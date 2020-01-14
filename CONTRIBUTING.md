@@ -7,7 +7,11 @@
 * Respect all group members, **COMMUNICATE** **COMMUNICATE** **COMMUNICATE** !
 * Push your pull request before *someday*
 
+<<<<<<< HEAD
 ## Guideline
+=======
+## Guileline
+>>>>>>> 30ad21617051df213ff49f958340184c3d758dfe
 * There should be three branches, master, Dev and Integration
 * Fork this repo once you have it, and then clone your own forked, ~~not fork you cloned~~
 * Create a `remote` called upstream off the original repo, and pull from upstream everytime otherwise you won't be in sync
