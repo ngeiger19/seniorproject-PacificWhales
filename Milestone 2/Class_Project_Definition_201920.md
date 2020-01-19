@@ -20,8 +20,10 @@ The product is centered around three core features:
 ## Initial Requirements Elaboration and Elicitation
 
 ### Questions
+1. Louis asked for #5, We want to have admins and contractors added by "super" admin after they get their offline confirmation. So is "super" admin a different level of admin or just an existing admin who has access to add another admin or contractor? What else can super admin do?
 
 ### Interviews
+1. "super" admin in this case means our employees and yes "super" admin will have to have different level of access with regular admin. Super admin can be the tech team leader of the company also there should not be too many super admins.
 
 ### Other Elicitation Activities?
 
@@ -34,6 +36,7 @@ The product is centered around three core features:
 5. "Standard" logins are fine.  Use email (must be unique) for username and then require an 8+ character password.  Will eventually need to confirm email to try to prevent some forms of misuse.  Admins and contractors must have an offline confirmation by our employees and then the "super" admin adds them manually.
 6. The core entity is the athlete.  They are essentially free agents in the system.  They can be a member of one or more teams at one time, then change at any time.  Later when we want to have teams and do predictive analysis we'll let the coaches assemble their own teams and add/remove athletes from their rosters.
 7. The first stats we want are: 1) display PR's prominantly in each race event, 2) show a historical picture/plot of performance, per race type and distance, 3) some measure of how they rank compared to other athletes, both current and historical, 4) something that shows how often they compete in each race event, i.e. which events are they competing in most frequently, and alternately, which events are they "avoiding"
+8. They might want to have a platform or forum for coaches, swimmers, and admins to communicate or share some of their personal experience or techniques about swimming.
 
 ## Initial Modeling
 
@@ -48,6 +51,7 @@ The product is centered around three core features:
 3. Site should never return debug error pages.  Web server should have a custom 404 page that is cute or funny and has a link to the main index page.
 4. All server errors must be logged so we can investigate what is going on in a page accessible only to Admins.
 5. English will be the default language.
+6. All threads should mostly be related to swimming. 
 
 ## Identify Functional Requirements (User Stories)
 
@@ -70,14 +74,14 @@ T: Task
 4. [U] As a visitor I want to be able to search for an athlete and then view their athlete page so I can find out more information about them
 5. [U] As a visitor I want to be able to view race results for an athlete so I can see how they have performed
 6. [U] As a visitor I want to be able to view PR's (personal records) for an athlete so I can see their best performances
-7. [E] 
-    1. [U]
-        1. [T]
-        2. [T]
-        3. [T]
-    2. [U]
+7. [E] As a swimmer I want to have a platform for us swimmers, coaches to exchange information of practices, techniques, prep works for meets.
+    1. [U] As a swimmer, I want to be able to **publish** a thread about my experience in a meet so I can share my experience or techniques I used
+    2. [U] As a swimmer, I want to be able to **read** other swimmers' threads so that I can learn about how other swimmers prepared for their meets and what techniques that used.
+    3. [U] As a swimmer, I want to be able to **comment** on others' threads so that we all can exchange information and give peer advices to each other.
+    4. [U] As an admin, I want to be able to **delete** threads that are inappropriate so that we can have all the information under control and stay on topic.
 8. [U] As a robot I would like to be prevented from creating an account on your website so I don't ask millions of my friends to join your website and try to add comments about male enhancement drugs.
-7. 
+9. [U]
+10. 
 
 ## Initial Architecture Envisioning
 
