@@ -49,9 +49,9 @@ The product is centered around three core features:
 ## Initial Modeling
 
 ### Use Case Diagrams
-![image not available](https://github.com/lawlouis/seniorproject-PacificWhales/blob/dev/Milestone%202/mind_map.jpg "mind_map")
-### Other Modeling
 
+### Other Modeling
+![image not available](https://github.com/lawlouis/seniorproject-PacificWhales/blob/dev/Milestone%202/mind_map.jpg "mind_map")
 ## Identify Non-Functional Requirements
 
 1. User accounts and data must be stored indefinitely.  They don't want to delete; rather, mark items as "deleted" but don't actually delete them.  They also used the word "inactive" as a synonym for deleted.
@@ -115,5 +115,5 @@ T: Task
 ## Agile Data Modeling
 ![image unavailable](https://github.com/lawlouis/seniorproject-PacificWhales/blob/dev/Milestone%202/initial_ER_classproject.jpg "ER_Diagram")
 ## Refined Vision Statement
-Our vision is to provide affordable software that allows coaches to track athletes’ progress and optimize their performance.
+Our vision is to provide affordable software that allows coaches to track athletesÂ’ progress and optimize their performance.
 ## Timeline and Release Plan
