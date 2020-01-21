@@ -114,4 +114,6 @@ T: Task
 ![image unavailable](https://github.com/lawlouis/seniorproject-PacificWhales/blob/dev/Milestone%202/architecture_diagram.jpg "Architure Diagram" )
 ## Agile Data Modeling
 ![image unavailable](https://github.com/lawlouis/seniorproject-PacificWhales/blob/dev/Milestone%202/initial_ER_classproject.jpg "ER_Diagram")
+## Refined Vision Statement
+Our vision is to provide affordable software that allows coaches to track athletes’ progress and optimize their performance.
 ## Timeline and Release Plan
