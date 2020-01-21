@@ -104,7 +104,7 @@ T: Task
   3. [U] As a coach, I want to be able to view and delete my saved predictions.
     1. [T] Create a seperate page to list coaches' saved predictions.
     2. [T] Allow for deletion of any of the items.
-11.[U] As a coach, I want to be able to view the athlete progress over certain period.
+11. [U] As a coach, I want to be able to view the athlete progress over certain period.
     1. [T] Create a dropdown list that the coach can choose the time period.
     2. [T] Creat a button that the coach can click to show the graph.
 
