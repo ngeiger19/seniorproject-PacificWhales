@@ -37,10 +37,30 @@ What are a few major features?
 
 
 
-
-
-
 What resources will be required for you to complete this project that are not already included in the class. i.e. you already have the Microsoft stack, server, database so what else would you need? Additional API’s, frameworks or platforms you’ll need to use.
 
+Asp.net MVC5, Sql Server, Photoshop, Some AI techniques(Accord.Net), prolog etc.
+
+
 What algorithmic content is there in this project? i.e. what algorithm(s) will you have to develop or implement in order to do something central to your project idea? (Remember, this isn’t just a software engineering course, it is your CS degree capstone course!)
+Definitely Sorts alogrithms. Merge Sort for price somparison
+
 Rate the topic with a difficulty rating of 1-10. One being supremely easy to implement (not necessarily short though). Ten would require the best CS students using lots of what they learned in their CS degree, plus additional independent learning, to complete successfully.
+
+5---Using API from Youtube, Sephora, Allure, Ipsy, amazon etc..///I also need a big datebase to support this website
+
+3---Dropdown list of a fully catogeries of differnt make-up styles.
+
+3-- Search Bar, by searchig keyword of make-up style, being able to find the specific make-up style/tutorial videos.
+
+6---Search Bar, by searchig keyword of specific cosmetics, being able to find related make-up style/tutorial videos.
+
+5--Applying AI to recognize your face shape to automatically match the style.
+
+6---Have links of those cosmetics have been metioned in the videos and the feature to compare the price of them from different sites.
+
+2---Place to leave comments and replies. Like and unlike the video/related cosmetics.
+
+8---Using AI/Being able to show your face wearing the specific make up.
+
+9---Have some differnrent background settings and be able to put the animation figure with your own face in differnt setting. Just for fun to make a picture.
