@@ -21,9 +21,13 @@ The product is centered around three core features:
 
 ### Questions
 1. Louis asked for #5, We want to have admins and contractors added by "super" admin after they get their offline confirmation. So is "super" admin a different level of admin or just an existing admin who has access to add another admin or contractor? What else can super admin do?
+2. What training scenarios should we include to help predict athletes' future performances?
+3. If a coach makes a prediction for an athlete, or optimizes their team for a meet, would they want the option to save that information?
 
 ### Interviews
 1. "super" admin in this case means our employees and yes "super" admin will have to have different level of access with regular admin. Super admin can be the tech team leader of the company also there should not be too many super admins.
+2. Training scenarios will mainly rely on the number of hours the athlete has trained for a certain event.
+3. Yes, that would be helpful. There could be a tab for coaches to acess that allows them to view and delete their saved predictions and team optimizations.
 
 ### Other Elicitation Activities?
 
@@ -37,6 +41,9 @@ The product is centered around three core features:
 6. The core entity is the athlete.  They are essentially free agents in the system.  They can be a member of one or more teams at one time, then change at any time.  Later when we want to have teams and do predictive analysis we'll let the coaches assemble their own teams and add/remove athletes from their rosters.
 7. The first stats we want are: 1) display PR's prominantly in each race event, 2) show a historical picture/plot of performance, per race type and distance, 3) some measure of how they rank compared to other athletes, both current and historical, 4) something that shows how often they compete in each race event, i.e. which events are they competing in most frequently, and alternately, which events are they "avoiding"
 8. They might want to have a platform or forum for coaches, swimmers, and admins to communicate or share some of their personal experience or techniques about swimming.
+9. We want a page where we can input the number of hours an athelte has trained for an event to estimate their future performance time, or estimate the hours they would need to train in order to reach a given time for an event.
+10. There should be a seperate account for coaches, so that only they may access the prediction and optimization features of the site, and only use them for their team. Coaches should also be able to save and delete their predictions and optimizations.
+
 
 ## Initial Modeling
 
@@ -80,8 +87,22 @@ T: Task
     3. [U] As a swimmer, I want to be able to **comment** on others' threads so that we all can exchange information and give peer advices to each other.
     4. [U] As an admin, I want to be able to **delete** threads that are inappropriate so that we can have all the information under control and stay on topic.
 8. [U] As a robot I would like to be prevented from creating an account on your website so I don't ask millions of my friends to join your website and try to add comments about male enhancement drugs.
-9. [U]
-10. 
+9. [U] As a coach, I want to be able to easily drop and add athletes from my team.
+   1. [T] Create a coach entity with a one-to-many relationship with athletes.
+   2. [T] Create an seperate account type for coaches, so only they can access certain features of the site.
+   3. [T] Make a page that each coach can access to view their team and make changes.
+10. [E] As a coach, I want to predict an athlete's future performance and save that information for later use.
+  1. [U] As a coach, I want to use athletes' past performances and training time to estimate future performance times.
+    1. [T] Create a page for coaches to select and athlete and an event and input information for a prediction.
+    2. [T] Write an algorithm to make accurate predictions of an athlete's performance time given past performances and hours trained.
+    3. [T] Allow only users with coach accounts to access this page.
+    4. [T] Add a predictions entity to our database, connected many-to-one with the coach entity.
+    5. [T] Allow this information to be saved for the coach to view later.
+  2. [U] As a coach, I want to input a desired performance time for an athlete in a specific event and predict how long they would need to train compete at that time.
+    1. [T] Modify our prediction algorithm to estimate hours of training needed to acheive a given time for an event.
+  3. [U] As a coach, I want to be able to view and delete my saved predictions.
+    1. [T] Create a seperate page to list coaches' saved predictions.
+    2. [T] Allow for deletion of any of the items.
 
 ## Initial Architecture Envisioning
 
