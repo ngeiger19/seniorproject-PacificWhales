@@ -49,7 +49,7 @@ The product is centered around three core features:
 ## Initial Modeling
 
 ### Use Case Diagrams
-
+![image not available](https://github.com/lawlouis/seniorproject-PacificWhales/blob/dev/Milestone%202/mind_map.jpg "mind_map")
 ### Other Modeling
 
 ## Identify Non-Functional Requirements
@@ -111,7 +111,7 @@ T: Task
 
 
 ## Initial Architecture Envisioning
-
+![image unavailable](https://github.com/lawlouis/seniorproject-PacificWhales/blob/dev/Milestone%202/architecture_diagram.jpg "Architure Diagram" )
 ## Agile Data Modeling
-
+![image unavailable](https://github.com/lawlouis/seniorproject-PacificWhales/blob/dev/Milestone%202/initial_ER_classproject.jpg "ER_Diagram")
 ## Timeline and Release Plan
