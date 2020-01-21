@@ -43,6 +43,7 @@ The product is centered around three core features:
 8. They might want to have a platform or forum for coaches, swimmers, and admins to communicate or share some of their personal experience or techniques about swimming.
 9. We want a page where we can input the number of hours an athelte has trained for an event to estimate their future performance time, or estimate the hours they would need to train in order to reach a given time for an event.
 10. There should be a seperate account for coaches, so that only they may access the prediction and optimization features of the site, and only use them for their team. Coaches should also be able to save and delete their predictions and optimizations.
+11.There should be a button you can click on to show the plot/graph of athlete progress over certain time(you are able to choose the period) for coaches.
 
 
 ## Initial Modeling
@@ -103,6 +104,11 @@ T: Task
   3. [U] As a coach, I want to be able to view and delete my saved predictions.
     1. [T] Create a seperate page to list coaches' saved predictions.
     2. [T] Allow for deletion of any of the items.
+11.[U] As a coach, I want to be able to view the athlete progress over certain period.
+    1. [T] Create a dropdown list that the coach can choose the time period.
+    2. [T] Creat a button that the coach can click to show the graph.
+
+
 
 ## Initial Architecture Envisioning
 
