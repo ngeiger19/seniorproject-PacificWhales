@@ -1,4 +1,9 @@
-﻿ALTER TABLE [dbo].[AspNetUserClaims]  DROP CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId] 
+﻿DROP TABLE [dbo].[Meets];
+DROP TABLE [dbo].[Events];
+DROP TABLE [dbo].[Athletes];
+DROP TABLE [dbo].[Teams];
+DROP TABLE [dbo].[Coaches];
+ALTER TABLE [dbo].[AspNetUserClaims]  DROP CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId] 
 
 ALTER TABLE [dbo].[AspNetUserLogins]  DROP CONSTRAINT [FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId] 
 
