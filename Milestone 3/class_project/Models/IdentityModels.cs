@@ -21,11 +21,14 @@ namespace class_project.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+        /*: base("DefaultConnection", throwIfV1Schema: false)*/
+        : base("ClassprojectContext_Azure", throwIfV1Schema: false)
         {
+            // Disable code-first migrations
+            Database.SetInitializer<ApplicationDbContext>(null);
         }
 
-        public static ApplicationDbContext Create()
+            public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }

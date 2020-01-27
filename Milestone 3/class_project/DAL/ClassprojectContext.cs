@@ -8,8 +8,11 @@ namespace class_project.DAL
     public partial class ClassprojectContext : DbContext
     {
         public ClassprojectContext()
-            : base("name=ClassprojectContext")
+            : base("name=ClassprojectContext_Azure")
+        //: base("AzureConnection", throwIfV1Schema: false)
         {
+            // Disable code-first migrations
+            Database.SetInitializer<ApplicationDbContext>(null);
         }
 
         public virtual DbSet<Athlete> Athletes { get; set; }
