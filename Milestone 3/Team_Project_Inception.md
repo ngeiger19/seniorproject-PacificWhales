@@ -7,9 +7,6 @@ Team Project Inception
 
 ## Initial Vision Discussion with Stakeholders
 
-For students/travelers/teachers who need or interested in learning new cultures before they **travel** or for the sake of diversity, the Culture Learning application is a website that will provide information of different cultures such as food, languages, history, landmarks, etc. The website will have a main search functionality and categories for visitors to look for a specific culture that they are interested in learning. This website will also act as a social media for people to exchange their culture with multimedia. Unlike a typical language learning website, our application will generate a lot of more info than just languages and will also be able to help people with different purpose of learning such as traveling or educational purposes.
-
-
 ## Initial Requirements Elaboration and Elicitation
 
 ### Questions
