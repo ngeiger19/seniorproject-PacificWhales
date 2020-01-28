@@ -20,7 +20,6 @@ For students/travelers/teachers who need or interested in learning new cultures 
 ### Interviews
 
 ### Other Elicitation Activities?
-![image unavailable](https://github.com/lawlouis/seniorproject-PacificWhales/blob/dev/Milestone%203/mindmap.jpg "Mindmap" )
 
 ## List of Needs and Features
 
@@ -38,6 +37,8 @@ For students/travelers/teachers who need or interested in learning new cultures 
 ### Use Case Diagrams
 
 ### Other Modeling
+
+![image unavailable](https://github.com/lawlouis/seniorproject-PacificWhales/blob/dev/Milestone%203/mindmap.jpg "Mindmap" )
 
 ## Identify Functional Requirements (User Stories)
 
