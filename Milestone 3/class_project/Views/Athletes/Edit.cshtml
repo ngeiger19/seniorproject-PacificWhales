@@ -4,8 +4,11 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Update Athlete's Information</h2>
-
+<div class="jumbotron" style="background-color: cornflowerblue; color: white; margin-top: 20px;">
+    <div class="container-fluid">
+        <h1>Edit Athlete's Information</h1>
+    </div>
+</div>
 
 @using (Html.BeginForm())
 {
@@ -55,10 +58,6 @@
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
