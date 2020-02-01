@@ -16,11 +16,13 @@ namespace class_project.Controllers
         private ClassprojectContext db = new ClassprojectContext();
 
         // GET: Athletes
+
         public ActionResult Index()
         {
             var athletes = db.Athletes.Include(a => a.Coach).Include(a => a.Team);
             return View(athletes.ToList());
         }
+        */
 
         // GET: Athletes/Details/5
         public ActionResult Details(int? id)
