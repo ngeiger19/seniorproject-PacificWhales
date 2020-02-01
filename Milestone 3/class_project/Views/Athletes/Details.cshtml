@@ -4,47 +4,18 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Athlete</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Coach.CoachName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Coach.CoachName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Team.TeamName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Team.TeamName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-
-    </dl>
+<<div class="jumbotron" style="background-color: cornflowerblue; color: white; margin-top: 20px;">
+    <div class="container-fluid">
+        <h1>@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</h1>
+    </div>
 </div>
+
+ <div>
+     <hr />
+     <p><strong>Coach: </strong> @Html.DisplayFor(model => model.Coach.CoachName)</p>
+     <p><strong>Team: </strong> @Html.DisplayFor(model => model.Team.TeamName)</p>
+
+ </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
 </p>

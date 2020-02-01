@@ -4,8 +4,11 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Add an Athlete to the Database</h2>
-
+<div class="jumbotron" style="background-color: cornflowerblue; color: white; margin-top: 20px;">
+    <div class="container-fluid">
+        <h1>Add an Athlete to our Database</h1>
+    </div>
+</div>
 
 @using (Html.BeginForm()) 
 {
@@ -53,10 +56,6 @@
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

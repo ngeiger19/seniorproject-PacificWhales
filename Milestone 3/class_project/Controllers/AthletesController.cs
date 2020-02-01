@@ -22,7 +22,6 @@ namespace class_project.Controllers
             var athletes = db.Athletes.Include(a => a.Coach).Include(a => a.Team);
             return View(athletes.ToList());
         }
-        */
 
         // GET: Athletes/Details/5
         public ActionResult Details(int? id)
@@ -58,7 +57,7 @@ namespace class_project.Controllers
             {
                 db.Athletes.Add(athlete);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", athlete);
             }
 
             ViewBag.CoachID = new SelectList(db.Coaches, "ID", "CoachName", athlete.CoachID);
@@ -94,7 +93,7 @@ namespace class_project.Controllers
             {
                 db.Entry(athlete).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", athlete);
             }
             ViewBag.CoachID = new SelectList(db.Coaches, "ID", "CoachName", athlete.CoachID);
             ViewBag.TeamID = new SelectList(db.Teams, "ID", "TeamName", athlete.TeamID);
