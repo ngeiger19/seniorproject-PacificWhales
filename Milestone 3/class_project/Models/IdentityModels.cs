@@ -32,5 +32,11 @@ namespace class_project.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<class_project.Models.Athlete> Athletes { get; set; }
+
+        public System.Data.Entity.DbSet<class_project.Models.Coach> Coaches { get; set; }
+
+        public System.Data.Entity.DbSet<class_project.Models.Team> Teams { get; set; }
     }
 }
