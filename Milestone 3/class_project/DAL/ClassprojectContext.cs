@@ -5,11 +5,11 @@ namespace class_project.DAL
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
     using Models;
+
     public partial class ClassprojectContext : DbContext
     {
         public ClassprojectContext()
-            /*: base("name=ClassprojectContext")*/
-            : base("name=ClassprojectContext_Azure")
+            : base("name=ClassprojectContext1")
         {
         }
 
@@ -17,6 +17,7 @@ namespace class_project.DAL
         public virtual DbSet<Coach> Coaches { get; set; }
         public virtual DbSet<Event> Events { get; set; }
         public virtual DbSet<Meet> Meets { get; set; }
+        public virtual DbSet<Record> Records { get; set; }
         public virtual DbSet<Team> Teams { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -34,6 +35,11 @@ namespace class_project.DAL
             modelBuilder.Entity<Event>()
                 .HasMany(e => e.Meets)
                 .WithRequired(e => e.Event)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Meet>()
+                .HasMany(e => e.Records)
+                .WithRequired(e => e.Meet)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Team>()

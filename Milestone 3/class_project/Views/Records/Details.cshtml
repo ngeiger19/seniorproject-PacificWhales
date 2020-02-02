@@ -1,0 +1,37 @@
+﻿@model class_project.Models.Record
+
+@{
+    ViewBag.Title = "Details";
+}
+    <div class="jumbotron" style="background-color: cornflowerblue; color: white; margin-top: 20px;">
+        <div class="container-fluid">
+            <h1>View Athlete Records</h1>
+        </div>
+    </div>
+
+<div>
+    <h4>Record</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Meet.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Meet.Location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RaceTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RaceTime)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

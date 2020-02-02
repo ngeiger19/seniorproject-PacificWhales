@@ -44,6 +44,15 @@ CREATE TABLE [dbo].[Meets]
     CONSTRAINT [FK_dbo.Meets_dbo.Events_ID] FOREIGN KEY ([EventID]) REFERENCES [dbo].[Events] ([ID])
 );
 
+CREATE TABLE [dbo].[Records]
+(
+	[ID]			INT IDENTITY (1,1)	NOT NULL,
+    [RaceTime]			NVARCHAR(50)	   NOT NULL,	
+    [MeetID]            INT					NOT NULL,				
+	CONSTRAINT [PK_dbo.Records] PRIMARY KEY CLUSTERED ([ID] ASC),
+    CONSTRAINT [FK_dbo.Records_dbo.Meets_ID] FOREIGN KEY ([MeetID]) REFERENCES [dbo].[Meets] ([ID])
+);
+
 
 CREATE TABLE [dbo].[AspNetRoles](
 	[Id] [nvarchar](128) NOT NULL,
