@@ -8,125 +8,115 @@ using System.Web;
 using System.Web.Mvc;
 using class_project.DAL;
 using class_project.Models;
-using class_project.Models.ViewModels;
 
 namespace class_project.Controllers
 {
-    public class AthletesController : Controller
+    public class RecordsController : Controller
     {
         private ClassprojectContext db = new ClassprojectContext();
 
-        // GET: Athletes
-        
+        // GET: Records
         public ActionResult Index()
         {
-            var athletes = db.Athletes.Include(a => a.Coach).Include(a => a.Team);
-            return View(athletes.ToList());
+            var records = db.Records.Include(r => r.Meet);
+            return View(records.ToList());
         }
-        
 
-        // GET: Athletes/Details/5
+        // GET: Records/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Athlete athlete = db.Athletes.Find(id);
-            if (athlete == null)
+            Record record = db.Records.Find(id);
+            if (record == null)
             {
                 return HttpNotFound();
             }
-            AthleteDetailsViewModel viewModel = new AthleteDetailsViewModel(athlete);
-            return View(viewModel);//passing the viewModel here
+            return View(record);
         }
- 
 
-        // GET: Athletes/Create
+        // GET: Records/Create
         public ActionResult Create()
         {
-            ViewBag.CoachID = new SelectList(db.Coaches, "ID", "CoachName");
-            ViewBag.TeamID = new SelectList(db.Teams, "ID", "TeamName");
+            ViewBag.MeetID = new SelectList(db.Meets, "ID", "Location");
             return View();
         }
 
-        // POST: Athletes/Create
+        // POST: Records/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,CoachID,TeamID")] Athlete athlete)
+        public ActionResult Create([Bind(Include = "ID,RaceTime,MeetID")] Record record)
         {
             if (ModelState.IsValid)
             {
-                db.Athletes.Add(athlete);
+                db.Records.Add(record);
                 db.SaveChanges();
-                return RedirectToAction("Details", athlete);
+                return RedirectToAction("Index");
             }
 
-            ViewBag.CoachID = new SelectList(db.Coaches, "ID", "CoachName", athlete.CoachID);
-            ViewBag.TeamID = new SelectList(db.Teams, "ID", "TeamName", athlete.TeamID);
-            return View(athlete);
+            ViewBag.MeetID = new SelectList(db.Meets, "ID", "Location", record.MeetID);
+            return View(record);
         }
 
-        // GET: Athletes/Edit/5
+        // GET: Records/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Athlete athlete = db.Athletes.Find(id);
-            if (athlete == null)
+            Record record = db.Records.Find(id);
+            if (record == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CoachID = new SelectList(db.Coaches, "ID", "CoachName", athlete.CoachID);
-            ViewBag.TeamID = new SelectList(db.Teams, "ID", "TeamName", athlete.TeamID);
-            return View(athlete);
+            ViewBag.MeetID = new SelectList(db.Meets, "ID", "Location", record.MeetID);
+            return View(record);
         }
 
-        // POST: Athletes/Edit/5
+        // POST: Records/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,CoachID,TeamID")] Athlete athlete)
+        public ActionResult Edit([Bind(Include = "ID,RaceTime,MeetID")] Record record)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(athlete).State = EntityState.Modified;
+                db.Entry(record).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Details", athlete);
+                return RedirectToAction("Index");
             }
-            ViewBag.CoachID = new SelectList(db.Coaches, "ID", "CoachName", athlete.CoachID);
-            ViewBag.TeamID = new SelectList(db.Teams, "ID", "TeamName", athlete.TeamID);
-            return View(athlete);
+            ViewBag.MeetID = new SelectList(db.Meets, "ID", "Location", record.MeetID);
+            return View(record);
         }
 
-        // GET: Athletes/Delete/5
-        /*
+        // GET: Records/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Athlete athlete = db.Athletes.Find(id);
-            if (athlete == null)
+            Record record = db.Records.Find(id);
+            if (record == null)
             {
                 return HttpNotFound();
             }
-            return View(athlete);
+            return View(record);
         }
 
-        // POST: Athletes/Delete/5
+        // POST: Records/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Athlete athlete = db.Athletes.Find(id);
-            db.Athletes.Remove(athlete);
+            Record record = db.Records.Find(id);
+            db.Records.Remove(record);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -138,6 +128,6 @@ namespace class_project.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        } */
+        }
     }
 }

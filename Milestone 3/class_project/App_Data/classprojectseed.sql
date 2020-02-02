@@ -33,5 +33,12 @@ INSERT INTO [dbo].[Meets](Location, AthleteID,EventID)
 	('OSU', 2, 2),
     ('UO', 3, 3),
 	('PSU', 4, 4);
+
+INSERT INTO [dbo].[Records](RaceTime, MeetID)
+	VALUES
+	('100s' , 1),
+	('210s', 2),
+    ('350s', 3),
+	('407s', 4);
     
     GO

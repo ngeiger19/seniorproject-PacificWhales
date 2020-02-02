@@ -1,21 +1,91 @@
-﻿@model class_project.Models.Athlete
+﻿@model class_project.Models.ViewModels.AthleteDetailsViewModel
 
 @{
     ViewBag.Title = "Details";
 }
 
-<<div class="jumbotron" style="background-color: cornflowerblue; color: white; margin-top: 20px;">
-    <div class="container-fluid">
-        <h1>@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</h1>
+    <div class="jumbotron" style="background-color: cornflowerblue; color: white; margin-top: 20px;">
+        <div class="container-fluid">
+            <h1>View Athlete Profile</h1>
+        </div>
     </div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AthleteID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AthleteID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AthleteFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AthleteFirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AthleteLastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AthleteLastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CoachName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CoachName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Stroke)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stroke)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Distance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Distance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RaceTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RaceTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+    </dl>
 </div>
-
- <div>
-     <hr />
-     <p><strong>Coach: </strong> @Html.DisplayFor(model => model.Coach.CoachName)</p>
-     <p><strong>Team: </strong> @Html.DisplayFor(model => model.Team.TeamName)</p>
-
- </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID })
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
 </p>

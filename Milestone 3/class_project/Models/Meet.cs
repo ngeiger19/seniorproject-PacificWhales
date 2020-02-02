@@ -8,6 +8,12 @@ namespace class_project.Models
 
     public partial class Meet
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Meet()
+        {
+            Records = new HashSet<Record>();
+        }
+
         public int ID { get; set; }
 
         [Required]
@@ -21,5 +27,8 @@ namespace class_project.Models
         public virtual Athlete Athlete { get; set; }
 
         public virtual Event Event { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Record> Records { get; set; }
     }
 }
