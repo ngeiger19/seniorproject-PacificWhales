@@ -48,12 +48,17 @@ E: Epic
 U: User Story  
 T: Task  
 
-1. [E] As a visitor, I want the site to look clean and professional so that I feel inclined to use it.
+1. [U] As a visitor, I want the site to look clean and professional so that I feel inclined to use it.
 2. [E] As a visitor, I would like to be able to create an account so that my information is saved.
+  1. [U] As a venue owner, I want to be able to create a venue owners account so that my experience is customized for venue owners.
+  2. [U] As a musicians, I want to be able to create a musicians account so that my experience is customized for musicians.
 3. [E] As a registered user I want to be able to display my information on a profile so that other users can find out more about me.
-4. [E] As a musician, I want to be able to share my youtube videos on my profile so that venue owners can listen to my music.
-5. [E] As a venue owner, I want to be able to show my location on a map in my profile so that musicians know where I am located.
-6. [E] As a registered user I want to be able to link my social media on my profile so that other users can follow me on different platforms.
+  1. [U] As a venue owner, I want to display my venue name and location and photos on my profile so that other users can learn about my venue.
+  2. [U] As a musician, I want to display information about my band and my music on my profile so that other users can learn about me as an artist.
+4. [E] As a registered user I want to be able to link my social media on my profile so that other users can follow me on different platforms.
+5. [E] As a musician, I want to be able to share my youtube videos on my profile so that venue owners can listen to my music.
+6. [E] As a venue owner, I want to be able to show my location on a map in my profile so that musicians know where I am located.
+
 
 7. [E] As a registered user, I want to set my availability and display it on my profile with a calender so that other users know when I am available for a show.
 3. [E] As a user, I want to be able to search for other users and filter the results so that I can find people I want to work with.
