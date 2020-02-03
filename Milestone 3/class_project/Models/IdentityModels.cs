@@ -21,8 +21,8 @@ namespace class_project.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-       : base("ClassprojectContext", throwIfV1Schema: false)
-        /*: base("ClassprojectContext_Azure", throwIfV1Schema: false)*/
+        /*: base("ClassprojectContext", throwIfV1Schema: false)*/
+        : base("ClassprojectContext_Azure", throwIfV1Schema: false)
         {
             // Disable code-first migrations
             Database.SetInitializer<ApplicationDbContext>(null);

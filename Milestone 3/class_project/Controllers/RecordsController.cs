@@ -16,14 +16,14 @@ namespace class_project.Controllers
         private ClassprojectContext db = new ClassprojectContext();
 
         // GET: Records
-        public ActionResult Index()
+        /*public ActionResult Index()
         {
-            var records = db.Records.Include(r => r.Meet);
+            var records = db.Records.Include(r => r.Athlete).Include(r => r.Event);
             return View(records.ToList());
-        }
+        }*/
 
         // GET: Records/Details/5
-        public ActionResult Details(int? id)
+        /*public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -35,12 +35,13 @@ namespace class_project.Controllers
                 return HttpNotFound();
             }
             return View(record);
-        }
+        }*/
 
         // GET: Records/Create
         public ActionResult Create()
         {
-            ViewBag.MeetID = new SelectList(db.Meets, "ID", "Location");
+            ViewBag.AthleteID = new SelectList(db.Athletes.Select(s => new { AthleteID = s.ID, FullName = s.FirstName + " " + s.LastName }).OrderBy(n => n.FullName), "AthleteID", "FullName");
+            ViewBag.EventID = new SelectList(db.Events.Select(e => new { EventID = e.ID, EventInfo = e.Stroke + " " + e.Distance }), "EventID", "EventInfo");
             return View();
         }
 
@@ -49,21 +50,22 @@ namespace class_project.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,RaceTime,MeetID")] Record record)
+        public ActionResult Create([Bind(Include = "ID,Location,AthleteID,EventID,RaceTime,Date")] Record record)
         {
             if (ModelState.IsValid)
             {
                 db.Records.Add(record);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Search", "Home");
             }
 
-            ViewBag.MeetID = new SelectList(db.Meets, "ID", "Location", record.MeetID);
+            ViewBag.AthleteID = new SelectList(db.Athletes.Select(s => new {AthleteID = s.ID, FullName = s.FirstName + " " + s.LastName}).OrderBy(n => n.FullName), "AthleteID", "FullName", record.AthleteID);
+            ViewBag.EventID = new SelectList(db.Events.Select(e => new {EventID = e.ID, EventInfo = e.Stroke + " " + e.Distance }), "EventID", "EventInfo", record.EventID);
             return View(record);
         }
 
         // GET: Records/Edit/5
-        public ActionResult Edit(int? id)
+       /* public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -74,16 +76,17 @@ namespace class_project.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.MeetID = new SelectList(db.Meets, "ID", "Location", record.MeetID);
+            ViewBag.AthleteID = new SelectList(db.Athletes, "ID", "FirstName", record.AthleteID);
+            ViewBag.EventID = new SelectList(db.Events, "ID", "Stroke", record.EventID);
             return View(record);
-        }
+        }*/
 
         // POST: Records/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+       /* [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,RaceTime,MeetID")] Record record)
+        public ActionResult Edit([Bind(Include = "ID,Location,AthleteID,EventID,RaceTime,Date")] Record record)
         {
             if (ModelState.IsValid)
             {
@@ -91,12 +94,13 @@ namespace class_project.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.MeetID = new SelectList(db.Meets, "ID", "Location", record.MeetID);
+            ViewBag.AthleteID = new SelectList(db.Athletes, "ID", "FirstName", record.AthleteID);
+            ViewBag.EventID = new SelectList(db.Events, "ID", "Stroke", record.EventID);
             return View(record);
-        }
+        }*/
 
         // GET: Records/Delete/5
-        public ActionResult Delete(int? id)
+       /* public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -108,10 +112,10 @@ namespace class_project.Controllers
                 return HttpNotFound();
             }
             return View(record);
-        }
+        }*/
 
         // POST: Records/Delete/5
-        [HttpPost, ActionName("Delete")]
+        /*[HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
@@ -128,6 +132,6 @@ namespace class_project.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }*/
     }
 }

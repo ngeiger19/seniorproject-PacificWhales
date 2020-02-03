@@ -12,10 +12,20 @@ namespace class_project.Models
 
         [Required]
         [StringLength(50)]
-        public string RaceTime { get; set; }
+        public string Location { get; set; }
 
-        public int MeetID { get; set; }
+        public int AthleteID { get; set; }
 
-        public virtual Meet Meet { get; set; }
+        public int EventID { get; set; }
+
+        public double? RaceTime { get; set; }
+
+        [DataType(DataType.Date)]
+        [Column(TypeName = "date")]
+        public DateTime Date { get; set; }
+
+        public virtual Athlete Athlete { get; set; }
+
+        public virtual Event Event { get; set; }
     }
 }

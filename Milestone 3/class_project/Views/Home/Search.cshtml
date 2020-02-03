@@ -1,0 +1,32 @@
+﻿@model IEnumerable<class_project.Models.Athlete>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<div class="jumbotron" style="background-color: cornflowerblue; color: white; margin-top: 20px;">
+    <div class="container-fluid">
+        <h1>Athlete Search</h1>
+
+        @using (Html.BeginForm("Search", "Home", FormMethod.Get))
+        {
+            <div class="form-group">
+                <div class="input-group-lg">
+                    @Html.TextBox("q", null, htmlAttributes: new { @class = "form-control form-control-lg", placeholder = "Type in Athlete Name", required = "true" })
+
+                </div>
+            </div> 
+            <button class="btn btn-primary" type="submit">Search</button>
+        }
+        @if (Model.Count() == 0 && Request.QueryString["q"] != null)
+        {
+            <p>No Athlete Found</p>
+        }
+        <ul class="list-group">
+            @foreach (var athlete in Model)
+            {
+                <li class="list-group-item">@Html.ActionLink(athlete.FirstName + " " + athlete.LastName, "Details/" + athlete.ID, "Athletes")</li>
+            }
+        </ul>
+    </div>
+</div>
