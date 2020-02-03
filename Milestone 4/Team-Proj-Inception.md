@@ -41,7 +41,7 @@ Our project is seperated into clear modules, which we will develop one at a time
 
 ## Non-Functional Requirements
 1. Posts on the Events page should not be personal advertisements or spam.
-
+2. Prevent people from creating fake accounts.
 ## Identify Functional Requirements (User Stories)
 
 E: Epic  
@@ -49,7 +49,7 @@ U: User Story
 T: Task  
 
 1. [E] As a visitor, I want the site to look clean and professional so that I feel inclined to use it.
-2. [E] As a visitor, I would like to be able to create an account so that my information is saved and other users can view my profile.
+2. [E] As a visitor, I would like to be able to create an account so that my information is saved.
 3. [E] As a registered user I want to be able to display my information on a profile so that other users can find out more about me.
 4. [E] As a musician, I want to be able to share my youtube videos on my profile so that venue owners can listen to my music.
 5. [E] As a venue owner, I want to be able to show my location on a map in my profile so that musicians know where I am located.
