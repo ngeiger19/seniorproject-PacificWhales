@@ -1,10 +1,10 @@
 Team Project Inception
 =====================================
-
+# Harmony
 ## Summary of Our Approach to Software Development
 
 [What processes are we following?  What are we choosing to do and at what level of detail or extent?]
-Our project is seperated into clear modules, which we will develop one at a time. These modules will be easy to break down or add on to later. We will work together as a team to complete each module, and to come up with solutions to difficult problems.
+Our project is seperated into clear modules, which we will develop one at a time. These modules will be easy to break down into small user stories. Each user story will be a thin verticle slice through all three layers of the application. We will work together as a team to complete each module and to come up with solutions to difficult problems. We are using Disciplined Agile Delivery and Scrum to develop our project.
 
 ## Initial Vision Statment
 **For** musicians and venue owners who need an easier way to book shows, **the** show booking application **is a** useful web application that will allow musicians and venue owners to search for and contact each other. This will make for a much smoother booking process and will aid venue owners and musicians in discovering one another. It will be helpful to musicians who play shows as a main source of income, as well those who are just starting out and lack experience. **Unlike** other booking websites, **our product** will be truly representative of, and useful to, independent musicians in the Salem area.
@@ -48,13 +48,14 @@ E: Epic
 U: User Story  
 T: Task  
 
-1. [E] As a visitor, I would like to be able to create an account so that my information is saved and other users can view my profile.
-   1. [U] As a visitor, I want the site to look clean and professional so that I feel inclined to use it to book shows.
-   2. [U] As a visitor, I want to be able to create a musician or venue owner account so that I can find people to work with.
-   3. [U] As a registered user, I want to have a profile to display my information so that other users can learn more about me.
-   4. [U] As a musician, I want to be able to share my YouTube videos on my profile so that venue owners can listen to my music.
-   5. [U] As a venue owner, I want to display my location with a map on my profile so that musicians know where I am located.
-2. [E] As a registered user, I want to set my availability and display it on my profile with a calender so that other users know when I am available for a show.
+1. [E] As a visitor, I want the site to look clean and professional so that I feel inclined to use it.
+2. [E] As a visitor, I would like to be able to create an account so that my information is saved and other users can view my profile.
+3. [E] As a registered user I want to be able to display my information on a profile so that other users can find out more about me.
+4. [E] As a musician, I want to be able to share my youtube videos on my profile so that venue owners can listen to my music.
+5. [E] As a venue owner, I want to be able to show my location on a map in my profile so that musicians know where I am located.
+6. [E] As a registered user I want to be able to link my social media on my profile so that other users can follow me on different platforms.
+
+7. [E] As a registered user, I want to set my availability and display it on my profile with a calender so that other users know when I am available for a show.
 3. [E] As a user, I want to be able to search for other users and filter the results so that I can find people I want to work with.
 4. [E] As a registered user, I want to contact people directly through the site so that I can communicate quickly and effectively.
 5. [E] As a registered user, I want to be able to book shows through the site so that I have a clear record of the show date and time.
