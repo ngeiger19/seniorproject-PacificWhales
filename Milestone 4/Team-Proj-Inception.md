@@ -4,7 +4,7 @@ Team Project Inception
 ## Summary of Our Approach to Software Development
 
 [What processes are we following?  What are we choosing to do and at what level of detail or extent?]
-Our project is seperated into clear modules, which we will develop one at a time. These modules will be easy to break down into small user stories. Each user story will be a thin verticle slice through all three layers of the application. We will work together as a team to complete each module and to come up with solutions to difficult problems. We are using Disciplined Agile Delivery and Scrum to develop our project.
+Our project is seperated into clear modules, which we will develop one at a time. These modules will be easy to break down into small user stories. Each user story will be a thin vertical slice through all three layers of the application. We will work together as a team to complete each module and to come up with solutions to difficult problems. We are using Disciplined Agile Delivery and Scrum to develop our project.
 
 ## Initial Vision Statment
 Music Booking For musicians and venues who need an easy way to book shows, the show booking application is a useful web application that will allow musicians and venues to search for and contact each other. This will make for a much smoother booking process and will aid venues and musicians in discovering one another. Unlike other booking applications, our product will be truly representative of, and useful to, the independent music scene in the Salem area.
@@ -19,7 +19,7 @@ Culture For students/travelers/teachers who need or interested in learning new c
 ## Initial Requirements Elaboration and Elicitation
 ### Questions and Interviews
 1. Q: What social media should we allow musicians to link in their profile? 
-A: Instagram, BandCamp, SoundCloud, Facebook, YouTube, and Spotify would be good too.
+A: Instagram, BandCamp, SoundCloud, Facebook, YouTube, AppleMusic/ITunes, and Spotify would be good too.
 2. Q: Do you know people in Salem who would be interested in using this web app?
 A: Yes, a lot of local musicians would use this.
 3. Q: Would it be helpful to have a record of all the shows you've booked through the site?
