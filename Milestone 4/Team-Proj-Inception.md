@@ -59,13 +59,13 @@ T: Task
 4. [E] As a registered user I want to be able to link my social media on my profile so that other users can follow me on different platforms.
 5. [E] As a musician, I want to be able to share my youtube videos on my profile so that venue owners can listen to my music.
 6. [E] As a venue owner, I want to be able to show my location with a map on my profile so that musicians know where I am located.
-7. [E] As a registered user, I want to be able to see how far away other users are from me in miles so that I know how far I/they will have to travel to work with together.
+7. [E] As a registered user, I want to be able to see how far away other users are from me in miles so that I know how far I/they will have to travel to work together.
 
 8. [E] As a visitor, I want to be able to search for musicians or venues so that I can find someone to work with.
-9. [E] As a user, I want to have other users recommended to me based on their location, popularity, and, who I've worked with before.
-10. [E] As a user, I want to be able to filter results when I look for other users so that I can
+9. [E] As a user, I want to have other users recommended to me based on their location, popularity, and, who I've worked with before so I can easily find the suitable people to work with.
+10. [E] As a user, I want to be able to filter results when I look for other users so that I can the specific people to work with.
 11. [E] As a user, I want to be able to send messages to other users on the site so that we have an easy way to communicate.
-12. [E] As a user, I want to be able easily send an email through the site so that I don't have open a new tab and navigate to my email.
+12. [E] As a user, I want to be able to easily send an email through the site so that I don't have to open a new tab and navigate to my email.
 13. [E] As a user, I want to be protected from interacting with bot accounts so that my information is safe and I don't waste my time.
 
 14. [E] As a user, I want to set my availability and display it on my profile with a calender so that other users know when I am available for a show.
@@ -81,7 +81,7 @@ T: Task
 23. [E] As a user, I want to be able to RSVP for events so that other users know I am planning to attend.
 24. [E] As a user, I want events I'm hosting or attending to show up on my public calender so that others will know that I won't be available to book shows during those events.
 25. [E] As a user, I want want to be notified when other users RSVP to my event so that I can message them and have an idea of how many people will be attending.
-26. [E] As a user, I want to be able to control who seees my event and have the ability to approve/decline people from attending so that I can control who shows up.
+26. [E] As a user, I want to be able to control who sees my event and have the ability to approve/decline people from attending so that I can control who shows up.
 27. [E] As a user, I want to be able to report spam posts so that the events page will only contain legitimate events.
 
 ## Initial Architecture Envisioning
