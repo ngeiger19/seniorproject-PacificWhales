@@ -34,9 +34,9 @@ Our project is seperated into clear modules, which we will develop one at a time
 6. We will create an Events page where any registered user can create and post an event, like a music festival, a competition, or a get-together. Events should be seperated by city, and you should be able to select a city from a drop-down to view its events. Events should have a link the profile of the person who posted it.
 
 ## Initial Modeling
-
+![image unavailable](https://github.com/lawlouis/seniorproject-PacificWhales/blob/dev/Milestone%203/mindmap.jpg "Mindmap" )
 ### Use Case Diagrams
-
+![image unavailable](https://github.com/lawlouis/seniorproject-PacificWhales/blob/dev/Milestone%204/UseCase_Diagram.jpg "UseCaseDiagram" )
 ### Other Modeling
 
 ## Non-Functional Requirements
@@ -69,9 +69,9 @@ T: Task
 8. [E] As a registered user, I want to be able to post and view events in my area so that I have an easy way to find work or meet-ups.
 
 ## Initial Architecture Envisioning
-
+![image unavailable](https://github.com/lawlouis/seniorproject-PacificWhales/blob/dev/Milestone%204/Architecture_Diagram.jpg "ArchitectureDiagram" )
 ## Agile Data Modeling
-
+![image unavailable](https://github.com/lawlouis/seniorproject-PacificWhales/blob/dev/Milestone%204/Initial_ER_Diagram.jpg "ERDiagram" )
 ## Refined Vision Statement
 
 ## Timeline and Release Plan
