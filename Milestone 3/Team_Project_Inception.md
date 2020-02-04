@@ -38,6 +38,8 @@ For students/travelers/teachers who need or interested in learning new cultures 
 
 ### Other Modeling
 
+![image unavailable](https://github.com/lawlouis/seniorproject-PacificWhales/blob/dev/Milestone%203/mindmap.jpg "Mindmap" )
+
 ## Identify Functional Requirements (User Stories)
 
 E: Epic  

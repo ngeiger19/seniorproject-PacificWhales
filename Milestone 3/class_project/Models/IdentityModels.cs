@@ -21,7 +21,7 @@ namespace class_project.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-        /*: base("DefaultConnection", throwIfV1Schema: false)*/
+        /*: base("ClassprojectContext", throwIfV1Schema: false)*/
         : base("ClassprojectContext_Azure", throwIfV1Schema: false)
         {
             // Disable code-first migrations
@@ -32,5 +32,11 @@ namespace class_project.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<class_project.Models.Athlete> Athletes { get; set; }
+
+        public System.Data.Entity.DbSet<class_project.Models.Coach> Coaches { get; set; }
+
+        public System.Data.Entity.DbSet<class_project.Models.Team> Teams { get; set; }
     }
 }

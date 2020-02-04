@@ -11,7 +11,7 @@ namespace class_project.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Athlete()
         {
-            Meets = new HashSet<Meet>();
+            Records = new HashSet<Record>();
         }
 
         public int ID { get; set; }
@@ -33,6 +33,6 @@ namespace class_project.Models
         public virtual Team Team { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Meet> Meets { get; set; }
+        public virtual ICollection<Record> Records { get; set; }
     }
 }

@@ -33,17 +33,18 @@ CREATE TABLE [dbo].[Events]
 	CONSTRAINT [PK_dbo.Events] PRIMARY KEY CLUSTERED ([ID] ASC),
 );
 
-CREATE TABLE [dbo].[Meets]
+CREATE TABLE [dbo].[Records]
 (
 	[ID]			INT IDENTITY (1,1)	NOT NULL,
     [Location]			NVARCHAR(50)	   NOT NULL,	
-	[AthleteID]           INT					NOT NULL,
-    [EventID]            INT					NOT NULL,				
+	[AthleteID]          INT					NOT NULL,
+    [EventID]            INT					NOT NULL,	
+	[RaceTime]			 FLOAT					,
+	[Date]				 Date				NOT NULL,
 	CONSTRAINT [PK_dbo.Meets] PRIMARY KEY CLUSTERED ([ID] ASC),
     CONSTRAINT [FK_dbo.Meets_dbo.Athletes_ID] FOREIGN KEY ([AthleteID]) REFERENCES [dbo].[Athletes] ([ID]),
     CONSTRAINT [FK_dbo.Meets_dbo.Events_ID] FOREIGN KEY ([EventID]) REFERENCES [dbo].[Events] ([ID])
 );
-
 
 CREATE TABLE [dbo].[AspNetRoles](
 	[Id] [nvarchar](128) NOT NULL,

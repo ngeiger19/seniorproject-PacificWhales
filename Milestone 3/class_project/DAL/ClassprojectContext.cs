@@ -4,27 +4,26 @@ namespace class_project.DAL
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
-    using Models;
+    using class_project.Models;
+
     public partial class ClassprojectContext : DbContext
     {
         public ClassprojectContext()
+            /*: base("name=ClassprojectContext")*/
             : base("name=ClassprojectContext_Azure")
-        //: base("AzureConnection", throwIfV1Schema: false)
         {
-            // Disable code-first migrations
-            Database.SetInitializer<ApplicationDbContext>(null);
         }
 
         public virtual DbSet<Athlete> Athletes { get; set; }
         public virtual DbSet<Coach> Coaches { get; set; }
         public virtual DbSet<Event> Events { get; set; }
-        public virtual DbSet<Meet> Meets { get; set; }
+        public virtual DbSet<Record> Records { get; set; }
         public virtual DbSet<Team> Teams { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Athlete>()
-                .HasMany(e => e.Meets)
+                .HasMany(e => e.Records)
                 .WithRequired(e => e.Athlete)
                 .WillCascadeOnDelete(false);
 
@@ -34,7 +33,7 @@ namespace class_project.DAL
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Event>()
-                .HasMany(e => e.Meets)
+                .HasMany(e => e.Records)
                 .WithRequired(e => e.Event)
                 .WillCascadeOnDelete(false);
 

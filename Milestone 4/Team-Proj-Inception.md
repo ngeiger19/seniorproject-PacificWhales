@@ -33,9 +33,9 @@ A: Yes, it would be nice to be able look back at all the shows I've played. It w
 4. We will create an Events page where any registered user can create and post an event, like a music festival, a competition, or a get-together. Events should be seperated by city, and you should be able to select a city from a drop-down to view its events. Events should have a link the profile of the person who posted it.
 
 ## Initial Modeling
-
+![image unavailable](https://github.com/lawlouis/seniorproject-PacificWhales/blob/dev/Milestone%203/mindmap.jpg "Mindmap" )
 ### Use Case Diagrams
-
+![image unavailable](https://github.com/lawlouis/seniorproject-PacificWhales/blob/dev/Milestone%204/UseCase_Diagram.jpg "UseCaseDiagram" )
 ### Other Modeling
 
 ## Non-Functional Requirements
@@ -83,9 +83,9 @@ T: Task
 27. [E] As a user, I want to be able to report spam posts so that the events page will only contain legitimate events.
 
 ## Initial Architecture Envisioning
-
+![image unavailable](https://github.com/lawlouis/seniorproject-PacificWhales/blob/dev/Milestone%204/Architecture_Diagram.jpg "ArchitectureDiagram" )
 ## Agile Data Modeling
-
+![image unavailable](https://github.com/lawlouis/seniorproject-PacificWhales/blob/dev/Milestone%204/Initial_ER_Diagram.jpg "ERDiagram" )
 ## Refined Vision Statement
 
 ## Timeline and Release Plan
