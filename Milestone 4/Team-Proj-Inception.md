@@ -15,19 +15,20 @@ Our project is seperated into clear modules, which we will develop one at a time
 3. There should be social media-like aspects of the site, like rating, commenting, messaging, and posting. We want users to interact with each other.
 
 ## Initial Requirements Elaboration and Elicitation
+### Questions and Interviews
+1. Q: What social media should we allow musicians to link in their profile? 
+A: Instagram, BandCamp, SoundCloud, Facebook, YouTube, and Spotify would be good too.
+2. Q: Do you know people in Salem who would be interested in using this web app?
+A: Yes, a lot of local musicians would use this.
+3. Q: Would it be helpful to have a record of all the shows you've booked through the site?
+A: Yes, it would be nice to be able look back at all the shows I've played. It would be great if you could use some kind of calender along with that.
 
-### Questions
-
-
-### Interviews
-1. Q: What social media should we allow musicians to link in their profile? A: Instagram, BandCamp, SoundCloud, Facebook, YouTube, and Spotify would be good too.
-2. 
 ### Other Elicitation Activities?
 
 ## List of Needs and Features
 
-1. There will be two different account types: musicians and venue owners. All users should have profile pages with a name, description, profile picture, contact information, location, and links to social media. A musician’s profile will include band member’s name(s) and role in the band, their music genre, and the option to include videos from their YouTube channel. A venue owner’s page will show their location on Google Maps and will have the option to upload photos of the venue.
-2. A search feature should be implemented so users can search for each other. Include filters: by location, genre, name, whether the musician has videos, or popularity (or no filters - by distance). We also want a browse page that will recommend musicians or venues to users. Recommendations should be based on search history and previous shows booked. Recommendation criteria will depend on whether the user is a musician or a venue owner. Musicians will be recommended venues in locations they’ve played before, venues that frequently book musicians of the same or similar genre as the musician browsing, and venues they’ve played at before. Venue owners will be recommended musicians whose genre is similar or the same as those they’ve booked before, musicians who frequently book shows in their area, and musicians they’ve worked with before. Users with no previous booking activity will be recommended users who are close, or popular. When a user finds someone to work with, they should be able to communicate and through the site or easily email the other user.
+1. There will be two different account types: musicians and venue owners. All users should have profile pages with a name, description, profile picture, contact information, location, and links to social media. A musician’s profile will include band member’s name(s) and role in the band, their music genre, and the option to include videos from their YouTube channel. A venue owner’s page will show their location on Google Maps and will have the option to upload photos of the venue. Users should be able to see their distance from other users in miles.
+2. A search feature should be implemented so users can search for each other. Include filters: by location, genre, name, whether the musician has videos, or popularity (or no filters - by distance). We also want a browse page that will recommend musicians or venues to users. Recommendations should be based on previous shows booked. Recommendation criteria will depend on whether the user is a musician or a venue owner. Musicians will be recommended venues in locations they’ve played before, venues that frequently book musicians of the same or similar genre as the musician browsing, and venues they’ve played at before. Venue owners will be recommended musicians whose genre is similar or the same as those they’ve booked before, musicians who frequently book shows in their area, and musicians they’ve worked with before. Users with no previous booking activity will be recommended users who are close, or popular. When a user finds someone to work with, they should be able to communicate and through the site or easily email the other user.
 3. To aid in scheduling, users will be able to display their availability on their profile with a calendar. We will use a calender API for this. When searching, users will have the option to filter by schedule to show only other users who are available on the day(s) they’ve selected. Users should also be able to confirm a scheduled show through the site after contacting each other. After a show is booked, it should appear on users' calenders. If a user schedules a show, the other user will be notified and can accept or decline the scheduled show. The show can be cancelled at any time.
 4. We will create an Events page where any registered user can create and post an event, like a music festival, a competition, or a get-together. Events should be seperated by city, and you should be able to select a city from a drop-down to view its events. Events should have a link the profile of the person who posted it.
 
