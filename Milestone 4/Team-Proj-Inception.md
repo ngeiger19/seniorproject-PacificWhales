@@ -7,7 +7,9 @@ Team Project Inception
 Our project is seperated into clear modules, which we will develop one at a time. These modules will be easy to break down into small user stories. Each user story will be a thin verticle slice through all three layers of the application. We will work together as a team to complete each module and to come up with solutions to difficult problems. We are using Disciplined Agile Delivery and Scrum to develop our project.
 
 ## Initial Vision Statment
-**For** musicians and venue owners who need an easier way to book shows, **the** show booking application **is a** useful web application that will allow musicians and venue owners to search for and contact each other. This will make for a much smoother booking process and will aid venue owners and musicians in discovering one another. It will be helpful to musicians who play shows as a main source of income, as well those who are just starting out and lack experience. **Unlike** other booking websites, **our product** will be truly representative of, and useful to, independent musicians in the Salem area.
+Music Booking For musicians and venues who need an easy way to book shows, the show booking application is a useful web application that will allow musicians and venues to search for and contact each other. This will make for a much smoother booking process and will aid venues and musicians in discovering one another. Unlike other booking applications, our product will be truly representative of, and useful to, the independent music scene in the Salem area.
+
+Culture For students/travelers/teachers who need or interested in learning new cultures before they travel or for the sake of diversity, the Culture Learning application is a website that will provide information of different cultures such as food, languages, history, landmarks, etc. The website will have a main search functionality and categories for visitors to look for a specific culture that they are interested in learning. This website will also act as a social media for people to exchange their culture with multimedia. Unlike a typical language learning website, our application will generate a lot of more info than just languages and will also be able to help people with different purpose of learning such as traveling or educational purposes.
 
 ## Core Features
 1. Allow musicians and venue owners to create accounts and profiles so that they can search for and find each other, communicate, and agree to work together, creating a much more modern and hassle-free way to book live music.
@@ -87,6 +89,7 @@ T: Task
 ## Agile Data Modeling
 ![image unavailable](https://github.com/lawlouis/seniorproject-PacificWhales/blob/dev/Milestone%204/Initial_ER_Diagram.jpg "ERDiagram" )
 ## Refined Vision Statement
+**For** musicians and venue owners who need an easier way to book shows, **the** show booking application **is a** useful web application that will allow musicians and venue owners to search for and contact each other. This will make for a much smoother booking process and will aid venue owners and musicians in discovering one another. It will be helpful to musicians who play shows as a main source of income, as well those who are just starting out and lack experience. **Unlike** other booking websites, **our product** will be truly representative of, and useful to, independent musicians in the Salem area.
 
 ## Timeline and Release Plan
 ![image unavailable](https://github.com/lawlouis/seniorproject-PacificWhales/blob/dev/Milestone%204/Timeline.jpg "imeline" )
