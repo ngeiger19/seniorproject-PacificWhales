@@ -89,7 +89,7 @@ T: Task
 ## Agile Data Modeling
 ![image unavailable](https://github.com/lawlouis/seniorproject-PacificWhales/blob/dev/Milestone%204/Initial_ER_Diagram.jpg "ERDiagram" )
 ## Refined Vision Statement
-**For** musicians and venue owners who need an easier way to book shows, **the** show booking application **is a** useful web application that will allow musicians and venue owners to search for and contact each other. This will make for a much smoother booking process and will aid venue owners and musicians in discovering one another. It will be helpful to musicians who play shows as a main source of income, as well those who are just starting out and lack experience. **Unlike** other booking websites, **our product** will be truly representative of, and useful to, independent musicians in the Salem area.
+**For** musicians and venue owners who need an easier way to book shows, **Harmony** **is a** useful web application that will allow musicians and venue owners to search for and contact each other. This will make for a much smoother booking process and will aid venue owners and musicians in discovering one another. It will be helpful to musicians who play shows as a main source of income, as well those who are just starting out and lack experience. **Unlike** other booking websites, **our product** will be truly representative of, and useful to, independent musicians in the Salem area.
 
 ## Timeline and Release Plan
 ![image unavailable](https://github.com/lawlouis/seniorproject-PacificWhales/blob/dev/Milestone%204/Timeline.jpg "imeline" )
