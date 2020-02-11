@@ -32,9 +32,6 @@
 
 ## Coding Guideline
 * PLEASE document you code; even a short note will be helpful
-* IDE: Visual Studio Community 2019, Microsoft SQL Server Management Studio 18
-* Frameworks/Languages: Entity Framework, ASP.NET MVC 5, JavaScript, C#, JQuery, AJAX, LINQ
-* Server: Microsoft SQL Server, Azure
 
 ## Database Design
 * Table names should be plural, e.g `Users`
