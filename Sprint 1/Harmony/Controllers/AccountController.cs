@@ -170,7 +170,7 @@ namespace Harmony.Controllers
                         LastName = model.LastName,
                         ASPNetIdentityID = user.Id
                     };
-                    UsersContext db = new UsersContext();
+                    HarmonyContext db = new UsersContext();
                     db.Users.Add(HarmonyUser);
                     await db.SaveChangesAsync();*/
 
