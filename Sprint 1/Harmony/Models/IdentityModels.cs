@@ -21,8 +21,12 @@ namespace Harmony.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("HarmonyContext_Azure", throwIfV1Schema: false)
+            /*: base("DefaultConnection", throwIfV1Schema: false)*/
         {
+            // Disable code-first migrations.  Default initializer is CreateDatabaseIfNotExists
+            // This sets the strategy to use the first time only the DbContext is created
+            Database.SetInitializer<ApplicationDbContext>(null);
         }
 
         public static ApplicationDbContext Create()
