@@ -30,7 +30,7 @@ ALTER TABLE [dbo].[Photos]  DROP CONSTRAINT [FK_dbo.Photos_dbo.Users_ID]
 
 ALTER TABLE [dbo].[Musician_Genre]  DROP CONSTRAINT [FK_dbo.Musician_Genre_dbo.Users_ID]
 
-ALTER TABLE [dbo].[Musician_Genre]  DROP CONSTRAINT [FK_dbo.Musician_Genre_dbo.Genres_ID]
+ALTER TABLE [dbo].[Musician_Genre]  DROP CONSTRAINT [FK_dbo.Musician_Genre_dbo.Genre_ID]
 
 ALTER TABLE [dbo].[BandMember_Instrument]  DROP CONSTRAINT [FK_dbo.BandMember_Instrument_dbo.BandMembers_ID]
 
@@ -40,7 +40,7 @@ ALTER TABLE [dbo].[BandMembers]  DROP CONSTRAINT [FK_dbo.BandMembers_dbo.Users_I
 
 ALTER TABLE [dbo].[Venues]  DROP CONSTRAINT [FK_dbo.Venues_dbo.VenueTypes_ID]
 
-ALTER TABLE [dbo].[Users]  DROP CONSTRAINT [FK_dbo.Users_dbo.Roles_ID]
+-- ALTER TABLE [dbo].[Users]  DROP CONSTRAINT [FK_dbo.Users_dbo.Roles_ID]
 
 DROP TABLE [dbo].[Videos]
 
@@ -48,7 +48,7 @@ DROP TABLE [dbo].[Photos]
 
 DROP TABLE [dbo].[Musician_Genre]
 
-DROP TABLE [dbo].[Genres]
+DROP TABLE [dbo].[Genre]
 
 DROP TABLE [dbo].[BandMember_Instrument]
 
@@ -62,4 +62,4 @@ DROP TABLE [dbo].[VenueTypes]
 
 DROP TABLE [dbo].[Users]
 
-DROP TABLE [dbo].[Roles]
+-- DROP TABLE [dbo].[Roles]

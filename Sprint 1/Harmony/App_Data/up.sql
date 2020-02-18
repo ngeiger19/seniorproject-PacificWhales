@@ -89,16 +89,18 @@ CREATE NONCLUSTERED INDEX [IX_RoleId] ON [dbo].[AspNetUserRoles]([RoleId] ASC);
 -- #######################################
 -- #             Roles Table             #
 -- #######################################
-CREATE TABLE [dbo].[Roles]
+-- Let's just use the asp.net one for now
+/* CREATE TABLE [dbo].[Roles]
 (
 	[ID]		INT IDENTITY (1,1)	NOT NULL,
 	[RoleName]		NVARCHAR (50)		NOT NULL,
 	CONSTRAINT [PK_dbo.Roles] PRIMARY KEY CLUSTERED ([ID] ASC)
-);
+); */
 
 -- #######################################
 -- #             Users Table             #
 -- #######################################
+-- enable the ShowsBooked and AveRating later on
 CREATE TABLE [dbo].[Users]
 (
 	[ID]		INT IDENTITY (1,1)	NOT NULL,
@@ -110,9 +112,10 @@ CREATE TABLE [dbo].[Users]
 	-- [ShowsBooked]		INT		 NULL,
 	[Description]		NVARCHAR (300)		NOT NULL,
 	-- [AveRating]		INT		NULL,
-	[RoleID]		INT		NOT NULL,
-	CONSTRAINT [PK_dbo.Users] PRIMARY KEY CLUSTERED ([ID] ASC),
-	CONSTRAINT [FK_dbo.Users_dbo.Roles_ID] FOREIGN KEY ([RoleID]) REFERENCES [dbo].[Roles] ([ID])
+	-- [RoleID]		INT		NOT NULL,
+	[ASPNetIdentityID] NVARCHAR (128) NOT NULL,			-- Id into Identity User table, but NOT a FK on purpose
+	CONSTRAINT [PK_dbo.Users] PRIMARY KEY CLUSTERED ([ID] ASC)
+	-- CONSTRAINT [FK_dbo.Users_dbo.Roles_ID] FOREIGN KEY ([RoleID]) REFERENCES [dbo].[Roles] ([ID])
 
 );
 
@@ -142,8 +145,6 @@ CREATE TABLE [dbo].[Venues]
 	CONSTRAINT [PK_dbo.Venues] PRIMARY KEY CLUSTERED ([ID] ASC),
 	CONSTRAINT [FK_dbo.Venues_dbo.VenueTypes_ID] FOREIGN KEY ([VenueTypeID]) REFERENCES [dbo].[VenueTypes] ([ID])
 );
-
------------------------------------------------------------
 
 --------FOR MUSICIANS--------------------------------------
 
@@ -179,6 +180,7 @@ CREATE TABLE [dbo].[BandMember_Instrument]
 (
 	[BandMemberID]		INT		NOT NULL,
 	[InstrumentID]		INT		NOT NULL,
+	CONSTRAINT [PK_dbo.BandMember_Instrument] PRIMARY KEY CLUSTERED ([BandMemberID], [InstrumentID] ASC),
 	CONSTRAINT [FK_dbo.BandMember_Instrument_dbo.BandMembers_ID] FOREIGN KEY ([BandMemberID]) REFERENCES [dbo].[BandMembers] ([ID]),
 	CONSTRAINT [FK_dbo.BandMember_Instrument_dbo.Instruments_ID] FOREIGN KEY ([InstrumentID]) REFERENCES [dbo].[Instruments] ([ID])
 );
@@ -187,11 +189,11 @@ CREATE TABLE [dbo].[BandMember_Instrument]
 -- #            Genres Table             #
 -- #######################################
 
-CREATE TABLE [dbo].[Genres]
+CREATE TABLE [dbo].[Genre]
 (
 	[ID]		INT IDENTITY (1,1)	NOT NULL,
 	[GenreName]		NVARCHAR (50)		NOT NULL,
-	CONSTRAINT [PK_dbo.Genres] PRIMARY KEY CLUSTERED ([ID] ASC)
+	CONSTRAINT [PK_dbo.Genre] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
 
 -- #######################################
@@ -203,10 +205,8 @@ CREATE TABLE [dbo].[Musician_Genre]
 	[UserID]		INT		NOT NULL,
 	[GenreID]		INT		NOT NULL,
 	CONSTRAINT [FK_dbo.Musician_Genre_dbo.Users_ID] FOREIGN KEY ([UserID]) REFERENCES [dbo].[Users] ([ID]),
-	CONSTRAINT [FK_dbo.Musician_Genre_dbo.Genres_ID] FOREIGN KEY ([GenreID]) REFERENCES [dbo].[Genres] ([ID])
+	CONSTRAINT [FK_dbo.Musician_Genre_dbo.Genre_ID] FOREIGN KEY ([GenreID]) REFERENCES [dbo].[Genre] ([ID])
 );
-
------------------------------------------------------------
 
 -----------------FOR PROFILE-------------------------------
 
