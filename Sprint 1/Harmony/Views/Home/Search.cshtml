@@ -1,4 +1,4 @@
-﻿<!-- Search form -->
+﻿@model IEnumerable<Harmony.Models.User>
 
 
 <style>
@@ -21,6 +21,8 @@
     }
 </style>
 
+
+<!-- Search form -->
 <div class="row">
     <div class="col-6 offset-3 shadow p-3 mb-5 bg-white rounded" style="margin-top: 40px;">
         <h3 id="form-title">Search for other users</h3>
@@ -51,3 +53,27 @@
         }
     </div>
 </div>
+
+@if(Model != null)
+{
+    <div class="row">
+        <div class="col-10">
+            <table>
+                <tr>
+                    <th>Results</th>
+                    <th></th>
+                </tr>
+                <hr />
+                @foreach(var user in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(x  => user.FirstName) @Html.DisplayFor(x  => user.LastName)</td>
+                        <td>@Html.DisplayFor(x => user.City), @Html.DisplayFor(x  => user.State)</td>
+                        <td>@Html.DisplayFor(x => user.Genres)</td>
+                        <td>@Html.DisplayFor(x  => user.Email)</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+}
