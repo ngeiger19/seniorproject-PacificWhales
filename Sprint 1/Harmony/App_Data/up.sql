@@ -110,7 +110,7 @@ CREATE TABLE [dbo].[Users]
 	[State]		NVARCHAR (16)		NOT NULL,
 	[Email]		NVARCHAR (100)		NOT NULL,
 	-- [ShowsBooked]		INT		 NULL,
-	[Description]		NVARCHAR (300)		NOT NULL,
+	[Description]		NVARCHAR (300)		NULL,
 	-- [AveRating]		INT		NULL,
 	-- [RoleID]		INT		NOT NULL,
 	[ASPNetIdentityID] NVARCHAR (128) NOT NULL,			-- Id into Identity User table, but NOT a FK on purpose
@@ -138,12 +138,16 @@ CREATE TABLE [dbo].[Venues]
 (
 	[ID]		INT IDENTITY (1,1)	NOT NULL,
 	[VenueName]		NVARCHAR (50)		NOT NULL,
-	[Street]		NVARCHAR (50)		NOT NULL,
+	[AddressLine1]		NVARCHAR (50)		NOT NULL,
+	[AddressLine2]		NVARCHAR (50)		NULL,
 	[City]		NVARCHAR (50)		NOT NULL,
 	[State]		NVARCHAR (24)		NOT NULL,
+	[ZipCode]	NVARCHAR (10)		NULL,
 	[VenueTypeID]		INT		NOT NULL,
+	[UserID]			INT		NOT NULL,
 	CONSTRAINT [PK_dbo.Venues] PRIMARY KEY CLUSTERED ([ID] ASC),
-	CONSTRAINT [FK_dbo.Venues_dbo.VenueTypes_ID] FOREIGN KEY ([VenueTypeID]) REFERENCES [dbo].[VenueTypes] ([ID])
+	CONSTRAINT [FK_dbo.Venues_dbo.VenueTypes_ID] FOREIGN KEY ([VenueTypeID]) REFERENCES [dbo].[VenueTypes] ([ID]),
+	CONSTRAINT [FK_dbo.Venues_dbo.Users_ID] FOREIGN KEY ([UserID]) REFERENCES [dbo].[Users] ([ID])
 );
 
 --------FOR MUSICIANS--------------------------------------
@@ -189,11 +193,11 @@ CREATE TABLE [dbo].[BandMember_Instrument]
 -- #            Genres Table             #
 -- #######################################
 
-CREATE TABLE [dbo].[Genre]
+CREATE TABLE [dbo].[Genres]
 (
 	[ID]		INT IDENTITY (1,1)	NOT NULL,
 	[GenreName]		NVARCHAR (50)		NOT NULL,
-	CONSTRAINT [PK_dbo.Genre] PRIMARY KEY CLUSTERED ([ID] ASC)
+	CONSTRAINT [PK_dbo.Genres] PRIMARY KEY CLUSTERED ([ID] ASC)
 );
 
 -- #######################################
@@ -204,8 +208,9 @@ CREATE TABLE [dbo].[Musician_Genre]
 (
 	[UserID]		INT		NOT NULL,
 	[GenreID]		INT		NOT NULL,
+	CONSTRAINT [PK_dbo.Musician_Genre] PRIMARY KEY CLUSTERED ([UserID], [GenreID] ASC),
 	CONSTRAINT [FK_dbo.Musician_Genre_dbo.Users_ID] FOREIGN KEY ([UserID]) REFERENCES [dbo].[Users] ([ID]),
-	CONSTRAINT [FK_dbo.Musician_Genre_dbo.Genre_ID] FOREIGN KEY ([GenreID]) REFERENCES [dbo].[Genre] ([ID])
+	CONSTRAINT [FK_dbo.Musician_Genre_dbo.Genres_ID] FOREIGN KEY ([GenreID]) REFERENCES [dbo].[Genres] ([ID])
 );
 
 -----------------FOR PROFILE-------------------------------
