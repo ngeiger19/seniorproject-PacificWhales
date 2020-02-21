@@ -42,6 +42,7 @@ namespace Harmony.Controllers
 
         public ActionResult Search()
         {
+
             string search = Request.QueryString["search"];
 
             if (search == null || search == "")
