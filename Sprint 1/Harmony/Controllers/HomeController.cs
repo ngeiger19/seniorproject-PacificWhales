@@ -50,12 +50,22 @@ namespace Harmony.Controllers
                 return View();
             }
 
-            var userQuery =
+            // search for musicians
+            var searchQuery =
                 from user in db.Users
                 where user.FirstName.Contains(search)
                 select user;
 
-            return View(userQuery);
+            // search for venues
+
+            var searchQuery =
+                from venue in db.Venues
+                where venue.VenueName.Contains(search)
+                select venue;
+
+            return View(searchQuery);
+
+            
         }
     }
 }
