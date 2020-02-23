@@ -80,25 +80,30 @@ namespace Harmony.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
+        // Choose a role
+        [Required]
+        [Display(Name = "Role")]
+        public string Role { get; set; }
+
         // For Venue Owners
 
-        [Required]
         [Display(Name = "VenueType")]
         public string VenueType { get; set; }
 
-        [Required]
         [Display(Name = "VenueName")]
         public string VenueName { get; set; }
 
-        [Required]
         [Display(Name = "AddressLine1")]
         public string AddressLine1 { get; set; }
 
-        [Required]
         [Display(Name = "AddressLine2")]
         public string AddressLine2 { get; set; }
 
+        [Display(Name = "City")]
+        public string City { get; set; }
 
+        [Display(Name = "State")]
+        public string State { get; set; }
 
     }
 
