@@ -6,11 +6,11 @@ namespace Harmony.DAL
     using System.Linq;
     using Harmony.Models;
 
-    public partial class UsersContext : DbContext
+    public partial class HarmonyContext : DbContext
     {
-        public UsersContext()
+        public HarmonyContext()
             : base("name=HarmonyContext_Azure")
-            /*: base("name=UsersContext")*/
+            /*: base("name=HarmonyContext")*/
         {
         }
 
