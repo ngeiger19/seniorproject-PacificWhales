@@ -9,7 +9,6 @@ using System.IO;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Newtonsoft.Json;
 using Harmony.DAL;
 using Harmony.Models;
 using System.Collections.Generic;
