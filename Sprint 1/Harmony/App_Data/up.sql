@@ -142,7 +142,7 @@ CREATE TABLE [dbo].[Venues]
 	[AddressLine2]		NVARCHAR (50)		NULL,
 	[City]		NVARCHAR (50)		NOT NULL,
 	[State]		NVARCHAR (24)		NOT NULL,
-	[ZipCode]	NVARCHAR (10)		NULL,
+	[ZipCode]	NVARCHAR (10)		NOT NULL,
 	[VenueTypeID]		INT		NOT NULL,
 	[UserID]			INT		NOT NULL,
 	CONSTRAINT [PK_dbo.Venues] PRIMARY KEY CLUSTERED ([ID] ASC),

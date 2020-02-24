@@ -30,6 +30,36 @@
                 </div>
             </div>
             <div class="form-group">
+                @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
+                <div class="col-md-12">
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
+                <div class="col-md-12">
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.City, new { @class = "col-md-2 control-label" })
+                <div class="col-md-12">
+                    @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.State, new { @class = "col-md-2 control-label" })
+                <div class="col-md-12">
+                    @Html.DropDownList("State", null, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
+                <div class="col-md-12">
+                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
                 @Html.LabelFor(m => m.Role, new { @class = "col-md-2 control-label" })
                 <div class="form-check">
                     <div class="col-md-12">
@@ -64,15 +94,21 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.City, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(m => m.VenueCity, new { @class = "col-md-2 control-label" })
                     <div class="col-md-12">
-                        @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.VenueCity, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.State, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(m => m.VenueState, new { @class = "col-md-2 control-label" })
                     <div class="col-md-12">
-                        @Html.DropDownList("AllStates", null, new { @class = "form-control" })
+                        @Html.DropDownList("VenueState", null, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ZipCode, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(m => m.ZipCode, new { @class = "form-control" })
                     </div>
                 </div>
             </div>

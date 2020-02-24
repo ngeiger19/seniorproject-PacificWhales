@@ -19,11 +19,14 @@ namespace Harmony.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        HarmonyContext db = new HarmonyContext();
         public AccountController()
-        {
+        { 
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -151,7 +154,8 @@ namespace Harmony.Controllers
             {
                 stateList.Add((string)arr[i]["name"]);
             }
-            ViewBag.AllStates = new SelectList(stateList);
+            ViewBag.VenueState = new SelectList(stateList);
+            ViewBag.State = new SelectList(stateList);
             sr.Dispose();
             return View();
         }
@@ -165,8 +169,8 @@ namespace Harmony.Controllers
         {
             if (ModelState.IsValid)
             {
-              //  var user = new ApplicationUser { UserName = model.FirstName + " " + model.LastName, Email = model.Email };
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.FirstName + " " + model.LastName, Email = model.Email};
+              //  var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -186,19 +190,40 @@ namespace Harmony.Controllers
                     {
                         stateList.Add((string)arr[i]["name"]);
                     }
-                    ViewBag.AllStates = new SelectList(stateList);
-                    /*var HarmonyUser = new User
+                    ViewBag.VenueState = new SelectList(stateList);
+                    ViewBag.State = new SelectList(stateList);
+                    User HarmonyUser = new User
                     {
                         FirstName = model.FirstName,
                         LastName = model.LastName,
+                        Email = user.Email,
+                        City = model.City,
+                        State = model.State,
+                        Description = model.Description,
                         ASPNetIdentityID = user.Id
                     };
-                    HarmonyContext db = new UsersContext();
                     db.Users.Add(HarmonyUser);
-                    await db.SaveChangesAsync();*/
+                    VenueType venueType = new VenueType
+                    {
+                        TypeName = model.VenueType
+                    };
+                    db.VenueTypes.Add(venueType);
+                    Venue venue = new Venue
+                    {
+                        VenueName = model.VenueName,
+                        AddressLine1 = model.AddressLine1,
+                        AddressLine2 = model.AddressLine2,
+                        City = model.VenueCity,
+                        State = model.VenueState,
+                        ZipCode = model.ZipCode,
+                        UserID = HarmonyUser.ID,
+                        VenueTypeID = venueType.ID
+                    };
+                    db.Venues.Add(venue);
+                    await db.SaveChangesAsync();
                     sr.Dispose();
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Welcome", "Home");
                 }
                 AddErrors(result);
             }

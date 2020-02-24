@@ -29,6 +29,7 @@ namespace Harmony.Models
         [StringLength(24)]
         public string State { get; set; }
 
+        [Required]
         [StringLength(10)]
         public string ZipCode { get; set; }
 

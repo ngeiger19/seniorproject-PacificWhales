@@ -80,31 +80,58 @@ namespace Harmony.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
+        // User general info
+        [Required]
+        [StringLength(50)]
+        public string FirstName { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string LastName { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string City { get; set; }
+
+        [Required]
+        [StringLength(16)]
+        public string State { get; set; }
+
+        [StringLength(300)]
+        public string Description { get; set; }
+
         // Choose a role
         [Required]
         [Display(Name = "Role")]
         public string Role { get; set; }
 
         // For Venue Owners
-
+        [Required]
         [Display(Name = "VenueType")]
         public string VenueType { get; set; }
 
+        [Required]
         [Display(Name = "VenueName")]
         public string VenueName { get; set; }
-
+        
+        [Required]
         [Display(Name = "AddressLine1")]
         public string AddressLine1 { get; set; }
 
         [Display(Name = "AddressLine2")]
         public string AddressLine2 { get; set; }
-
+        
+        [Required]
         [Display(Name = "City")]
-        public string City { get; set; }
-
+        public string VenueCity { get; set; }
+        
+        [Required]
         [Display(Name = "State")]
-        public string State { get; set; }
+        public string VenueState { get; set; }
 
+        [Required]
+        [StringLength(10)]
+        public string ZipCode { get; set; }
     }
 
     public class ResetPasswordViewModel
