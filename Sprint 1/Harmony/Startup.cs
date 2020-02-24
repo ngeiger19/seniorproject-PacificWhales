@@ -26,7 +26,7 @@ namespace Harmony
 
 
             // Create a venue owner role  
-            /**
+            
             if (!roleManager.RoleExists("VenueOwner"))
             {                var role = new IdentityRole();
                 role.Name = "VenueOwner";
@@ -40,7 +40,7 @@ namespace Harmony
                 role.Name = "GeneralUser";
                 roleManager.Create(role);
             }
-            ***/
+
             // Do we need another role?  i.e. "User"
 
             // creating Creating Employee role   
