@@ -5,22 +5,28 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.IO;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Harmony.DAL;
 using Harmony.Models;
+using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 
 namespace Harmony.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        HarmonyContext db = new HarmonyContext();
         public AccountController()
-        {
+        { 
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -140,6 +146,17 @@ namespace Harmony.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            StreamReader sr = new StreamReader(Server.MapPath("~/Content/states_hash.json"));
+            string data = sr.ReadToEnd();
+            JArray arr = JArray.Parse(data);
+            List<string> stateList = new List<string>();
+            for (int i = 0; i < arr.Count(); i++)
+            {
+                stateList.Add((string)arr[i]["name"]);
+            }
+            ViewBag.VenueState = new SelectList(stateList);
+            ViewBag.State = new SelectList(stateList);
+            sr.Dispose();
             return View();
         }
 
@@ -152,8 +169,8 @@ namespace Harmony.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var user = new ApplicationUser { UserName = model.FirstName + " " + model.LastName, Email = model.Email };
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.FirstName + " " + model.LastName, Email = model.Email};
+              //  var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -164,17 +181,49 @@ namespace Harmony.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    /*var HarmonyUser = new User
+                    await this.UserManager.AddToRoleAsync(user.Id, model.Role);
+                    StreamReader sr = new StreamReader(Server.MapPath("~/Content/states_hash.json"));
+                    string data = sr.ReadToEnd();
+                    JArray arr = JArray.Parse(data);
+                    List<string> stateList = new List<string>();
+                    for (int i = 0; i < arr.Count(); i++)
+                    {
+                        stateList.Add((string)arr[i]["name"]);
+                    }
+                    ViewBag.VenueState = new SelectList(stateList);
+                    ViewBag.State = new SelectList(stateList);
+                    User HarmonyUser = new User
                     {
                         FirstName = model.FirstName,
                         LastName = model.LastName,
+                        Email = user.Email,
+                        City = model.City,
+                        State = model.State,
+                        Description = model.Description,
                         ASPNetIdentityID = user.Id
                     };
-                    HarmonyContext db = new UsersContext();
                     db.Users.Add(HarmonyUser);
-                    await db.SaveChangesAsync();*/
+                    VenueType venueType = new VenueType
+                    {
+                        TypeName = model.VenueType
+                    };
+                    db.VenueTypes.Add(venueType);
+                    Venue venue = new Venue
+                    {
+                        VenueName = model.VenueName,
+                        AddressLine1 = model.AddressLine1,
+                        AddressLine2 = model.AddressLine2,
+                        City = model.VenueCity,
+                        State = model.VenueState,
+                        ZipCode = model.ZipCode,
+                        UserID = HarmonyUser.ID,
+                        VenueTypeID = venueType.ID
+                    };
+                    db.Venues.Add(venue);
+                    await db.SaveChangesAsync();
+                    sr.Dispose();
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Welcome", "Home");
                 }
                 AddErrors(result);
             }
