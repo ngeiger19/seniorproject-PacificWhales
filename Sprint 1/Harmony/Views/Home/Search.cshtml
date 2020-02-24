@@ -1,18 +1,52 @@
-﻿<!-- Search form -->
-    <div class="form-group row">
-        <form class="form-inline md-form form-sm active-cyan-2 mt-2">
-            <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
-                   aria-label="Search">
+﻿<style>
+    #form-title {
+        margin-left: 20px;
+        padding-top: 20px;
+    }
 
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="searchOption" id="musician" value="option1" checked>
-                <label class="form-check-label" for="musician">Musicians</label>
+    .form-group {
+        margin-left: 20px;
+        padding: 20px;
+    }
+
+    #radio-text {
+        margin-top: 20px;
+    }
+
+    .form-check {
+        margin: 20px 0 0 20px;
+    }
+</style>
+
+
+<!-- Search form -->
+<div class="row">
+    <div class="col-6 offset-3 shadow p-3 mb-5 bg-white rounded" style="margin-top: 40px;">
+        <h3 id="form-title">Search for other users</h3>
+        <hr />
+
+        @using (Html.BeginForm("Search", "Home", FormMethod.Get))
+        {
+            <div class="form-group">
+                <div class="row">
+                    <form class="form-inline md-form form-sm mt-2">
+                        <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
+                               aria-label="Search" id="search" name="search">
+                    </form>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+                <div class="row" id="radioBtnList">
+                    <p id="radio-text">Search for: </p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="searchOption" id="musician-radio" runat="server" value="option1" checked>
+                        <label class="form-check-label" for="musician">Musicians</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="searchOption" id="venue-radio" runat="server" value="option2">
+                        <label class="form-check-label" for="venue">Venues</label>
+                    </div>
+                </div>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="searchOption" id="venue" value="option2">
-                <label class="form-check-label" for="venue">Venues</label>
-            </div>
-            <button type="submit" class="btn btn-primary">Search</button>
-        </form>
+        }
     </div>
-    
+</div>
