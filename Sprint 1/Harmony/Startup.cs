@@ -13,6 +13,7 @@ namespace Harmony
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            createRolesandUsers();
         }
 
         // In this method we will create default User roles and Admin user for login    
@@ -24,11 +25,9 @@ namespace Harmony
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
 
-            // In Startup iam creating first Admin Role and creating a default Admin User     
+            // Create a venue owner role   
             if (!roleManager.RoleExists("VenueOwner"))
-            {
-                // first we create Admin rool    
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+            {                var role = new IdentityRole();
                 role.Name = "VenueOwner";
                 roleManager.Create(role);
             }
