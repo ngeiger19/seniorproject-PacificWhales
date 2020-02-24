@@ -1,6 +1,8 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background: url(../musicbk.jpg);
+    background-color:transparent:!important;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -53,10 +55,15 @@ textarea {
     box-sizing: content-box;
     width: 400px;
     height: 300px;
-    padding: -30px;
-    border: 1px solid black;
+    padding: 30px;
+    border: 5px solid white;
 }
 
 #bkimage {
     background-image: url(../musicbk.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin:0;
+    padding:0;
 }

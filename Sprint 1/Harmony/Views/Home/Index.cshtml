@@ -1,35 +1,7 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-<div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="#">Harmony</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarColor02">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#" style="font-size:larger">Post Events <span class="sr-only"></span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#" style="font-size:larger">Search Gigs <span class="sr-only"></span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#" style="font-size:larger">Search Musicians <span class="sr-only"></span></a>
-                </li>
-            </ul>
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search Gigs/Musicians" aria-label="Search">
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-            </form>
-            <a id="navbar-login-desktop" class="btn btn-primary napa-navbar-join" href="~/Account/Login" title="Login">Log in</a>
-            <a id="navbar-login-desktop" class="btn btn-primary napa-navbar-join" href="~/Account/Register" title="Register">Register</a>
-        </div>
-    </nav>
-</div>
-<div class="container-fluid" id="bkimage">
+<div class="container-fluid" style=" "id="bkimage">
     <div>
         <h1 class="title text-center" style="color:floralwhite">Harmony--Gig booking made easy!</h1>
         <h2 class="text-center" style="color:floralwhite">Connect with venue owners, book more gigs and grow your career(Salem Oregon).</h2>
@@ -38,25 +10,25 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3"></div>
-            <div class="col-lg-3 box1">
-                <strong class="block btn-label text-center">I'm a musician</strong>
+            <div class="col-lg-3 text-center box1">
+                <strong class="block btn-label ">I'm a musician</strong>
                 <span class="cta-li-block block pad-tb half">
                     <ul style="color:floralwhite">
-                        <p>I want more gigs</p>
-                        <p>I want industry exposure</p>
-                        <p>My band needs a professional EPK</p>
-                        <p>I want to network with other musicians</p>
+                        <p>More Gigs</p>
+                        <p>Industry Exposure</p>
+                        <p>Professional EPK</p>
+                        <p>Network with Other Musicians</p>
                     </ul>
                 </span>
                 <a class="btn btn-primary" href="~/Account/Register" title="Register">Get started</a>
             </div>
 
-            <div class="col-lg-3 box1">
-                <strong class="block btn-label text-center">I'm a musician</strong>
+            <div class="col-lg-3 text-center box1">
+                <strong class="block btn-label ">I'm a musician</strong>
                 <span class="cta-li-block block pad-tb half">
                     <ul style="color:floralwhite">
                         <p>Book Talented Musicians</p>
-                        <p>Need Advertise Playing Opportunities</p>
+                        <p>Advertise Playing Opportunities</p>
                         <p>Promote My Venues</p>
                         <p>Share Good Musics</p>
                     </ul>
@@ -68,12 +40,12 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3"></div>
-            <div class="col-lg-3 box1">
-                <strong class="block btn-label text-center">Post an Event</strong>
+            <div class="col-lg-3 text-center box1">
+                <strong class="block btn-label ">Post an Event</strong>
                 <span class="cta-li-block block pad-tb half">
                     <ul style="color:floralwhite">
                         <p>Share Good Events</p>
-                        <p>More Industry Exposure for Bands</p>
+                        <p>Industry Exposure for Bands</p>
                         <p>Cultural Exchange</p>
                         <p>Music and Venue Networks</p>
                     </ul>
@@ -81,8 +53,8 @@
                 <a class="btn btn-primary" href="~/Account/Register" title="Register">Get started</a>
             </div>
 
-            <div class="col-lg-3 box1">
-                <strong class="block btn-label text-center">Last Minute Call</strong>
+            <div class="col-lg-3 text-center box1">
+                <strong class="block btn-label ">Last Minute Call</strong>
                 <span class="cta-li-block block pad-tb half">
                     <ul style="color:floralwhite">
                         <p>Pick Up Shows on the Same Day</p>
@@ -95,4 +67,8 @@
             </div>
         </div>
     </div>
-</div>
+</div> 
+
+@section scripts
+{
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css">}
