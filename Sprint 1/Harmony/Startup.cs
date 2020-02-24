@@ -34,15 +34,15 @@ namespace Harmony
 
             // Do we need another role?  i.e. "User"
 
-            // creating Creating Employee role   
-            /*
-            if (!roleManager.RoleExists("Employee"))
+            // Create a Musician role   
+
+            if (!roleManager.RoleExists("Musician"))
             {
                 var role = new IdentityRole();
-                role.Name = "Employee";
+                role.Name = "Musician";
                 roleManager.Create(role);
             }
-            */
+
         }
     }
 }
