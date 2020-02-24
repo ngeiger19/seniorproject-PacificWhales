@@ -13,6 +13,7 @@ namespace Harmony.Models
         {
             BandMembers = new HashSet<BandMember>();
             Photos = new HashSet<Photo>();
+            Venues = new HashSet<Venue>();
             Videos = new HashSet<Video>();
             Genres = new HashSet<Genre>();
         }
@@ -39,7 +40,6 @@ namespace Harmony.Models
         [StringLength(100)]
         public string Email { get; set; }
 
-        [Required]
         [StringLength(300)]
         public string Description { get; set; }
 
@@ -52,6 +52,9 @@ namespace Harmony.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Photo> Photos { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Venue> Venues { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Video> Videos { get; set; }

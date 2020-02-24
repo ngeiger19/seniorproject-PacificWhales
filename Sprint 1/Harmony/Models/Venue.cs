@@ -16,7 +16,10 @@ namespace Harmony.Models
 
         [Required]
         [StringLength(50)]
-        public string Street { get; set; }
+        public string AddressLine1 { get; set; }
+
+        [StringLength(50)]
+        public string AddressLine2 { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -26,7 +29,15 @@ namespace Harmony.Models
         [StringLength(24)]
         public string State { get; set; }
 
+        [Required]
+        [StringLength(10)]
+        public string ZipCode { get; set; }
+
         public int VenueTypeID { get; set; }
+
+        public int UserID { get; set; }
+
+        public virtual User User { get; set; }
 
         public virtual VenueType VenueType { get; set; }
     }
