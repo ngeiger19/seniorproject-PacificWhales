@@ -65,6 +65,9 @@
                     <div class="col-md-12">
                         @Html.RadioButtonFor(m => m.Role, "VenueOwner", new { @class = "form-check-input", id = "VenueOwner" })
                         @Html.Label("VenueOwner", new { @class = "form-check-label", @for = "VenueOwner" })
+                        <br />
+                        @Html.RadioButtonFor(m => m.Role, "GeneralUser", new { @class = "form-check-input", id = "GeneralUser" })
+                        @Html.Label("GeneralUser", new { @class = "form-check-label", @for = "GeneralUser" })
                     </div>
                 </div>
             </div>
@@ -118,6 +121,9 @@
                 })
                 $('#VenueOwner').click(function () {
                     $('#VenueInfo').show();
+                })
+                $('#GeneralUser').click(function () {
+                    $('#VenueInfo').hide();
                 })
             </script>
             <div class="form-group">
