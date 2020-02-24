@@ -16,6 +16,7 @@ namespace Harmony.Controllers
 
         private HarmonyContext db = new HarmonyContext();
 
+        
         public ActionResult Index()
         {
             return View();
@@ -40,32 +41,62 @@ namespace Harmony.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Search()
         {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Search(string searchOption)
+        {
+            // If neither radio button is selected
+            if (searchOption is null)
+            {
+                throw new ArgumentNullException(nameof(searchOption));
+            }
 
             string search = Request.QueryString["search"];
-
+            
+            // If nothing was typed into search bar
             if (search == null || search == "")
             {
                 return View();
             }
 
             // search for musicians
-            var searchQuery =
-                from user in db.Users
-                where user.FirstName.Contains(search)
-                select user;
+            if (searchOption == "option1")
+            {
+                return RedirectToAction("MusicianSearchResults", new { musicianSearch = search });
+            }
 
             // search for venues
+            else if (searchOption == "option2")
+            {
+                return RedirectToAction("VenueSearchResults", new { venueSearch = search });
+            }
 
-            var searchQuery =
+            return View();
+        }
+
+        public ActionResult MusicianSearchResults(string musicianSearch)
+        {
+            var userQuery =
+                from user in db.Users
+                where user.FirstName.Contains(musicianSearch)
+                select user;
+
+            return View(userQuery);
+        }
+
+        public ActionResult VenueSearchResults(string venueSearch)
+        {
+            var venueQuery =
                 from venue in db.Venues
-                where venue.VenueName.Contains(search)
+                where venue.VenueName.Contains(venueSearch)
                 select venue;
 
-            return View(searchQuery);
-
-            
+            return View(venueQuery);
         }
     }
 }
