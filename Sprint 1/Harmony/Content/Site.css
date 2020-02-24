@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#login-link{
+    color: white;
+}
+
+#register-link {
+    color: white;
+}
