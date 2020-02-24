@@ -30,3 +30,33 @@ textarea {
 #register-link {
     color: white;
 }
+
+.h1.title {
+    font-size: 30px;
+    font-family:'Informal Roman';
+    color:white;
+}
+
+.h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    font-family: 'Informal Roman';
+    color: white;
+}
+
+.box1 {
+    box-sizing: content-box;
+    width: 400px;
+    height: 300px;
+    padding: -30px;
+    border: 1px solid black;
+}
+
+#bkimage {
+    background-image: url(../musicbk.jpg);
+}

@@ -26,11 +26,11 @@ namespace Harmony
 
 
             // Create a venue owner role   
-            if (!roleManager.RoleExists("VenueOwner"))
-            {                var role = new IdentityRole();
-                role.Name = "VenueOwner";
-                roleManager.Create(role);
-            }
+            //if (!roleManager.RoleExists("VenueOwner"))
+           // {                var role = new IdentityRole();
+             //   role.Name = "VenueOwner";
+               // roleManager.Create(role);
+           // }
 
             // Do we need another role?  i.e. "User"
 
