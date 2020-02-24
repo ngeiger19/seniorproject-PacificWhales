@@ -41,21 +41,10 @@ namespace Harmony.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult Search()
-        {
-            return View();
-        }
 
         [HttpGet]
         public ActionResult Search(string searchOption)
         {
-            // If neither radio button is selected
-            if (searchOption is null)
-            {
-                throw new ArgumentNullException(nameof(searchOption));
-            }
-
             string search = Request.QueryString["search"];
             
             // If nothing was typed into search bar
@@ -71,12 +60,10 @@ namespace Harmony.Controllers
             }
 
             // search for venues
-            else if (searchOption == "option2")
+            else
             {
                 return RedirectToAction("VenueSearchResults", new { venueSearch = search });
             }
-
-            return View();
         }
 
         public ActionResult MusicianSearchResults(string musicianSearch)
