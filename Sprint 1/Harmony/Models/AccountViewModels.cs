@@ -83,18 +83,21 @@ namespace Harmony.Models
         // User general info
         [Required]
         [StringLength(50)]
+        [Display(Name = "FirstName")]
         public string FirstName { get; set; }
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "LastName")]
         public string LastName { get; set; }
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "City")]
         public string City { get; set; }
 
         [Required]
-        [StringLength(16)]
+        [Display(Name = "State")]
         public string State { get; set; }
 
         [StringLength(300)]
@@ -131,7 +134,25 @@ namespace Harmony.Models
 
         [Required]
         [StringLength(10)]
+        [Display(Name = "ZipCode")]
         public string ZipCode { get; set; }
+
+        // For Musicians
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "Genre")]
+        public string GenreName { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "BandMemberName")]
+        public string BandMemberName { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "Instruments")]
+        public string InstrumentName { get; set; }
+
     }
 
     public class ResetPasswordViewModel
