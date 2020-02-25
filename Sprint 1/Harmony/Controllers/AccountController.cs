@@ -252,6 +252,7 @@ namespace Harmony.Controllers
                             });
                             db.BandMembers.Add(bandmembers[i]);
                         }
+                        
                     }
                     
                     await db.SaveChangesAsync();
