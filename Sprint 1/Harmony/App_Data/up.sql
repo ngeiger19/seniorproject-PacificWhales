@@ -107,7 +107,7 @@ CREATE TABLE [dbo].[Users]
 	[FirstName]		NVARCHAR (50)		NOT NULL,
 	[LastName]		NVARCHAR (50)		NOT NULL,
 	[City]		NVARCHAR (50)		NOT NULL,
-	[State]		NVARCHAR (16)		NOT NULL,
+	[State]		NVARCHAR (24)		NOT NULL,
 	[Email]		NVARCHAR (100)		NOT NULL,
 	-- [ShowsBooked]		INT		 NULL,
 	[Description]		NVARCHAR (300)		NULL,

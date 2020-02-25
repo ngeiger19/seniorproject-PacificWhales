@@ -109,46 +109,37 @@ namespace Harmony.Models
         public string Role { get; set; }
 
         // For Venue Owners
-        [Required]
         [Display(Name = "VenueType")]
         public string VenueType { get; set; }
 
-        [Required]
         [Display(Name = "VenueName")]
         public string VenueName { get; set; }
         
-        [Required]
         [Display(Name = "AddressLine1")]
         public string AddressLine1 { get; set; }
 
         [Display(Name = "AddressLine2")]
         public string AddressLine2 { get; set; }
         
-        [Required]
         [Display(Name = "City")]
         public string VenueCity { get; set; }
         
-        [Required]
         [Display(Name = "State")]
         public string VenueState { get; set; }
 
-        [Required]
         [StringLength(10)]
         [Display(Name = "ZipCode")]
         public string ZipCode { get; set; }
 
         // For Musicians
-        [Required]
         [StringLength(50)]
         [Display(Name = "Genre")]
         public string GenreName { get; set; }
 
-        [Required]
         [StringLength(50)]
         [Display(Name = "BandMemberName")]
         public string BandMemberName { get; set; }
 
-        [Required]
         [StringLength(50)]
         [Display(Name = "Instruments")]
         public string InstrumentName { get; set; }

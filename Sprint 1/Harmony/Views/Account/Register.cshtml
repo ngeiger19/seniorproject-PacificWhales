@@ -50,8 +50,9 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.State, new { @class = "col-md-2 control-label" })
                 <div class="col-md-12">
-                  @Html.DropDownList("States", (SelectList)ViewBag.States, new { @class = "form-control" })
-      </div>
+                    @Html.DropDownList("State", (IEnumerable<SelectListItem>)ViewData["State"], new { @class = "form-control" })
+                    @*Html.DropDownListFor(m => m.State, (SelectList)ViewBag.State, new { @class = "form-control" })*@
+                </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
@@ -96,7 +97,7 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.AddressLine2, new { @class = "col-md-2 control-label" })
                     <div class="col-md-12">
-                        @Html.TextBoxFor(m => m.AddressLine2, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.AddressLine2, new { @class = "form-control" , id = "AddressLine2"})
                     </div>
                 </div>
                 <div class="form-group">
@@ -108,7 +109,7 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.VenueState, new { @class = "col-md-2 control-label" })
                     <div class="col-md-12">
-                        @Html.DropDownList("VenueState", (SelectList)ViewBag.States, new { @class = "form-control" })
+                        @Html.DropDownListFor(m => m.VenueState, (IEnumerable<SelectListItem>)ViewData["State"], new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="form-group">
@@ -119,16 +120,19 @@
                 </div>
             </div>
             <div id="MusicianInfo">
+                <div class="col-md-12">
+                    <p><small>For the following information, Please separate each item by "," without any spacing:</small></p>
+                </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.GenreName, new { @class = "col-md-2 control-label" })
                     <div class="col-md-12">
-                        @Html.TextBoxFor(m => m.GenreName, new { @class = "form-control" })
+                        @Html.TextAreaFor(m => m.GenreName, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.BandMemberName, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-12">
-                        @Html.TextBoxFor(m => m.BandMemberName, new { @class = "form-control" })
+                    <div class="col-md-12" id="BandMember">
+                        @Html.TextAreaFor(m => m.BandMemberName, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="form-group">
@@ -141,18 +145,26 @@
             <script>
                 $().ready(function () {
                     $('#VenueInfo').hide();
-                })
-                $().ready(function () {
                     $('#MusicianInfo').hide();
                 })
                 $('#VenueOwner').click(function () {
                     $('#VenueInfo').show();
+                    $('#VenueInfo').find('.form-control').addClass('required')
+                    $('#AddressLine2').removeClass('required');
+                    $('#MusicianInfo').hide();
+                    $('#MusicianInfo').find('.form-control').removeClass('required');
                 })
                 $('#GeneralUser').click(function () {
                     $('#VenueInfo').hide();
+                    $('#VenueInfo').find('.form-control').removeClass('required');
+                    $('#MusicianInfo').hide();
+                    $('#MusicianInfo').find('.form-control').removeClass('required');
                 })
                 $('#Musician').click(function () {
+                    $('#MusicianInfo').show();
+                    $('#MusicianInfo').find('.form-control').addClass('required');
                     $('#VenueInfo').hide();
+                    $('#VenueInfo').find('.form-control').removeClass('required');
                 })
             </script>
             <div class="form-group">
