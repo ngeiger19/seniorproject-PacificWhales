@@ -13,6 +13,7 @@ using Harmony.DAL;
 using Harmony.Models;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
+using System.Data.Entity.Validation;
 
 namespace Harmony.Controllers
 {
@@ -193,60 +194,67 @@ namespace Harmony.Controllers
                         Description = model.Description,
                         ASPNetIdentityID = user.Id
                     };
-                    if (HarmonyUser != null)
+                    db.Users.Add(HarmonyUser);
+                    
+                    if (model.Role == "VenueOwner")
                     {
-                        db.Users.Add(HarmonyUser);
+                        VenueType venueType = new VenueType
+                        {
+                            TypeName = model.VenueType
+                        };
+                        Venue venue = new Venue
+                        {
+                            VenueName = model.VenueName,
+                            AddressLine1 = model.AddressLine1,
+                            AddressLine2 = model.AddressLine2,
+                            City = model.VenueCity,
+                            State = model.VenueState,
+                            ZipCode = model.ZipCode,
+                            UserID = HarmonyUser.ID,
+                            VenueTypeID = venueType.ID
+                        };
+                            db.VenueTypes.Add(venueType);
+                            db.Venues.Add(venue);
                     }
-                    VenueType venueType = new VenueType
+                    if(model.Role == "Musician")
                     {
-                        TypeName = model.VenueType
-                    };
-                    if(venueType != null)
-                    {
-                        db.VenueTypes.Add(venueType);
+                        List<Genre> genres = new List<Genre>();
+                        List<Instrument> instruments = new List<Instrument>();
+                        List<BandMember> bandmembers = new List<BandMember>();
+                        List<string> genreList = new List<string>();
+                        List<string> instrumentList = new List<string>();
+                        List<string> bandmemberList = new List<string>();
+                        genreList = model.GenreName.Split(',').ToList();
+                        instrumentList = model.InstrumentName.Split(',').ToList();
+                        bandmemberList = model.BandMemberName.Split(',').ToList();
+                        for (int i = 0; i < genreList.Count(); i++)
+                        {
+                            genres.Add(new Genre
+                            {
+                                GenreName = genreList[i]
+                            });
+                            db.Genres.Add(genres[i]);
+                        }
+                        for (int i = 0; i < instrumentList.Count(); i++)
+                        {
+                            instruments.Add(new Instrument
+                            {
+                                InstrumentName = instrumentList[i],
+                            });
+                            db.Instruments.Add(instruments[i]);
+                        }
+                        for (int i = 0; i < bandmemberList.Count(); i++)
+                        {
+                            bandmembers.Add(new BandMember
+                            {
+                                BandMemberName = bandmemberList[i],
+                                UserID = HarmonyUser.ID
+                            });
+                            db.BandMembers.Add(bandmembers[i]);
+                        }
                     }
-                    Venue venue = new Venue
-                    {
-                        VenueName = model.VenueName,
-                        AddressLine1 = model.AddressLine1,
-                        AddressLine2 = model.AddressLine2,
-                        City = model.VenueCity,
-                        State = model.VenueState,
-                        ZipCode = model.ZipCode,
-                        UserID = HarmonyUser.ID,
-                        VenueTypeID = venueType.ID
-                    };
-                    if (venue != null)
-                    {
-                        db.Venues.Add(venue);
-                    }
-                    /*Genre genre = new Genre
-                    {
-                        GenreName = model.GenreName
-                    };
-                    if (genre != null)
-                    {
-                        db.Genres.Add(genre);
-                    }
-                    Instrument instrument = new Instrument
-                    {
-                        InstrumentName = model.InstrumentName
-                    };
-                    if (instrument != null)
-                    {
-                        db.Instruments.Add(instrument);
-                    }
-                    BandMember bandmember = new BandMember
-                    {
-                        BandMemberName = model.BandMemberName,
-                        UserID = HarmonyUser.ID
-                    };
-                    if (bandmember != null)
-                    {
-                        db.BandMembers.Add(bandmember);
-                    }*/
+                    
                     await db.SaveChangesAsync();
-
                     return RedirectToAction("Welcome", "Home");
                 }
                 AddErrors(result);
