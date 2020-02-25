@@ -50,7 +50,8 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.State, new { @class = "col-md-2 control-label" })
                 <div class="col-md-12">
-                    @Html.DropDownList("States", (SelectList)ViewBag.States, new { @class = "form-control" })
+                    @Html.DropDownList("VenueState", (SelectList)ViewBag.VenueState, new { @class = "form-control" })
+                    @*Html.DropDownListFor(m => m.State, (SelectList)ViewBag.State, new { @class = "form-control" })*@
                 </div>
             </div>
             <div class="form-group">
@@ -108,7 +109,7 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.VenueState, new { @class = "col-md-2 control-label" })
                     <div class="col-md-12">
-                        @Html.DropDownList("VenueState", (SelectList)ViewBag.States, new { @class = "form-control" })
+                        @Html.DropDownList("VenueState", (SelectList)ViewBag.VenueState, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="form-group">
@@ -141,8 +142,6 @@
             <script>
                 $().ready(function () {
                     $('#VenueInfo').hide();
-                })
-                $().ready(function () {
                     $('#MusicianInfo').hide();
                 })
                 $('#VenueOwner').click(function () {
@@ -150,6 +149,7 @@
                 })
                 $('#GeneralUser').click(function () {
                     $('#VenueInfo').hide();
+                    $('#MusicianInfo').hide();
                 })
                 $('#Musician').click(function () {
                     $('#VenueInfo').hide();

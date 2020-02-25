@@ -154,7 +154,8 @@ namespace Harmony.Controllers
             {
                 stateList.Add((string)arr[i]["name"]);
             }
-            ViewBag.States = new SelectList(stateList);
+            ViewBag.VenueState = new SelectList(stateList);
+            ViewBag.state = new SelectList(stateList);
             sr.Dispose();
             return View();
         }
@@ -189,7 +190,7 @@ namespace Harmony.Controllers
                     {
                         stateList.Add((string)arr[i]["name"]);
                     }
-                    ViewBag.States = new SelectList(stateList);
+                    ViewBag.VenueState = new SelectList(stateList);
                     User HarmonyUser = new User
                     {
                         FirstName = model.FirstName,
