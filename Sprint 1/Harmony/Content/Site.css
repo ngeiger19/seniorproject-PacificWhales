@@ -1,6 +1,8 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background: url(../musicbk.jpg);
+    background-color:transparent:!important;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -32,18 +34,14 @@ textarea {
 }
 
 .h1.title {
-    font-size: 30px;
+    font-size: 20px;
     font-family:'Informal Roman';
     color:white;
 }
 
 .h2 {
     display: block;
-    font-size: 1.5em;
-    margin-block-start: 0.83em;
-    margin-block-end: 0.83em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
+    font-size: 10px;
     font-weight: bold;
     font-family: 'Informal Roman';
     color: white;
@@ -54,9 +52,14 @@ textarea {
     width: 400px;
     height: 300px;
     padding: -30px;
-    border: 1px solid black;
+    border: 2px solid white;
 }
 
 #bkimage {
     background-image: url(../musicbk.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin:0;
+    padding:0;
 }
