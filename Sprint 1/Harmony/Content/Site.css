@@ -1,8 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background: url(../musicbk.jpg);
-    background-color:transparent:!important;
+    
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -37,6 +36,7 @@ textarea {
     font-size: 20px;
     font-family:'Informal Roman';
     color:white;
+
 }
 
 .h2 {
@@ -56,10 +56,44 @@ textarea {
 }
 
 #bkimage {
+    /*
     background-image: url(../musicbk.jpg);
+        */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     margin:0;
     padding:0;
+}
+
+.black-font{
+    color: black;
+}
+
+#bi {
+    background-image: url(../musicbk.jpg);
+}
+#musicianprofilepic {
+    background-image: url(../singer.jpg);
+    max-width: 500px;
+    max-height: 500px;
+}
+#venuepic {
+    background-image: url(../venue.jpg);
+    max-width: 500px;
+    max-height: 500px;
+}
+
+#venueprofile {
+    border: 1px dotted black;
+    padding: 10px;
+    background-color: lavender;
+    background-clip: content-box;
+}
+
+#musicianprofile {
+    border: 1px dotted black;
+    padding: 10px;
+    background-color: lightgoldenrodyellow;
+    background-clip: content-box;
 }

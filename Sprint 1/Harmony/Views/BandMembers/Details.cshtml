@@ -1,0 +1,44 @@
+﻿@model Harmony.Models.BandMember
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+    <div class="container black-font">
+        <h4 style="color:seashell">Musician Profile Page</h4>
+        <hr />
+        <div class="row" id="musicianprofile">
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.User.FirstName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.User.FirstName)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.BandMemberName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.BandMemberName)
+                        </dd>
+
+                    </dl>
+            </div>
+            <div class="col-md-8">
+                <h4><strong>Profile Picture</strong></h4>
+                <div>
+                    <img src="~/singer.jpg" id="musicianprofilepic" />
+                </div>
+            </div>
+        </br>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
