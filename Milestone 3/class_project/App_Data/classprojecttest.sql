@@ -1,0 +1,6 @@
+﻿select * from [dbo].[Coaches]
+select * from [dbo].[Teams]
+select * from [dbo].[Athletes]
+select * from [dbo].[Events]
+select * from [dbo].[Meets]
+select * from [dbo].[Records]
