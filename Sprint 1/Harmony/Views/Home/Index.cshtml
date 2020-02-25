@@ -2,34 +2,36 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="container-fluid" id="bkimage">
+<div class="container-fluid">
+
     <div>
         <h1 class="title text-center" style="color:floralwhite">Harmony--Gig booking made easy!</h1>
         <h2 class="text-center" style="color:floralwhite">Connect with venue owners, book more gigs and grow your career(Salem Oregon).</h2>
     </div>
-
+  
     <div class="container">
+
         <div class="row">
             <div class="col-lg-3"></div>
-            <div class="col-lg-3 box1">
-                <strong class="block btn-label text-center">I'm a musician</strong>
+            <div class="col-lg-3 text-center box1">
+                <h5 class="block btn-label " style="color:floralwhite">I'm a Musician</h5>
                 <span class="cta-li-block block pad-tb half">
                     <ul style="color:floralwhite">
-                        <p>I want more gigs</p>
-                        <p>I want industry exposure</p>
-                        <p>My band needs a professional EPK</p>
-                        <p>I want to network with other musicians</p>
+                        <p>More Gigs</p>
+                        <p>Industry Exposure</p>
+                        <p>Professional EPK</p>
+                        <p>Network with Other Musicians</p>
                     </ul>
                 </span>
                 <a class="btn btn-primary" href="~/Account/Register" title="Register">Get started</a>
             </div>
 
-            <div class="col-lg-3 box1">
-                <strong class="block btn-label text-center">I'm a musician</strong>
+            <div class="col-lg-3 text-center box1">
+                <h5 class="block btn-label " style="color:floralwhite">I'm a Venue Owner</h5>
                 <span class="cta-li-block block pad-tb half">
                     <ul style="color:floralwhite">
                         <p>Book Talented Musicians</p>
-                        <p>Need Advertise Playing Opportunities</p>
+                        <p>Advertise Playing Opportunities</p>
                         <p>Promote My Venues</p>
                         <p>Share Good Musics</p>
                     </ul>
@@ -41,12 +43,12 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3"></div>
-            <div class="col-lg-3 box1">
-                <strong class="block btn-label text-center">Post an Event</strong>
+            <div class="col-lg-3 text-center box1">
+                <h5 class="block btn-label " style="color:floralwhite">Post an Event</h5>
                 <span class="cta-li-block block pad-tb half">
                     <ul style="color:floralwhite">
                         <p>Share Good Events</p>
-                        <p>More Industry Exposure for Bands</p>
+                        <p>Industry Exposure for Bands</p>
                         <p>Cultural Exchange</p>
                         <p>Music and Venue Networks</p>
                     </ul>
@@ -54,8 +56,8 @@
                 <a class="btn btn-primary" href="~/Account/Register" title="Register">Get started</a>
             </div>
 
-            <div class="col-lg-3 box1">
-                <strong class="block btn-label text-center">Last Minute Call</strong>
+            <div class="col-lg-3 text-center box1">
+                <h5 class="block btn-label " style="color:floralwhite">Last Minute Call</h5>
                 <span class="cta-li-block block pad-tb half">
                     <ul style="color:floralwhite">
                         <p>Pick Up Shows on the Same Day</p>
@@ -64,8 +66,13 @@
                         <p>Share Good Musics</p>
                     </ul>
                 </span>
-                <a class="btn btn-primary" href="~/Account/Register" title="Register">Register</a>
+                <a class="btn btn-primary" href="~/Account/Register" title="Register">Get started</a>
             </div>
         </div>
     </div>
 </div>
+
+@section scripts
+{
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css">
+}
