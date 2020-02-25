@@ -43,7 +43,7 @@ namespace Harmony.Controllers
 
 
         [HttpGet]
-        public ActionResult Search(string searchOption)
+        public ActionResult Search()
         {
             string search = Request.QueryString["search"];
             
@@ -52,28 +52,9 @@ namespace Harmony.Controllers
             {
                 return View();
             }
-
-            // search for musicians
-            if (searchOption == "option1")
-            {
-                return RedirectToAction("MusicianSearchResults", new { musicianSearch = search });
-            }
-
-            // search for venues
-            else
-            {
-                return RedirectToAction("VenueSearchResults", new { venueSearch = search });
-            }
-        }
-
-        public ActionResult MusicianSearchResults(string musicianSearch)
-        {
-            var userQuery =
-                from user in db.Users
-                where user.FirstName.Contains(musicianSearch)
-                select user;
-
-            return View(userQuery);
+            
+            return RedirectToAction("VenueSearchResults", new { venueSearch = search });
+            
         }
 
         public ActionResult VenueSearchResults(string venueSearch)
