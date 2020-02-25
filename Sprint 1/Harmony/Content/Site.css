@@ -1,7 +1,7 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-    
+﻿body, html {
+    /*padding-top: 50px;
+    padding-bottom: 20px;*/
+    height: 100%;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -9,6 +9,7 @@
     padding-left: 15px;
     padding-right: 15px;
 }
+
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -72,7 +73,39 @@ textarea {
 
 #bi {
     background-image: url(../musicbk.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.85;
+    height: 100%;
 }
+
+
+nav {
+    background-color: transparent;
+}
+
+.nav-link {
+    color: white;
+}
+
+.navbar-brand {
+    color: deepskyblue;
+}
+
+.nav-link:hover {
+    color: deepskyblue;
+}
+
+.btn-outline-light{
+    border-color: deepskyblue;
+    color: deepskyblue;
+}
+
+.btn-outline-light:hover {
+    background-color: deepskyblue;
+    color: white;
+}
+
 #musicianprofilepic {
     background-image: url(../singer.jpg);
     max-width: 500px;

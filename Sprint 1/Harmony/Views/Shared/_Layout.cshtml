@@ -4,49 +4,48 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Harmony</title>
-    <link href="~/Content/Site.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/popper.min.js"></script>
 </head>
 <body>
     <div id="bi">
-        <div style="margin-top">
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="~/Home/Index">Harmony</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-                <a class="navbar-brand" href="~/Home/Index">Harmony</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+            <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#" style="font-size:larger">Post Events <span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="~/BandMembers/" style="font-size:larger">Musician Profile <span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="~/Venues/" style="font-size:larger">Venue Profile <span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="~/Home/Search" style="font-size:larger">Search Musicians <span class="sr-only"></span></a>
+                    </li>
+                </ul>
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search Gigs/Musicians" aria-label="Search">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                @Html.Partial("_LoginPartial") @*<---  DO NOT DELETE THIS LINE PLEASE!*@
+            </div>
+        </nav>
 
-                <div class="collapse navbar-collapse" id="navbarColor02">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#" style="font-size:larger">Post Events <span class="sr-only"></span></a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="~/BandMembers/Details" style="font-size:larger">Musician Profile <span class="sr-only"></span></a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="~/Venues/Details" style="font-size:larger">Venue Profile <span class="sr-only"></span></a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#" style="font-size:larger">Search Musicians <span class="sr-only"></span></a>
-                        </li>
-                    </ul>
-                    <form class="form-inline">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search Gigs/Musicians" aria-label="Search">
-                        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-                    <a id="navbar-login-desktop" class="btn btn-primary napa-navbar-join" href="~/Account/Login" title="Login">Log in</a>
-                    <a id="navbar-login-desktop" class="btn btn-primary napa-navbar-join" href="~/Account/Register" title="Register">Register</a>
-                </div>
-            </nav>
-
-            @RenderBody()
-            <footer>2020-Harmony</footer>
-        </div>
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Harmony</p>
+        </footer>
     </div>
 
 

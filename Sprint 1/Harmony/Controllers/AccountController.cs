@@ -149,13 +149,14 @@ namespace Harmony.Controllers
             StreamReader sr = new StreamReader(Server.MapPath("~/Content/states_hash.json"));
             string data = sr.ReadToEnd();
             JArray arr = JArray.Parse(data);
-            List<string> stateList = new List<string>();
+            List<SelectListItem> stateList = new List<SelectListItem>();
             for (int i = 0; i < arr.Count(); i++)
             {
-                stateList.Add((string)arr[i]["name"]);
+                stateList.Add(new SelectListItem { Text = (string)arr[i]["name"], Value = (string)arr[i]["name"] });
             }
-            ViewBag.VenueState = new SelectList(stateList);
-            ViewBag.state = new SelectList(stateList);
+            ViewData.Clear();
+            ViewBag.State = stateList;
+            ViewData["State"] = stateList;
             sr.Dispose();
             return View();
         }
@@ -182,15 +183,6 @@ namespace Harmony.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                     await this.UserManager.AddToRoleAsync(user.Id, model.Role);
-                    StreamReader sr = new StreamReader(Server.MapPath("~/Content/states_hash.json"));
-                    string data = sr.ReadToEnd();
-                    JArray arr = JArray.Parse(data);
-                    List<string> stateList = new List<string>();
-                    for (int i = 0; i < arr.Count(); i++)
-                    {
-                        stateList.Add((string)arr[i]["name"]);
-                    }
-                    ViewBag.VenueState = new SelectList(stateList);
                     User HarmonyUser = new User
                     {
                         FirstName = model.FirstName,
@@ -201,12 +193,18 @@ namespace Harmony.Controllers
                         Description = model.Description,
                         ASPNetIdentityID = user.Id
                     };
-                    db.Users.Add(HarmonyUser);
+                    if (HarmonyUser != null)
+                    {
+                        db.Users.Add(HarmonyUser);
+                    }
                     VenueType venueType = new VenueType
                     {
                         TypeName = model.VenueType
                     };
-                    db.VenueTypes.Add(venueType);
+                    if(venueType != null)
+                    {
+                        db.VenueTypes.Add(venueType);
+                    }
                     Venue venue = new Venue
                     {
                         VenueName = model.VenueName,
@@ -218,31 +216,51 @@ namespace Harmony.Controllers
                         UserID = HarmonyUser.ID,
                         VenueTypeID = venueType.ID
                     };
-                    db.Venues.Add(venue);
-                    Genre genre = new Genre
+                    if (venue != null)
+                    {
+                        db.Venues.Add(venue);
+                    }
+                    /*Genre genre = new Genre
                     {
                         GenreName = model.GenreName
                     };
-                    db.Genres.Add(genre);
+                    if (genre != null)
+                    {
+                        db.Genres.Add(genre);
+                    }
                     Instrument instrument = new Instrument
                     {
                         InstrumentName = model.InstrumentName
                     };
-                    db.Instruments.Add(instrument);
+                    if (instrument != null)
+                    {
+                        db.Instruments.Add(instrument);
+                    }
                     BandMember bandmember = new BandMember
                     {
                         BandMemberName = model.BandMemberName,
                         UserID = HarmonyUser.ID
                     };
-                    db.BandMembers.Add(bandmember);
+                    if (bandmember != null)
+                    {
+                        db.BandMembers.Add(bandmember);
+                    }*/
                     await db.SaveChangesAsync();
-                    sr.Dispose();
 
                     return RedirectToAction("Welcome", "Home");
                 }
                 AddErrors(result);
             }
-
+            StreamReader sr = new StreamReader(Server.MapPath("~/Content/states_hash.json"));
+            string data = sr.ReadToEnd();
+            JArray arr = JArray.Parse(data);
+            List<SelectListItem> stateList = new List<SelectListItem>();
+            for (int i = 0; i < arr.Count(); i++)
+            {
+                stateList.Add(new SelectListItem { Text = (string)arr[i]["name"], Value = (string)arr[i]["name"] });
+            }
+            ViewBag.State = stateList;
+            ViewData["State"] = stateList;
             // If we got this far, something failed, redisplay form
             return View(model);
         }
