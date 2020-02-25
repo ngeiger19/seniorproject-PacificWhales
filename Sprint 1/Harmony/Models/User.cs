@@ -33,7 +33,7 @@ namespace Harmony.Models
         public string City { get; set; }
 
         [Required]
-        [StringLength(16)]
+        [StringLength(24)]
         public string State { get; set; }
 
         [Required]

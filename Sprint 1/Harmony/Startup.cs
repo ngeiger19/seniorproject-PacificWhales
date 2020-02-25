@@ -24,25 +24,37 @@ namespace Harmony
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
+<<<<<<< HEAD
             
             // Create a venue owner role   
+=======
+>>>>>>> dev
             if (!roleManager.RoleExists("VenueOwner"))
-            {                var role = new IdentityRole();
+            {                
+                var role = new IdentityRole();
                 role.Name = "VenueOwner";
+                roleManager.Create(role);
+            }
+
+            // Create a general user role   
+            if (!roleManager.RoleExists("GeneralUser"))
+            {
+                var role = new IdentityRole();
+                role.Name = "GeneralUser";
                 roleManager.Create(role);
             }
 
             // Do we need another role?  i.e. "User"
 
-            // creating Creating Employee role   
-            /*
-            if (!roleManager.RoleExists("Employee"))
+            // Create a Musician role   
+
+            if (!roleManager.RoleExists("Musician"))
             {
                 var role = new IdentityRole();
-                role.Name = "Employee";
+                role.Name = "Musician";
                 roleManager.Create(role);
             }
-            */
+
         }
     }
 }

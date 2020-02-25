@@ -2,30 +2,77 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<div class="container-fluid">
+
+    <div>
+        <h1 class="title text-center" style="color:floralwhite">Harmony--Gig booking made easy!</h1>
+        <h2 class="text-center" style="color:floralwhite">Connect with venue owners, book more gigs and grow your career(Salem Oregon).</h2>
+    </div>
+  
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-3 text-center box1">
+                <h5 class="block btn-label " style="color:floralwhite">I'm a Musician</h5>
+                <span class="cta-li-block block pad-tb half">
+                    <ul style="color:floralwhite">
+                        <p>More Gigs</p>
+                        <p>Industry Exposure</p>
+                        <p>Professional EPK</p>
+                        <p>Network with Other Musicians</p>
+                    </ul>
+                </span>
+                <a class="btn btn-primary" href="~/Account/Register" title="Register">Get started</a>
+            </div>
+
+            <div class="col-lg-3 text-center box1">
+                <h5 class="block btn-label " style="color:floralwhite">I'm a Venue Owner</h5>
+                <span class="cta-li-block block pad-tb half">
+                    <ul style="color:floralwhite">
+                        <p>Book Talented Musicians</p>
+                        <p>Advertise Playing Opportunities</p>
+                        <p>Promote My Venues</p>
+                        <p>Share Good Musics</p>
+                    </ul>
+                </span>
+                <a class="btn btn-primary" href="~/Account/Register" title="Register">Get started</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-3 text-center box1">
+                <h5 class="block btn-label " style="color:floralwhite">Post an Event</h5>
+                <span class="cta-li-block block pad-tb half">
+                    <ul style="color:floralwhite">
+                        <p>Share Good Events</p>
+                        <p>Industry Exposure for Bands</p>
+                        <p>Cultural Exchange</p>
+                        <p>Music and Venue Networks</p>
+                    </ul>
+                </span>
+                <a class="btn btn-primary" href="~/Account/Register" title="Register">Get started</a>
+            </div>
+
+            <div class="col-lg-3 text-center box1">
+                <h5 class="block btn-label " style="color:floralwhite">Last Minute Call</h5>
+                <span class="cta-li-block block pad-tb half">
+                    <ul style="color:floralwhite">
+                        <p>Pick Up Shows on the Same Day</p>
+                        <p>Good Gigs</p>
+                        <p>Promote Venues</p>
+                        <p>Share Good Musics</p>
+                    </ul>
+                </span>
+                <a class="btn btn-primary" href="~/Account/Register" title="Register">Get started</a>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+@section scripts
+{
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css">
+}
