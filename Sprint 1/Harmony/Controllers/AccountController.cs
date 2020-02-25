@@ -154,8 +154,7 @@ namespace Harmony.Controllers
             {
                 stateList.Add((string)arr[i]["name"]);
             }
-            ViewBag.VenueState = new SelectList(stateList);
-            ViewBag.State = new SelectList(stateList);
+            ViewBag.States = new SelectList(stateList);
             sr.Dispose();
             return View();
         }
@@ -190,8 +189,7 @@ namespace Harmony.Controllers
                     {
                         stateList.Add((string)arr[i]["name"]);
                     }
-                    ViewBag.VenueState = new SelectList(stateList);
-                    ViewBag.State = new SelectList(stateList);
+                    ViewBag.States = new SelectList(stateList);
                     User HarmonyUser = new User
                     {
                         FirstName = model.FirstName,
@@ -220,6 +218,22 @@ namespace Harmony.Controllers
                         VenueTypeID = venueType.ID
                     };
                     db.Venues.Add(venue);
+                    Genre genre = new Genre
+                    {
+                        GenreName = model.GenreName
+                    };
+                    db.Genres.Add(genre);
+                    Instrument instrument = new Instrument
+                    {
+                        InstrumentName = model.InstrumentName
+                    };
+                    db.Instruments.Add(instrument);
+                    BandMember bandmember = new BandMember
+                    {
+                        BandMemberName = model.BandMemberName,
+                        UserID = HarmonyUser.ID
+                    };
+                    db.BandMembers.Add(bandmember);
                     await db.SaveChangesAsync();
                     sr.Dispose();
 
