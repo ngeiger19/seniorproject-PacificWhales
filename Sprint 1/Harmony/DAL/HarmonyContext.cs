@@ -9,7 +9,7 @@ namespace Harmony.DAL
     public partial class HarmonyContext : DbContext
     {
         public HarmonyContext()
-            : base("name=HarmonyContext_Azure")
+            : base("name=HarmonyContext")
         {
         }
 
@@ -21,6 +21,8 @@ namespace Harmony.DAL
         public virtual DbSet<Venue> Venues { get; set; }
         public virtual DbSet<VenueType> VenueTypes { get; set; }
         public virtual DbSet<Video> Videos { get; set; }
+        public virtual DbSet<BandMember_Instrument> BandMember_Instrument { get; set; }
+        public virtual DbSet<Musician_Genre> Musician_Genre { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

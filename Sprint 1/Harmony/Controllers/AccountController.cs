@@ -234,6 +234,7 @@ namespace Harmony.Controllers
                                 GenreName = genreList[i]
                             });
                             db.Genres.Add(genres[i]);
+                            db.Musician_Genre.Add(new Musician_Genre { UserID = HarmonyUser.ID, GenreID = genres[i].ID });
                         }
                         for (int i = 0; i < instrumentList.Count(); i++)
                         {
@@ -251,8 +252,9 @@ namespace Harmony.Controllers
                                 UserID = HarmonyUser.ID
                             });
                             db.BandMembers.Add(bandmembers[i]);
+                            db.BandMember_Instrument.Add(new BandMember_Instrument { BandMemberID = bandmembers[i].ID, InstrumentID = instruments[i].ID });
                         }
-                        
+
                     }
                     
                     await db.SaveChangesAsync();
