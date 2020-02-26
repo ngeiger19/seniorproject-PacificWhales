@@ -79,6 +79,71 @@ namespace Harmony.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        // User general info
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "FirstName")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "LastName")]
+        public string LastName { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "City")]
+        public string City { get; set; }
+
+        [Required]
+        [Display(Name = "State")]
+        public string State { get; set; }
+
+        [StringLength(300)]
+        public string Description { get; set; }
+
+        // Choose a role
+        [Required]
+        [Display(Name = "Role")]
+        public string Role { get; set; }
+
+        // For Venue Owners
+        [Display(Name = "VenueType")]
+        public string VenueType { get; set; }
+
+        [Display(Name = "VenueName")]
+        public string VenueName { get; set; }
+        
+        [Display(Name = "AddressLine1")]
+        public string AddressLine1 { get; set; }
+
+        [Display(Name = "AddressLine2")]
+        public string AddressLine2 { get; set; }
+        
+        [Display(Name = "City")]
+        public string VenueCity { get; set; }
+        
+        [Display(Name = "State")]
+        public string VenueState { get; set; }
+
+        [StringLength(10)]
+        [Display(Name = "ZipCode")]
+        public string ZipCode { get; set; }
+
+        // For Musicians
+        [StringLength(50)]
+        [Display(Name = "Genre")]
+        public string GenreName { get; set; }
+
+        [StringLength(50)]
+        [Display(Name = "BandMemberName")]
+        public string BandMemberName { get; set; }
+
+        [StringLength(50)]
+        [Display(Name = "Instruments")]
+        public string InstrumentName { get; set; }
+
     }
 
     public class ResetPasswordViewModel
