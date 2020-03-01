@@ -11,8 +11,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Harmony.Models;
+using Calendar.ASP.NET.MVC5.Models;
 
-namespace Harmony
+namespace Calendar.ASP.NET.MVC5
 {
     public class EmailService : IIdentityMessageService
     {
@@ -96,14 +97,45 @@ namespace Harmony
         {
         }
 
-        public override Task<ClaimsIdentity> CreateUserIdentityAsync(ApplicationUser user)
+        private async Task ReplaceClaims(string userId, params Claim[] newClaims)
         {
-            return user.GenerateUserIdentityAsync((ApplicationUserManager)UserManager);
+            var oldClaims = await UserManager.GetClaimsAsync(userId);
+
+            foreach (var newClaim in newClaims.Where(nc => nc != null))
+            {
+                foreach (var oldClaim in oldClaims.Where(oc => oc.Type == newClaim.Type))
+                {
+                    await UserManager.RemoveClaimAsync(userId, oldClaim);
+                }
+
+                await UserManager.AddClaimAsync(userId, newClaim);
+            }
         }
 
-        public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
+        public async override Task<ClaimsIdentity> CreateUserIdentityAsync(ApplicationUser user)
         {
-            return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
+            var externalIdentity = await AuthenticationManager.GetExternalIdentityAsync(
+                DefaultAuthenticationTypes.ExternalCookie);
+            if (externalIdentity != null)
+            {
+                // ***
+                // Copy the claim that our external authentication provider set (in Startup.Auth.cs) over
+                // to the user's application identity.
+
+                var googleUserId = externalIdentity.FindFirst(MyClaimTypes.GoogleUserId);
+
+                await ReplaceClaims(user.Id, googleUserId);
+            }
+
+            var identity = await user.GenerateUserIdentityAsync((ApplicationUserManager)UserManager);
+            return identity;
+        }
+
+        public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options,
+            IOwinContext context)
+        {
+            return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(),
+                context.Authentication);
         }
     }
 }
