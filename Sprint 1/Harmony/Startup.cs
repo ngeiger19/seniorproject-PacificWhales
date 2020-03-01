@@ -5,7 +5,7 @@ using Owin;
 using Harmony.Models;
 using System.Diagnostics;
 
-[assembly: OwinStartupAttribute(typeof(Harmony.Startup))]
+[assembly: OwinStartupAttribute(typeof(Calendar.ASP.NET.MVC5.Startup))]
 namespace Harmony
 {
     public partial class Startup
