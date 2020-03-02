@@ -5,14 +5,21 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using Harmony.Models;
+using Calendar.ASP.NET.MVC5.Models;
+using Google.Apis.Util.Store;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Auth.OAuth2.Responses;
 
-namespace Calendar.ASP.NET.MVC5.Models;
+namespace Calendar.ASP.NET.MVC5
 {
     public partial class Startup
     {
-    // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
-    public void ConfigureAuth(IAppBuilder app)
+        private IDataStore dataStore = new FileDataStore(GoogleWebAuthorizationBroker.Folder);
+        // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
+        public void ConfigureAuth(IAppBuilder app)
     {
         // Configure the db context, user manager and signin manager to use a single instance per request
         app.CreatePerOwinContext(ApplicationDbContext.Create);
