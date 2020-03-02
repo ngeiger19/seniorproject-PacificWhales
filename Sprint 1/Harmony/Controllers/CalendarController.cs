@@ -58,7 +58,7 @@ namespace Calendar.ASP.NET.MVC5.Controllers
         }
 
         // GET: /Calendar/UpcomingEvents
-        public async Task<ActionResult> UpcomingEvents()
+        public async Task<ActionResult> Schedule()
         {
             const int MaxEventsPerCalendar = 20;
             const int MaxEventsOverall = 50;

@@ -432,6 +432,7 @@
     <Content Include="Views\BandMembers\Edit.cshtml" />
     <Content Include="Views\BandMembers\Index.cshtml" />
     <Content Include="Views\Calendar\Schedule.cshtml" />
+    <Content Include="client_secret.json" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

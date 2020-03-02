@@ -18,7 +18,9 @@ namespace Calendar.ASP.NET.MVC5
     public partial class Startup
     {
         private IDataStore dataStore = new FileDataStore(GoogleWebAuthorizationBroker.Folder);
+
         // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
+        [Obsolete]
         public void ConfigureAuth(IAppBuilder app)
     {
         // Configure the db context, user manager and signin manager to use a single instance per request
