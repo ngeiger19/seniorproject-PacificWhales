@@ -200,8 +200,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\MyClientSecrets.cs" />
+    <Compile Include="App_Start\MyClaimTypes.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\MyRequestedScopes.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -218,9 +221,8 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BandMember.cs" />
     <Compile Include="Models\BandMember_Instrument.cs" />
-    <Compile Include="Models\Calendar.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
+    <Compile Include="Models\CalendarEventGroups.cs" />
+    <Compile Include="Models\CalendarViewModels.cs" />
     <Compile Include="Models\DetailViewModel.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -428,10 +430,10 @@
     <Content Include="Views\BandMembers\Details.cshtml" />
     <Content Include="Views\BandMembers\Edit.cshtml" />
     <Content Include="Views\BandMembers\Index.cshtml" />
+    <Content Include="Views\Calendar\Schedule.cshtml" />
+    <Content Include="client_secret.json" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Calendar\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
