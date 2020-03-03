@@ -60,11 +60,6 @@ namespace Calendar.ASP.NET.MVC5.Controllers
         // GET: /Calendar/UpcomingEvents
         public async Task<ActionResult> Schedule()
         {
-            const int MaxEventsPerCalendar = 20;
-            const int MaxEventsOverall = 50;
-
-            var model = new UpcomingEventsViewModel();
-
             var credential = await GetCredentialForApiAsync();
 
             var initializer = new BaseClientService.Initializer()
@@ -74,48 +69,7 @@ namespace Calendar.ASP.NET.MVC5.Controllers
             };
             var service = new CalendarService(initializer);
 
-            // Fetch the list of calendars.
-            var calendars = await service.CalendarList.List().ExecuteAsync();
-
-            // Fetch some events from each calendar.
-            var fetchTasks = new List<Task<Google.Apis.Calendar.v3.Data.Events>>(calendars.Items.Count);
-            foreach (var calendar in calendars.Items)
-            {
-                var request = service.Events.List(calendar.Id);
-                request.MaxResults = MaxEventsPerCalendar;
-                request.SingleEvents = true;
-                request.TimeMin = DateTime.Now;
-                fetchTasks.Add(request.ExecuteAsync());
-            }
-            var fetchResults = await Task.WhenAll(fetchTasks);
-
-            // Sort the events and put them in the model.
-            var upcomingEvents = from result in fetchResults
-                                 from evt in result.Items
-                                 where evt.Start != null
-                                 let date = evt.Start.DateTime.HasValue ?
-                                     evt.Start.DateTime.Value.Date :
-                                     DateTime.ParseExact(evt.Start.Date, "yyyy-MM-dd", null)
-                                 let sortKey = evt.Start.DateTimeRaw ?? evt.Start.Date
-                                 orderby sortKey
-                                 select new { evt, date };
-            var eventsByDate = from result in upcomingEvents.Take(MaxEventsOverall)
-                               group result.evt by result.date into g
-                               orderby g.Key
-                               select g;
-
-            var eventGroups = new List<CalendarEventGroup>();
-            foreach (var grouping in eventsByDate)
-            {
-                eventGroups.Add(new CalendarEventGroup
-                {
-                    GroupTitle = grouping.Key.ToLongDateString(),
-                    Events = grouping,
-                });
-            }
-
-            model.EventGroups = eventGroups;
-            return View(model);
+            return View();
         }
     }
 }
