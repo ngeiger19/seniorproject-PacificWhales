@@ -23,6 +23,8 @@ namespace Harmony.DAL
         public virtual DbSet<Video> Videos { get; set; }
         public virtual DbSet<BandMember_Instrument> BandMember_Instrument { get; set; }
         public virtual DbSet<Musician_Genre> Musician_Genre { get; set; }
+        public virtual DbSet<Show> Shows { get; set; }
+        public virtual DbSet<User_Show> User_Show { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -59,6 +61,11 @@ namespace Harmony.DAL
             modelBuilder.Entity<VenueType>()
                 .HasMany(e => e.Venues)
                 .WithRequired(e => e.VenueType)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Show>()
+                .HasMany(e => e.User_Show)
+                .WithRequired(e => e.Show)
                 .WillCascadeOnDelete(false);
         }
     }

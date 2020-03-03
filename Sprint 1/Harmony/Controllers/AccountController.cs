@@ -252,7 +252,7 @@ namespace Harmony.Controllers
                                 UserID = HarmonyUser.ID
                             });
                             db.BandMembers.Add(bandmembers[i]);
-                            db.BandMember_Instrument.Add(new BandMember_Instrument { BandMemberID = bandmembers[i].ID, InstrumentID = instruments[i].ID });
+                            db.BandMember_Instrument.Add(new BandMember_Instrument { BandMemberID = bandmembers[i].ID, InstrumentID = instruments[i].ID });     
                         }
 
                     }
