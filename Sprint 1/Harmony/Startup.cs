@@ -5,11 +5,12 @@ using Owin;
 using Harmony.Models;
 using System.Diagnostics;
 
-[assembly: OwinStartupAttribute(typeof(Harmony.Startup))]
-namespace Harmony
+[assembly: OwinStartupAttribute(typeof(Calendar.ASP.NET.MVC5.Startup))]
+namespace Calendar.ASP.NET.MVC5
 {
     public partial class Startup
     {
+        [System.Obsolete]
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);

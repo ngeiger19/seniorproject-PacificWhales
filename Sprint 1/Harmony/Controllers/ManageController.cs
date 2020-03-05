@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Harmony.Models;
+using Calendar.ASP.NET.MVC5;
 
 namespace Harmony.Controllers
 {
