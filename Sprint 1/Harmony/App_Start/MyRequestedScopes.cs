@@ -29,7 +29,8 @@ namespace Calendar.ASP.NET.MVC5
                 return new[] {
                     "openid",
                     "email",
-                    CalendarService.Scope.CalendarReadonly,
+                    CalendarService.Scope.Calendar,
+                    CalendarService.Scope.CalendarEvents
                 };
             }
         }
