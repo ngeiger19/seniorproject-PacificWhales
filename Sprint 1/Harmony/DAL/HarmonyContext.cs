@@ -21,18 +21,12 @@ namespace Harmony.DAL
         public virtual DbSet<Venue> Venues { get; set; }
         public virtual DbSet<VenueType> VenueTypes { get; set; }
         public virtual DbSet<Video> Videos { get; set; }
-        public virtual DbSet<BandMember_Instrument> BandMember_Instrument { get; set; }
         public virtual DbSet<Musician_Genre> Musician_Genre { get; set; }
         public virtual DbSet<Show> Shows { get; set; }
         public virtual DbSet<User_Show> User_Show { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<BandMember>()
-                .HasMany(e => e.Instruments)
-                .WithMany(e => e.BandMembers)
-                .Map(m => m.ToTable("BandMember_Instrument").MapLeftKey("BandMemberID").MapRightKey("InstrumentID"));
-
             modelBuilder.Entity<Genre>()
                 .HasMany(e => e.Users)
                 .WithMany(e => e.Genres)
