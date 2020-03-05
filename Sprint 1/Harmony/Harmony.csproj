@@ -222,7 +222,6 @@
     <Compile Include="Models\BandMember.cs" />
     <Compile Include="Models\BandMember_Instrument.cs" />
     <Compile Include="Models\CalendarEventGroups.cs" />
-    <Compile Include="Models\CalendarViewModels.cs" />
     <Compile Include="Models\DetailViewModel.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -238,7 +237,6 @@
     <Compile Include="Models\Video.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Harmony.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\down.sql" />

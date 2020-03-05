@@ -201,7 +201,7 @@ CREATE TABLE [dbo].[Genres]
 );
 
 -- #######################################
--- #    BandMember_Instrument Table      #
+-- #        Musician_Genre Table         #
 -- #######################################
 
 CREATE TABLE [dbo].[Musician_Genre]
