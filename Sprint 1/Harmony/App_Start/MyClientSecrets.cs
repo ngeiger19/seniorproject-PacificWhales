@@ -24,7 +24,7 @@ namespace Calendar.ASP.NET.MVC5
     /// </summary>
     internal static class MyClientSecrets
     {
-        public const string ClientId = "988423333380-j02ftv85oivj2e5q1mrc26crk3eq11p8.apps.googleusercontent.com";
-        public const string ClientSecret = "bnRzqL-2LWpcTzREJkDrGUtg";
+        public const string ClientId = "950853341755-3jan389eiotnc059dor7ljh0npk3hlj5.apps.googleusercontent.com";
+        public const string ClientSecret = "5EZ4QcCOQjQbfOCFfn7h14n1";
     }
 }
