@@ -4,7 +4,7 @@
     ViewBag.Title = "Log in";
 }
 
-    <div class="row" style="justify-content: center;">
+   <div class="row" style="justify-content: center;">
         <div class="col-md-5 shadow p-3 mb-5 bg-white rounded">
             <section id="loginForm">
                 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))

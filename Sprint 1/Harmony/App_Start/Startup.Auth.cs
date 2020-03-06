@@ -92,10 +92,10 @@ namespace Calendar.ASP.NET.MVC5
             },
         };
 
-        foreach (var scope in MyRequestedScopes.Scopes)
+       /* foreach (var scope in MyRequestedScopes.Scopes)
         {
             google.Scope.Add(scope);
-        }
+        }*/
 
         app.UseGoogleAuthentication(google);
 
