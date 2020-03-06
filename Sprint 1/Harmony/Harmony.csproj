@@ -218,7 +218,6 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BandMember.cs" />
-    <Compile Include="Models\BandMember_Instrument.cs" />
     <Compile Include="Models\CalendarEventGroup.cs" />
     <Compile Include="Models\CalendarViewModels.cs" />
     <Compile Include="Models\DetailViewModel.cs" />
@@ -227,7 +226,6 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Instrument.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Musician_Genre.cs" />
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\Show.cs" />
     <Compile Include="Models\User.cs" />

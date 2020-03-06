@@ -184,7 +184,7 @@ namespace Harmony.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                  //  await this.UserManager.AddToRoleAsync(user.Id, model.Role);
+                    await this.UserManager.AddToRoleAsync(user.Id, model.Role);
                     User HarmonyUser = new User
                     {
                         FirstName = model.FirstName,
@@ -235,7 +235,7 @@ namespace Harmony.Controllers
                                 GenreName = genreList[i]
                             });
                             db.Genres.Add(genres[i]);
-                            db.Musician_Genre.Add(new Musician_Genre { UserID = HarmonyUser.ID, GenreID = genres[i].ID });
+                            HarmonyUser.Genres.Add(genres[i]);
                         }
                         for (int i = 0; i < instrumentList.Count(); i++)
                         {
@@ -252,8 +252,10 @@ namespace Harmony.Controllers
                                 BandMemberName = bandmemberList[i],
                                 UserID = HarmonyUser.ID
                             });
+                            bandmembers[i].Instruments.Add(instruments[i]);
                             db.BandMembers.Add(bandmembers[i]);
-                            db.BandMember_Instrument.Add(new BandMember_Instrument { BandMemberID = bandmembers[i].ID, InstrumentID = instruments[i].ID });     
+
+                           // db.BandMember_Instrument.Add(new BandMember_Instrument { BandMemberID = bandmembers[i].ID, InstrumentID = instruments[i].ID });     
                         }
 
                     }
