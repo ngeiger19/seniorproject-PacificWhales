@@ -418,9 +418,9 @@
     <Content Include="Views\Venues\Index.cshtml" />
     <Content Include="Views\Users\Create.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
-    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\MusicianDetails.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
-    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\MusicianIndex.cshtml" />
     <Content Include="Views\BandMembers\Create.cshtml" />
     <Content Include="Views\BandMembers\Delete.cshtml" />
     <Content Include="Views\BandMembers\Details.cshtml" />

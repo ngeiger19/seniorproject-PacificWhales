@@ -11,29 +11,32 @@ using Harmony.Models;
 
 namespace Harmony.Controllers
 {
+    [Authorize]
     public class UsersController : Controller
     {
         private HarmonyContext db = new HarmonyContext();
 
         // GET: Users
-        public ActionResult Index()
+        public ActionResult MusicianIndex()
         {
-            return View(db.Users.ToList());
+            // return View(db.Users.ToList());
+            return View(db.Users.Where(u => u.Genres.Count() != 0).ToList());
         }
 
         // GET: Users/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult MusicianDetails(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             User user = db.Users.Find(id);
+            MusicianDetailViewModel viewModel = new MusicianDetailViewModel(user);
             if (user == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(viewModel);
         }
 
         // GET: Users/Create

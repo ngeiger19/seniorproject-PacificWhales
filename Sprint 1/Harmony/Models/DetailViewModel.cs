@@ -63,7 +63,7 @@ namespace Harmony.Models
 
     public class MusicianDetailViewModel
     {
-        MusicianDetailViewModel(User user)
+        public MusicianDetailViewModel(User user)
         {
             ID = user.ID;
             FirstName = user.FirstName;
@@ -75,29 +75,19 @@ namespace Harmony.Models
             Genres = user.Genres.Select(g => g.GenreName).ToList();
             BandMembers = user.BandMembers.Select(b => b.BandMemberName).ToList();
         }
+
         public int ID { get; set; }
 
-        [Required]
-        [StringLength(50)]
         public string FirstName { get; set; }
 
-        [Required]
-        [StringLength(50)]
         public string LastName { get; set; }
 
-        [Required]
-        [StringLength(50)]
         public string City { get; set; }
 
-        [Required]
-        [StringLength(24)]
         public string State { get; set; }
 
-        [Required]
-        [StringLength(100)]
         public string Email { get; set; }
 
-        [StringLength(300)]
         public string Description { get; set; }
 
         public List<string> Genres { get; set; }
