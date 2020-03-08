@@ -67,43 +67,12 @@ namespace Calendar.ASP.NET.MVC5
                appId: "1076805802680549",
                appSecret: "eb1862210555dc08a0035bb9acda74be");
 
-      /*  var google = new GoogleOAuth2AuthenticationOptions()
-        {
-            AccessType = "offline",     // Request a refresh token.
-            ClientId = MyClientSecrets.ClientId,
-            ClientSecret = MyClientSecrets.ClientSecret,
-            Provider = new GoogleOAuth2AuthenticationProvider()
-            {
-                OnAuthenticated = async context =>
-                {
-                    var userId = context.Id;
-                    context.Identity.AddClaim(new Claim(MyClaimTypes.GoogleUserId, userId));
 
-                    var tokenResponse = new TokenResponse()
-                    {
-                        AccessToken = context.AccessToken,
-                        RefreshToken = context.RefreshToken,
-                        ExpiresInSeconds = (long)context.ExpiresIn.Value.TotalSeconds,
-                        Issued = DateTime.Now,
-                    };
-
-                    await dataStore.StoreAsync(userId, tokenResponse);
-                },
-            },
-        };
-
-        foreach (var scope in MyRequestedScopes.Scopes)
-        {
-            google.Scope.Add(scope);
-        }
-
-        app.UseGoogleAuthentication(google);*/
-
-            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            {
-                ClientId = "694725937442-cicpvbv4628snad2aclnaomdgktidgv1.apps.googleusercontent.com",
-                ClientSecret = "bBcKmxuHqdZLQKRkvIsIGDRr"
-            });
+           // app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+           // {
+             //   ClientId = "694725937442-cicpvbv4628snad2aclnaomdgktidgv1.apps.googleusercontent.com",
+              //  ClientSecret = "bBcKmxuHqdZLQKRkvIsIGDRr"
+           // });
 
         }
     }
