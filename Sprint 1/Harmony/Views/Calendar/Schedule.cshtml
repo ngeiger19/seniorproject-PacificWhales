@@ -46,7 +46,7 @@
             </tr>
 
             <!----------------------- DISPLAYING EVENTS ------------------------>
-            @foreach (var group in Model)
+            @foreach (var group in Model.EventGroups)
             {
                 foreach (var evt in group.Events)
                 {

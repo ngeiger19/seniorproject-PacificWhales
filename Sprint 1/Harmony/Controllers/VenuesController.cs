@@ -25,35 +25,7 @@ namespace Calendar.ASP.NET.MVC5
     {
         private HarmonyContext db = new HarmonyContext();
 
-        private readonly IDataStore dataStore = new FileDataStore(GoogleWebAuthorizationBroker.Folder);
-
-
-        // Get user's Google Calendar info
-        private async Task<UserCredential> GetCredentialForApiAsync()
-        {
-            var initializer = new GoogleAuthorizationCodeFlow.Initializer
-            {
-                ClientSecrets = new ClientSecrets
-                {
-
-                    ClientId = MyClientSecrets.ClientId,
-                    ClientSecret = MyClientSecrets.ClientSecret,
-                },
-                Scopes = MyRequestedScopes.Scopes,
-            };
-            var flow = new GoogleAuthorizationCodeFlow(initializer);
-
-            var identity = await HttpContext.GetOwinContext().Authentication.GetExternalIdentityAsync(
-                DefaultAuthenticationTypes.ApplicationCookie);
-            var userId = identity.FindFirstValue(MyClaimTypes.GoogleUserId);
-
-            var token = await dataStore.GetAsync<TokenResponse>(userId);
-            return new UserCredential(flow, userId, token);
-        }
-
-        /************************************
-         *           VENUE PROFILE
-         * *********************************/
+        
         // GET: Venues
         public ActionResult Index()
         {
@@ -61,8 +33,11 @@ namespace Calendar.ASP.NET.MVC5
             return View(venues.ToList());
         }
 
+        /************************************
+         *           VENUE PROFILE
+         * *********************************/
         // GET: Venues/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public ActionResult Details(int? id)
         {
             // If no user is passed through
             if (id == null)
@@ -77,66 +52,6 @@ namespace Calendar.ASP.NET.MVC5
             }
 
             VenueOwnerDetailViewModel viewModel = new VenueOwnerDetailViewModel(venue);
-
-            // Get user's calendar credentials
-            const int MaxEventsPerCalendar = 20;
-            const int MaxEventsOverall = 40;
-
-            var credential = await GetCredentialForApiAsync();
-
-            var initializer = new BaseClientService.Initializer()
-            {
-                HttpClientInitializer = credential,
-                ApplicationName = "ASP.NET MVC5 Calendar Sample",
-            };
-            var service = new CalendarService(initializer);
-
-            // Fetch the list of calendars.
-            var calendars = await service.CalendarList.List().ExecuteAsync();
-
-            // Fetch some events from each calendar.
-            var fetchTasks = new List<Task<Google.Apis.Calendar.v3.Data.Events>>(calendars.Items.Count);
-            foreach (var calendar in calendars.Items)
-            {
-                var request = service.Events.List(calendar.Id);
-                request.MaxResults = MaxEventsPerCalendar;
-                request.SingleEvents = true;
-                request.TimeMin = DateTime.Now;
-                fetchTasks.Add(request.ExecuteAsync());
-            }
-            var fetchResults = await Task.WhenAll(fetchTasks);
-
-            // Sort the events and put them in the model.
-            var upcomingEvents = from result in fetchResults
-                                 from evt in result.Items
-                                 where evt.Start != null
-                                 let date = evt.Start.DateTime.HasValue ?
-                                     evt.Start.DateTime.Value.Date :
-                                     DateTime.ParseExact(evt.Start.Date, "yyyy-MM-dd", null)
-                                 let sortKey = evt.Start.DateTimeRaw ?? evt.Start.Date
-                                 orderby sortKey
-                                 select new { evt, date };
-            var eventsByDate = from result in upcomingEvents.Take(MaxEventsOverall)
-                               group result.evt by result.date into g
-                               orderby g.Key
-                               select g;
-
-            // Days in the next week
-            int thisWeek = DateTime.Now.DayOfYear + 7;
-            var eventGroups = new List<CalendarEventGroup>();
-            foreach (var grouping in eventsByDate)
-            {
-                // Adding event to model if they are scheduled for the next week
-                if (grouping.Key.DayOfYear <= thisWeek)
-                {
-                    eventGroups.Add(new CalendarEventGroup
-                    {
-                        GroupTitle = grouping.Key.ToLongDateString(),
-                        Events = grouping,
-                    });
-                }
-            }
-            viewModel.UpcomingEvents = eventGroups;
 
             return View(venue);
         }
