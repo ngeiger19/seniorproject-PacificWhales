@@ -69,8 +69,8 @@ namespace Calendar.ASP.NET.MVC5
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "694725937442-cicpvbv4628snad2aclnaomdgktidgv1.apps.googleusercontent.com",
-                ClientSecret = "bBcKmxuHqdZLQKRkvIsIGDRr"
+                ClientId = "667918887540-p5gfml3oojmtnfcsj5bmoljd1qv1ee34.apps.googleusercontent.com",
+                ClientSecret = "bc_AGUim11eA-xievyZVWAH3"
             });
 
         }
