@@ -157,7 +157,7 @@ namespace Harmony.Controllers
                 stateList.Add(new SelectListItem { Text = (string)arr[i]["name"], Value = (string)arr[i]["name"] });
             }
             ViewData.Clear();
-            ViewBag.State = stateList;
+            // ViewBag.State = stateList;
             ViewData["State"] = stateList;
             sr.Dispose();
             return View();
@@ -273,7 +273,7 @@ namespace Harmony.Controllers
             {
                 stateList.Add(new SelectListItem { Text = (string)arr[i]["name"], Value = (string)arr[i]["name"] });
             }
-            ViewBag.State = stateList;
+            // ViewBag.State = stateList;
             ViewData["State"] = stateList;
             // If we got this far, something failed, redisplay form
             return View(model);
@@ -443,7 +443,7 @@ namespace Harmony.Controllers
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
-                case SignInStatus.RequiresVerification:
+                case SignInStatus.RequiresVerification: 
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = false });
                 case SignInStatus.Failure:
                 default:

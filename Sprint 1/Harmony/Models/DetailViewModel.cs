@@ -95,5 +95,19 @@ namespace Harmony.Models
         public List<string> BandMembers { get; set; }
 
         public List<string> Instruments { get; set; }
+
+        // This section is for the calendar event form
+
+        public int ShowID { get; set; }
+
+        [Display(Name = "ShowDate")]
+        public DateTime Date { get; set; }
+
+        [Display(Name = "VenueName")]
+        public string VenueID { get; set; }
+
+        public string ShowDescription { get; set; }
+
+        public DateTime DateBooked { get; set; }
     }
 }

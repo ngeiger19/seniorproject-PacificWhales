@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Harmony.DAL;
 using Harmony.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Harmony.Controllers
 {
@@ -37,6 +38,32 @@ namespace Harmony.Controllers
                 return HttpNotFound();
             }
             return View(viewModel);
+        }
+
+        public ActionResult CreateShow()
+        {
+            var IdentityID = User.Identity.GetUserId();
+            ViewBag.VenueID = new SelectList(db.Venues.Where(v => v.User.ASPNetIdentityID == IdentityID).Select(v => new { VenueID = v.ID, VenueName = v.VenueName }), "VenueID", "VenueName");
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateShow([Bind(Include = "ShowID,Date,VenueID,ShowDescription,DateBooked")] Show show)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                show.DateBooked = DateTime.Now;
+                db.Shows.Add(show);
+                db.SaveChanges();
+                return View();
+            }
+            var IdentityID = User.Identity.GetUserId();
+            ViewBag.VenueID = new SelectList(db.Venues.Where(v => v.User.ASPNetIdentityID == IdentityID).Select(v => new {VenueID = v.ID, VenueName = v.VenueName }), "VenueID", "VenueName", show.VenueID);
+            
+            return View(show);
         }
 
         // GET: Users/Create
