@@ -409,7 +409,6 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Home\Search.cshtml" />
-    <Content Include="Views\Home\MusicianSearchResults.cshtml" />
     <Content Include="Views\Home\VenueSearchResults.cshtml" />
     <Content Include="Views\Venues\Create.cshtml" />
     <Content Include="Views\Venues\Delete.cshtml" />
