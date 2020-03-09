@@ -4,11 +4,28 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using Harmony.Models;
+using Calendar.ASP.NET.MVC5.Models;
 
 namespace Harmony.Models
 {
     public class VenueOwnerDetailViewModel
     {
+        public VenueOwnerDetailViewModel(Venue venue)
+        {
+            ID = venue.ID;
+            FirstName = venue.User.FirstName;
+            LastName = venue.User.LastName;
+            City = venue.City;
+            State = venue.State;
+            Email = venue.User.Email;
+            Description = venue.User.Description;
+            VenueName = venue.VenueName;
+            AddressLine1 = venue.AddressLine1;
+            AddressLine2 = venue.AddressLine2;
+            ZipCode = venue.ZipCode;
+            TypeName = venue.VenueType.TypeName;
+        }
+
         public int ID { get; set; }
 
         [Required]
@@ -57,8 +74,9 @@ namespace Harmony.Models
         [StringLength(10)]
         public string ZipCode { get; set; }
 
-        public int TypeName { get; set; }
+        public string TypeName { get; set; }
 
+        public IEnumerable<CalendarEventGroup> UpcomingEvents { get; set; }
     }
 
     public class MusicianDetailViewModel
@@ -109,5 +127,6 @@ namespace Harmony.Models
         public string ShowDescription { get; set; }
 
         public DateTime DateBooked { get; set; }
+        public IEnumerable<CalendarEventGroup> UpcomingEvents { get; set; }
     }
 }
