@@ -16,6 +16,7 @@ namespace Harmony.Models
 
         public int ID { get; set; }
 
+        [DataType(DataType.DateTime)]
         public DateTime? Date { get; set; }
 
         public int? VenueID { get; set; }

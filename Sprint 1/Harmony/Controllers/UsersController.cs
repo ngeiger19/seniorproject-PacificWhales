@@ -13,11 +13,14 @@ using Google.Apis.Auth.OAuth2;
 using Google.Apis.Auth.OAuth2.Flows;
 using Google.Apis.Auth.OAuth2.Responses;
 using Google.Apis.Calendar.v3;
+using Google.Apis.Calendar.v3.Data;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using Calendar.ASP.NET.MVC5.Models;
+using System.IO;
+using Google.GData.Extensions;
 
 namespace Calendar.ASP.NET.MVC5
 {
@@ -148,27 +151,83 @@ namespace Calendar.ASP.NET.MVC5
         public ActionResult CreateShow()
         {
             var IdentityID = User.Identity.GetUserId();
-            ViewBag.VenueID = new SelectList(db.Venues.Where(v => v.User.ASPNetIdentityID == IdentityID).Select(v => new { VenueID = v.ID, VenueName = v.VenueName }), "VenueID", "VenueName");
+            List<Venue> venues = db.Venues.ToList();
+            List<SelectListItem> venueList = new List<SelectListItem>();
+            for (int i = 0; i < venues.Count(); i++)
+            {
+                venueList.Add(new SelectListItem { Text = venues[i].VenueName, Value = venues[i].ID.ToString() });
+            }
+            ViewBag.VenueID = new SelectList(db.Venues, "ID", "VenueName");
 
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateShow([Bind(Include = "ShowID,Date,VenueID,ShowDescription,DateBooked")] Show show)
+        public async Task<ActionResult> CreateShow(MusicianDetailViewModel model)
         {
             
             if (ModelState.IsValid)
             {
-                show.DateBooked = DateTime.Now;
-                db.Shows.Add(show);
-                db.SaveChanges();
-                return View();
+                var credential = await GetCredentialForApiAsync();
+
+                var initializer = new BaseClientService.Initializer()
+                {
+                    HttpClientInitializer = credential,
+                    ApplicationName = "ASP.NET MVC5 Calendar Sample",
+                };
+                var service = new CalendarService(initializer);
+
+                var calendars = await service.CalendarList.List().ExecuteAsync();
+
+                // add the new show to db
+                Show newShow = new Show
+                {
+                    ID = model.ShowID,
+                    Date = model.DateTime,
+                    Description = model.ShowDescription,
+                    DateBooked = DateTime.Now,
+                    VenueID = model.VenueID
+                };
+                db.Shows.Add(newShow);
+
+                // create a new event to google calendar
+                if(calendars != null)
+                {
+                    Event newEvent = new Event()
+                    {
+                        Summary = newShow.Description,
+                        Location = "VenueName: " + newShow.Venue.VenueName + " Address: " + newShow.Venue.AddressLine1 + " " + newShow.Venue.AddressLine2 + " " + newShow.Venue.City + ", " + newShow.Venue.State + " " + newShow.Venue.ZipCode,
+                        Start = new EventDateTime()
+                        {
+                            DateTime = newShow.Date
+                        },
+                        End = new EventDateTime()
+                        {
+                            DateTime = newShow.Date.Value.AddHours(1.0)
+                        },
+                        Attendees = new List<EventAttendee>()
+                        {
+                            new EventAttendee(){Email = model.Email}
+                        }
+
+                    };
+                    var newEventRequest = service.Events.Insert(newEvent, calendars.Items.First().Id);
+                    // This allow attendees to get email notification
+                    newEventRequest.SendNotifications = true; 
+                    var eventResult = newEventRequest.ExecuteAsync();
+                }
+                await db.SaveChangesAsync();
+                return RedirectToAction("Welcome", "Home");
             }
             var IdentityID = User.Identity.GetUserId();
-            ViewBag.VenueID = new SelectList(db.Venues.Where(v => v.User.ASPNetIdentityID == IdentityID).Select(v => new {VenueID = v.ID, VenueName = v.VenueName }), "VenueID", "VenueName", show.VenueID);
-            
-            return View(show);
+            List<Venue> venues = db.Venues.ToList();
+            for(int i = 0; i < venues.Count(); i++)
+            {
+                model.VenueList.Add(new SelectListItem { Text = venues[i].VenueName, Value = venues[i].ID.ToString() });
+            }
+            ViewBag.VenueID = new SelectList(db.Venues, "ID", "VenueName");
+            return View(model);
         }
 
         // GET: Users/Create

@@ -13,52 +13,6 @@
                 if (User.IsInRole("VenueOwner"))
                 {
                     <button class="btn btn-outline-light my-2 my-sm-0" data-toggle="modal" data-target="#event-modal">Book This Musician!</button>
-
-                    <div class="modal fade" id="event-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="event-modal-label">Create an event</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    @using (Html.BeginForm("CreateShow", "User",  FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                                    {
-                                        @Html.AntiForgeryToken()
-                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                        <div class="form-group">
-                                            @Html.LabelFor(m => m.Date, new { @class = "col-md-2 control-label" })
-                                            <div class="col-md-12">
-                                                @Html.TextBoxFor(m => m.Date, new { @class = "form-control" })
-                                                @Html.ValidationMessageFor(m => m.Date, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            @Html.LabelFor(m => m.VenueID, new { @class = "col-md-2 control-label" })
-                                            <div class="col-md-12">
-                                                @Html.DropDownList("VenueID", null, htmlAttributes: new { @class = "form-control" })
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            @Html.LabelFor(m => m.ShowDescription, new { @class = "col-md-2 control-label" })
-                                            <div class="col-md-12">
-                                                @Html.TextAreaFor(m => m.ShowDescription, new { @class = "form-control" })
-                                                @Html.ValidationMessageFor(m => m.ShowDescription, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-primary">Create</button>
-                                            </div>
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 }
             }
             <dl class="dl-horizontal">
@@ -111,61 +65,61 @@
         </div>
 
         <!------------------------------- HELPERS FOR FORMATTING EVENTS -------------------------------->
-        @helper FormatEventTime(CalendarData.EventDateTime when)
-        {
-        // Either Date or DateTime is set, depending on whether or not the event is
-        // an all-day event.
-        if (when.DateTime == null)
-        {
-        <text>All day</text>
-        }
-        else
-        {
-        @:@when.DateTime.Value.ToShortTimeString()
-        }
-        }
-        @helper FormatEventLength(CalendarData.EventDateTime start, CalendarData.EventDateTime end)
-        {
-            var duration = end.DateTime - start.DateTime;
-            if (duration == null)
-            {
-                <text>All day</text>
-            }
-            else
-            {
-                @:@string.Format(
-            "{0} hour{1} {2} minute{3}",
-            (int)duration.Value.TotalHours,
-            duration.Value.TotalHours >= 2 ? "s" : "",
-            (int)duration.Value.Minutes,
-            duration.Value.Minutes >= 2 ? "s" : "")
-            }
-        }
-
-    <div class="col-md-4">
-        <h5>Availability</h5>
-        <table>
-            <tr>
-                <th>Event</th>
-                <th>Date</th>
-                <th>Duration</th>
-            </tr>
-
-            <!-------------------------- DISPLAYING EVENTS ----------------------->
-            @foreach (var group in Model.UpcomingEvents)
-            {
-                foreach (var evt in group.Events)
+        @*helper FormatEventTime(CalendarData.EventDateTime when)
                 {
-                    <tr>
-                        <td>@evt.Summary</td>
-                        <td>@FormatEventTime(evt.Start)</td>
-                        <td>@FormatEventLength(evt.Start, evt.End)</td>
-                    </tr>
+                    // Either Date or DateTime is set, depending on whether or not the event is
+                    // an all-day event.
+                    if (when.DateTime == null)
+                    {
+                        <text>All day</text>
+                    }
+                    else
+                    {
+                        @:@when.DateTime.Value.ToShortTimeString()
+                    }
+                }
+                @helper FormatEventLength(CalendarData.EventDateTime start, CalendarData.EventDateTime end)
+                {
+                    var duration = end.DateTime - start.DateTime;
+                    if (duration == null)
+                    {
+                        <text>All day</text>
+                    }
+                    else
+                    {
+                        @:@string.Format(
+                        "{0} hour{1} {2} minute{3}",
+                        (int)duration.Value.TotalHours,
+                        duration.Value.TotalHours >= 2 ? "s" : "",
+                        (int)duration.Value.Minutes,
+                        duration.Value.Minutes >= 2 ? "s" : "")
+                    }
                 }
 
-            }
-        </table>
-    </div>
+            <div class="col-md-4">
+                <h5>Availability</h5>
+                <table>
+                    <tr>
+                        <th>Event</th>
+                        <th>Date</th>
+                        <th>Duration</th>
+                    </tr>
+
+                    <!-------------------------- DISPLAYING EVENTS ----------------------->
+                    @foreach (var group in Model.UpcomingEvents)
+                    {
+                        foreach (var evt in group.Events)
+                        {
+                            <tr>
+                                <td>@evt.Summary</td>
+                                <td>@FormatEventTime(evt.Start)</td>
+                                <td>@FormatEventLength(evt.Start, evt.End)</td>
+                            </tr>
+                        }
+
+                    }
+                </table>
+            </div>*@
         <br />
     </div>
     <p>
@@ -173,3 +127,59 @@
         @Html.ActionLink("Back to List", "MusicianIndex")
     </p>
 </div>
+
+
+<div class="modal fade" id="event-modal" tabindex="-1" role="dialog" aria-labelledby="event-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="event-modal-label">Create an event</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("CreateShow", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Date, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-12">
+                            @Html.TextBoxFor(m => m.Date, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Date, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.VenueID, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-12">
+                            @Html.DropDownListFor(m => m.VenueID, new List<SelectListItem>() { new SelectListItem { Text = "Staples Center", Value = "1" } }, "---Select---", htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ShowDescription, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-12">
+                            @Html.TextAreaFor(m => m.ShowDescription, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.ShowDescription, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#event-modal').appendTo("body")
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

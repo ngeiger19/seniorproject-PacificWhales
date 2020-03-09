@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using Harmony.Models;
 using Calendar.ASP.NET.MVC5.Models;
+using System.Web.Mvc;
 
 namespace Harmony.Models
 {
@@ -118,15 +119,17 @@ namespace Harmony.Models
 
         public int ShowID { get; set; }
 
-        [Display(Name = "ShowDate")]
-        public DateTime Date { get; set; }
+        [DataType(DataType.DateTime)]
+        [Display(Name = "DateTime")]
+        public DateTime DateTime { get; set; }
 
         [Display(Name = "VenueName")]
-        public string VenueID { get; set; }
+        public int VenueID { get; set; }
 
         public string ShowDescription { get; set; }
 
         public DateTime DateBooked { get; set; }
+        public List<SelectListItem> VenueList { get; set; }
         public IEnumerable<CalendarEventGroup> UpcomingEvents { get; set; }
     }
 }
