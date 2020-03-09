@@ -29,6 +29,7 @@ namespace Calendar.ASP.NET.MVC5
 
         private readonly IDataStore dataStore = new FileDataStore(GoogleWebAuthorizationBroker.Folder);
 
+        // Get user's Google Calendar info
         private async Task<UserCredential> GetCredentialForApiAsync()
         {
             var initializer = new GoogleAuthorizationCodeFlow.Initializer
@@ -58,6 +59,9 @@ namespace Calendar.ASP.NET.MVC5
             return View(db.Users.Where(u => u.Genres.Count() != 0).ToList());
         }
 
+        /*******************************************
+         *          MUSICIAN PROFILE
+         *  *************************************/
         // GET: Users/Details/5
         public async Task<ActionResult> MusicianDetails(int? id)
         {
@@ -67,11 +71,19 @@ namespace Calendar.ASP.NET.MVC5
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            // Viewmodel for Musician
+            User user = db.Users.Find(id);
+            MusicianDetailViewModel viewModel = new MusicianDetailViewModel(user);
+
+            // If users doesn't exisit
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
             // Get user's calendar credentials
             const int MaxEventsPerCalendar = 20;
-            const int MaxEventsOverall = 50;
-
-            var model = new UpcomingEventsViewModel();
+            const int MaxEventsOverall = 40;
 
             var credential = await GetCredentialForApiAsync();
 
@@ -112,22 +124,23 @@ namespace Calendar.ASP.NET.MVC5
                                orderby g.Key
                                select g;
 
+            // Days in the next week
+            int thisWeek = DateTime.Now.DayOfYear + 7;
             var eventGroups = new List<CalendarEventGroup>();
             foreach (var grouping in eventsByDate)
             {
-                eventGroups.Add(new CalendarEventGroup
+                // Adding event to model if they are scheduled for the next week
+                if (grouping.Key.DayOfYear <= thisWeek)
                 {
-                    GroupTitle = grouping.Key.ToLongDateString(),
-                    Events = grouping,
-                });
+                    eventGroups.Add(new CalendarEventGroup
+                    {
+                        GroupTitle = grouping.Key.ToLongDateString(),
+                        Events = grouping,
+                    });
+                }
             }
-            model.EventGroups = eventGroups;
-            User user = db.Users.Find(id);
-            MusicianDetailViewModel viewModel = new MusicianDetailViewModel(user);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
+            viewModel.UpcomingEvents = eventGroups;
+
             return View(viewModel);
         }
 

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using Harmony.Models;
+using Calendar.ASP.NET.MVC5.Models;
 
 namespace Harmony.Models
 {
@@ -59,6 +60,7 @@ namespace Harmony.Models
 
         public int TypeName { get; set; }
 
+        public IEnumerable<CalendarEventGroup> UpcomingEvents { get; set; }
     }
 
     public class MusicianDetailViewModel
@@ -95,5 +97,7 @@ namespace Harmony.Models
         public List<string> BandMembers { get; set; }
 
         public List<string> Instruments { get; set; }
+
+        public IEnumerable<CalendarEventGroup> UpcomingEvents { get; set; }
     }
 }
