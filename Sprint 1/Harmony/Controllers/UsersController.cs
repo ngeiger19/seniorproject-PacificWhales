@@ -73,13 +73,14 @@ namespace Calendar.ASP.NET.MVC5
 
             // Viewmodel for Musician
             User user = db.Users.Find(id);
-            MusicianDetailViewModel viewModel = new MusicianDetailViewModel(user);
 
             // If users doesn't exisit
             if (user == null)
             {
                 return HttpNotFound();
             }
+
+            MusicianDetailViewModel viewModel = new MusicianDetailViewModel(user);
 
             // Get user's calendar credentials
             const int MaxEventsPerCalendar = 20;
