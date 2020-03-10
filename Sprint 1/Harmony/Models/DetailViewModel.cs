@@ -82,6 +82,7 @@ namespace Harmony.Models
 
     public class MusicianDetailViewModel
     {
+        public MusicianDetailViewModel() { }
         public MusicianDetailViewModel(User user)
         {
             ID = user.ID;

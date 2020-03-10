@@ -67,7 +67,7 @@ namespace Calendar.ASP.NET.MVC5
             //   appId: "",
             //   appSecret: "");
 
-        var google = new GoogleOAuth2AuthenticationOptions()
+        /*var google = new GoogleOAuth2AuthenticationOptions()
         {
             AccessType = "offline",     // Request a refresh token.
             ClientId = MyClientSecrets.ClientId,
@@ -97,12 +97,12 @@ namespace Calendar.ASP.NET.MVC5
             google.Scope.Add(scope);
         }
 
-        app.UseGoogleAuthentication(google);
+        app.UseGoogleAuthentication(google);*/
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "694725937442-cicpvbv4628snad2aclnaomdgktidgv1.apps.googleusercontent.com",
-                ClientSecret = "bBcKmxuHqdZLQKRkvIsIGDRr"
+                ClientId = MyClientSecrets.ClientId,
+                ClientSecret = MyClientSecrets.ClientSecret
             });
 
         }

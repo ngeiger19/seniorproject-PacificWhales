@@ -138,41 +138,39 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                @using (Html.BeginForm("CreateShow", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            @using (Html.BeginForm("CreateShow", "Users", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Date, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-12">
-                            @Html.TextBoxFor(m => m.Date, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Date, "", new { @class = "text-danger" })
+                    <div class="modal-body">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.DateTime, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-12">
+                                @Html.TextBoxFor(m => m.DateTime, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.DateTime, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.VenueID, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-12">
+                                @Html.DropDownListFor(m => m.VenueID, new List<SelectListItem>() { new SelectListItem { Text = "Staples Center", Value = "1" } }, "---Select---", htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ShowDescription, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-12">
+                                @Html.TextAreaFor(m => m.ShowDescription, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.ShowDescription, "", new { @class = "text-danger" })
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.VenueID, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-12">
-                            @Html.DropDownListFor(m => m.VenueID, new List<SelectListItem>() { new SelectListItem { Text = "Staples Center", Value = "1" } }, "---Select---", htmlAttributes: new { @class = "form-control" })
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Create</button>
                         </div>
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.ShowDescription, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-12">
-                            @Html.TextAreaFor(m => m.ShowDescription, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.ShowDescription, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
                 }
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Create</button>
-                </div>
-            </div>
         </div>
     </div>
 </div>

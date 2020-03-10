@@ -30,7 +30,7 @@ namespace Calendar.ASP.NET.MVC5
 
         private HarmonyContext db = new HarmonyContext();
 
-        private readonly IDataStore dataStore = new FileDataStore(GoogleWebAuthorizationBroker.Folder);
+        /*private readonly IDataStore dataStore = new FileDataStore(GoogleWebAuthorizationBroker.Folder);
 
         // Get user's Google Calendar info
         private async Task<UserCredential> GetCredentialForApiAsync()
@@ -53,7 +53,7 @@ namespace Calendar.ASP.NET.MVC5
 
             var token = await dataStore.GetAsync<TokenResponse>(userId);
             return new UserCredential(flow, userId, token);
-        }
+        }*/
 
         // GET: Users
         public ActionResult MusicianIndex()
@@ -86,7 +86,7 @@ namespace Calendar.ASP.NET.MVC5
             MusicianDetailViewModel viewModel = new MusicianDetailViewModel(user);
 
             // Get user's calendar credentials
-            const int MaxEventsPerCalendar = 20;
+            /*const int MaxEventsPerCalendar = 20;
             const int MaxEventsOverall = 40;
 
             var credential = await GetCredentialForApiAsync();
@@ -143,7 +143,7 @@ namespace Calendar.ASP.NET.MVC5
                     });
                 }
             }
-            viewModel.UpcomingEvents = eventGroups;
+            viewModel.UpcomingEvents = eventGroups;*/
 
             return View(viewModel);
         }
@@ -169,7 +169,7 @@ namespace Calendar.ASP.NET.MVC5
             
             if (ModelState.IsValid)
             {
-                var credential = await GetCredentialForApiAsync();
+                /*var credential = await GetCredentialForApiAsync();
 
                 var initializer = new BaseClientService.Initializer()
                 {
@@ -178,7 +178,7 @@ namespace Calendar.ASP.NET.MVC5
                 };
                 var service = new CalendarService(initializer);
 
-                var calendars = await service.CalendarList.List().ExecuteAsync();
+                var calendars = await service.CalendarList.List().ExecuteAsync();*/
 
                 // add the new show to db
                 Show newShow = new Show
@@ -192,7 +192,7 @@ namespace Calendar.ASP.NET.MVC5
                 db.Shows.Add(newShow);
 
                 // create a new event to google calendar
-                if(calendars != null)
+                /*if(calendars != null)
                 {
                     Event newEvent = new Event()
                     {
@@ -216,7 +216,7 @@ namespace Calendar.ASP.NET.MVC5
                     // This allow attendees to get email notification
                     newEventRequest.SendNotifications = true; 
                     var eventResult = newEventRequest.ExecuteAsync();
-                }
+                }*/
                 await db.SaveChangesAsync();
                 return RedirectToAction("Welcome", "Home");
             }
