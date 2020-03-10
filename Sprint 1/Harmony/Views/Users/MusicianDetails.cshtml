@@ -1,15 +1,13 @@
-﻿@model Harmony.Models.VenueOwnerDetailViewModel
+﻿@model Harmony.Models.MusicianDetailViewModel
 @using CalendarData = Google.Apis.Calendar.v3.Data;
 @{
     ViewBag.Title = "Details";
 }
 
-
-
 <div class="container black-font">
-    <h4 style="color:seashell">Venue Owner Profile</h4>
+    <h4 style="color:seashell">Musician Profile Page</h4>
     <hr />
-    <div class="row" id="venueprofile">
+    <div class="row" id="musicianprofile">
         <div class="col-md-4">
             <dl class="dl-horizontal">
                 <dt>
@@ -19,47 +17,19 @@
                 <dd>
                     @Html.DisplayFor(model => model.FirstName)
                 </dd>
-
                 <dt>
-                    @Html.DisplayNameFor(model => model.TypeName)
+                    @Html.DisplayNameFor(model => model.LastName)
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.TypeName)
+                    @Html.DisplayFor(model => model.LastName)
                 </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.VenueName)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.VenueName)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.AddressLine1)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.AddressLine1)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.AddressLine2)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.AddressLine2)
-                </dd>
-
                 <dt>
                     @Html.DisplayNameFor(model => model.City)
                 </dt>
-
                 <dd>
                     @Html.DisplayFor(model => model.City)
                 </dd>
-
                 <dt>
                     @Html.DisplayNameFor(model => model.State)
                 </dt>
@@ -67,31 +37,35 @@
                 <dd>
                     @Html.DisplayFor(model => model.State)
                 </dd>
-
                 <dt>
-                    @Html.DisplayNameFor(model => model.ZipCode)
+                    @Html.DisplayNameFor(model => model.Email)
                 </dt>
-
                 <dd>
-                    @Html.DisplayFor(model => model.ZipCode)
+                    @Html.DisplayFor(model => model.Email)
                 </dd>
-
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
             </dl>
         </div>
         <div class="col-md-8">
             <h4><strong>Profile Picture</strong></h4>
             <div>
-                <img src="~/venue.jpg" id="venuepic" />
+                <img src="~/singer.jpg" id="musicianprofilepic" />
             </div>
         </div>
+
     <div class="col-md-4">
         <h5>Availability</h5>
         @Html.ActionLink("View Schedule", "Schedule", "Calendar")
     </div>
         <br />
-        <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-            @Html.ActionLink("Back to List", "Index")
-        </p>
     </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 </div>
