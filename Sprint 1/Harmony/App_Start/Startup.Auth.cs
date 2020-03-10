@@ -69,11 +69,21 @@ namespace Calendar.ASP.NET.MVC5
               appSecret: "eb1862210555dc08a0035bb9acda74be");
 
 
-            // app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            // {
-              // ClientId = "694725937442-cicpvbv4628snad2aclnaomdgktidgv1.apps.googleusercontent.com",
-              //ClientSecret = "bBcKmxuHqdZLQKRkvIsIGDRr"
-            // });
+       facebookaccount
+             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+             {
+               ClientId = "694725937442-cicpvbv4628snad2aclnaomdgktidgv1.apps.googleusercontent.com",
+              ClientSecret = "bBcKmxuHqdZLQKRkvIsIGDRr"
+             });
+
+       // app.UseGoogleAuthentication(google);
+
+            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            ///{
+               // ClientId = "950853341755-3jan389eiotnc059dor7ljh0npk3hlj5.apps.googleusercontent.com",
+               // ClientSecret = "5EZ4QcCOQjQbfOCFfn7h14n1"
+           // });
+
 
         }
     }
