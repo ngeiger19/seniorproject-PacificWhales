@@ -67,9 +67,6 @@ namespace Calendar.ASP.NET.MVC5
             app.UseFacebookAuthentication(
                appId: "1076805802680549",
               appSecret: "eb1862210555dc08a0035bb9acda74be");
-
-
-       facebookaccount
              app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
              {
                ClientId = "694725937442-cicpvbv4628snad2aclnaomdgktidgv1.apps.googleusercontent.com",
