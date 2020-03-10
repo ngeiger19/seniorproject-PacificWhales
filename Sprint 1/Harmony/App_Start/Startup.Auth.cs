@@ -63,9 +63,6 @@ namespace Calendar.ASP.NET.MVC5
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
 
         /*var google = new GoogleOAuth2AuthenticationOptions()
         {
@@ -78,26 +75,13 @@ namespace Calendar.ASP.NET.MVC5
                 {
                     var userId = context.Id;
                     context.Identity.AddClaim(new Claim(MyClaimTypes.GoogleUserId, userId));
-
-                    var tokenResponse = new TokenResponse()
-                    {
-                        AccessToken = context.AccessToken,
-                        RefreshToken = context.RefreshToken,
-                        ExpiresInSeconds = (long)context.ExpiresIn.Value.TotalSeconds,
-                        Issued = DateTime.Now,
-                    };
-
-                    await dataStore.StoreAsync(userId, tokenResponse);
-                },
-            },
-        };
-
-        foreach (var scope in MyRequestedScopes.Scopes)
-        {
-            google.Scope.Add(scope);
-        }
+                }
+            }
 
         app.UseGoogleAuthentication(google);*/
+            app.UseFacebookAuthentication(
+               appId: "1076805802680549",
+              appSecret: "eb1862210555dc08a0035bb9acda74be");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
