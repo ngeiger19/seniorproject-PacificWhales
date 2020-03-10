@@ -49,12 +49,13 @@ namespace Calendar.ASP.NET.MVC5.Controllers
         // GET: /Calendar/UpcomingEvents
         public async Task<ActionResult> Schedule()
         {
+            // Get user's calendar credentials
             const int MaxEventsPerCalendar = 20;
-            const int MaxEventsOverall = 50;
-
-            var model = new UpcomingEventsViewModel();
+            const int MaxEventsOverall = 40;
 
             var credential = await GetCredentialForApiAsync();
+
+            UpcomingEventsViewModel viewModel = new UpcomingEventsViewModel();
 
             var initializer = new BaseClientService.Initializer()
             {
@@ -93,18 +94,23 @@ namespace Calendar.ASP.NET.MVC5.Controllers
                                orderby g.Key
                                select g;
 
+            // Days in the next week
+            int thisWeek = DateTime.Now.DayOfYear + 7;
             var eventGroups = new List<CalendarEventGroup>();
             foreach (var grouping in eventsByDate)
             {
-                eventGroups.Add(new CalendarEventGroup
+                // Adding event to model if they are scheduled for the next week
+                if (grouping.Key.DayOfYear <= thisWeek)
                 {
-                    GroupTitle = grouping.Key.ToLongDateString(),
-                    Events = grouping,
-                });
+                    eventGroups.Add(new CalendarEventGroup
+                    {
+                        GroupTitle = grouping.Key.ToLongDateString(),
+                        Events = grouping,
+                    });
+                }
             }
-
-            model.EventGroups = eventGroups;
-            return View(model);
+            viewModel.EventGroups = eventGroups;
+            return View(viewModel);
         }
     }
 }
