@@ -51,10 +51,41 @@
         </section>
     </div>
     <div class="col-md-4">
+<<<<<<< HEAD
             <section id="socialLoginForm">
                 @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
             </section>
         </div>
+=======
+        <section id="socialLoginForm">
+            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+        </section>
+    </div>
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '{1076805802680549}',
+                cookie: true,
+                xfbml: true,
+                version: '{v6.0}'
+            });
+
+            FB.AppEvents.logPageView();
+
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+
+
+>>>>>>> dev0.2
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
