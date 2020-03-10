@@ -62,25 +62,47 @@ namespace Calendar.ASP.NET.MVC5
             //app.UseTwitterAuthentication(
             //   consumerKey: "",
             //   consumerSecret: "");
-
-
             app.UseFacebookAuthentication(
                appId: "1076805802680549",
               appSecret: "eb1862210555dc08a0035bb9acda74be");
-             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-             {
-               ClientId = "694725937442-cicpvbv4628snad2aclnaomdgktidgv1.apps.googleusercontent.com",
-              ClientSecret = "bBcKmxuHqdZLQKRkvIsIGDRr"
-             });
+            
+            var google = new GoogleOAuth2AuthenticationOptions()
+            {
+                AccessType = "offline",     // Request a refresh token.
+                ClientId = MyClientSecrets.ClientId,
+                ClientSecret = MyClientSecrets.ClientSecret,
+                Provider = new GoogleOAuth2AuthenticationProvider()
+                {
+                    OnAuthenticated = async context =>
+                    {
+                        var userId = context.Id;
+                        context.Identity.AddClaim(new Claim(MyClaimTypes.GoogleUserId, userId));
 
-       // app.UseGoogleAuthentication(google);
+                        var tokenResponse = new TokenResponse()
+                        {
+                            AccessToken = context.AccessToken,
+                            RefreshToken = context.RefreshToken,
+                            ExpiresInSeconds = (long)context.ExpiresIn.Value.TotalSeconds,
+                            Issued = DateTime.Now,
+                        };
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            ///{
-               // ClientId = "950853341755-3jan389eiotnc059dor7ljh0npk3hlj5.apps.googleusercontent.com",
-               // ClientSecret = "5EZ4QcCOQjQbfOCFfn7h14n1"
-           // });
+                        await dataStore.StoreAsync(userId, tokenResponse);
+                    },
+                },
+            };
 
+            foreach (var scope in MyRequestedScopes.Scopes)
+            {
+                google.Scope.Add(scope);
+            }
+
+            app.UseGoogleAuthentication(google);
+
+            /*app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = MyClientSecrets.ClientId,
+                ClientSecret = MyClientSecrets.ClientSecret
+            });*/
 
         }
     }
