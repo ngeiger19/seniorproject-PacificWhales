@@ -24,7 +24,7 @@ using Google.GData.Extensions;
 
 namespace Harmony
 {
-
+    [Authorize]
     public class UsersController : Controller
     {
 
