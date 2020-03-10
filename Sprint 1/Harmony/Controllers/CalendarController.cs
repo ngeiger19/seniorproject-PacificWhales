@@ -12,8 +12,12 @@ using Google.Apis.Auth.OAuth2;
 using Google.Apis.Auth.OAuth2.Flows;
 using Google.Apis.Auth.OAuth2.Responses;
 using Google.Apis.Calendar.v3;
+using Google.Apis.Calendar.v3.Data;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
+using System.IO;
+using Harmony.Models;
+using Harmony.DAL;
 
 /** Just here to test the API -
  * Should allow us to see all the user's events **/
@@ -24,6 +28,8 @@ namespace Calendar.ASP.NET.MVC5.Controllers
     public class CalendarController : Controller
     {
         private readonly IDataStore dataStore = new FileDataStore(GoogleWebAuthorizationBroker.Folder);
+
+        private HarmonyContext db = new HarmonyContext();
 
         private async Task<UserCredential> GetCredentialForApiAsync()
         {
@@ -112,6 +118,65 @@ namespace Calendar.ASP.NET.MVC5.Controllers
             }
             viewModel.EventGroups = eventGroups;
             return View(viewModel);
+        } 
+        public async Task<ActionResult> CreateShow()
+        {
+            // Get user's calendar credentials
+
+            UserCredential credential = await GetCredentialForApiAsync();
+            // Create Google Calendar API service.
+            var service = new CalendarService(new BaseClientService.Initializer()
+            {
+                HttpClientInitializer = credential,
+                ApplicationName = "Harmony",
+            });
+
+            // Define parameters of request.
+            EventsResource.ListRequest request = service.Events.List("primary");
+            request.TimeMin = DateTime.Now;
+            request.ShowDeleted = false;
+            request.SingleEvents = true;
+            request.MaxResults = 10;
+            request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
+
+            // Fetch the list of calendars.
+            var calendars = await service.CalendarList.List().ExecuteAsync();
+
+            // create a new event to google calendar
+            if (calendars != null)
+            {
+                Event newEvent = new Event()
+                {
+                    Summary = "Something",
+                    Location = "Somewhere",
+                    Start = new EventDateTime()
+                    {
+                        DateTime = DateTime.Now
+                    },
+                    End = new EventDateTime()
+                    {
+                        DateTime = DateTime.Now.AddHours(1.0)
+                    },
+                    Attendees = new List<EventAttendee>()
+                    {
+                        new EventAttendee(){Email = "lawyunho@gmail.com"}
+                    }
+
+                };
+                var newEventRequest = service.Events.Insert(newEvent, calendars.Items.First().Id);
+                // This allow attendees to get email notification
+                newEventRequest.SendNotifications = true; 
+                var eventResult = newEventRequest.ExecuteAsync();
+            }
+
+            return RedirectToAction("Welcome", "Home");
         }
     }
+
+   
+
+    /*public async Task<ActionResult> CreateShow()
+    {
+
+    }*/
 }

@@ -18,9 +18,10 @@ using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
-using Calendar.ASP.NET.MVC5.Models;
+using Calendar.ASP.NET.MVC5;
 using System.IO;
 using Google.GData.Extensions;
+using Calendar.ASP.NET.MVC5.Models;
 
 namespace Harmony
 {
@@ -30,7 +31,7 @@ namespace Harmony
 
         private HarmonyContext db = new HarmonyContext();
 
-        /*private readonly IDataStore dataStore = new FileDataStore(GoogleWebAuthorizationBroker.Folder);
+        private readonly IDataStore dataStore = new FileDataStore(GoogleWebAuthorizationBroker.Folder);
 
         // Get user's Google Calendar info
         private async Task<UserCredential> GetCredentialForApiAsync()
@@ -39,7 +40,7 @@ namespace Harmony
             {
                 ClientSecrets = new ClientSecrets
                 {
-                    
+
                     ClientId = MyClientSecrets.ClientId,
                     ClientSecret = MyClientSecrets.ClientSecret,
                 },
@@ -53,7 +54,7 @@ namespace Harmony
 
             var token = await dataStore.GetAsync<TokenResponse>(userId);
             return new UserCredential(flow, userId, token);
-        }*/
+        }
 
         // GET: Users
         public ActionResult MusicianIndex()
@@ -66,7 +67,7 @@ namespace Harmony
          *          MUSICIAN PROFILE
          *  *************************************/
         // GET: Users/Details/5
-        public ActionResult MusicianDetails(int? id)
+        public async Task<ActionResult> MusicianDetails(int? id)
         {
             // No user id passed through
             if (id == null)
@@ -86,7 +87,7 @@ namespace Harmony
             MusicianDetailViewModel viewModel = new MusicianDetailViewModel(user);
 
             // Get user's calendar credentials
-            /*const int MaxEventsPerCalendar = 20;
+            const int MaxEventsPerCalendar = 20;
             const int MaxEventsOverall = 40;
 
             var credential = await GetCredentialForApiAsync();
@@ -143,7 +144,7 @@ namespace Harmony
                     });
                 }
             }
-            viewModel.UpcomingEvents = eventGroups;*/
+            viewModel.UpcomingEvents = eventGroups;
 
             return View(viewModel);
         }
@@ -169,7 +170,7 @@ namespace Harmony
             
             if (ModelState.IsValid)
             {
-                /*var credential = await GetCredentialForApiAsync();
+                var credential = await GetCredentialForApiAsync();
 
                 var initializer = new BaseClientService.Initializer()
                 {
@@ -178,7 +179,7 @@ namespace Harmony
                 };
                 var service = new CalendarService(initializer);
 
-                var calendars = await service.CalendarList.List().ExecuteAsync();*/
+                var calendars = await service.CalendarList.List().ExecuteAsync();
 
                 // add the new show to db
                 Show newShow = new Show
@@ -192,7 +193,7 @@ namespace Harmony
                 db.Shows.Add(newShow);
 
                 // create a new event to google calendar
-                /*if(calendars != null)
+                if (calendars != null)
                 {
                     Event newEvent = new Event()
                     {
@@ -214,9 +215,9 @@ namespace Harmony
                     };
                     var newEventRequest = service.Events.Insert(newEvent, calendars.Items.First().Id);
                     // This allow attendees to get email notification
-                    newEventRequest.SendNotifications = true; 
+                    newEventRequest.SendNotifications = true;
                     var eventResult = newEventRequest.ExecuteAsync();
-                }*/
+                }
                 await db.SaveChangesAsync();
                 return RedirectToAction("Welcome", "Home");
             }

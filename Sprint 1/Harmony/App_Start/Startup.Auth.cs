@@ -64,30 +64,47 @@ namespace Calendar.ASP.NET.MVC5
             //   consumerSecret: "");
 
 
-        /*var google = new GoogleOAuth2AuthenticationOptions()
-        {
-            AccessType = "offline",     // Request a refresh token.
-            ClientId = MyClientSecrets.ClientId,
-            ClientSecret = MyClientSecrets.ClientSecret,
-            Provider = new GoogleOAuth2AuthenticationProvider()
+            var google = new GoogleOAuth2AuthenticationOptions()
             {
-                OnAuthenticated = async context =>
+                AccessType = "offline",     // Request a refresh token.
+                ClientId = MyClientSecrets.ClientId,
+                ClientSecret = MyClientSecrets.ClientSecret,
+                Provider = new GoogleOAuth2AuthenticationProvider()
                 {
-                    var userId = context.Id;
-                    context.Identity.AddClaim(new Claim(MyClaimTypes.GoogleUserId, userId));
-                }
+                    OnAuthenticated = async context =>
+                    {
+                        var userId = context.Id;
+                        context.Identity.AddClaim(new Claim(MyClaimTypes.GoogleUserId, userId));
+
+                        var tokenResponse = new TokenResponse()
+                        {
+                            AccessToken = context.AccessToken,
+                            RefreshToken = context.RefreshToken,
+                            ExpiresInSeconds = (long)context.ExpiresIn.Value.TotalSeconds,
+                            Issued = DateTime.Now,
+                        };
+
+                        await dataStore.StoreAsync(userId, tokenResponse);
+                    },
+                },
+            };
+
+            foreach (var scope in MyRequestedScopes.Scopes)
+            {
+                google.Scope.Add(scope);
             }
 
-        app.UseGoogleAuthentication(google);*/
+            app.UseGoogleAuthentication(google);
+
             app.UseFacebookAuthentication(
                appId: "1076805802680549",
               appSecret: "eb1862210555dc08a0035bb9acda74be");
 
-            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            /*app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
                 ClientId = MyClientSecrets.ClientId,
                 ClientSecret = MyClientSecrets.ClientSecret
-            });
+            });*/
 
         }
     }
