@@ -237,10 +237,18 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="1.jpg" />
+    <Content Include="2.jpg" />
+    <Content Include="3.jpg" />
+    <Content Include="4.jpg" />
     <Content Include="App_Data\down.sql" />
     <Content Include="App_Data\seed.sql" />
     <Content Include="App_Data\test.sql" />
     <Content Include="App_Data\up.sql" />
+    <Content Include="Beatles.jpg" />
+    <Content Include="Corrs.jpg" />
+    <Content Include="Cranberries.jpg" />
+    <Content Include="Maroon5.jpg" />
     <Content Include="musicbk.jpg" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -251,6 +259,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="SavageGarden.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
