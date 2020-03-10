@@ -63,7 +63,6 @@
                 <img src="~/singer.jpg" id="musicianprofilepic" />
             </div>
         </div>
-
         <!------------------------------- HELPERS FOR FORMATTING EVENTS -------------------------------->
         @*helper FormatEventTime(CalendarData.EventDateTime when)
                 {
@@ -120,6 +119,10 @@
                     }
                 </table>
             </div>*@
+    <div class="col-md-4">
+        <h5>Availability</h5>
+        @Html.ActionLink("View Schedule", "Schedule", "Calendar")
+    </div>
         <br />
     </div>
     <p>

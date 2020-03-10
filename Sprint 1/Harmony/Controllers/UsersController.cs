@@ -22,7 +22,7 @@ using Calendar.ASP.NET.MVC5.Models;
 using System.IO;
 using Google.GData.Extensions;
 
-namespace Calendar.ASP.NET.MVC5
+namespace Harmony
 {
 
     public class UsersController : Controller
@@ -66,7 +66,7 @@ namespace Calendar.ASP.NET.MVC5
          *          MUSICIAN PROFILE
          *  *************************************/
         // GET: Users/Details/5
-        public async Task<ActionResult> MusicianDetails(int? id)
+        public ActionResult MusicianDetails(int? id)
         {
             // No user id passed through
             if (id == null)
