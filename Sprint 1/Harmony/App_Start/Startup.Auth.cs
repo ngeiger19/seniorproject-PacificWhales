@@ -63,66 +63,16 @@ namespace Calendar.ASP.NET.MVC5
             //   consumerKey: "",
             //   consumerSecret: "");
 
-<<<<<<< HEAD
-            app.UseFacebookAuthentication(
-               appId: "1076805802680549",
-              appSecret: "eb1862210555dc08a0035bb9acda74be");
-
-           /* var google = new GoogleOAuth2AuthenticationOptions()
-        {
-            AccessType = "offline",     // Request a refresh token.
-            ClientId = MyClientSecrets.ClientId,
-            ClientSecret = MyClientSecrets.ClientSecret,
-            Provider = new GoogleOAuth2AuthenticationProvider()
-            {
-                OnAuthenticated = async context =>
-                {
-                    var userId = context.Id;
-                    context.Identity.AddClaim(new Claim(MyClaimTypes.GoogleUserId, userId));
-=======
 
             app.UseFacebookAuthentication(
                appId: "1076805802680549",
               appSecret: "eb1862210555dc08a0035bb9acda74be");
->>>>>>> dev0.2
-
-
-<<<<<<< HEAD
-                    await dataStore.StoreAsync(userId, tokenResponse);
-
-                },
-            }
-        };
-=======
-       facebookaccount
-             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-             {
-               ClientId = "694725937442-cicpvbv4628snad2aclnaomdgktidgv1.apps.googleusercontent.com",
-              ClientSecret = "bBcKmxuHqdZLQKRkvIsIGDRr"
-             });
->>>>>>> dev0.2
-
-       // app.UseGoogleAuthentication(google);
-
-<<<<<<< HEAD
-        app.UseGoogleAuthentication(google);*/
-
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
                ClientId = "694725937442-1r0g83v5509s0eso7qlkuegne5ql5rfm.apps.googleusercontent.com",
                 ClientSecret = "pNKTuI946E9jhHXtQhexusvL"
-               //ClientId = MyClientSecrets.ClientId,
-               //ClientSecret = MyClientSecrets.ClientSecret
             });
-=======
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            ///{
-               // ClientId = "950853341755-3jan389eiotnc059dor7ljh0npk3hlj5.apps.googleusercontent.com",
-               // ClientSecret = "5EZ4QcCOQjQbfOCFfn7h14n1"
-           // });
-
->>>>>>> dev0.2
-
+            
         }
     }
 }
