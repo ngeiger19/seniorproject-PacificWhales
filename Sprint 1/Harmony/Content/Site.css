@@ -1,6 +1,11 @@
 ﻿body, html {
     /*padding-top: 50px;
     padding-bottom: 20px;*/
+    background-image: url(../musicbk.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    opacity: 0.85;
     height: 100%;
 }
 
@@ -63,8 +68,9 @@ textarea {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    margin:0;
-    padding:0;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
 }
 
 .black-font{
@@ -75,6 +81,7 @@ textarea {
     background-image: url(../musicbk.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     opacity: 0.85;
     height: 100%;
 }
@@ -129,4 +136,7 @@ nav {
     padding: 10px;
     background-color: lightgoldenrodyellow;
     background-clip: content-box;
+}
+#video2 {
+    margin: 30px 300px 0px 300px;
 }

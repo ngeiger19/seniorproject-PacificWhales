@@ -62,8 +62,10 @@ namespace Calendar.ASP.NET.MVC5
             //app.UseTwitterAuthentication(
             //   consumerKey: "",
             //   consumerSecret: "");
-
-
+            app.UseFacebookAuthentication(
+               appId: "1076805802680549",
+              appSecret: "eb1862210555dc08a0035bb9acda74be");
+            
             var google = new GoogleOAuth2AuthenticationOptions()
             {
                 AccessType = "offline",     // Request a refresh token.
@@ -95,10 +97,6 @@ namespace Calendar.ASP.NET.MVC5
             }
 
             app.UseGoogleAuthentication(google);
-
-            app.UseFacebookAuthentication(
-               appId: "1076805802680549",
-              appSecret: "eb1862210555dc08a0035bb9acda74be");
 
             /*app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
