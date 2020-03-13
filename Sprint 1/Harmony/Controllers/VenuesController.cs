@@ -45,7 +45,6 @@ namespace Calendar.ASP.NET.MVC5
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Venue venue = db.Venues.Find(id);
-            VenueOwnerDetailViewModel viewmodel = new VenueOwnerDetailViewModel(venue);
             // If user doesn't exisit
             if (venue == null)
             {
@@ -54,7 +53,7 @@ namespace Calendar.ASP.NET.MVC5
 
             VenueOwnerDetailViewModel viewModel = new VenueOwnerDetailViewModel(venue);
 
-            return View(venue);
+            return View(viewModel);
         }
 
         // GET: Venues/Create
