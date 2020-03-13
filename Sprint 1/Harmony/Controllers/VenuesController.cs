@@ -54,7 +54,7 @@ namespace Calendar.ASP.NET.MVC5
 
             VenueOwnerDetailViewModel viewModel = new VenueOwnerDetailViewModel(venue);
 
-            return View(venue);
+            return View(viewModel);
         }
 
         // GET: Venues/Create

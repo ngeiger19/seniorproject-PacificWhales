@@ -488,14 +488,14 @@ namespace Harmony.Controllers
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        /*await this.UserManager.AddToRoleAsync(user.Id, model.Role);
-                        StreamReader sr = new StreamReader(Server.MapPath("~/Content/states_hash.json"));
+                        await this.UserManager.AddToRoleAsync(user.Id, model.Role);
+                        /*StreamReader sr = new StreamReader(Server.MapPath("~/Content/states_hash.json"));
                         string data = sr.ReadToEnd();
                         JArray arr = JArray.Parse(data);
                         for (int i = 0; i < arr.Count(); i++)
                         {
                             model.stateList.Add(new SelectListItem { Text = (string)arr[i]["name"], Value = (string)arr[i]["name"] });
-                        }
+                        }*/
                         User HarmonyUser = new User
                         {
                             FirstName = model.FirstName,
@@ -570,7 +570,7 @@ namespace Harmony.Controllers
                             }
 
                         }
-                        await db.SaveChangesAsync();*/
+                        await db.SaveChangesAsync();
                         return RedirectToLocal(returnUrl);
                     }
                 }

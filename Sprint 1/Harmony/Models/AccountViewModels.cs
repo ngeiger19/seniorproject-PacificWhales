@@ -11,7 +11,7 @@ namespace Harmony.Models
         public string Email { get; set; }
 
         // User general info
-        /*[Required]
+        [Required]
         [StringLength(50)]
         [Display(Name = "FirstName")]
         public string FirstName { get; set; }
@@ -74,7 +74,7 @@ namespace Harmony.Models
         [Display(Name = "Instruments")]
         public string InstrumentName { get; set; }
 
-        public List<SelectListItem> stateList { get; set; }*/
+        /*public List<SelectListItem> stateList { get; set; }*/
     }
 
     public class ExternalLoginListViewModel
