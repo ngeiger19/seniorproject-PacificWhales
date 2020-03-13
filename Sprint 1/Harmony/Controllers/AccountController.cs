@@ -668,7 +668,7 @@ namespace Harmony.Controllers
             {
                 LoginProvider = provider;
                 RedirectUri = redirectUri;
-                UserId = userId;
+                UserId = userId; 
             }
 
             public string LoginProvider { get; set; }
