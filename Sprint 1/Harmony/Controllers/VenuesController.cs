@@ -8,13 +8,24 @@ using System.Web;
 using System.Web.Mvc;
 using Harmony.DAL;
 using Harmony.Models;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Auth.OAuth2.Flows;
+using Google.Apis.Auth.OAuth2.Responses;
+using Google.Apis.Calendar.v3;
+using Google.Apis.Services;
+using Google.Apis.Util.Store;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
+using Calendar.ASP.NET.MVC5.Models;
+using System.Threading.Tasks;
 
-namespace Harmony.Controllers
+namespace Calendar.ASP.NET.MVC5
 {
     public class VenuesController : Controller
     {
         private HarmonyContext db = new HarmonyContext();
 
+        
         // GET: Venues
         public ActionResult Index()
         {
@@ -22,19 +33,28 @@ namespace Harmony.Controllers
             return View(venues.ToList());
         }
 
+        /************************************
+         *           VENUE PROFILE
+         * *********************************/
         // GET: Venues/Details/5
         public ActionResult Details(int? id)
         {
+            // If no user is passed through
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Venue venue = db.Venues.Find(id);
+            VenueOwnerDetailViewModel viewmodel = new VenueOwnerDetailViewModel(venue);
+            // If user doesn't exisit
             if (venue == null)
             {
                 return HttpNotFound();
             }
-            return View(venue);
+
+            VenueOwnerDetailViewModel viewModel = new VenueOwnerDetailViewModel(venue);
+
+            return View(viewModel);
         }
 
         // GET: Venues/Create

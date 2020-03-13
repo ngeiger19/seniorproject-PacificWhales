@@ -6,16 +6,27 @@ namespace Harmony.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Musician_Genre
+    public partial class User_Show
     {
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int UserID { get; set; }
+        public int MusicianID { get; set; }
 
         [Key]
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int GenreID { get; set; }
+        public int VenueOwnerID { get; set; }
+
+        [Key]
+        [Column(Order = 2)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int ShowID { get; set; }
+
+        public virtual Show Show { get; set; }
+
+        public virtual User User { get; set; }
+
+        public virtual User User1 { get; set; }
     }
 }

@@ -11,7 +11,7 @@
     <script src="~/Scripts/popper.min.js"></script>
 </head>
 <body>
-    <div id="bi">
+    <div>
         <nav class="navbar navbar-expand-lg">
             <a class="navbar-brand" href="~/Home/Index">Harmony</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,7 +24,7 @@
                         <a class="nav-link" href="#" style="font-size:larger">Post Events <span class="sr-only"></span></a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="~/BandMembers/" style="font-size:larger">Musician Profile <span class="sr-only"></span></a>
+                        <a class="nav-link" href="~/Users/MusicianIndex" style="font-size:larger">Musician Profile <span class="sr-only"></span></a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="~/Venues/" style="font-size:larger">Venue Profile <span class="sr-only"></span></a>
@@ -44,12 +44,9 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Harmony</p>
+            <p style="color:floralwhite">&copy; @DateTime.Now.Year - Harmony</p>
         </footer>
     </div>
-
-
-
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

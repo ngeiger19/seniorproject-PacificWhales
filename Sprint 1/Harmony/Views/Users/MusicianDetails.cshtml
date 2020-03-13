@@ -1,0 +1,255 @@
+﻿@model Harmony.Models.MusicianDetailViewModel
+@using CalendarData = Google.Apis.Calendar.v3.Data;
+@{
+    ViewBag.Title = "Details";
+}
+<style>
+    #video3 {
+        margin: 30px 200px 0px 200px;
+    }
+</style>
+<hr />
+
+<div class="container black-font">
+    <h4 style="color:seashell;font-family: Broadway; font-size: 30px">Musician Profile Page</h4>
+    <hr />
+    <div class="row" id="musicianprofile">
+        <div class="col-md-4">
+            @{
+                //if (User.IsInRole("VenueOwner"))
+                //{
+                <button class="btn btn-outline-light my-2 my-sm-0" data-toggle="modal" data-target="#event-modal">Book This Musician!</button>
+                //}
+            }
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FirstName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.LastName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.City)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.City)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.State)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.State)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-8">
+            <h4><strong>Profile Picture</strong></h4>
+            <div>
+                <img src="~/singer.jpg" id="musicianprofilepic" />
+            </div>
+        </div>
+        <!------------------------------- HELPERS FOR FORMATTING EVENTS -------------------------------->
+        @helper FormatEventTime(CalendarData.EventDateTime when)
+        {
+            // Either Date or DateTime is set, depending on whether or not the event is
+            // an all-day event.
+            if (when.DateTime == null)
+            {
+                <text>All day</text>
+            }
+            else
+            {
+                @:@when.DateTime.Value.ToShortTimeString()
+            }
+        }
+        @helper FormatEventLength(CalendarData.EventDateTime start, CalendarData.EventDateTime end)
+        {
+            var duration = end.DateTime - start.DateTime;
+            if (duration == null)
+            {
+                <text>All day</text>
+            }
+            else
+            {
+                @:@string.Format(
+              "{0} hour{1} {2} minute{3}",
+              (int)duration.Value.TotalHours,
+              duration.Value.TotalHours >= 2 ? "s" : "",
+              (int)duration.Value.Minutes,
+              duration.Value.Minutes >= 2 ? "s" : "")
+            }
+        }
+
+        <div class="col-md-4">
+            <h5>Availability</h5>
+            <table>
+                <tr>
+                    <th>Event</th>
+                    <th>Date</th>
+                    <th>Duration</th>
+                </tr>
+
+                <!-------------------------- DISPLAYING EVENTS ----------------------->
+                @foreach (var group in Model.UpcomingEvents)
+                {
+                    foreach (var evt in group.Events)
+                    {
+                        <tr>
+                            <td>@evt.Summary</td>
+                            <td>@FormatEventTime(evt.Start)</td>
+                            <td>@FormatEventLength(evt.Start, evt.End)</td>
+                        </tr>
+                    }
+
+                }
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src="~/4.jpg" alt="First slide" style="max-width: 700px;">
+                        <div class="carousel-caption">
+                            <h3>Musicains</h3>
+                            <p>We Love Music!</p>
+                        </div>
+
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="~/2.jpg" alt="Second slide" style="max-width: 700px;">
+                        <div class="carousel-caption">
+                            <h3>Venues</h3>
+                            <p>Thank you, Musicians!</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="~/3.jpg" alt="Third slide" style="max-width: 700px;">
+                        <div class="carousel-caption">
+                            <h3>Music</h3>
+                            <p>Bring you Magic!</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src="~/1.jpg" alt="Forth slide" style="max-width: 700px;">
+                        <div class="carousel-caption">
+                            <h3>Band</h3>
+                            <p>Music, We only live Once!</p>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <br />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6"></div>
+            <div id="video3" class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <br />
+    </div>
+    <div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+            @Html.ActionLink("Back to List", "MusicianIndex")
+        </p>
+    </div>
+</div>
+
+<div class="modal fade" id="event-modal" tabindex="-1" role="dialog" aria-labelledby="event-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="event-modal-label">Create an event</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm("CreateShow", "Users", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                <div class="modal-body">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.DateTime, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-12">
+                            @Html.TextBoxFor(m => m.DateTime, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.DateTime, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.VenueID, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-12">
+                            @Html.DropDownListFor(m => m.VenueID, new List<SelectListItem>() { new SelectListItem { Text = "Staples Center", Value = "1" } }, "---Select---", htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ShowDescription, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-12">
+                            @Html.TextAreaFor(m => m.ShowDescription, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.ShowDescription, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script>
+    $('#event-modal').appendTo("body")
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

@@ -201,7 +201,7 @@ CREATE TABLE [dbo].[Genres]
 );
 
 -- #######################################
--- #    BandMember_Instrument Table      #
+-- #        Musician_Genre Table         #
 -- #######################################
 
 CREATE TABLE [dbo].[Musician_Genre]
@@ -242,3 +242,36 @@ CREATE TABLE [dbo].[Videos]
 	CONSTRAINT [PK_dbo.Videos] PRIMARY KEY CLUSTERED ([ID] ASC),
 	CONSTRAINT [FK_dbo.Videos_dbo.Users_ID] FOREIGN KEY ([UserID]) REFERENCES [dbo].[Users] ([ID])
 );
+
+-----------------FOR SHOWS-------------------------------
+
+-- #######################################
+-- #            Shows Table              #
+-- #######################################
+
+CREATE TABLE [dbo].[Shows]
+(
+	[ID]		INT IDENTITY (1,1)	NOT NULL,
+	[Date]		DateTime		NULL,
+	[VenueID]		INT		NULL,
+	[Description]		NVARCHAR(500)		NULL,
+	[DateBooked]	DateTime		NOT NULL,
+	CONSTRAINT [PK_dbo.Shows] PRIMARY KEY CLUSTERED ([ID] ASC),
+	CONSTRAINT [FK_dbo.Shows_dbo.Venues_ID] FOREIGN KEY ([VenueID]) REFERENCES [dbo].[Venues] ([ID])
+);
+
+-- #######################################
+-- #           User_Show Table           #
+-- #######################################
+
+CREATE TABLE [dbo].[User_Show]
+(
+	[MusicianID]		INT 	NOT NULL,
+	[VenueOwnerID]		INT		NOT NULL,
+	[ShowID]		INT		NOT NULL,
+	CONSTRAINT [PK_dbo.User_Show] PRIMARY KEY CLUSTERED ([MusicianID], [VenueOwnerID], [ShowID] ASC),
+	CONSTRAINT [FK_dbo.User_Show_dbo.Musicians_ID] FOREIGN KEY ([MusicianID]) REFERENCES [dbo].[Users] ([ID]),
+	CONSTRAINT [FK_dbo.User_Show_dbo.VenueOwners_ID] FOREIGN KEY ([VenueOwnerID]) REFERENCES [dbo].[Users] ([ID]),
+	CONSTRAINT [FK_dbo.User_Show_dbo.Shows_ID] FOREIGN KEY ([ShowID]) REFERENCES [dbo].[Shows] ([ID])
+);
+

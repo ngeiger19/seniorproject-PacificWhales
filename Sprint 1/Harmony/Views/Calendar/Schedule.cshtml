@@ -1,0 +1,63 @@
+﻿@model Calendar.ASP.NET.MVC5.Models.UpcomingEventsViewModel
+@using CalendarData = Google.Apis.Calendar.v3.Data;
+
+<div class="container">
+
+
+    <!------------------------------- HELPERS FOR FORMATTING EVENTS -------------------------------->
+    @helper FormatEventTime(CalendarData.EventDateTime when)
+    {
+        // Either Date or DateTime is set, depending on whether or not the event is
+        // an all-day event.
+        if (when.DateTime == null)
+        {
+            <text>All day</text>
+        }
+        else
+        {
+            @:@when.DateTime.Value.ToShortTimeString()
+        }
+    }
+    @helper FormatEventLength(CalendarData.EventDateTime start, CalendarData.EventDateTime end)
+    {
+        var duration = end.DateTime - start.DateTime;
+        if (duration == null)
+        {
+            <text>All day</text>
+        }
+        else
+        {
+            @:@string.Format(
+            "{0} hour{1} {2} minute{3}",
+            (int)duration.Value.TotalHours,
+            duration.Value.TotalHours >= 2 ? "s" : "",
+            (int)duration.Value.Minutes,
+            duration.Value.Minutes >= 2 ? "s" : "")
+        }
+    }
+
+    <div class="col-md-4">
+        <h5>Availability</h5>
+        <table>
+            <tr>
+                <th>Event</th>
+                <th>Date</th>
+                <th>Duration</th>
+            </tr>
+
+            <!----------------------- DISPLAYING EVENTS ------------------------>
+            @foreach (var group in Model.EventGroups)
+            {
+                foreach (var evt in group.Events)
+                {
+                    <tr>
+                        <td>@evt.Summary</td>
+                        <td>@FormatEventTime(evt.Start)</td>
+                        <td>@FormatEventLength(evt.Start, evt.End)</td>
+                    </tr>
+                }
+
+            }
+        </table>
+    </div>
+</div>

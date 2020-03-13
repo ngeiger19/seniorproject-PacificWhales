@@ -18,7 +18,23 @@ DROP TABLE [dbo].[AspNetRoles]
 
 DROP TABLE [dbo].[AspNetUserClaims]
 
-DROP TABLE [dbo].[AspNetUserLogins]
+DROP TABLE [dbo].[AspNetUserLogins] */
+
+-- #######################################
+-- #    Drop All Users/Profile Tables    #
+-- #######################################
+
+ALTER TABLE [dbo].[User_Show]  DROP CONSTRAINT [FK_dbo.User_Show_dbo.Musicians_Id] 
+
+ALTER TABLE [dbo].[User_Show]  DROP CONSTRAINT [FK_dbo.User_Show_dbo.VenueOwners_Id] 
+
+ALTER TABLE [dbo].[User_Show]  DROP CONSTRAINT [FK_dbo.User_Show_dbo.Shows_Id]
+
+ALTER TABLE [dbo].[Shows]  DROP CONSTRAINT [FK_dbo.Shows_dbo.Venues_Id]
+
+DROP TABLE [dbo].[User_Show]
+
+DROP TABLE [dbo].[Shows] 
 
 -- #######################################
 -- #    Drop All Users/Profile Tables    #

@@ -1,94 +1,244 @@
-﻿@model Harmony.Models.Venue
-
+﻿@model Harmony.Models.VenueOwnerDetailViewModel
+@using CalendarData = Google.Apis.Calendar.v3.Data;
 @{
     ViewBag.Title = "Details";
 }
+<style>
+    #video4 {
+        margin: 30px 300px 0px 200px;
+    }
+</style>
 
+<div class="row">
+    <div class="col-lg-3"></div>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
 
-
-    <div class="container black-font">
-        <h4 style="color:seashell">Venue Owner Profile</h4>
-        <hr />
-        <div class="row" id="venueprofile">
-            <div class="col-md-4">
-                <dl class="dl-horizontal">
-                    <dt >
-                        @Html.DisplayNameFor(model => model.User.FirstName)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.User.FirstName)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.VenueType.TypeName)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.VenueType.TypeName)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.VenueName)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.VenueName)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.AddressLine1)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.AddressLine1)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.AddressLine2)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.AddressLine2)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.City)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.City)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.State)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.State)
-                    </dd>
-
-                    <dt>
-                        @Html.DisplayNameFor(model => model.ZipCode)
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.ZipCode)
-                    </dd>
-
-                </dl>
-            </div>
-            <div class="col-md-8">
-                <h4><strong>Profile Picture</strong></h4>
-                <div>
-                    <img src="~/venue.jpg" id="venuepic" />
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="~/1.jpg" alt="First slide" style="max-width: 750px;">
+                <div class="carousel-caption">
+                    <h3>Musicains</h3>
+                    <p>We Love Music!</p>
                 </div>
 
 
             </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="~/3.jpg" alt="Second slide" style="max-width: 750px;">
+                <div class="carousel-caption">
+                    <h3>Venues</h3>
+                    <p>Thank you, Musicians!</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="~/2.jpg" alt="Third slide" style="max-width: 750px;">
+                <div class="carousel-caption">
+                    <h3>Music</h3>
+                    <p>Bring you Magic!</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="~/4.jpg" alt="Forth slide" style="max-width: 750px;">
+                <div class="carousel-caption">
+                    <h3>Band</h3>
+                    <p>Music, We only live Once!</p>
+                </div>
+            </div>
         </div>
-        </br>
-        <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-            @Html.ActionLink("Back to List", "Index")
-        </p>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <br />
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6"></div>
+    <div id="video4" class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<hr />
+<div class="container black-font">
+    <h4 style="color:seashell;font-family: Broadway; font-size: 30px">Venue Owner Profile</h4>
+
+    <hr />
+    <div class="row" id="venueprofile">
+        <div class="col-md-4">
+            <dl class="dl-horizontal">
+                <dt>
+
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FirstName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TypeName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TypeName)
+
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.VenueName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.VenueName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.AddressLine1)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AddressLine1)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.AddressLine2)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AddressLine2)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.City)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.City)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.State)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.State)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ZipCode)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ZipCode)
+                </dd>
+
+            </dl>
+        </div>
+        <div class="col-md-8">
+            <h4><strong>Profile Picture</strong></h4>
+            <div>
+                <img src="~/venue.jpg" id="venuepic" />
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    </br>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
+
+</div>
+
+<div class="jumbotron">
+    <h5 style="color:sandybrown;font-family: Broadway; font-size: 36px">Availability</h5>
+    @Html.ActionLink("View Schedule", "Schedule", "Calendar")
+</div>
+<div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>
+<div class="row">
+    <div class="col-lg-3"></div>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="~/2.jpg" alt="First slide" style="max-width: 750px;">
+                <div class="carousel-caption">
+                    <h3>Musicains</h3>
+                    <p>We Love Music!</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="~/3.jpg" alt="Second slide" style="max-width: 750px;">
+                <div class="carousel-caption">
+                    <h3>Venues</h3>
+                    <p>Thank you, Musicians!</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="~/1.jpg" alt="Third slide" style="max-width: 750px;">
+                <div class="carousel-caption">
+                    <h3>Music</h3>
+                    <p>Bring you Magic!</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="~/4.jpg" alt="Forth slide" style="max-width: 750px;">
+                <div class="carousel-caption">
+                    <h3>Band</h3>
+                    <p>Music, We only live Once!</p>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <br />
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6"></div>
+    <div id="video4" class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+

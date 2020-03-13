@@ -5,11 +5,12 @@ using Owin;
 using Harmony.Models;
 using System.Diagnostics;
 
-[assembly: OwinStartupAttribute(typeof(Harmony.Startup))]
-namespace Harmony
+[assembly: OwinStartupAttribute(typeof(Calendar.ASP.NET.MVC5.Startup))]
+namespace Calendar.ASP.NET.MVC5
 {
     public partial class Startup
     {
+        [System.Obsolete]
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
@@ -23,8 +24,6 @@ namespace Harmony
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-
-            // Create a venue owner role   
             if (!roleManager.RoleExists("VenueOwner"))
             {                
                 var role = new IdentityRole();
@@ -50,7 +49,6 @@ namespace Harmony
                 role.Name = "Musician";
                 roleManager.Create(role);
             }
-
         }
     }
 }

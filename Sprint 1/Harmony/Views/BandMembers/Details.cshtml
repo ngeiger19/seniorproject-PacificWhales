@@ -3,76 +3,89 @@
 @{
     ViewBag.Title = "Details";
 }
+   
+<div class="container black-font">
+<<<<<<< HEAD
+    <h4 style="color:seashell;font-family: Broadway; font-size: 30px">Musician Profile Page</h4>
+=======
 
+    <h4 style="color:seashell;font-family: Broadway; font-size: 30px">Musician Profile Page</h4>
 
+    
+>>>>>>> 37bb5fb4f78c74a7e82e99bfa5c4634721fc6a9e
+    <hr />
+    <div class="row" id="musicianprofile">
+        <div class="col-md-4">
+            <dl class="dl-horizontal">
+<<<<<<< HEAD
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </dt>
 
-    <div class="container black-font">
-        <h4 style="color:seashell">Musician Profile Page</h4>
-        <hr />
-        <div class="row" id="musicianprofile">
-            <div class="col-md-4">
-                <dl class="dl-horizontal">
-                    <dl class="dl-horizontal">
+                    <dd>
+                        @Html.DisplayFor(model => model.FirstName)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.LastName)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.City)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.City)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.State)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.State)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Email)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Description)
+                    </dd>
+                    @foreach (var m in Model.BandMembers.ToList())
+                    {
                         <dt>
-                            @Html.DisplayNameFor(model => model.FirstName)
+                            @Html.DisplayNameFor(m => m.BandMembers)
                         </dt>
+                        <dd>
+                            @Html.DisplayFor(m => m.BandMembers)
+                        </dd>
+                    }
 
-                        <dd>
-                            @Html.DisplayFor(model => model.FirstName)
-                        </dd>
-                        <dt>
-                            @Html.DisplayNameFor(model => model.LastName)
-                        </dt>
+                </dl>
+=======
 
-                        <dd>
-                            @Html.DisplayFor(model => model.LastName)
-                        </dd>
-                        <dt>
-                            @Html.DisplayNameFor(model => model.City)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(model => model.City)
-                        </dd>
-                        <dt>
-                            @Html.DisplayNameFor(model => model.State)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.State)
-                        </dd>
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Email)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(model => model.Email)
-                        </dd>
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Description)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(model => model.Description)
-                        </dd>
-                        @foreach (var m in Model.BandMembers.ToList())
-                        {
-                            <dt>
-                                @Html.DisplayNameFor(m => m.BandMembers)
-                            </dt>
-                            <dd>
-                                @Html.DisplayFor(m => m.)
-                            </dd>
-                        }
-
-
-                    </dl>
+>>>>>>> 37bb5fb4f78c74a7e82e99bfa5c4634721fc6a9e
+        </div>
+        <div class="col-md-8">
+            <h4><strong>Profile Picture</strong></h4>
+            <div>
+                <img src="~/singer.jpg" id="musicianprofilepic" />
             </div>
-            <div class="col-md-8">
-                <h4><strong>Profile Picture</strong></h4>
-                <div>
-                    <img src="~/singer.jpg" id="musicianprofilepic" />
-                </div>
-            </div>
-        </br>
-        <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-            @Html.ActionLink("Back to List", "Index")
-        </p>
+        </div>
+<<<<<<< HEAD
+        <br/>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>
+=======
+
+>>>>>>> 37bb5fb4f78c74a7e82e99bfa5c4634721fc6a9e
