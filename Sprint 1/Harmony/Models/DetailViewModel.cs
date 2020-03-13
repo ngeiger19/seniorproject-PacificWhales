@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using Harmony.Models;
 using Calendar.ASP.NET.MVC5.Models;
+using System.Web.Mvc;
 
 namespace Harmony.Models
 {
@@ -81,6 +82,7 @@ namespace Harmony.Models
 
     public class MusicianDetailViewModel
     {
+        public MusicianDetailViewModel() { }
         public MusicianDetailViewModel(User user)
         {
             ID = user.ID;
@@ -114,6 +116,21 @@ namespace Harmony.Models
 
         public List<string> Instruments { get; set; }
 
+        // This section is for the calendar event form
+
+        public int ShowID { get; set; }
+
+        [DataType(DataType.DateTime)]
+        [Display(Name = "DateTime")]
+        public DateTime DateTime { get; set; }
+
+        [Display(Name = "VenueName")]
+        public int VenueID { get; set; }
+
+        public string ShowDescription { get; set; }
+
+        public DateTime DateBooked { get; set; }
+        public List<SelectListItem> VenueList { get; set; }
         public IEnumerable<CalendarEventGroup> UpcomingEvents { get; set; }
     }
 }
