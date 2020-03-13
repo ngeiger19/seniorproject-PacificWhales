@@ -1,16 +1,3 @@
-﻿/*
-Copyright 2015 Google Inc
-Licensed under the Apache License, Version 2.0(the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-    http://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +7,6 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
-
 using Calendar.ASP.NET.MVC5.Models;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Auth.OAuth2.Flows;
@@ -63,12 +49,13 @@ namespace Calendar.ASP.NET.MVC5.Controllers
         // GET: /Calendar/UpcomingEvents
         public async Task<ActionResult> Schedule()
         {
+            // Get user's calendar credentials
             const int MaxEventsPerCalendar = 20;
-            const int MaxEventsOverall = 50;
-
-            var model = new UpcomingEventsViewModel();
+            const int MaxEventsOverall = 40;
 
             var credential = await GetCredentialForApiAsync();
+
+            UpcomingEventsViewModel viewModel = new UpcomingEventsViewModel();
 
             var initializer = new BaseClientService.Initializer()
             {
@@ -107,18 +94,23 @@ namespace Calendar.ASP.NET.MVC5.Controllers
                                orderby g.Key
                                select g;
 
+            // Days in the next week
+            int thisWeek = DateTime.Now.DayOfYear + 7;
             var eventGroups = new List<CalendarEventGroup>();
             foreach (var grouping in eventsByDate)
             {
-                eventGroups.Add(new CalendarEventGroup
+                // Adding event to model if they are scheduled for the next week
+                if (grouping.Key.DayOfYear <= thisWeek)
                 {
-                    GroupTitle = grouping.Key.ToLongDateString(),
-                    Events = grouping,
-                });
+                    eventGroups.Add(new CalendarEventGroup
+                    {
+                        GroupTitle = grouping.Key.ToLongDateString(),
+                        Events = grouping,
+                    });
+                }
             }
-
-            model.EventGroups = eventGroups;
-            return View(model);
+            viewModel.EventGroups = eventGroups;
+            return View(viewModel);
         }
     }
 }

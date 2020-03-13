@@ -24,6 +24,22 @@ DROP TABLE [dbo].[AspNetUserLogins]
 -- #    Drop All Users/Profile Tables    #
 -- #######################################
 
+ALTER TABLE [dbo].[User_Show]  DROP CONSTRAINT [FK_dbo.User_Show_dbo.Musicians_Id] 
+
+ALTER TABLE [dbo].[User_Show]  DROP CONSTRAINT [FK_dbo.User_Show_dbo.VenueOwners_Id] 
+
+ALTER TABLE [dbo].[User_Show]  DROP CONSTRAINT [FK_dbo.User_Show_dbo.Shows_Id]
+
+ALTER TABLE [dbo].[Shows]  DROP CONSTRAINT [FK_dbo.Shows_dbo.Venues_Id]
+
+DROP TABLE [dbo].[User_Show]
+
+DROP TABLE [dbo].[Shows]
+
+-- #######################################
+-- #    Drop All Users/Profile Tables    #
+-- #######################################
+
 ALTER TABLE [dbo].[Videos]  DROP CONSTRAINT [FK_dbo.Videos_dbo.Users_ID]
 
 ALTER TABLE [dbo].[Photos]  DROP CONSTRAINT [FK_dbo.Photos_dbo.Users_ID]

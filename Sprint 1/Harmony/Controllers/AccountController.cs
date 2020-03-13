@@ -172,8 +172,8 @@ namespace Harmony.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.FirstName + " " + model.LastName, Email = model.Email};
-              //  var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+              //  var user = new ApplicationUser { UserName = model.FirstName + " " + model.LastName, Email = model.Email};
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -235,7 +235,7 @@ namespace Harmony.Controllers
                                 GenreName = genreList[i]
                             });
                             db.Genres.Add(genres[i]);
-                            db.Musician_Genre.Add(new Musician_Genre { UserID = HarmonyUser.ID, GenreID = genres[i].ID });
+                            HarmonyUser.Genres.Add(genres[i]);
                         }
                         for (int i = 0; i < instrumentList.Count(); i++)
                         {
@@ -252,8 +252,10 @@ namespace Harmony.Controllers
                                 BandMemberName = bandmemberList[i],
                                 UserID = HarmonyUser.ID
                             });
+                            bandmembers[i].Instruments.Add(instruments[i]);
                             db.BandMembers.Add(bandmembers[i]);
-                            db.BandMember_Instrument.Add(new BandMember_Instrument { BandMemberID = bandmembers[i].ID, InstrumentID = instruments[i].ID });
+
+                           // db.BandMember_Instrument.Add(new BandMember_Instrument { BandMemberID = bandmembers[i].ID, InstrumentID = instruments[i].ID });     
                         }
 
                     }

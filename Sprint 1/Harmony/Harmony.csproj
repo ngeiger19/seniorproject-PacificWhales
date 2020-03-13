@@ -50,42 +50,35 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Google.Apis, Version=1.44.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>packages\Google.Apis.1.44.0\lib\net45\Google.Apis.dll</HintPath>
+    <Reference Include="Google.Apis, Version=1.44.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.1.44.1\lib\net45\Google.Apis.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.Auth, Version=1.44.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>packages\Google.Apis.Auth.1.44.0\lib\net45\Google.Apis.Auth.dll</HintPath>
+    <Reference Include="Google.Apis.Auth, Version=1.44.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Auth.1.44.1\lib\net45\Google.Apis.Auth.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.Auth.Mvc, Version=1.44.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>packages\Google.Apis.Auth.Mvc.1.44.0\lib\net45\Google.Apis.Auth.Mvc.dll</HintPath>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.44.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Auth.1.44.1\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.44.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>packages\Google.Apis.Auth.1.44.0\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
+    <Reference Include="Google.Apis.Calendar.v3, Version=1.44.1.1886, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Calendar.v3.1.44.1.1886\lib\net45\Google.Apis.Calendar.v3.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.Calendar.v3, Version=1.44.0.1872, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>packages\Google.Apis.Calendar.v3.1.44.0.1872\lib\net45\Google.Apis.Calendar.v3.dll</HintPath>
+    <Reference Include="Google.Apis.Core, Version=1.44.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Core.1.44.1\lib\net45\Google.Apis.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.Core, Version=1.44.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>packages\Google.Apis.Core.1.44.0\lib\net45\Google.Apis.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Apis.PlatformServices, Version=1.44.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>packages\Google.Apis.1.44.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.44.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.1.44.1\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
     </Reference>
     <Reference Include="Google.GData.AccessControl, Version=2.2.0.0, Culture=neutral, PublicKeyToken=b4b8eb9a7afc8328, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Google.GData.AccessControl.DLL</HintPath>
+      <HintPath>packages\Google.GData.AccessControl.2.2.0.0\lib\Google.GData.AccessControl.dll</HintPath>
     </Reference>
     <Reference Include="Google.GData.Calendar, Version=2.2.0.0, Culture=neutral, PublicKeyToken=aa6748391206b888, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Google.GData.Calendar.dll</HintPath>
+      <HintPath>packages\Google.GData.Calendar.2.2.0.0\lib\Google.GData.Calendar.dll</HintPath>
     </Reference>
     <Reference Include="Google.GData.Client, Version=2.2.0.0, Culture=neutral, PublicKeyToken=04a59ca9b0273830, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Google.GData.Client.dll</HintPath>
+      <HintPath>packages\Google.GData.Client.2.2.0.0\lib\Google.GData.Client.dll</HintPath>
     </Reference>
     <Reference Include="Google.GData.Extensions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=0b4c5df2ebf20876, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Google.GData.Extensions.dll</HintPath>
+      <HintPath>packages\Google.GData.Extensions.2.2.0.0\lib\Google.GData.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -98,9 +91,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -110,9 +100,6 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -226,23 +213,23 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\VenuesController.cs" />
-    <Compile Include="DAL\HarmonyContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BandMember.cs" />
-    <Compile Include="Models\BandMember_Instrument.cs" />
     <Compile Include="Models\CalendarEventGroup.cs" />
     <Compile Include="Models\CalendarViewModels.cs" />
     <Compile Include="Models\DetailViewModel.cs" />
     <Compile Include="Models\Genre.cs" />
+    <Compile Include="DAL\HarmonyContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Instrument.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Musician_Genre.cs" />
     <Compile Include="Models\Photo.cs" />
+    <Compile Include="Models\Show.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\User_Show.cs" />
     <Compile Include="Models\Venue.cs" />
     <Compile Include="Models\VenueType.cs" />
     <Compile Include="Models\Video.cs" />
@@ -431,9 +418,9 @@
     <Content Include="Views\Venues\Index.cshtml" />
     <Content Include="Views\Users\Create.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
-    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\MusicianDetails.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
-    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\MusicianIndex.cshtml" />
     <Content Include="Views\BandMembers\Create.cshtml" />
     <Content Include="Views\BandMembers\Delete.cshtml" />
     <Content Include="Views\BandMembers\Details.cshtml" />

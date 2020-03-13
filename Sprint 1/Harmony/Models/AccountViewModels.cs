@@ -64,6 +64,12 @@ namespace Harmony.Models
 
     public class RegisterViewModel
     {
+        class Musician_Genre
+        {
+            int MusicianID { get; set; }
+            int GenreID { get; set; }
+        };
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
