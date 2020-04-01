@@ -42,8 +42,9 @@ namespace Harmony.Controllers
         }
 
 
+        // GET INFO FROM SEARCH PAGE
         [HttpGet]
-        public ActionResult Search()
+        public ActionResult Search(string searchOption)
         {
             string search = Request.QueryString["search"];
             
@@ -52,11 +53,23 @@ namespace Harmony.Controllers
             {
                 return View();
             }
-            
-            return RedirectToAction("VenueSearchResults", new { venueSearch = search });
-            
-        }
 
+            // search for musicians
+            if (searchOption == "option1")
+            {
+                return RedirectToAction("MusicianSearchResults", new { musicianSearch = search });
+            }
+            else
+            {
+
+                return RedirectToAction("VenueSearchResults", new { venueSearch = search });
+            }
+
+            return View();
+
+        }
+        
+        // VENUE SEARCH RESULTS
         public ActionResult VenueSearchResults(string venueSearch)
         {
             var venueQuery =
@@ -65,6 +78,17 @@ namespace Harmony.Controllers
                 select venue;
 
             return View(venueQuery);
+        }
+
+        // MUSICIAN SEARCH RESULTS
+        public ActionResult MusicianSearchResults(string musicianSearch)
+        {
+            var musicianQuery =
+                from musician in db.Users
+                where musician.FirstName.Contains(musicianSearch)
+                select musician;
+
+            return View(musicianQuery);
         }
     }
 }
