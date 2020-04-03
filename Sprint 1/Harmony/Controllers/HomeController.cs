@@ -59,7 +59,7 @@ namespace Harmony.Controllers
             {
                 return RedirectToAction("MusicianSearchResults", new { musicianSearch = search });
             }
-            else
+            else if (searchOption == "option2")
             {
 
                 return RedirectToAction("VenueSearchResults", new { venueSearch = search });
