@@ -8,15 +8,18 @@
                 <tr>
                     <th>Name</th>
                     <th>Location</th>
+                    <tth>Email</tth>
                     <th></th>
                 </tr>
                 @foreach (var user in Model)
                 {
-                    <tr>
-                        <td>@Html.DisplayFor(x => user.FirstName) @Html.DisplayFor(x  => user.LastName)</td>
-                        <td>@Html.DisplayFor(x => user.City) @Html.DisplayFor(x => user.State)</td>
-                        <td>@Html.ActionLink("Profile", "MusicianDetails", "UsersController", new { id = user.ID }, null)</td>
-                    </tr>
+                <tr>
+                    <td>@Html.DisplayFor(x => user.FirstName) @Html.DisplayFor(x => user.LastName)</td>
+                    <td>@Html.DisplayFor(x => user.City) @Html.DisplayFor(x => user.State)</td>
+                    <td>@Html.DisplayFor(x => user.Email)</td>
+                    <td>@Html.ActionLink("Profile", "MusicianDetails", "UsersController", new { id = user.ID }, null)</td>
+                </tr>
+
                 }
             </table>
         </div>
