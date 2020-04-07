@@ -235,6 +235,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\User_Show.cs" />
     <Compile Include="Models\Venue.cs" />
+    <Compile Include="Models\VenueSearchModel.cs" />
     <Compile Include="Models\VenueType.cs" />
     <Compile Include="Models\Video.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

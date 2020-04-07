@@ -42,25 +42,19 @@
                 <button type="button" class="btn btn-secondary" id="filter_btn">Filter</button>
             </div>
             <div class="col-4" id="filters">
-                <div class="form-check">
-                    <ul>
-                        <li>
-                            <input class="form-check-input" type="checkbox" name="filter" id="city-check" runat="server" value="filter1" />
-                            <label class="form-check-label" for="city">City</label>
-                            <input class="form-check-input" type="text" id="city" />
-                        </li>
-                        <li>
-                            <p>Venue Type</p>
-                        </li>
-                        <li>
-                            <input class="form-check-input" type="radio" name="filter" id="type-radio" runat="server" value="option1">
-                            <label class="form-check-label" for="bar">Bar</label>
-                        </li>
-                        <li>
-                            <input class="form-check-input" type="radio" name="filter" id="type-radio" runat="server" value="option1">
-                            <label class="form-check-label" for="Coffee Shop">Coffee Shop</label>
-                        </li>
-                    </ul>
+                <div class="row form-check">
+                    <input class="form-check-input" type="checkbox" id="city-check" value="cityFilter" />
+                    <label class="form-check-label"  for="city">City</label>
+                    <br />
+                    <input class="form-check-input" name="cityFilter" type="text" id="city" />
+                    <br />
+                </div>
+                <div class="row form-check">
+                    <input class="form-check-input" type="checkbox" id="state-check" value="stateFilter" />
+                    <label class="form-check-label" for="state">State</label>
+                    <br />
+                    @Html.DropDownList("stateFilter", (SelectList)ViewBag.State, string.Empty)
+                    <!--<input class="form-check-input" name="stateFilter" type="text" id="state" />-->
                 </div>
             </div>
         </div>
