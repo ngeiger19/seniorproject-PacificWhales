@@ -8,6 +8,8 @@ using System.Data;
 using Harmony.Models;
 using Harmony.DAL;
 using System.Net;
+using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace Harmony.Controllers
 {
@@ -15,7 +17,6 @@ namespace Harmony.Controllers
     {
 
         private HarmonyContext db = new HarmonyContext();
-
         
         public ActionResult Index()
         {
@@ -41,18 +42,21 @@ namespace Harmony.Controllers
             return View();
         }
 
-
         // GET INFO FROM SEARCH PAGE
         [HttpGet]
         public ActionResult Search(string searchOption)
         {
             string search = Request.QueryString["search"];
             
+
             // If nothing was typed into search bar
             if (search == null || search == "")
             {
                 return View();
             }
+
+            string cityFilter = Request.QueryString["cityFilter"];
+            string stateFilter = Request.QueryString["stateFilter"];
 
             // search for musicians
             if (searchOption == "option1")
@@ -61,22 +65,58 @@ namespace Harmony.Controllers
             }
             else if (searchOption == "option2")
             {
-
-                return RedirectToAction("VenueSearchResults", new { venueSearch = search });
+                return RedirectToAction("VenueSearchResults", new { venueSearch = search, city = cityFilter, state = stateFilter});
             }
 
+            
             return View();
 
         }
-        
+
         // VENUE SEARCH RESULTS
-        public ActionResult VenueSearchResults(string venueSearch)
+        public ActionResult VenueSearchResults(string venueSearch, string city, string state)
         {
             var venueQuery =
                 from venue in db.Venues
                 where venue.VenueName.Contains(venueSearch)
                 select venue;
 
+            // City filter active
+            if (city != null)
+            {
+                var cityQuery =
+                from venue in venueQuery
+                where venue.City == city
+                select venue;
+
+                ViewBag.City = city;
+                // State and City filters active
+                if (state != null)
+                {
+                    var stateQuery =
+                        from venue in cityQuery
+                        where venue.State == state
+                        select venue;
+
+                    ViewBag.State = state;
+                    return View(stateQuery);
+                }
+                return View(cityQuery);
+            }
+            // State filter active
+            else if (state != null)
+            {
+                var stateQuery =
+                    from venue in venueQuery
+                    where venue.State == state
+                    select venue;
+
+                ViewBag.State = state;
+                return View(stateQuery);
+            }
+
+            // No filters active
+            ViewData.Clear();
             return View(venueQuery);
         }
 
