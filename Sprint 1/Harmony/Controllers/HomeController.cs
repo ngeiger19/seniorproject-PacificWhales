@@ -42,34 +42,21 @@ namespace Harmony.Controllers
             return View();
         }
 
-
         // GET INFO FROM SEARCH PAGE
         [HttpGet]
         public ActionResult Search(string searchOption)
         {
-            // For state dropdown list
-            StreamReader sr = new StreamReader(Server.MapPath("~/Content/states_hash.json"));
-            string data = sr.ReadToEnd();
-            JArray arr = JArray.Parse(data);
-            List<SelectListItem> stateList = new List<SelectListItem>();
-            for (int i = 0; i < arr.Count(); i++)
-            {
-                stateList.Add(new SelectListItem { Text = (string)arr[i]["name"], Value = (string)arr[i]["name"] });
-            }
-            ViewData.Clear();
-            // ViewBag.State = stateList;
-            ViewData["State"] = stateList;
-            sr.Dispose();
-
             string search = Request.QueryString["search"];
-            string cityFilter = Request.QueryString["cityFilter"];
-            string stateFilter = Request.QueryString["stateFilter"];
+            
 
             // If nothing was typed into search bar
             if (search == null || search == "")
             {
                 return View();
             }
+
+            string cityFilter = Request.QueryString["cityFilter"];
+            string stateFilter = Request.QueryString["stateFilter"];
 
             // search for musicians
             if (searchOption == "option1")
@@ -78,10 +65,10 @@ namespace Harmony.Controllers
             }
             else if (searchOption == "option2")
             {
-
-                return RedirectToAction("VenueSearchResults", new { venueSearch = search , city = cityFilter, state = stateFilter});
+                return RedirectToAction("VenueSearchResults", new { venueSearch = search, city = cityFilter, state = stateFilter});
             }
 
+            
             return View();
 
         }
