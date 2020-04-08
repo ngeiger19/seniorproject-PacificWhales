@@ -16,10 +16,10 @@
     <div class="row" id="musicianprofile">
         <div class="col-md-4">
             @{
-                //if (User.IsInRole("VenueOwner"))
-                //{
-                <button class="btn btn-outline-light my-2 my-sm-0" data-toggle="modal" data-target="#event-modal">Book This Musician!</button>
-                //}
+                if (User.IsInRole("VenueOwner"))
+                {
+                    <button class="btn btn-outline-light my-2 my-sm-0" data-toggle="modal" data-target="#event-modal">Book This Musician!</button>
+                }
             }
             <dl class="dl-horizontal">
                 <dt>
@@ -93,11 +93,11 @@
             else
             {
                 @:@string.Format(
-              "{0} hour{1} {2} minute{3}",
-              (int)duration.Value.TotalHours,
-              duration.Value.TotalHours >= 2 ? "s" : "",
-              (int)duration.Value.Minutes,
-              duration.Value.Minutes >= 2 ? "s" : "")
+            "{0} hour{1} {2} minute{3}",
+            (int)duration.Value.TotalHours,
+            duration.Value.TotalHours >= 2 ? "s" : "",
+            (int)duration.Value.Minutes,
+            duration.Value.Minutes >= 2 ? "s" : "")
             }
         }
 
@@ -189,36 +189,35 @@
                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
             </div>
         </div>
-
         <br />
     </div>
-    <div>
-        <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-            @Html.ActionLink("Back to List", "MusicianIndex")
-        </p>
-    </div>
-</div>
-
-<div class="modal fade" id="event-modal" tabindex="-1" role="dialog" aria-labelledby="event-modal-label" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="event-modal-label">Create an event</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            @using (Html.BeginForm("CreateShow", "Users", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                <div class="modal-body">
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.DateTime, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-12">
-                            @Html.TextBoxFor(m => m.DateTime, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.DateTime, "", new { @class = "text-danger" })
+    <div class="modal fade" id="event-modal" tabindex="-1" role="dialog" aria-labelledby="event-modal-label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="event-modal-label">Create an event</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @using (Html.BeginForm("CreateShow", "Users", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    <div class="modal-body">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.DateTime, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-12">
+                                @Html.TextBoxFor(m => m.DateTime, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.DateTime, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.VenueID, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-12">
+                                @*Html.TextBoxFor(m => m.VenueID,  htmlAttributes: new { @class = "form-control" })*@
+                                @Html.DropDownList("VenueID", Model.VenueList, htmlAttributes: new { @class = "form-control" })
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -244,11 +243,16 @@
             }
         </div>
     </div>
+    <div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+            @Html.ActionLink("Back to List", "MusicianIndex")
+        </p>
+    </div>
+    <script>
+        $('#event-modal').appendTo("body")
+    </script>
 </div>
-<script>
-    $('#event-modal').appendTo("body")
-</script>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

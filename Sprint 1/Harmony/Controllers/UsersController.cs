@@ -95,7 +95,7 @@ namespace Harmony
             var initializer = new BaseClientService.Initializer()
             {
                 HttpClientInitializer = credential,
-                ApplicationName = "ASP.NET MVC5 Calendar Sample",
+                ApplicationName = "Harmony",
             };
             var service = new CalendarService(initializer);
 
@@ -152,15 +152,19 @@ namespace Harmony
         public ActionResult CreateShow()
         {
             var IdentityID = User.Identity.GetUserId();
-            List<Venue> venues = db.Venues.ToList();
+            List<Venue> venues = db.Venues/*.Where(m => m.User.ASPNetIdentityID == IdentityID)*/.ToList();
             List<SelectListItem> venueList = new List<SelectListItem>();
-            for (int i = 0; i < venues.Count(); i++)
+            foreach(var v in venues)
             {
-                venueList.Add(new SelectListItem { Text = venues[i].VenueName, Value = venues[i].ID.ToString() });
+                venueList.Add(new SelectListItem { Text = v.VenueName, Value = v.ID.ToString() });
             }
-            ViewBag.VenueID = new SelectList(db.Venues, "ID", "VenueName");
-
-            return View();
+            MusicianDetailViewModel model = new MusicianDetailViewModel
+            {
+                VenueList = venueList
+            };
+            // ViewBag.VenueList = new SelectList(db.Venues/*.Where(m => m.User.ASPNetIdentityID == IdentityID).Select(s => new { VenueID = s.ID, s.VenueName })*/, "ID", "ID");
+            // ViewData["VenueList"] = new SelectList(venueList, "Value", "Text");
+            return View(model);
         }
 
         [HttpPost]
@@ -175,7 +179,7 @@ namespace Harmony
                 var initializer = new BaseClientService.Initializer()
                 {
                     HttpClientInitializer = credential,
-                    ApplicationName = "ASP.NET MVC5 Calendar Sample",
+                    ApplicationName = "Harmony",
                 };
                 var service = new CalendarService(initializer);
 
@@ -184,28 +188,28 @@ namespace Harmony
                 // add the new show to db
                 Show newShow = new Show
                 {
-                    ID = model.ShowID,
                     Date = model.DateTime,
                     Description = model.ShowDescription,
                     DateBooked = DateTime.Now,
                     VenueID = model.VenueID
                 };
                 db.Shows.Add(newShow);
+                db.SaveChanges();
 
                 // create a new event to google calendar
                 if (calendars != null)
                 {
                     Event newEvent = new Event()
                     {
-                        Summary = newShow.Description,
-                        Location = "VenueName: " + newShow.Venue.VenueName + " Address: " + newShow.Venue.AddressLine1 + " " + newShow.Venue.AddressLine2 + " " + newShow.Venue.City + ", " + newShow.Venue.State + " " + newShow.Venue.ZipCode,
+                        Summary = model.Description,
+                        Location = db.Venues.Find(model.VenueID).VenueName,
                         Start = new EventDateTime()
                         {
-                            DateTime = newShow.Date
+                            DateTime = model.DateTime
                         },
                         End = new EventDateTime()
                         {
-                            DateTime = newShow.Date.Value.AddHours(1.0)
+                            DateTime = model.DateTime.AddHours(1.0)
                         },
                         Attendees = new List<EventAttendee>()
                         {
@@ -214,20 +218,22 @@ namespace Harmony
 
                     };
                     var newEventRequest = service.Events.Insert(newEvent, calendars.Items.First().Id);
-                    // This allow attendees to get email notification
+                    // This allows attendees to get email notification
                     newEventRequest.SendNotifications = true;
                     var eventResult = newEventRequest.ExecuteAsync();
                 }
-                await db.SaveChangesAsync();
                 return RedirectToAction("Welcome", "Home");
             }
             var IdentityID = User.Identity.GetUserId();
-            List<Venue> venues = db.Venues.ToList();
-            for(int i = 0; i < venues.Count(); i++)
+            List<Venue> venues = db.Venues/*.Where(m => m.User.ASPNetIdentityID == IdentityID)*/.ToList();
+            // List<SelectListItem> venueList = new List<SelectListItem>();
+            foreach(var v in venues)
             {
-                model.VenueList.Add(new SelectListItem { Text = venues[i].VenueName, Value = venues[i].ID.ToString() });
+                model.VenueList.Add(new SelectListItem { Text = v.VenueName, Value = v.ID.ToString() });
             }
-            ViewBag.VenueID = new SelectList(db.Venues, "ID", "VenueName");
+            // model.VenueList = new SelectList(db.Venues.Where(m => m.User.ASPNetIdentityID == IdentityID).Select(s => new { VenueID = s.ID, s.VenueName }), "VenueID", "VenueName", model.VenueID);
+            // ViewData["VenueList"] = new SelectList(db.Venues.Where(m => m.User.ASPNetIdentityID == IdentityID).Select(s => new { VenueID = s.ID, s.VenueName }), "VenueID", "VenueName", model.VenueID);
+            // ViewData["VenueList"] = new SelectList(venueList, "Value", "Text");
             return View(model);
         }
 
