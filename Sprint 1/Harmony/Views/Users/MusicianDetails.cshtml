@@ -219,28 +219,22 @@
                                 @Html.DropDownList("VenueID", Model.VenueList, htmlAttributes: new { @class = "form-control" })
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.VenueID, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-12">
-                            @Html.DropDownListFor(m => m.VenueID, new List<SelectListItem>() { new SelectListItem { Text = "Staples Center", Value = "1" } }, "---Select---", htmlAttributes: new { @class = "form-control" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ShowDescription, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-12">
+                                @Html.TextAreaFor(m => m.ShowDescription, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.ShowDescription, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Create</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.ShowDescription, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-12">
-                            @Html.TextAreaFor(m => m.ShowDescription, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.ShowDescription, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Create</button>
-                    </div>
-                </div>
-            }
+                }
+            </div>
         </div>
     </div>
     <div>

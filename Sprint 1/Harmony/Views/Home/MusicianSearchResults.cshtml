@@ -17,7 +17,7 @@
                     <td>@Html.DisplayFor(x => user.FirstName) @Html.DisplayFor(x => user.LastName)</td>
                     <td>@Html.DisplayFor(x => user.City) @Html.DisplayFor(x => user.State)</td>
                     <td>@Html.DisplayFor(x => user.Email)</td>
-                    <td>@Html.ActionLink("Profile", "MusicianDetails", "UsersController", new { id = user.ID }, null)</td>
+                    <td>@Html.ActionLink("Profile", "MusicianDetails", "Users", new { id = user.ID }, null)</td>
                 </tr>
 
                 }
