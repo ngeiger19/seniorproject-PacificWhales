@@ -219,7 +219,8 @@
                         <div class="form-group">
                             @Html.LabelFor(m => m.VenueID, new { @class = "col-md-2 control-label" })
                             <div class="col-md-12">
-                                @Html.TextBoxFor(m => m.VenueID,  htmlAttributes: new { @class = "form-control" })
+                                @*Html.TextBoxFor(m => m.VenueID,  htmlAttributes: new { @class = "form-control" })*@
+                                @Html.DropDownList("VenueID", Model.VenueList, htmlAttributes: new { @class = "form-control" })
                             </div>
                         </div>
                         <div class="form-group">

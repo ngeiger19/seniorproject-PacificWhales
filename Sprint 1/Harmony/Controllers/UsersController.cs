@@ -95,7 +95,7 @@ namespace Harmony
             var initializer = new BaseClientService.Initializer()
             {
                 HttpClientInitializer = credential,
-                ApplicationName = "ASP.NET MVC5 Calendar Sample",
+                ApplicationName = "Harmony",
             };
             var service = new CalendarService(initializer);
 
@@ -152,15 +152,19 @@ namespace Harmony
         public ActionResult CreateShow()
         {
             var IdentityID = User.Identity.GetUserId();
-            List<Venue> venues = db.Venues.ToList();
+            List<Venue> venues = db.Venues/*.Where(m => m.User.ASPNetIdentityID == IdentityID)*/.ToList();
             List<SelectListItem> venueList = new List<SelectListItem>();
-            for (int i = 0; i < venues.Count(); i++)
+            foreach(var v in venues)
             {
-                venueList.Add(new SelectListItem { Text = venues[i].VenueName, Value = venues[i].ID.ToString() });
+                venueList.Add(new SelectListItem { Text = v.VenueName, Value = v.ID.ToString() });
             }
-            ViewBag.VenueID = new SelectList(db.Venues, "ID", "VenueName");
-
-            return View();
+            MusicianDetailViewModel model = new MusicianDetailViewModel
+            {
+                VenueList = venueList
+            };
+            // ViewBag.VenueList = new SelectList(db.Venues/*.Where(m => m.User.ASPNetIdentityID == IdentityID).Select(s => new { VenueID = s.ID, s.VenueName })*/, "ID", "ID");
+            // ViewData["VenueList"] = new SelectList(venueList, "Value", "Text");
+            return View(model);
         }
 
         [HttpPost]
@@ -175,7 +179,7 @@ namespace Harmony
                 var initializer = new BaseClientService.Initializer()
                 {
                     HttpClientInitializer = credential,
-                    ApplicationName = "ASP.NET MVC5 Calendar Sample",
+                    ApplicationName = "Harmony",
                 };
                 var service = new CalendarService(initializer);
 
@@ -184,7 +188,6 @@ namespace Harmony
                 // add the new show to db
                 Show newShow = new Show
                 {
-                    ID = model.ShowID,
                     Date = model.DateTime,
                     Description = model.ShowDescription,
                     DateBooked = DateTime.Now,
@@ -215,19 +218,22 @@ namespace Harmony
 
                     };
                     var newEventRequest = service.Events.Insert(newEvent, calendars.Items.First().Id);
-                    // This allow attendees to get email notification
+                    // This allows attendees to get email notification
                     newEventRequest.SendNotifications = true;
                     var eventResult = newEventRequest.ExecuteAsync();
                 }
                 return RedirectToAction("Welcome", "Home");
             }
-            /*var IdentityID = User.Identity.GetUserId();
-            List<Venue> venues = db.Venues.ToList();
-            for(int i = 0; i < venues.Count(); i++)
+            var IdentityID = User.Identity.GetUserId();
+            List<Venue> venues = db.Venues/*.Where(m => m.User.ASPNetIdentityID == IdentityID)*/.ToList();
+            // List<SelectListItem> venueList = new List<SelectListItem>();
+            foreach(var v in venues)
             {
-                model.VenueList.Add(new SelectListItem { Text = venues[i].VenueName, Value = venues[i].ID.ToString() });
+                model.VenueList.Add(new SelectListItem { Text = v.VenueName, Value = v.ID.ToString() });
             }
-            ViewBag.VenueID = new SelectList(db.Venues, "ID", "VenueName");*/
+            // model.VenueList = new SelectList(db.Venues.Where(m => m.User.ASPNetIdentityID == IdentityID).Select(s => new { VenueID = s.ID, s.VenueName }), "VenueID", "VenueName", model.VenueID);
+            // ViewData["VenueList"] = new SelectList(db.Venues.Where(m => m.User.ASPNetIdentityID == IdentityID).Select(s => new { VenueID = s.ID, s.VenueName }), "VenueID", "VenueName", model.VenueID);
+            // ViewData["VenueList"] = new SelectList(venueList, "Value", "Text");
             return View(model);
         }
 
