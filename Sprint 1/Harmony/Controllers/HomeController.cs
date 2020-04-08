@@ -89,6 +89,7 @@ namespace Harmony.Controllers
                 where venue.City == city
                 select venue;
 
+                ViewBag.City = city;
                 // State and City filters active
                 if (state != null)
                 {
@@ -96,6 +97,8 @@ namespace Harmony.Controllers
                         from venue in cityQuery
                         where venue.State == state
                         select venue;
+
+                    ViewBag.State = state;
                     return View(stateQuery);
                 }
                 return View(cityQuery);
@@ -107,10 +110,13 @@ namespace Harmony.Controllers
                     from venue in venueQuery
                     where venue.State == state
                     select venue;
+
+                ViewBag.State = state;
                 return View(stateQuery);
             }
 
             // No filters active
+            ViewData.Clear();
             return View(venueQuery);
         }
 
