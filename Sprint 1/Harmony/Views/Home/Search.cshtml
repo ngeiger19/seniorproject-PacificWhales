@@ -21,7 +21,7 @@
 
 <!-- Search form -->
 <div class="row">
-    <div class="col-6 offset-3 shadow p-3 mb-5 bg-white rounded" style="margin-top: 40px;">
+    <div class="col-8 offset-2 shadow p-3 mb-5 bg-white rounded" style="margin-top: 40px;">
         <h3 id="form-title">Search for other users</h3>
         <hr />
 
@@ -34,11 +34,27 @@
                     <input class="form-control" type="text" placeholder="Search"
                            aria-label="Search" id="search" name="search">
                 </form>
+                <br />
+                <div class="row" id="radioBtnList">
+                    <p id="radio-text">Search for: </p>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="searchOption" id="musician-radio" runat="server" value="option1" checked>
+                        <label class="form-check-label" for="musician">Musicians</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="searchOption" id="venue-radio" runat="server" value="option2">
+                        <label class="form-check-label" for="venue">Venues</label>
+                    </div>
+
+                    <div class="col-2" style="margin-left: 20px; margin-top: 20px;">
+                    </div>
+
+                </div>
             </div>
-            <div class="col-2">
+            <div class="col-1">
                 <button type="submit" class="btn btn-primary">Search</button>
             </div>
-            <div class="col-2">
+            <div class="col-1">
                 <button type="button" class="btn btn-secondary" id="filter_btn">Filter</button>
             </div>
             <div class="col-4" id="filters">
@@ -61,21 +77,7 @@
 
         
 
-        <div class="row" id="radioBtnList">
-            <p id="radio-text">Search for: </p>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="searchOption" id="musician-radio" runat="server" value="option1" checked>
-                <label class="form-check-label" for="musician">Musicians</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="searchOption" id="venue-radio" runat="server" value="option2">
-                <label class="form-check-label" for="venue">Venues</label>
-            </div>
-
-            <div class="col-2" style="margin-left: 20px; margin-top: 20px;" >
-            </div>
-            
-            </div>
+        
     </div>
         }
         <script>
@@ -86,10 +88,27 @@
             $('#filter_btn').click(function () {
                 $('#filters').show();
                 $('#city').hide();
+                $('#state').hide();
             })
 
-            $('#city-check').click(function () {
-                $('#city').show();
+            $('#city-check').change(function () {
+                if (this.checked) {
+                    $('#city').show();
+                }
+                else {
+                    $('#city').hide();
+                    $('#city').val('');
+                }
+            })
+
+            $('#state-check').click(function () {
+                if (this.checked) {
+                    $('#state').show();
+                }
+                else {
+                    $('#state').hide();
+                    $('#state').val('');
+                }
             })
         </script>
     </div>
