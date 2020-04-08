@@ -56,6 +56,9 @@
     <Reference Include="Google.Apis.Auth, Version=1.44.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>packages\Google.Apis.Auth.1.44.1\lib\net45\Google.Apis.Auth.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Apis.Auth.Mvc, Version=1.44.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Apis.Auth.Mvc.1.44.1\lib\net45\Google.Apis.Auth.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.44.1.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>packages\Google.Apis.Auth.1.44.1\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
     </Reference>
@@ -243,6 +246,10 @@
     <Content Include="3.jpg" />
     <Content Include="4.jpg" />
     <Content Include="App_Data\down.sql" />
+    <Content Include="App_Data\myharmonydb.mdf" />
+    <Content Include="App_Data\myharmonydb_log.ldf">
+      <DependentUpon>myharmonydb.mdf</DependentUpon>
+    </Content>
     <Content Include="App_Data\seed.sql" />
     <Content Include="App_Data\test.sql" />
     <Content Include="App_Data\up.sql" />
@@ -288,6 +295,7 @@
     <Content Include="credentials.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\harmony2 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\HarmonyDev - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -444,6 +452,7 @@
     <Content Include="Views\Shows\Details.cshtml" />
     <Content Include="Views\Shows\Edit.cshtml" />
     <Content Include="Views\Shows\Index.cshtml" />
+    <Content Include="Views\Home\MusicianSearchResults.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

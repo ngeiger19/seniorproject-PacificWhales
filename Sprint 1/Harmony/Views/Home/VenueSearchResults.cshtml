@@ -15,7 +15,7 @@
                     <tr>
                         <td>@Html.DisplayFor(x => venue.VenueName)</td>
                         <td>@Html.DisplayFor(x => venue.AddressLine1) @Html.DisplayFor(x => venue.City), @Html.DisplayFor(x => venue.State)</td>
-                        <td>@Html.ActionLink("Profile", "#", new { id = venue.UserID })</td>
+                        <td>@Html.ActionLink("Profile", "Details", "VenuesController", new { id = venue.UserID }, null)</td>
                     </tr>
                 }
             </table>
