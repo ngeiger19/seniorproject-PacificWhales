@@ -164,8 +164,7 @@ namespace Calendar.ASP.NET.MVC5.Controllers
 
                 };
                 var newEventRequest = service.Events.Insert(newEvent, calendars.Items.First().Id);
-                // This allow attendees to get email notification
-                newEventRequest.SendNotifications = true; 
+                newEventRequest.SendNotifications = true; // This allow attendees to get email notification
                 var eventResult = newEventRequest.ExecuteAsync();
             }
 

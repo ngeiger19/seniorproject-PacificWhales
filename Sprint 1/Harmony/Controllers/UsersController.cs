@@ -149,10 +149,10 @@ namespace Harmony
             return View(viewModel);
         }
 
-        public ActionResult CreateShow()
+        /*public ActionResult CreateShow()
         {
             var IdentityID = User.Identity.GetUserId();
-            List<Venue> venues = db.Venues/*.Where(m => m.User.ASPNetIdentityID == IdentityID)*/.ToList();
+            List<Venue> venues = db.Venues*//*.Where(m => m.User.ASPNetIdentityID == IdentityID)*//*.ToList();
             List<SelectListItem> venueList = new List<SelectListItem>();
             foreach(var v in venues)
             {
@@ -162,27 +162,52 @@ namespace Harmony
             {
                 VenueList = venueList
             };
-            // ViewBag.VenueList = new SelectList(db.Venues/*.Where(m => m.User.ASPNetIdentityID == IdentityID).Select(s => new { VenueID = s.ID, s.VenueName })*/, "ID", "ID");
+            // ViewBag.VenueList = new SelectList(db.Venues/*.Where(m => m.User.ASPNetIdentityID == IdentityID).Select(s => new { VenueID = s.ID, s.VenueName }), "ID", "ID");
             // ViewData["VenueList"] = new SelectList(venueList, "Value", "Text");
             return View(model);
-        }
+        }*/
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateShow(MusicianDetailViewModel model)
+        public async Task<ActionResult> CreateShow(int? id)
         {
-            
+            // No user id passed through
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // Viewmodel for Musician
+            User user = db.Users.Find(id);
+
+            // If users doesn't exisit
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            MusicianDetailViewModel model = new MusicianDetailViewModel(user);
+
             if (ModelState.IsValid)
             {
-                var credential = await GetCredentialForApiAsync();
-
-                var initializer = new BaseClientService.Initializer()
+                // Get user's calendar credentials
+                UserCredential credential = await GetCredentialForApiAsync();
+                // Create Google Calendar API service.
+                var service = new CalendarService(new BaseClientService.Initializer()
                 {
                     HttpClientInitializer = credential,
                     ApplicationName = "Harmony",
-                };
-                var service = new CalendarService(initializer);
+                });
 
+                // Define parameters of request.
+                EventsResource.ListRequest request = service.Events.List("primary");
+                request.TimeMin = DateTime.Now;
+                request.ShowDeleted = false;
+                request.SingleEvents = true;
+                request.MaxResults = 10;
+                request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
+
+                // Fetch the list of calendars.
                 var calendars = await service.CalendarList.List().ExecuteAsync();
 
                 // add the new show to db
@@ -201,7 +226,7 @@ namespace Harmony
                 {
                     Event newEvent = new Event()
                     {
-                        Summary = model.Description,
+                        Summary = model.ShowDescription,
                         Location = db.Venues.Find(model.VenueID).VenueName,
                         Start = new EventDateTime()
                         {
