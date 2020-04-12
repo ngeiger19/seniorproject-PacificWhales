@@ -60,7 +60,7 @@
             <div class="col-4" id="filters">
                 <div class="row form-check">
                     <input class="form-check-input" type="checkbox" id="city-check" value="cityFilter" />
-                    <label class="form-check-label"  for="city">City</label>
+                    <label class="form-check-label" for="city">City</label>
                     <br />
                     <input class="form-check-input" name="cityFilter" type="text" id="city" />
                     <br />
@@ -71,6 +71,12 @@
                     <br />
                     <!-- Html.DropDownList("stateFilter", (SelectList)ViewBag.StateList, string.Empty) -->
                     <input class="form-check-input" name="stateFilter" type="text" id="state" />
+                </div>
+                <div class="row form-check" id="musician-filters">
+                    <input class="form-check-input" type="checkbox" id="genre-check" value="genreFilter" />
+                    <label class="form-check-label" for="genre">Genre</label>
+                    <br />
+                    <input class="form-check-input" name="genreFilter" type="text" id="genre" />
                 </div>
             </div>
         </div>
@@ -89,6 +95,10 @@
                 $('#filters').show();
                 $('#city').hide();
                 $('#state').hide();
+                $('genre').hide();
+                if ($('venue-radio').checked) {
+                    $('musician-filters').hide();
+                }
             })
 
             $('#city-check').change(function () {
@@ -101,7 +111,7 @@
                 }
             })
 
-            $('#state-check').click(function () {
+            $('#state-check').change(function () {
                 if (this.checked) {
                     $('#state').show();
                 }
@@ -110,6 +120,10 @@
                     $('#state').val('');
                 }
             })
+
+            $('venue-radio').click() {
+                $('musician-filter').hide();
+            }
         </script>
     </div>
 </div>
