@@ -24,7 +24,7 @@ namespace Calendar.ASP.NET.MVC5
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            /*if (!roleManager.RoleExists("VenueOwner"))
+            if (!roleManager.RoleExists("VenueOwner"))
             {                
                 var role = new IdentityRole();
                 role.Name = "VenueOwner";
@@ -48,7 +48,7 @@ namespace Calendar.ASP.NET.MVC5
                 var role = new IdentityRole();
                 role.Name = "Musician";
                 roleManager.Create(role);
-            } */
+            }
         } 
     }
 }
