@@ -18,7 +18,7 @@ namespace Harmony.Controllers
 
         private HarmonyContext db = new HarmonyContext();
 
-        public IQueryable<Venue> VenueCityQuery(IQueryable<Venue> venues, string city)
+        /* public IQueryable<Venue> VenueCityQuery(IQueryable<Venue> venues, string city)
         {
             if (city != null && city != "")
             {
@@ -50,12 +50,12 @@ namespace Harmony.Controllers
 
             ViewBag.State = null;
             return venues;
-        }
-        public IQueryable<User> CityQuery(IQueryable<User> users, string city)
+        } */
+        public IEnumerable<User> CityQuery(IEnumerable<User> users, string city)
         {
             if (city != null && city != "")
             {
-                var cityQuery =
+                IEnumerable<User> cityQuery =
                     from user in users
                     where user.City.Contains(city)
                     select user;
@@ -68,11 +68,11 @@ namespace Harmony.Controllers
             return users;
         }
 
-        public IQueryable<User> StateQuery(IQueryable<User> users, string state)
+        public IEnumerable<User> StateQuery(IEnumerable<User> users, string state)
         {
             if (state != null && state != "")
             {
-                var stateQuery =
+                IEnumerable<User> stateQuery =
                     from user in users
                     where user.State.Contains(state)
                     select user;
@@ -85,7 +85,7 @@ namespace Harmony.Controllers
             return users;
         }
 
-        public IQueryable<User> GenreQuery(IQueryable<User> users, string genre)
+        public IEnumerable<User> GenreQuery(IEnumerable<User> users, string genre)
         {
             if (genre != null && genre != "")
             {
@@ -93,13 +93,13 @@ namespace Harmony.Controllers
 
                 foreach (Genre x in db.Genres)
                 {
-                    if (x.GenreName.Contains(genre))
+                    if (x.GenreName == genre)
                     {
                         g = x;
                     }
-                }
+                } 
 
-                var genreQuery =
+                IEnumerable < User > genreQuery =
                     from musician in users
                     where musician.Genres.Contains(g)
                     select musician;
@@ -219,7 +219,7 @@ namespace Harmony.Controllers
         // MUSICIAN SEARCH RESULTS
         public ActionResult MusicianSearchResults(string musicianSearch, string city, string state, string genre)
         {
-            var musicians =
+            IEnumerable<User> musicians =
                 from musician in db.Users
                 where musician.FirstName.Contains(musicianSearch)
                 select musician;
