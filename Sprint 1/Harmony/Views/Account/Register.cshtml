@@ -50,8 +50,8 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.State, new { @class = "col-md-2 control-label" })
                 <div class="col-md-12">
-                    @Html.DropDownList("State", (IEnumerable<SelectListItem>)ViewData["State"], new { @class = "form-control" })
-                    @*Html.DropDownListFor(m => m.State, (SelectList)ViewBag.State, new { @class = "form-control" })*@
+                    @*Html.DropDownList("State", (IEnumerable<SelectListItem>)ViewData["State"], new { @class = "form-control" })*@
+                    @Html.DropDownList("State", Model.stateList, new { @class = "form-control" })
                 </div>
             </div>
             <div class="form-group">
@@ -109,7 +109,8 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.VenueState, new { @class = "col-md-2 control-label" })
                     <div class="col-md-12">
-                        @Html.DropDownListFor(m => m.VenueState, (IEnumerable<SelectListItem>)ViewData["State"], new { @class = "form-control" })
+                        @*Html.DropDownListFor(m => m.VenueState, (IEnumerable<SelectListItem>)ViewData["State"], new { @class = "form-control" })*@
+                        @Html.DropDownListFor(m => m.VenueState, Model.stateList, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="form-group">
