@@ -200,10 +200,11 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                @using (Html.BeginForm("CreateShow", "Users", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                @using (Html.BeginForm("CreateShow", "Users", Model.ID, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = Model.ID }))
                 {
                     <div class="modal-body">
                         @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.ID)
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
                             @Html.LabelFor(m => m.DateTime, new { @class = "col-md-2 control-label" })
@@ -237,12 +238,7 @@
             </div>
         </div>
     </div>
-    <div>
-        <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-            @Html.ActionLink("Back to List", "MusicianIndex")
-        </p>
-    </div>
+    
     <script>
         $('#event-modal').appendTo("body")
     </script>

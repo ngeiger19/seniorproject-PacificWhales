@@ -188,6 +188,8 @@ namespace Harmony
 
             MusicianDetailViewModel model = new MusicianDetailViewModel(user);
 
+            var IdentityID = User.Identity.GetUserId();
+
             if (ModelState.IsValid)
             {
                 // Get user's calendar credentials
@@ -217,8 +219,16 @@ namespace Harmony
                     Description = model.ShowDescription,
                     DateBooked = DateTime.Now,
                     VenueID = model.VenueID
+                    
                 };
                 db.Shows.Add(newShow);
+                User_Show user_Show = new User_Show
+                {
+                    MusicianID = model.ID,
+                    VenueOwnerID = db.Users.Where(u => u.ASPNetIdentityID == IdentityID).First().ID,
+                    ShowID = newShow.ID
+                };
+                db.User_Show.Add(user_Show);
                 db.SaveChanges();
 
                 // create a new event to google calendar
@@ -249,7 +259,6 @@ namespace Harmony
                 }
                 return RedirectToAction("Welcome", "Home");
             }
-            var IdentityID = User.Identity.GetUserId();
             List<Venue> venues = db.Venues/*.Where(m => m.User.ASPNetIdentityID == IdentityID)*/.ToList();
             // List<SelectListItem> venueList = new List<SelectListItem>();
             foreach(var v in venues)
