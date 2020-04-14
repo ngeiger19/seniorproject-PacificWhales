@@ -118,8 +118,6 @@ namespace Harmony.Models
 
         // This section is for the calendar event form
 
-        public int ShowID { get; set; }
-
         [DataType(DataType.DateTime)]
         [Display(Name = "DateTime")]
         public DateTime DateTime { get; set; }

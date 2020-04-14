@@ -73,8 +73,7 @@ namespace Harmony.Models
         [StringLength(50)]
         [Display(Name = "Instruments")]
         public string InstrumentName { get; set; }
-
-        /*public List<SelectListItem> stateList { get; set; }*/
+        public List<SelectListItem> stateList { get; set; }
     }
 
     public class ExternalLoginListViewModel

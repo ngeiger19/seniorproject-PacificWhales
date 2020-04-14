@@ -247,10 +247,6 @@
     <Content Include="3.jpg" />
     <Content Include="4.jpg" />
     <Content Include="App_Data\down.sql" />
-    <Content Include="App_Data\myharmonydb.mdf" />
-    <Content Include="App_Data\myharmonydb_log.ldf">
-      <DependentUpon>myharmonydb.mdf</DependentUpon>
-    </Content>
     <Content Include="App_Data\seed.sql" />
     <Content Include="App_Data\test.sql" />
     <Content Include="App_Data\up.sql" />
