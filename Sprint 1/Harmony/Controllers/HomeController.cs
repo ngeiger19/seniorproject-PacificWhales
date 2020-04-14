@@ -18,24 +18,7 @@ namespace Harmony.Controllers
 
         private HarmonyContext db = new HarmonyContext();
 
-        // Used to compare users - need for Intersect operator
-        internal class UserNameComparer : IEqualityComparer<User>
-        {
-            public bool Equals(User x, User y)
-            {
-                if (x.ID == y.ID)
-                {
-                    return true;
-                }
-                return false;
-            }
-
-            public int GetHashCode(User obj)
-            {
-                return obj.ID.GetHashCode();
-            }
-        }
-
+        // Queries for Venue FIlters
         /* public IQueryable<Venue> VenueCityQuery(IQueryable<Venue> venues, string city)
         {
             if (city != null && city != "")
@@ -69,6 +52,8 @@ namespace Harmony.Controllers
             ViewBag.State = null;
             return venues;
         } */
+
+        // Queries for Musician Filters
         public IEnumerable<User> CityQuery(IEnumerable<User> users, string city)
         {
             if (city != null && city != "")
