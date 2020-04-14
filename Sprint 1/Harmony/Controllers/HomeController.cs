@@ -18,6 +18,24 @@ namespace Harmony.Controllers
 
         private HarmonyContext db = new HarmonyContext();
 
+        // Used to compare users - need for Intersect operator
+        internal class UserNameComparer : IEqualityComparer<User>
+        {
+            public bool Equals(User x, User y)
+            {
+                if (x.ID == y.ID)
+                {
+                    return true;
+                }
+                return false;
+            }
+
+            public int GetHashCode(User obj)
+            {
+                return obj.ID.GetHashCode();
+            }
+        }
+
         /* public IQueryable<Venue> VenueCityQuery(IQueryable<Venue> venues, string city)
         {
             if (city != null && city != "")
@@ -83,26 +101,27 @@ namespace Harmony.Controllers
 
             ViewBag.State = null;
             return users;
-        }
+        } 
 
         public IEnumerable<User> GenreQuery(IEnumerable<User> users, string genre)
         {
+            IEnumerable<User> empty = Enumerable.Empty<User>();
             if (genre != null && genre != "")
             {
-                Genre g = new Genre();
+                var genres =
+                    from g in db.Genres
+                    where g.GenreName == genre
+                    select g;
 
-                foreach (Genre x in db.Genres)
+                if (genres.Count() == 0)
                 {
-                    if (x.GenreName == genre)
-                    {
-                        g = x;
-                    }
-                } 
+                    return empty;
+                }
 
-                IEnumerable < User > genreQuery =
-                    from musician in users
-                    where musician.Genres.Contains(g)
-                    select musician;
+                IEnumerable <User> genreQuery =
+                    from user in users
+                    where user.Genres.Contains(genres.First())
+                    select user;
 
                 ViewBag.Genre = genre;
                 return genreQuery;
