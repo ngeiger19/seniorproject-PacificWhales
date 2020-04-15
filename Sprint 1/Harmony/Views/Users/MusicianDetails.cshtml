@@ -199,7 +199,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                @using (Html.BeginForm("CreateShow", "Users", Model.ID, FormMethod.Post, new { @class = "form-horizontal", role = "form", id = Model.ID }))
+                @using (Html.BeginForm("CreateShow", "Users", new { id = Model.ID }, FormMethod.Post, new { @class = "form-horizontal", role = "form"}))
                 {
                     <div class="modal-body">
                         @Html.AntiForgeryToken()
