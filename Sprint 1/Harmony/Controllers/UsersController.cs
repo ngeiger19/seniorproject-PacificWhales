@@ -169,7 +169,7 @@ namespace Harmony
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateShow(int? id)
+        public async Task<ActionResult> CreateShow(int? id, MusicianDetailViewModel viewModel)
         {
             // No user id passed through
             if (id == null)
@@ -201,28 +201,43 @@ namespace Harmony
                     ApplicationName = "Harmony",
                 });
 
-                // Define parameters of request.
-                EventsResource.ListRequest request = service.Events.List("primary");
-                request.TimeMin = DateTime.Now;
-                request.ShowDeleted = false;
-                request.SingleEvents = true;
-                request.MaxResults = 10;
-                request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
-
                 // Fetch the list of calendars.
                 var calendars = await service.CalendarList.List().ExecuteAsync();
                 // create a new event to google calendar
                 if (calendars != null)
                 {
+                    Event newEvent = new Event()
+                    {
+                        Summary = viewModel.Title,
+                        Description = viewModel.ShowDescription,
+                        Location = db.Venues.Find(viewModel.VenueID).VenueName,
+                        Start = new EventDateTime()
+                        {
+                            DateTime = viewModel.StartDateTime
+                        },
+                        End = new EventDateTime()
+                        {
+                            DateTime = viewModel.EndDateTime
+                        },
+                        Attendees = new List<EventAttendee>()
+                        {
+                            new EventAttendee(){Email = model.Email}
+                        }
+                    };
+                    var newEventRequest = service.Events.Insert(newEvent, "primary");
+                    // This allows attendees to get email notification
+                    newEventRequest.SendNotifications = true;
+                    var eventResult = newEventRequest.ExecuteAsync();
+
                     // add the new show to db
                     Show newShow = new Show
                     {
-                        Title = model.Title,
-                        StartDateTime = model.StartDateTime,
-                        EndDateTime = model.EndDateTime,
-                        Description = model.ShowDescription,
-                        DateBooked = DateTime.Now,
-                        VenueID = model.VenueID
+                        Title = viewModel.Title,
+                        StartDateTime = viewModel.StartDateTime,
+                        EndDateTime = viewModel.EndDateTime,
+                        Description = viewModel.ShowDescription,
+                        DateBooked = newEvent.Created ?? DateTime.Now,
+                        VenueID = viewModel.VenueID
                     };
                     db.Shows.Add(newShow);
                     User_Show user_Show = new User_Show
@@ -233,29 +248,6 @@ namespace Harmony
                     };
                     db.User_Show.Add(user_Show);
                     db.SaveChanges();
-                    Event newEvent = new Event()
-                    {
-                        Summary = model.Title,
-                        Description = model.ShowDescription,
-                        Location = db.Venues.Find(model.VenueID).VenueName,
-                        Start = new EventDateTime()
-                        {
-                            DateTime = model.StartDateTime
-                        },
-                        End = new EventDateTime()
-                        {
-                            DateTime = model.EndDateTime
-                        },
-                        Attendees = new List<EventAttendee>()
-                        {
-                            new EventAttendee(){Email = model.Email}
-                        }
-                    };
-                    var newEventRequest = service.Events.Insert(newEvent, calendars.Items.First().Id);
-                    // This allows attendees to get email notification
-                    newEventRequest.SendNotifications = true;
-                    var eventResult = newEventRequest.ExecuteAsync();
-                    
                 }
                 
                 return RedirectToAction("Welcome", "Home");
