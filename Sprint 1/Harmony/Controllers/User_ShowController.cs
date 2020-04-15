@@ -11,112 +11,120 @@ using Harmony.Models;
 
 namespace Harmony.Controllers
 {
-    public class BandMembersController : Controller
+    public class User_ShowController : Controller
     {
         private HarmonyContext db = new HarmonyContext();
 
-        // GET: BandMembers
+        // GET: User_Show
         public ActionResult Index()
         {
-            var bandMembers = db.BandMembers.Include(b => b.User);
-            return View(bandMembers.ToList());
+            var user_Show = db.User_Show.Include(u => u.Show).Include(u => u.User).Include(u => u.User1);
+            return View(user_Show.ToList());
         }
 
-        // GET: BandMembers/Details/5
+        // GET: User_Show/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BandMember bandMember = db.BandMembers.Find(id);
-            if (bandMember == null)
+            User_Show user_Show = db.User_Show.Find(id);
+            if (user_Show == null)
             {
                 return HttpNotFound();
             }
-            return View(bandMember);
+            return View(user_Show);
         }
 
-        // GET: BandMembers/Create
+        // GET: User_Show/Create
         public ActionResult Create()
         {
-            ViewBag.UserID = new SelectList(db.Users, "ID", "FirstName");
+            ViewBag.ShowID = new SelectList(db.Shows, "ID", "Title");
+            ViewBag.MusicianID = new SelectList(db.Users, "ID", "FirstName");
+            ViewBag.VenueOwnerID = new SelectList(db.Users, "ID", "FirstName");
             return View();
         }
 
-        // POST: BandMembers/Create
+        // POST: User_Show/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,BandMemberName,UserID")] BandMember bandMember)
+        public ActionResult Create([Bind(Include = "MusicianID,VenueOwnerID,ShowID")] User_Show user_Show)
         {
             if (ModelState.IsValid)
             {
-                db.BandMembers.Add(bandMember);
+                db.User_Show.Add(user_Show);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserID = new SelectList(db.Users, "ID", "FirstName", bandMember.UserID);
-            return View(bandMember);
+            ViewBag.ShowID = new SelectList(db.Shows, "ID", "Title", user_Show.ShowID);
+            ViewBag.MusicianID = new SelectList(db.Users, "ID", "FirstName", user_Show.MusicianID);
+            ViewBag.VenueOwnerID = new SelectList(db.Users, "ID", "FirstName", user_Show.VenueOwnerID);
+            return View(user_Show);
         }
 
-        // GET: BandMembers/Edit/5
+        // GET: User_Show/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BandMember bandMember = db.BandMembers.Find(id);
-            if (bandMember == null)
+            User_Show user_Show = db.User_Show.Find(id);
+            if (user_Show == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.UserID = new SelectList(db.Users, "ID", "FirstName", bandMember.UserID);
-            return View(bandMember);
+            ViewBag.ShowID = new SelectList(db.Shows, "ID", "Title", user_Show.ShowID);
+            ViewBag.MusicianID = new SelectList(db.Users, "ID", "FirstName", user_Show.MusicianID);
+            ViewBag.VenueOwnerID = new SelectList(db.Users, "ID", "FirstName", user_Show.VenueOwnerID);
+            return View(user_Show);
         }
 
-        // POST: BandMembers/Edit/5
+        // POST: User_Show/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,BandMemberName,UserID")] BandMember bandMember)
+        public ActionResult Edit([Bind(Include = "MusicianID,VenueOwnerID,ShowID")] User_Show user_Show)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(bandMember).State = EntityState.Modified;
+                db.Entry(user_Show).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserID = new SelectList(db.Users, "ID", "FirstName", bandMember.UserID);
-            return View(bandMember);
+            ViewBag.ShowID = new SelectList(db.Shows, "ID", "Title", user_Show.ShowID);
+            ViewBag.MusicianID = new SelectList(db.Users, "ID", "FirstName", user_Show.MusicianID);
+            ViewBag.VenueOwnerID = new SelectList(db.Users, "ID", "FirstName", user_Show.VenueOwnerID);
+            return View(user_Show);
         }
 
-        // GET: BandMembers/Delete/5
+        // GET: User_Show/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BandMember bandMember = db.BandMembers.Find(id);
-            if (bandMember == null)
+            User_Show user_Show = db.User_Show.Find(id);
+            if (user_Show == null)
             {
                 return HttpNotFound();
             }
-            return View(bandMember);
+            return View(user_Show);
         }
 
-        // POST: BandMembers/Delete/5
+        // POST: User_Show/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            BandMember bandMember = db.BandMembers.Find(id);
-            db.BandMembers.Remove(bandMember);
+            User_Show user_Show = db.User_Show.Find(id);
+            db.User_Show.Remove(user_Show);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

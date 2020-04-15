@@ -156,38 +156,38 @@ CREATE TABLE [dbo].[Venues]
 -- #         BandMembers Table           #
 -- #######################################
 
-CREATE TABLE [dbo].[BandMembers]
+/*CREATE TABLE [dbo].[BandMembers]
 (
 	[ID]		INT IDENTITY (1,1)	NOT NULL,
 	[BandMemberName]		NVARCHAR (50)		NOT NULL,
 	[UserID]		INT		NOT NULL,
 	CONSTRAINT [PK_dbo.BandMembers] PRIMARY KEY CLUSTERED ([ID] ASC),
 	CONSTRAINT [FK_dbo.BandMembers_dbo.Users_ID] FOREIGN KEY ([UserID]) REFERENCES [dbo].[Users] ([ID])
-);
+);*/
 
 -- #######################################
 -- #         Instruments Table           #
 -- #######################################
 
-CREATE TABLE [dbo].[Instruments]
+/*CREATE TABLE [dbo].[Instruments]
 (
 	[ID]		INT IDENTITY (1,1)	NOT NULL,
 	[InstrumentName]		NVARCHAR (50)		NOT NULL,
 	CONSTRAINT [PK_dbo.Instruments] PRIMARY KEY CLUSTERED ([ID] ASC)
-);
+);*/
 
 -- #######################################
 -- #    BandMember_Instrument Table      #
 -- #######################################
 
-CREATE TABLE [dbo].[BandMember_Instrument]
+/*CREATE TABLE [dbo].[BandMember_Instrument]
 (
 	[BandMemberID]		INT		NOT NULL,
 	[InstrumentID]		INT		NOT NULL,
 	CONSTRAINT [PK_dbo.BandMember_Instrument] PRIMARY KEY CLUSTERED ([BandMemberID], [InstrumentID] ASC),
 	CONSTRAINT [FK_dbo.BandMember_Instrument_dbo.BandMembers_ID] FOREIGN KEY ([BandMemberID]) REFERENCES [dbo].[BandMembers] ([ID]),
 	CONSTRAINT [FK_dbo.BandMember_Instrument_dbo.Instruments_ID] FOREIGN KEY ([InstrumentID]) REFERENCES [dbo].[Instruments] ([ID])
-);
+);*/
 
 -- #######################################
 -- #            Genres Table             #
@@ -252,7 +252,9 @@ CREATE TABLE [dbo].[Videos]
 CREATE TABLE [dbo].[Shows]
 (
 	[ID]		INT IDENTITY (1,1)	NOT NULL,
-	[Date]		DateTime		NULL,
+	[Title]		NVARCHAR(64)	NOT NULL,
+	[StartDateTime]		DateTime		NOT NULL,
+	[EndDateTime]		DateTime		NOT NULL,
 	[VenueID]		INT		NULL,
 	[Description]		NVARCHAR(500)		NULL,
 	[DateBooked]	DateTime		NOT NULL,

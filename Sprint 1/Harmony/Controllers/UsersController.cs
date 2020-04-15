@@ -188,6 +188,8 @@ namespace Harmony
 
             MusicianDetailViewModel model = new MusicianDetailViewModel(user);
 
+            var IdentityID = User.Identity.GetUserId();
+
             if (ModelState.IsValid)
             {
                 // Get user's calendar credentials
@@ -209,47 +211,55 @@ namespace Harmony
 
                 // Fetch the list of calendars.
                 var calendars = await service.CalendarList.List().ExecuteAsync();
-
-                // add the new show to db
-                Show newShow = new Show
-                {
-                    Date = model.DateTime,
-                    Description = model.ShowDescription,
-                    DateBooked = DateTime.Now,
-                    VenueID = model.VenueID
-                };
-                db.Shows.Add(newShow);
-                db.SaveChanges();
-
                 // create a new event to google calendar
                 if (calendars != null)
                 {
+                    // add the new show to db
+                    Show newShow = new Show
+                    {
+                        Title = model.Title,
+                        StartDateTime = model.StartDateTime,
+                        EndDateTime = model.EndDateTime,
+                        Description = model.ShowDescription,
+                        DateBooked = DateTime.Now,
+                        VenueID = model.VenueID
+                    };
+                    db.Shows.Add(newShow);
+                    User_Show user_Show = new User_Show
+                    {
+                        MusicianID = model.ID,
+                        VenueOwnerID = db.Users.Where(u => u.ASPNetIdentityID == IdentityID).First().ID,
+                        ShowID = newShow.ID
+                    };
+                    db.User_Show.Add(user_Show);
+                    db.SaveChanges();
                     Event newEvent = new Event()
                     {
-                        Summary = model.ShowDescription,
+                        Summary = model.Title,
+                        Description = model.ShowDescription,
                         Location = db.Venues.Find(model.VenueID).VenueName,
                         Start = new EventDateTime()
                         {
-                            DateTime = model.DateTime
+                            DateTime = model.StartDateTime
                         },
                         End = new EventDateTime()
                         {
-                            DateTime = model.DateTime.AddHours(1.0)
+                            DateTime = model.EndDateTime
                         },
                         Attendees = new List<EventAttendee>()
                         {
                             new EventAttendee(){Email = model.Email}
                         }
-
                     };
                     var newEventRequest = service.Events.Insert(newEvent, calendars.Items.First().Id);
                     // This allows attendees to get email notification
                     newEventRequest.SendNotifications = true;
                     var eventResult = newEventRequest.ExecuteAsync();
+                    
                 }
+                
                 return RedirectToAction("Welcome", "Home");
             }
-            var IdentityID = User.Identity.GetUserId();
             List<Venue> venues = db.Venues/*.Where(m => m.User.ASPNetIdentityID == IdentityID)*/.ToList();
             // List<SelectListItem> venueList = new List<SelectListItem>();
             foreach(var v in venues)

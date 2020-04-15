@@ -49,7 +49,7 @@ namespace Harmony.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Date,VenueID,Description,DateBooked")] Show show)
+        public ActionResult Create([Bind(Include = "ID,Title,StartDateTime,EndDateTime,VenueID,Description,DateBooked")] Show show)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace Harmony.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Date,VenueID,Description,DateBooked")] Show show)
+        public ActionResult Edit([Bind(Include = "ID,Title,StartDateTime,EndDateTime,VenueID,Description,DateBooked")] Show show)
         {
             if (ModelState.IsValid)
             {

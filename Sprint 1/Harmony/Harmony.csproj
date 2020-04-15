@@ -210,25 +210,23 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\BandMembersController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ShowsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\User_ShowController.cs" />
     <Compile Include="Controllers\VenuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\BandMember.cs" />
     <Compile Include="Models\CalendarEventGroup.cs" />
     <Compile Include="Models\CalendarViewModels.cs" />
     <Compile Include="Models\DetailViewModel.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="DAL\HarmonyContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Instrument.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\Show.cs" />
@@ -435,20 +433,10 @@
     <Content Include="Views\Users\MusicianDetails.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\MusicianIndex.cshtml" />
-    <Content Include="Views\BandMembers\Create.cshtml" />
-    <Content Include="Views\BandMembers\Delete.cshtml" />
-    <Content Include="Views\BandMembers\Details.cshtml" />
-    <Content Include="Views\BandMembers\Edit.cshtml" />
-    <Content Include="Views\BandMembers\Index.cshtml" />
     <Content Include="Views\Calendar\Schedule.cshtml" />
     <Content Include="client_secret.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Shows\Create.cshtml" />
-    <Content Include="Views\Shows\Delete.cshtml" />
-    <Content Include="Views\Shows\Details.cshtml" />
-    <Content Include="Views\Shows\Edit.cshtml" />
-    <Content Include="Views\Shows\Index.cshtml" />
     <Content Include="Views\Home\MusicianSearchResults.cshtml" />
   </ItemGroup>
   <ItemGroup />
