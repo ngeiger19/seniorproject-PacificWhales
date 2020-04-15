@@ -93,7 +93,6 @@ namespace Harmony.Models
             Email = user.Email;
             Description = user.Description;
             Genres = user.Genres.Select(g => g.GenreName).ToList();
-            BandMembers = user.BandMembers.Select(b => b.BandMemberName).ToList();
         }
 
         public int ID { get; set; }
@@ -111,16 +110,18 @@ namespace Harmony.Models
         public string Description { get; set; }
 
         public List<string> Genres { get; set; }
-        
-        public List<string> BandMembers { get; set; }
-
-        public List<string> Instruments { get; set; }
 
         // This section is for the calendar event form
+        [Display(Name = "ShowTitle")]
+        public string Title { get; set; }
 
         [DataType(DataType.DateTime)]
-        [Display(Name = "DateTime")]
-        public DateTime DateTime { get; set; }
+        [Display(Name = "StartDateTime")]
+        public DateTime StartDateTime { get; set; }
+
+        [DataType(DataType.DateTime)]
+        [Display(Name = "EndDateTime")]
+        public DateTime EndDateTime { get; set; }
 
         [Display(Name = "VenueName")]
         public int VenueID { get; set; }

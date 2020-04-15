@@ -66,13 +66,6 @@ namespace Harmony.Models
         [Display(Name = "Genre")]
         public string GenreName { get; set; }
 
-        [StringLength(50)]
-        [Display(Name = "BandMemberName")]
-        public string BandMemberName { get; set; }
-
-        [StringLength(50)]
-        [Display(Name = "Instruments")]
-        public string InstrumentName { get; set; }
         public List<SelectListItem> stateList { get; set; }
     }
 
@@ -201,14 +194,6 @@ namespace Harmony.Models
         [StringLength(50)]
         [Display(Name = "Genre")]
         public string GenreName { get; set; }
-
-        [StringLength(50)]
-        [Display(Name = "BandMemberName")]
-        public string BandMemberName { get; set; }
-
-        [StringLength(50)]
-        [Display(Name = "Instruments")]
-        public string InstrumentName { get; set; }
 
         public List<SelectListItem> stateList { get; set; }
 
