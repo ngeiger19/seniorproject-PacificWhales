@@ -2,6 +2,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Harmony;
 using Harmony.Controllers;
+using Harmony.Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HarmonyTest
 {
@@ -15,6 +18,16 @@ namespace HarmonyTest
             UsersController Controller = new UsersController();
 
             return true;
+        }
+
+        [TestMethod]
+        public void CityQuery_EmptyList_ReturnsEmptyList()
+        {
+            HomeController controller = new HomeController();
+            IEnumerable<User> users = Enumerable.Empty<User>();
+            
+            IEnumerable<User> result = controller.CityQuery(users, "Salem");
+            Assert.AreEqual(users.Count(), result.Count());
         }
     }
 }
