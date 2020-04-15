@@ -60,6 +60,28 @@ namespace Harmony.Controllers
                 _userManager = value;
             }
         }
+        public List<SelectListItem> ParseJsonStringOfStatesToSelectList(string data)
+        {
+            JArray arr = JArray.Parse(data);
+            List<SelectListItem> stateList = new List<SelectListItem>();
+            foreach (var item in arr)
+            {
+                stateList.Add(new SelectListItem { Text = (string)item["name"], Value = (string)item["name"] });
+            }
+            return stateList;
+        }
+        public List<SelectListItem> ReadAllStatesFromJSON()
+        {
+            StreamReader sr = new StreamReader(Server.MapPath("~/Content/states_hash.json"));
+            string data = sr.ReadToEnd();
+            JArray arr = JArray.Parse(data);
+            List<SelectListItem> stateList = new List<SelectListItem>();
+            foreach (var item in arr)
+            {
+                stateList.Add(new SelectListItem { Text = (string)item["name"], Value = (string)item["name"] });
+            }
+            return stateList;
+        }
 
         //
         // GET: /Account/Login
@@ -148,23 +170,13 @@ namespace Harmony.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            StreamReader sr = new StreamReader(Server.MapPath("~/Content/states_hash.json"));
-            string data = sr.ReadToEnd();
-            JArray arr = JArray.Parse(data);
-            List<SelectListItem> stateList = new List<SelectListItem>();
-            foreach (var item in arr)
-            {
-                stateList.Add(new SelectListItem { Text = (string)item["name"], Value = (string)item["name"] });
-            }
             RegisterViewModel model = new RegisterViewModel
             {
-                stateList = stateList
+                stateList = ReadAllStatesFromJSON()
             };
-            
             // ViewData.Clear();
             // ViewBag.State = stateList;
             // ViewData["State"] = stateList;
-            sr.Dispose();
             return View(model);
         }
 
@@ -252,13 +264,7 @@ namespace Harmony.Controllers
                 }
                 AddErrors(result);
             }
-            StreamReader sr = new StreamReader(Server.MapPath("~/Content/states_hash.json"));
-            string data = sr.ReadToEnd();
-            JArray arr = JArray.Parse(data);
-            foreach (var item in arr)
-            {
-                model.stateList.Add(new SelectListItem { Text = (string)item["name"], Value = (string)item["name"] });
-            }
+            model.stateList = ReadAllStatesFromJSON();
             // ViewBag.State = stateList;
             // ViewData["State"] = stateList;
             // If we got this far, something failed, redisplay form
@@ -553,13 +559,7 @@ namespace Harmony.Controllers
                 }
                 AddErrors(result);
             }
-            StreamReader sr = new StreamReader(Server.MapPath("~/Content/states_hash.json"));
-            string data = sr.ReadToEnd();
-            JArray arr = JArray.Parse(data);
-            foreach (var item in arr)
-            {
-                model.stateList.Add(new SelectListItem { Text = (string)item["name"], Value = (string)item["name"] });
-            }
+            model.stateList = ReadAllStatesFromJSON();
             // ViewBag.State = stateList;
             // ViewData["State"] = stateList;
             // If we got this far, something failed, redisplay form
