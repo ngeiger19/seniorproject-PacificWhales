@@ -90,23 +90,19 @@ namespace Harmony.Controllers
 
         public IEnumerable<User> GenreQuery(IEnumerable<User> users, string genre)
         {
-            IEnumerable<User> empty = Enumerable.Empty<User>();
             if (genre != null && genre != "")
             {
-                var genres =
-                    from g in db.Genres
-                    where g.GenreName == genre
-                    select g;
+                Genre g = new Genre();
 
-                if (genres.Count() == 0)
+                foreach(Genre x in db.Genres)
                 {
-                    return empty;
+                    g = x;
                 }
 
-                IEnumerable <User> genreQuery =
-                    from user in users
-                    where user.Genres.Contains(genres.First())
-                    select user;
+                var genreQuery =
+                    from musician in users
+                    where musician.Genres.Contains(g)
+                    select musician;
 
                 ViewBag.Genre = genre;
                 return genreQuery;

@@ -213,11 +213,13 @@ namespace Harmony
                         Location = db.Venues.Find(viewModel.VenueID).VenueName,
                         Start = new EventDateTime()
                         {
-                            DateTime = viewModel.StartDateTime.ToLocalTime()
+                            DateTime = viewModel.StartDateTime.AddHours(7.0),
+                            TimeZone = "America/Los_Angeles"
                         },
                         End = new EventDateTime()
                         {
-                            DateTime = viewModel.EndDateTime.ToLocalTime()
+                            DateTime = viewModel.EndDateTime.AddHours(7.0),
+                            TimeZone = "America/Los_Angeles"
                         },
                         Attendees = new List<EventAttendee>()
                         {
