@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using Harmony.DAL;
 using Harmony.Models;
+using Microsoft.AspNet.Identity;
+using System.Security.Claims;
 
 namespace Harmony.Controllers
 {
@@ -16,10 +18,14 @@ namespace Harmony.Controllers
         private HarmonyContext db = new HarmonyContext();
 
         // GET: User_Show
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            var user_Show = db.User_Show.Include(u => u.Show).Include(u => u.User).Include(u => u.User1);
-            return View(user_Show.ToList());
+            var user_shows =
+                from show in db.User_Show
+                where show.MusicianID == id
+                orderby show.Show.EndDateTime descending
+                select show;
+            return View(user_shows.ToList());
         }
 
         // GET: User_Show/Details/5
