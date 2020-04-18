@@ -438,6 +438,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Home\MusicianSearchResults.cshtml" />
+    <Content Include="Views\Users\MyShows.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

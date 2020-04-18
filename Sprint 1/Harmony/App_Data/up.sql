@@ -256,10 +256,12 @@ CREATE TABLE [dbo].[Shows]
 	[StartDateTime]		DateTime		NOT NULL,
 	[EndDateTime]		DateTime		NOT NULL,
 	[VenueID]		INT		NULL,
+	[MusicianID]	INT		NULL,
 	[Description]		NVARCHAR(500)		NULL,
 	[DateBooked]	DateTime		NOT NULL,
 	CONSTRAINT [PK_dbo.Shows] PRIMARY KEY CLUSTERED ([ID] ASC),
-	CONSTRAINT [FK_dbo.Shows_dbo.Venues_ID] FOREIGN KEY ([VenueID]) REFERENCES [dbo].[Venues] ([ID])
+	CONSTRAINT [FK_dbo.Shows_dbo.Venues_ID] FOREIGN KEY ([VenueID]) REFERENCES [dbo].[Venues] ([ID]),
+	CONSTRAINT [FK_dbo.Shows_dbo.Users_ID] FOREIGN KEY ([MusicianID]) REFERENCES [dbo].[Users] ([ID])
 );
 
 -- #######################################
