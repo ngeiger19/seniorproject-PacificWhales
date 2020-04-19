@@ -346,6 +346,20 @@ namespace Harmony
             return RedirectToAction("Index");
         }
 
+        /*********************************
+         *          VIEW SHOWS
+         * ******************************/
+         public ActionResult MyShows(int id)
+        {
+            // Query shows that match user's id
+            var shows =
+                from show in db.User_Show
+                where show.MusicianID == id
+                select show;
+
+            return View(shows.ToList());
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
