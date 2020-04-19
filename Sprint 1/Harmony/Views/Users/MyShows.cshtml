@@ -1,4 +1,15 @@
-﻿@model Harmony.Models.ShowsViewModel
+﻿@model IEnumerable<Harmony.Models.ShowsViewModel>
 
+@if (Model.Count() > 0)
+{
 
+}
 
+@if (Model.Count() < 1)
+{
+    <div class="row">
+        <div class="col-8 offset-2 shadow p-3 mb-5 bg-white rounded" style="margin-top: 40px;">
+            <h2 style="text-align:center;">You haven't booked any shows</h2>
+        </div>
+    </div>
+}

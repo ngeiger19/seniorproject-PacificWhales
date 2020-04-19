@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using Harmony.DAL;
 
 namespace Harmony.Models
 {
     public class ShowsViewModel
     {
+        HarmonyContext db = new HarmonyContext();
         public ShowsViewModel(User_Show show)
         {
             MusicianID = show.MusicianID;
@@ -17,6 +19,14 @@ namespace Harmony.Models
             StartTime = show.Show.StartDateTime;
             EndTime = show.Show.EndDateTime;
             DateBooked = show.Show.DateBooked;
+
+            VenueName = (from v in db.Venues
+                         where v.ID == show.VenueOwnerID
+                         select v).First().VenueName;
+
+            MusicianName = (from u in db.Users
+                            where u.ID == show.MusicianID
+                            select u).First().FirstName;
         }
 
         public int ID { get; set; }
@@ -44,5 +54,11 @@ namespace Harmony.Models
         [Required]
         [Display(Name = "Date Booked")]
         public DateTime DateBooked { get; set; }
+
+        [Display(Name = "Venue")]
+        public string VenueName { get; set; }
+
+        [Display(Name = "Musician")]
+        public string MusicianName { get; set; }
     }
 }

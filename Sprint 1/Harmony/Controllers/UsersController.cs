@@ -355,6 +355,7 @@ namespace Harmony
             var shows =
                 from show in db.User_Show
                 where show.MusicianID == id
+                orderby show.Show.EndDateTime descending
                 select show;
 
             return View(shows.ToList());
