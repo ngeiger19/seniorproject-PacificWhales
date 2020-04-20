@@ -352,13 +352,13 @@ namespace Harmony
          public ActionResult MyShows(int id)
         {
             // Query shows that match user's id
-            var shows =
+            IEnumerable<User_Show> shows =
                 from show in db.User_Show
                 where show.MusicianID == id
                 orderby show.Show.EndDateTime descending
                 select show;
 
-            return View(shows.ToList());
+            return View(shows);
         }
 
         protected override void Dispose(bool disposing)
