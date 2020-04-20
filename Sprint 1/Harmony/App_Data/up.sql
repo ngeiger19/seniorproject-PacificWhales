@@ -2,7 +2,7 @@
 -- Please also follow our convention, README: https://github.com/lawlouis/seniorproject-PacificWhales/blob/master/CONTRIBUTING.md
 
 ------------FOR IDENTITY MODEL------------------------------- COMMENT THIS SECTION OUT IF NECESSARY
-
+/**
 -- #######################################
 -- #          AspNetRoles Table          #
 -- #######################################
@@ -96,12 +96,12 @@ CREATE NONCLUSTERED INDEX [IX_RoleId] ON [dbo].[AspNetUserRoles]([RoleId] ASC);
 	[RoleName]		NVARCHAR (50)		NOT NULL,
 	CONSTRAINT [PK_dbo.Roles] PRIMARY KEY CLUSTERED ([ID] ASC)
 ); */
-
+*/
 -- #######################################
 -- #             Users Table             #
 -- #######################################
 -- enable the ShowsBooked and AveRating later on
-CREATE TABLE [dbo].[Users]
+/*CREATE TABLE [dbo].[Users]
 (
 	[ID]		INT IDENTITY (1,1)	NOT NULL,
 	[FirstName]		NVARCHAR (50)		NOT NULL,
@@ -117,7 +117,7 @@ CREATE TABLE [dbo].[Users]
 	CONSTRAINT [PK_dbo.Users] PRIMARY KEY CLUSTERED ([ID] ASC)
 	-- CONSTRAINT [FK_dbo.Users_dbo.Roles_ID] FOREIGN KEY ([RoleID]) REFERENCES [dbo].[Roles] ([ID])
 
-);
+); */
 
 --------FOR VENUE OWNERS-----------------------------------
 

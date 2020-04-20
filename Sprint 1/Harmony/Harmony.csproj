@@ -230,10 +230,10 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\Show.cs" />
+    <Compile Include="Models\ShowsViewModel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\User_Show.cs" />
     <Compile Include="Models\Venue.cs" />
-    <Compile Include="Models\VenueSearchModel.cs" />
     <Compile Include="Models\VenueType.cs" />
     <Compile Include="Models\Video.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -245,6 +245,10 @@
     <Content Include="3.jpg" />
     <Content Include="4.jpg" />
     <Content Include="App_Data\down.sql" />
+    <Content Include="App_Data\harmonyshow.mdf" />
+    <Content Include="App_Data\harmonyshow_log.ldf">
+      <DependentUpon>harmonyshow.mdf</DependentUpon>
+    </Content>
     <Content Include="App_Data\seed.sql" />
     <Content Include="App_Data\test.sql" />
     <Content Include="App_Data\up.sql" />
