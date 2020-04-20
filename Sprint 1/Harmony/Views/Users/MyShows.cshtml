@@ -13,20 +13,21 @@
                     <th>End Time</th>
                     <th></th>
                 </tr>
-            </table>
-            @foreach (var show in Model)
-            {
-                if (show.EndTime < DateTime.Now)
+
+                @foreach (var show in Model)
                 {
-                    <tr>
-                        <td>@Html.DisplayFor(x => show.VenueName)</td>
-                        <td>@Html.DisplayFor(x => show.DateBooked)</td>
-                        <td>@Html.DisplayFor(x => show.StartTime)</td>
-                        <td>@Html.DisplayFor(x => show.EndTime)</td>
-                        <td></td>
-                    </tr>
+                    if (show.Show.EndDateTime < DateTime.Now)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(x => show.VenueOwnerID)</td>
+                            <td>@Html.DisplayFor(x => show.Show.DateBooked)</td>
+                            <td>@Html.DisplayFor(x => show.Show.StartDateTime)</td>
+                            <td>@Html.DisplayFor(x => show.Show.EndDateTime)</td>
+                            <td></td>
+                        </tr>
+                    }
                 }
-            }
+            </table>
         </div>
     </div>
 }
