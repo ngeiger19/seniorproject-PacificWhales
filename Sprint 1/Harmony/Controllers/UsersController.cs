@@ -349,28 +349,9 @@ namespace Harmony
         /*********************************
          *          VIEW SHOWS
          * ******************************/
-         public ActionResult MyShows(int id)
+         public ActionResult MyShows(int? id)
         {
             // Query shows that match user's id
-            Show newShow = new Show
-            {
-                Title = "My Show",
-                StartDateTime = DateTime.Now,
-                EndDateTime = DateTime.Now,
-                Description = "Description",
-                DateBooked = DateTime.Now,
-                VenueID = 1
-            };
-            db.Shows.Add(newShow);
-            User_Show user_Show = new User_Show
-            {
-                MusicianID = id,
-                VenueOwnerID = 1,
-                ShowID = newShow.ID
-            };
-            db.User_Show.Add(user_Show);
-            db.SaveChanges();
-
             IEnumerable<User_Show> shows =
                 from show in db.User_Show
                 where show.MusicianID == id

@@ -1,7 +1,7 @@
 ﻿-- #######################################
 -- #       Drop All Identity Tables      #
 -- #######################################
-/*
+
 ALTER TABLE [dbo].[AspNetUserClaims]  DROP CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId] 
 
 ALTER TABLE [dbo].[AspNetUserLogins]  DROP CONSTRAINT [FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId] 
@@ -19,10 +19,11 @@ DROP TABLE [dbo].[AspNetRoles]
 DROP TABLE [dbo].[AspNetUserClaims]
 
 DROP TABLE [dbo].[AspNetUserLogins] 
-*/
+
 -- #######################################
 -- #    Drop All Users/Profile Tables    #
 -- #######################################
+
 ALTER TABLE [dbo].[User_Show]  DROP CONSTRAINT [FK_dbo.User_Show_dbo.Musicians_Id] 
 
 ALTER TABLE [dbo].[User_Show]  DROP CONSTRAINT [FK_dbo.User_Show_dbo.VenueOwners_Id] 
@@ -52,7 +53,7 @@ ALTER TABLE [dbo].[Musician_Genre]  DROP CONSTRAINT [FK_dbo.Musician_Genre_dbo.G
 
 ALTER TABLE [dbo].[BandMember_Instrument]  DROP CONSTRAINT [FK_dbo.BandMember_Instrument_dbo.Instruments_ID]
 
-ALTER TABLE [dbo].[BandMembers]  DROP CONSTRAINT [FK_dbo.BandMembers_dbo.Users_ID]*/
+ALTER TABLE [dbo].[BandMembers]  DROP CONSTRAINT [FK_dbo.BandMembers_dbo.Users_ID] */
 
 ALTER TABLE [dbo].[Venues]  DROP CONSTRAINT [FK_dbo.Venues_dbo.VenueTypes_ID]
 
@@ -64,11 +65,12 @@ DROP TABLE [dbo].[Musician_Genre]
 
 DROP TABLE [dbo].[Genres]
 
-/*DROP TABLE [dbo].[BandMember_Instrument]
+/*
+DROP TABLE [dbo].[BandMember_Instrument]
 
 DROP TABLE [dbo].[Instruments]
 
-DROP TABLE [dbo].[BandMembers]*/
+DROP TABLE [dbo].[BandMembers] */
 
 DROP TABLE [dbo].[Venues]
 

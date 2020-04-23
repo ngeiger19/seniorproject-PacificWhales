@@ -11,7 +11,6 @@ namespace Harmony.Models
     public class ShowsViewModel
     {
         HarmonyContext db = new HarmonyContext();
-        private IEnumerable<User_Show> shows;
 
         public ShowsViewModel(User_Show show)
         {
@@ -29,11 +28,6 @@ namespace Harmony.Models
             MusicianName = (from u in db.Users
                             where u.ID == show.MusicianID
                             select u).First().FirstName;
-        }
-
-        public ShowsViewModel(IEnumerable<User_Show> shows)
-        {
-            this.shows = shows;
         }
 
         public int ID { get; set; }

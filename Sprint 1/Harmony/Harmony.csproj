@@ -443,6 +443,7 @@
     </Content>
     <Content Include="Views\Home\MusicianSearchResults.cshtml" />
     <Content Include="Views\Users\MyShows.cshtml" />
+    <Content Include="Views\Venues\MyShows.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

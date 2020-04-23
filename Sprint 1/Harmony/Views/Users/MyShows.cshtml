@@ -7,7 +7,7 @@
             <h3 id="form-title">Completed Shows</h3>
             <table>
                 <tr>
-                    <th>Venue</th>
+                    <th>Title</th>
                     <th>Date Booked</th>
                     <th>Start Time</th>
                     <th>End Time</th>
@@ -19,7 +19,7 @@
                     if (show.Show.EndDateTime < DateTime.Now)
                     {
                         <tr>
-                            <td>@Html.DisplayFor(x => show.VenueOwnerID)</td>
+                            <td>@Html.DisplayFor(x => show.Show.Title)</td>
                             <td>@Html.DisplayFor(x => show.Show.DateBooked)</td>
                             <td>@Html.DisplayFor(x => show.Show.StartDateTime)</td>
                             <td>@Html.DisplayFor(x => show.Show.EndDateTime)</td>
