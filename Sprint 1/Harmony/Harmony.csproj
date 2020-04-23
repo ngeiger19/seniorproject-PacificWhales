@@ -444,6 +444,8 @@
     <Content Include="Views\Home\MusicianSearchResults.cshtml" />
     <Content Include="Views\Users\MyShows.cshtml" />
     <Content Include="Views\Venues\MyShows.cshtml" />
+    <Content Include="Views\Users\ShowDetails.cshtml" />
+    <Content Include="Views\Venues\ShowDetails.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

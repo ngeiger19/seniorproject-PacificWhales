@@ -14,6 +14,7 @@ namespace Harmony.Models
 
         public ShowsViewModel(User_Show show)
         {
+            Title = show.Show.Title;
             MusicianID = show.MusicianID;
             VenueID = show.VenueOwnerID;
             ShowID = show.ShowID;
@@ -22,7 +23,7 @@ namespace Harmony.Models
             DateBooked = show.Show.DateBooked;
 
             VenueName = (from v in db.Venues
-                         where v.ID == show.VenueOwnerID
+                         where v.UserID == show.VenueOwnerID
                          select v).First().VenueName;
 
             MusicianName = (from u in db.Users
@@ -31,6 +32,10 @@ namespace Harmony.Models
         }
 
         public int ID { get; set; }
+
+        [Required]
+        [Display(Name = "Title")]
+        public string Title { get; set; }
 
         [Required]
         [Display(Name = "Musician ID")]

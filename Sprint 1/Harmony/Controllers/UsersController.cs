@@ -361,6 +361,16 @@ namespace Harmony
             return View(shows);
         }
 
+        public ActionResult ShowDetails(int? id)
+        {
+            // Find show and create viewmodel
+            User_Show show = db.User_Show.Find(id);
+
+            ShowsViewModel viewModel = new ShowsViewModel(show);
+
+            return View(viewModel);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
