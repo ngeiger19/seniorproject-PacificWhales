@@ -144,6 +144,21 @@ namespace Calendar.ASP.NET.MVC5
             return RedirectToAction("Index");
         }
 
+        public ActionResult MyShows(int? id)
+        {
+            // Getting venue owner's ID
+            int venueID = db.Users.Where(u => u.ID == id).First().ID;
+
+            // Query shows that match user's id
+            IEnumerable<User_Show> shows =
+                from show in db.User_Show
+                where show.VenueOwnerID == venueID
+                orderby show.Show.EndDateTime descending
+                select show;
+
+            return View(shows);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
