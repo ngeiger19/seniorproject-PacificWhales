@@ -269,11 +269,25 @@ CREATE TABLE [dbo].[Shows]
 CREATE TABLE [dbo].[User_Show]
 (
 	[MusicianID]		INT 	NOT NULL,
+	[MusicianRated]		BIT		NOT NULL,
 	[VenueOwnerID]		INT		NOT NULL,
+	[VenueRated]		BIT		NOT NULL,
 	[ShowID]		INT		NOT NULL,
 	CONSTRAINT [PK_dbo.User_Show] PRIMARY KEY CLUSTERED ([MusicianID], [VenueOwnerID], [ShowID] ASC),
 	CONSTRAINT [FK_dbo.User_Show_dbo.Musicians_ID] FOREIGN KEY ([MusicianID]) REFERENCES [dbo].[Users] ([ID]),
 	CONSTRAINT [FK_dbo.User_Show_dbo.VenueOwners_ID] FOREIGN KEY ([VenueOwnerID]) REFERENCES [dbo].[Users] ([ID]),
 	CONSTRAINT [FK_dbo.User_Show_dbo.Shows_ID] FOREIGN KEY ([ShowID]) REFERENCES [dbo].[Shows] ([ID])
+);
+
+-- #######################################
+-- #           Rating Table              #
+-- #######################################
+
+CREATE TABLE [dbo].[Ratings]
+(
+	[ID]		INT IDENTITY (1,1)	NOT NULL,
+	[UserID]		INT		NOT NULL,
+	CONSTRAINT [PK_dbo.Ratings] PRIMARY KEY CLUSTERED ([ID] ASC),
+	CONSTRAINT [FK_dbo.Ratings_dbo.Users_ID] FOREIGN KEY ([UserID]) REFERENCES [dbo].[Users] ([ID])
 );
 
