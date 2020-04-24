@@ -19,14 +19,18 @@
                 {
                     if (show.Show.EndDateTime < DateTime.Now)
                     {
-                        <tr>
-                            <td>@Html.DisplayFor(x => show.Show.Title)</td>
-                            <td>@Html.DisplayFor(x => show.Show.DateBooked)</td>
-                            <td>@Html.DisplayFor(x => show.Show.StartDateTime)</td>
-                            <td>@Html.DisplayFor(x => show.Show.EndDateTime)</td>
-                            <td>@Html.ActionLink("Details", "ShowDetails", new { id = show.Show.ID })</td>
+                    <tr>
+                        <td>@Html.DisplayFor(x => show.Show.Title)</td>
+                        <td>@Html.DisplayFor(x => show.Show.DateBooked)</td>
+                        <td>@Html.DisplayFor(x => show.Show.StartDateTime)</td>
+                        <td>@Html.DisplayFor(x => show.Show.EndDateTime)</td>
+                        <td>@Html.ActionLink("Details", "ShowDetails", new { id = show.Show.ID })</td>
+                        @if (show.MusicianRated == 0)
+                        {
                             <td>@Html.ActionLink("Rate", "Rate", new { id = show.Show.ID })</td>
-                        </tr>
+                        }
+
+                    </tr>
                     }
                 }
             </table>
