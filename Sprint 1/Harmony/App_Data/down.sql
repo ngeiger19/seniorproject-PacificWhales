@@ -37,6 +37,13 @@ DROP TABLE [dbo].[User_Show]
 DROP TABLE [dbo].[Shows] 
 
 -- #######################################
+-- #    Drop Ratings Table			     #
+-- #######################################
+ALTER TABLE [dbo].[Ratings] DROP CONSTRAINT [FK_dbo.Ratings_dbo.Users_Id]
+
+DROP TABLE [dbo].[Ratings]
+
+-- #######################################
 -- #    Drop All Users/Profile Tables    #
 -- #######################################
 ALTER TABLE [dbo].[Videos]  DROP CONSTRAINT [FK_dbo.Videos_dbo.Users_ID]

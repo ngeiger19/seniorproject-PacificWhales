@@ -269,9 +269,9 @@ CREATE TABLE [dbo].[Shows]
 CREATE TABLE [dbo].[User_Show]
 (
 	[MusicianID]		INT 	NOT NULL,
-	[MusicianRated]		BIT		NOT NULL,
+	[MusicianRated]		BIT		NULL	DEFAULT 0,
 	[VenueOwnerID]		INT		NOT NULL,
-	[VenueRated]		BIT		NOT NULL,
+	[VenueRated]		BIT		NULL	DEFAULT 0,
 	[ShowID]		INT		NOT NULL,
 	CONSTRAINT [PK_dbo.User_Show] PRIMARY KEY CLUSTERED ([MusicianID], [VenueOwnerID], [ShowID] ASC),
 	CONSTRAINT [FK_dbo.User_Show_dbo.Musicians_ID] FOREIGN KEY ([MusicianID]) REFERENCES [dbo].[Users] ([ID]),
@@ -286,6 +286,7 @@ CREATE TABLE [dbo].[User_Show]
 CREATE TABLE [dbo].[Ratings]
 (
 	[ID]		INT IDENTITY (1,1)	NOT NULL,
+	[Rating]		INT		NOT NULL,
 	[UserID]		INT		NOT NULL,
 	CONSTRAINT [PK_dbo.Ratings] PRIMARY KEY CLUSTERED ([ID] ASC),
 	CONSTRAINT [FK_dbo.Ratings_dbo.Users_ID] FOREIGN KEY ([UserID]) REFERENCES [dbo].[Users] ([ID])
