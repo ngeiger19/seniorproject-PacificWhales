@@ -18,6 +18,7 @@ namespace Harmony.Models
             Venues = new HashSet<Venue>();
             Videos = new HashSet<Video>();
             Genres = new HashSet<Genre>();
+            Ratings = new HashSet<Rating>();
         }
 
         public int ID { get; set; }
@@ -69,6 +70,9 @@ namespace Harmony.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Show> Shows { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Rating> Ratings { get; set; }
 
     }
 }

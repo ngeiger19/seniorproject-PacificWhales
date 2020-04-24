@@ -12,6 +12,7 @@
                     <th>>@Html.DisplayNameFor(model => model.Show.StartDateTime)</th>
                     <th>>@Html.DisplayNameFor(model => model.Show.EndDateTime)</th>
                     <th></th>
+                    <th></th>
                 </tr>
 
                 @foreach (var show in Model)
@@ -24,6 +25,7 @@
                             <td>@Html.DisplayFor(x => show.Show.StartDateTime)</td>
                             <td>@Html.DisplayFor(x => show.Show.EndDateTime)</td>
                             <td>@Html.ActionLink("Details", "ShowDetails", new { id = show.Show.ID })</td>
+                            <td>@Html.ActionLink("Rate", "Rate", new { id = show.Show.ID })</td>
                         </tr>
                     }
                 }

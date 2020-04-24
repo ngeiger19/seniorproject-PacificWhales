@@ -12,5 +12,7 @@ namespace Harmony.Models
         public int Value { get; set; }
 
         public int? UserID { get; set; }
+
+        public virtual User User { get; set; }
     }
 }
