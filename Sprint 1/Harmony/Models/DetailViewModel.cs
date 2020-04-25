@@ -30,10 +30,12 @@ namespace Harmony.Models
         public int ID { get; set; }
 
         [Required]
+        [Display(Name = "First Name")]
         [StringLength(50)]
         public string FirstName { get; set; }
 
         [Required]
+        [Display(Name = "Last Name")]
         [StringLength(50)]
         public string LastName { get; set; }
 
@@ -54,27 +56,34 @@ namespace Harmony.Models
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Venue Name")]
         public string VenueName { get; set; }
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Address Line 1")]
         public string AddressLine1 { get; set; }
 
         [StringLength(50)]
+        [Display(Name = "Address Line 2")]
         public string AddressLine2 { get; set; }
 
         [Required]
         [StringLength(50)]
+        [Display(Name = "Venue City")]
         public string VenueCity { get; set; }
 
         [Required]
         [StringLength(24)]
+        [Display(Name = "Venue State")]
         public string VenueState { get; set; }
 
         [Required]
         [StringLength(10)]
+        [Display(Name = "Zip Code")]
         public string ZipCode { get; set; }
 
+        [Display(Name = "Type Name")]
         public string TypeName { get; set; }
 
         public IEnumerable<CalendarEventGroup> UpcomingEvents { get; set; }
@@ -97,8 +106,10 @@ namespace Harmony.Models
 
         public int ID { get; set; }
 
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         public string City { get; set; }
@@ -112,18 +123,18 @@ namespace Harmony.Models
         public List<string> Genres { get; set; }
 
         // This section is for the calendar event form
-        [Display(Name = "ShowTitle")]
+        [Display(Name = "Show Title")]
         public string Title { get; set; }
 
         [DataType(DataType.DateTime)]
-        [Display(Name = "StartDateTime")]
+        [Display(Name = "Start Time")]
         public DateTime StartDateTime { get; set; }
 
         [DataType(DataType.DateTime)]
-        [Display(Name = "EndDateTime")]
+        [Display(Name = "End Time")]
         public DateTime EndDateTime { get; set; }
 
-        [Display(Name = "VenueName")]
+        [Display(Name = "Venue Name")]
         public int VenueID { get; set; }
 
         public string ShowDescription { get; set; }

@@ -346,6 +346,31 @@ namespace Harmony
             return RedirectToAction("Index");
         }
 
+        /*********************************
+         *          VIEW SHOWS
+         * ******************************/
+         public ActionResult MyShows(int? id)
+        {
+            // Query shows that match user's id
+            IEnumerable<User_Show> shows =
+                from show in db.User_Show
+                where show.MusicianID == id
+                orderby show.Show.EndDateTime descending
+                select show;
+
+            return View(shows);
+        }
+
+        public ActionResult ShowDetails(int? id)
+        {
+            // Find show and create viewmodel
+            User_Show show = db.User_Show.Find(id);
+
+            ShowsViewModel viewModel = new ShowsViewModel(show);
+
+            return View(viewModel);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
