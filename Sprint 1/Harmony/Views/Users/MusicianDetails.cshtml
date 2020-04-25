@@ -13,7 +13,7 @@
 <div class="container black-font">
     <h4 style="color:seashell;font-family: Broadway; font-size: 30px">Musician Profile Page</h4>
     <div class="row" id="musicianprofile">
-        <div class="col-md-4">
+        <div class="col-md-2">
             @{
                 if (User.IsInRole("VenueOwner"))
                 {
@@ -66,6 +66,9 @@
             <div>
                 <img src="~/singer.jpg" id="musicianprofilepic" />
             </div>
+        </div>
+        <div class="col-md-4">
+            @Html.ActionLink("View My Shows", "MyShows", new { id = Model.ID })
         </div>
         <!------------------------------- HELPERS FOR FORMATTING EVENTS -------------------------------->
         @helper FormatEventTime(CalendarData.EventDateTime when)
