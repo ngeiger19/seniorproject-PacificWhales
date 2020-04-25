@@ -36,6 +36,9 @@ namespace Harmony.Models
 
         // For Availability
         public IEnumerable<CalendarEventGroup> UpcomingEvents { get; set; }
+
+        // For Upcoming Shows
+        public List<Show> UpcomingShows { get; set; }
     }
 
     public class ManageLoginsViewModel

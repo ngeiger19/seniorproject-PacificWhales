@@ -66,7 +66,7 @@ namespace Harmony
         /*******************************************
          *          MUSICIAN PROFILE
          *  *************************************/
-        // GET: Users/Details/5
+        // GET: Users/MusicianDetails/5
         public async Task<ActionResult> MusicianDetails(int? id)
         {
             // No user id passed through

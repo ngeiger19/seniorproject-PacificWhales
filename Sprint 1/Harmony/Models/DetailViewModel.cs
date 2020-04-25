@@ -11,31 +11,28 @@ namespace Harmony.Models
 {
     public class VenueOwnerDetailViewModel
     {
+        public VenueOwnerDetailViewModel() { }
         public VenueOwnerDetailViewModel(Venue venue)
         {
             ID = venue.ID;
-            FirstName = venue.User.FirstName;
-            LastName = venue.User.LastName;
+            Owner = venue.User.FirstName + " " + venue.User.LastName;
             City = venue.City;
             State = venue.State;
-            Email = venue.User.Email;
+            OwnerEmail = venue.User.Email;
             Description = venue.User.Description;
             VenueName = venue.VenueName;
             AddressLine1 = venue.AddressLine1;
             AddressLine2 = venue.AddressLine2;
             ZipCode = venue.ZipCode;
-            TypeName = venue.VenueType.TypeName;
+            Type = venue.VenueType.TypeName;
+            UserID = venue.UserID;
         }
 
         public int ID { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string FirstName { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string LastName { get; set; }
+        public string Owner { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -47,7 +44,7 @@ namespace Harmony.Models
 
         [Required]
         [StringLength(100)]
-        public string Email { get; set; }
+        public string OwnerEmail { get; set; }
 
         [StringLength(300)]
         public string Description { get; set; }
@@ -75,7 +72,26 @@ namespace Harmony.Models
         [StringLength(10)]
         public string ZipCode { get; set; }
 
-        public string TypeName { get; set; }
+        public string Type { get; set; }
+
+        public int UserID { get; set; }
+
+        // This section is for the calendar event form
+        [Display(Name = "ShowTitle")]
+        public string Title { get; set; }
+
+        [DataType(DataType.DateTime)]
+        [Display(Name = "StartDateTime")]
+        public DateTime StartDateTime { get; set; }
+
+        [DataType(DataType.DateTime)]
+        [Display(Name = "EndDateTime")]
+        public DateTime EndDateTime { get; set; }
+
+        public string ShowDescription { get; set; }
+
+        public DateTime DateBooked { get; set; }
+        public List<SelectListItem> VenueList { get; set; }
 
         public IEnumerable<CalendarEventGroup> UpcomingEvents { get; set; }
     }
