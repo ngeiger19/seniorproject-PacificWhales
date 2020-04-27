@@ -27,7 +27,7 @@
                         <td>@Html.ActionLink("Details", "ShowDetails", new { id = show.Show.ID })</td>
                         @if (show.MusicianRated == 0)
                         {
-                            <td>@Html.ActionLink("Rate", "Rate", new { id = show.Show.ID })</td>
+                            <td>@Html.ActionLink("Rate", "RateUser", new { show = show })</td>
                         }
 
                     </tr>

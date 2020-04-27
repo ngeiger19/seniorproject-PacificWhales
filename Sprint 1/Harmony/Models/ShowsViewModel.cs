@@ -52,10 +52,10 @@ namespace Harmony.Models
         public int ShowID { get; set; }
 
         [Required]
-        public bool MusicianRated { get; set; }
+        public int MusicianRated { get; set; }
 
         [Required]
-        public bool VenueRated { get; set; }
+        public int VenueRated { get; set; }
 
         [Required]
         [Display(Name = "Start Date")]

@@ -379,7 +379,7 @@ namespace Harmony
             return View(show);
         }
 
-        public ActionResult Rate(User_Show show, int rating)
+        public ActionResult RateUser(User_Show show, int rating)
         {
             Models.Rating userRating = new Models.Rating
             {
