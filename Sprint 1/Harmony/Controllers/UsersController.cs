@@ -33,6 +33,7 @@ namespace Harmony
 
         private readonly IDataStore dataStore = new FileDataStore(GoogleWebAuthorizationBroker.Folder);
 
+        // Converts rating string into int
         public int getRating(string ratingStr)
         {
             if (ratingStr == "star1")
@@ -416,7 +417,7 @@ namespace Harmony
             };
 
             show.VenueRated = 1;
-
+            
             db.Ratings.Add(userRating);
             db.SaveChanges();
 

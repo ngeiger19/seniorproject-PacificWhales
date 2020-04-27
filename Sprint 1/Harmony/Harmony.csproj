@@ -448,6 +448,7 @@
     <Content Include="Views\Users\ShowDetails.cshtml" />
     <Content Include="Views\Venues\ShowDetails.cshtml" />
     <Content Include="Views\Users\RateUser.cshtml" />
+    <Content Include="Views\Venues\RateUser.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

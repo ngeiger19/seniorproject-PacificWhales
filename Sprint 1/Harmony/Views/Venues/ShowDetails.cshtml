@@ -11,5 +11,6 @@
             <p>Start: @Model.StartTime</p>
             <p>End: @Model.EndTime</p>
         </div>
+        @Html.ActionLink("Return to shows", "MyShows", new { id = Model.VenueID })
     </div>
 }
