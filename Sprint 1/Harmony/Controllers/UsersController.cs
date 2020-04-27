@@ -33,6 +33,30 @@ namespace Harmony
 
         private readonly IDataStore dataStore = new FileDataStore(GoogleWebAuthorizationBroker.Folder);
 
+        public int getRating(string ratingStr)
+        {
+            if (ratingStr == "star1")
+            {
+                return 1;
+            }
+            else if (ratingStr == "star2")
+            {
+                return 2;
+            }
+            else if (ratingStr == "star3")
+            {
+                return 3;
+            }
+            else if (ratingStr == "star4")
+            {
+                return 4;
+            }
+            else
+            {
+                return 5;
+            }
+        }
+
         // Get user's Google Calendar info
         private async Task<UserCredential> GetCredentialForApiAsync()
         {
@@ -374,25 +398,31 @@ namespace Harmony
         /*********************************
          *          RATE SHOWS
          * ******************************/
-         public ActionResult Rate(User_Show show)
+         public ActionResult RateUser(User_Show show)
         {
-            return View(show);
+            ShowsViewModel viewModel = new ShowsViewModel(show);
+            return View(viewModel);
         }
 
-        public ActionResult RateUser(User_Show show, int rating)
+        public ActionResult RateUser(User_Show show, string rating)
         {
+            // Converting string into int
+            int numStars = getRating(rating);
+
             Models.Rating userRating = new Models.Rating
             {
                 UserID = show.VenueOwnerID,
-                Value = rating
+                Value = numStars
             };
 
-            show.MusicianRated = 1;
+            show.VenueRated = 1;
 
             db.Ratings.Add(userRating);
             db.SaveChanges();
 
-            return View();
+            ShowsViewModel viewModel = new ShowsViewModel(show);
+
+            return View(viewModel);
         }
 
         protected override void Dispose(bool disposing)
