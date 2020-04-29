@@ -213,7 +213,6 @@
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\PhotosController.cs" />
     <Compile Include="Controllers\ShowsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\User_ShowController.cs" />
@@ -241,6 +240,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
+  <ItemGroup>
     <Content Include="1.jpg" />
     <Content Include="2.jpg" />
     <Content Include="3.jpg" />
@@ -446,6 +446,11 @@
     <Content Include="Views\Shows\Delete.cshtml" />
     <Content Include="Views\Shows\Details.cshtml" />
     <Content Include="Views\Shows\Edit.cshtml" />
+    <Content Include="Views\Shows\MyShows.cshtml" />
+    <Content Include="Views\Shows\RateUser.cshtml" />
+    <Content Include="Views\Venues\RateUser.cshtml" />
+  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
