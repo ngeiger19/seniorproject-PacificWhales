@@ -258,6 +258,8 @@ CREATE TABLE [dbo].[Shows]
 	[VenueID]		INT		NULL,
 	[Description]		NVARCHAR(500)		NULL,
 	[DateBooked]	DateTime		NOT NULL,
+	[Status]	NVARCHAR(16)		NOT NULL,
+	[GoogleEventID] NVARCHAR(500)	NOT NULL,
 	CONSTRAINT [PK_dbo.Shows] PRIMARY KEY CLUSTERED ([ID] ASC),
 	CONSTRAINT [FK_dbo.Shows_dbo.Venues_ID] FOREIGN KEY ([VenueID]) REFERENCES [dbo].[Venues] ([ID])
 );

@@ -32,32 +32,6 @@ namespace Harmony
         private HarmonyContext db = new HarmonyContext();
 
         private readonly IDataStore dataStore = new FileDataStore(GoogleWebAuthorizationBroker.Folder);
-
-        // Converts rating string into int
-        public int getRating(string ratingStr)
-        {
-            if (ratingStr == "star1")
-            {
-                return 1;
-            }
-            else if (ratingStr == "star2")
-            {
-                return 2;
-            }
-            else if (ratingStr == "star3")
-            {
-                return 3;
-            }
-            else if (ratingStr == "star4")
-            {
-                return 4;
-            }
-            else
-            {
-                return 5;
-            }
-        }
-
         // Get user's Google Calendar info
         private async Task<UserCredential> GetCredentialForApiAsync()
         {
@@ -112,7 +86,7 @@ namespace Harmony
             var identityID = User.Identity.GetUserId();
             MusicianDetailViewModel viewModel = new MusicianDetailViewModel(user);
 
-            viewModel.UpcomingShows = db.User_Show.Where(u => u.MusicianID == user.ID).Select(s => s.Show).Where(s => s.StartDateTime > DateTime.Now).OrderByDescending(s => s.EndDateTime).ToList();
+            viewModel.UpcomingShows = db.User_Show.Where(u => u.MusicianID == user.ID).Select(s => s.Show).Where(s => s.StartDateTime > DateTime.Now && s.Status == "Accepted").OrderByDescending(s => s.EndDateTime).ToList();
 
             return View(viewModel);
         }
@@ -176,6 +150,7 @@ namespace Harmony
                 {
                     Event newEvent = new Event()
                     {
+                        Id = Guid.NewGuid().ToString().Replace('-', '0'),
                         Summary = viewModel.Title,
                         Description = viewModel.ShowDescription,
                         Location = db.Venues.Find(viewModel.VenueID).VenueName,
@@ -197,7 +172,7 @@ namespace Harmony
                     var newEventRequest = service.Events.Insert(newEvent, "primary");
                     // This allows attendees to get email notification
                     newEventRequest.SendNotifications = true;
-                    var eventResult = newEventRequest.ExecuteAsync();
+                    var eventResult = newEventRequest.Execute();
 
                     // add the new show to db
                     Show newShow = new Show
@@ -207,14 +182,18 @@ namespace Harmony
                         EndDateTime = viewModel.EndDateTime,
                         Description = viewModel.ShowDescription,
                         DateBooked = newEvent.Created ?? DateTime.Now,
-                        VenueID = viewModel.VenueID
+                        VenueID = viewModel.VenueID,
+                        Status = "Pending",
+                        GoogleEventID = newEvent.Id
                     };
                     db.Shows.Add(newShow);
                     User_Show user_Show = new User_Show
                     {
                         MusicianID = model.ID,
                         VenueOwnerID = db.Users.Where(u => u.ASPNetIdentityID == IdentityID).First().ID,
-                        ShowID = newShow.ID
+                        ShowID = newShow.ID,
+                        MusicianRated = false,
+                        VenueRated = false
                     };
                     db.User_Show.Add(user_Show);
                     db.SaveChanges();
@@ -313,32 +292,6 @@ namespace Harmony
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        /*********************************
-         *          VIEW SHOWS
-         * ******************************/
-         public ActionResult MyShows(int? id)
-        {
-            // Query shows that match user's id
-            IEnumerable<User_Show> shows =
-                from show in db.User_Show
-                where show.MusicianID == id
-                orderby show.Show.EndDateTime descending
-                select show;
-
-            return View(shows);
-        }
-
-        public ActionResult ShowDetails(int? id)
-        {
-            // Find show and create viewmodel
-            User_Show show = db.User_Show.Find(id);
-
-            ShowsViewModel viewModel = new ShowsViewModel(show);
-
-            return View(viewModel);
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

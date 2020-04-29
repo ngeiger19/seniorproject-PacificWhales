@@ -30,6 +30,14 @@ namespace Harmony.Models
         public string Description { get; set; }
 
         public DateTime DateBooked { get; set; }
+
+        [Required]
+        [StringLength(64)]
+        public string Status { get; set; }
+
+        [Required]
+        [StringLength(500)]
+        public string GoogleEventID { get; set; }
         public virtual Venue Venue { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User_Show> User_Show { get; set; }
