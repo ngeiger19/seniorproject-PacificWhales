@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Harmony.DAL;
 using Harmony.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Harmony.Controllers
 {
@@ -16,10 +17,20 @@ namespace Harmony.Controllers
         private HarmonyContext db = new HarmonyContext();
 
         // GET: Shows
-        public ActionResult Index()
+        public ActionResult MyShows()
         {
-            var shows = db.Shows.Include(s => s.Venue);
-            return View(shows.ToList());
+            var identityID = User.Identity.GetUserId();
+            if (User.IsInRole("Musician"))
+            {
+                User musician = db.Users.Where(u => u.ASPNetIdentityID == identityID).FirstOrDefault();
+                return View(db.User_Show.Where(u => u.MusicianID == musician.ID).Select(s => s.Show).OrderByDescending(s => s.EndDateTime).ToList());
+            }
+            if (User.IsInRole("VenueOwner"))
+            {
+                User venueOwner = db.Users.Where(u => u.ASPNetIdentityID == identityID).FirstOrDefault();
+                return View(db.User_Show.Where(u => u.VenueOwnerID == venueOwner.ID).Select(s => s.Show).OrderByDescending(s => s.EndDateTime).ToList());
+            }
+            return View(db.Shows.ToList());
         }
 
         // GET: Shows/Details/5
@@ -34,7 +45,71 @@ namespace Harmony.Controllers
             {
                 return HttpNotFound();
             }
-            return View(show);
+            User_Show user_Show = db.User_Show.Where(u => u.ShowID == id).First();
+            ShowsViewModel viewModel = new ShowsViewModel(user_Show);
+            
+            return View(viewModel);
+        }
+
+        /*********************************
+         *          RATE SHOWS
+         * ******************************/
+        public int getRating(string ratingStr)
+        {
+            if (ratingStr == "star1")
+            {
+                return 1;
+            }
+            else if (ratingStr == "star2")
+            {
+                return 2;
+            }
+            else if (ratingStr == "star3")
+            {
+                return 3;
+            }
+            else if (ratingStr == "star4")
+            {
+                return 4;
+            }
+            else
+            {
+                return 5;
+            }
+        }
+        public ActionResult RateUser(int? id)
+        {
+            User_Show show = db.User_Show.Where(s => s.ShowID == id).FirstOrDefault();
+            ShowsViewModel viewModel = new ShowsViewModel(show);
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult RateUser(int? id, ShowsViewModel model)
+        {
+            User_Show show = db.User_Show.Where(s => s.ShowID == id).FirstOrDefault();
+            ShowsViewModel viewModel = new ShowsViewModel(show);
+            // Converting string into int
+            int numStars = getRating(model.RatingValue);
+
+            Rating userRating = new Rating();
+
+            if (User.IsInRole("VenueOwner"))
+            {
+                userRating.UserID = viewModel.MusicianID;
+                userRating.Value = numStars;
+                show.VenueRated = true;
+            }
+            else if (User.IsInRole("Musician"))
+            {
+                userRating.UserID = viewModel.VenueID;
+                userRating.Value = numStars;
+                show.MusicianRated = true;
+            }
+            db.Ratings.Add(userRating);
+            db.SaveChanges();
+
+            return RedirectToAction("MyShows");
         }
 
         // GET: Shows/Create
@@ -49,7 +124,7 @@ namespace Harmony.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Date,VenueID,Description,DateBooked")] Show show)
+        public ActionResult Create([Bind(Include = "ID,Title,StartDateTime,EndDateTime,VenueID,Description,DateBooked")] Show show)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +158,7 @@ namespace Harmony.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Date,VenueID,Description,DateBooked")] Show show)
+        public ActionResult Edit([Bind(Include = "ID,Title,StartDateTime,EndDateTime,VenueID,Description,DateBooked")] Show show)
         {
             if (ModelState.IsValid)
             {

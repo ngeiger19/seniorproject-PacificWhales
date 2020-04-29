@@ -2,16 +2,40 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using Calendar.ASP.NET.MVC5.Models;
 
 namespace Harmony.Models
 {
     public class IndexViewModel
     {
+        // General Info
+        public int ID { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string City { get; set; }
+
+        public string State { get; set; }
+
+        public string Email { get; set; }
+
+        public string Description { get; set; }
         public bool HasPassword { get; set; }
         public IList<UserLoginInfo> Logins { get; set; }
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+
+        // For VenueOwner
+        public List<Venue> MyVenues { get; set; }
+
+        // For Musician
+        public List<Genre> MyGenres { get; set; }
+
+        // For Availability
+        public IEnumerable<CalendarEventGroup> UpcomingEvents { get; set; }
     }
 
     public class ManageLoginsViewModel

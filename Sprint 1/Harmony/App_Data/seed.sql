@@ -26,11 +26,11 @@ INSERT INTO [dbo].[BandMember_Instrument](BandMemberID, InstrumentID)
 
 INSERT INTO [dbo].[Genres](GenreName)
 	VALUES
-   ('Classical');
+   ('Pop');
 
 INSERT INTO [dbo].[Musician_Genre](UserID, GenreID)
 	VALUES
-   (1,1);
+   (2,1);
 
 INSERT INTO [dbo].[Photos](FileName, Path,UserID)
 	VALUES

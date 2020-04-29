@@ -16,8 +16,13 @@ namespace Harmony.Models
 
         public int ID { get; set; }
 
-        [DataType(DataType.DateTime)]
-        public DateTime? Date { get; set; }
+        [Required]
+        [StringLength(64)]
+        public string Title { get; set; }
+
+        public DateTime StartDateTime { get; set; }
+
+        public DateTime EndDateTime { get; set; }
 
         public int? VenueID { get; set; }
 
@@ -25,9 +30,7 @@ namespace Harmony.Models
         public string Description { get; set; }
 
         public DateTime DateBooked { get; set; }
-
         public virtual Venue Venue { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User_Show> User_Show { get; set; }
     }

@@ -8,14 +8,12 @@ namespace Harmony.DAL
     public partial class HarmonyContext : DbContext
     {
         public HarmonyContext()
-        : base("name=HarmonyContext")
-        /*: base("name=HarmonyContext_Azure")*/
+         : base("name=HarmonyContext")
+        // : base("name=HarmonyContext_Azure")
         {
         }
 
-        public virtual DbSet<BandMember> BandMembers { get; set; }
         public virtual DbSet<Genre> Genres { get; set; }
-        public virtual DbSet<Instrument> Instruments { get; set; }
         public virtual DbSet<Photo> Photos { get; set; }
         public virtual DbSet<Show> Shows { get; set; }
         public virtual DbSet<User_Show> User_Show { get; set; }
@@ -23,13 +21,9 @@ namespace Harmony.DAL
         public virtual DbSet<Venue> Venues { get; set; }
         public virtual DbSet<VenueType> VenueTypes { get; set; }
         public virtual DbSet<Video> Videos { get; set; }
+        public virtual DbSet<Rating> Ratings { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<BandMember>()
-                .HasMany(e => e.Instruments)
-                .WithMany(e => e.BandMembers)
-                .Map(m => m.ToTable("BandMember_Instrument").MapLeftKey("BandMemberID").MapRightKey("InstrumentID"));
-
             modelBuilder.Entity<Genre>()
                 .HasMany(e => e.Users)
                 .WithMany(e => e.Genres)
@@ -38,11 +32,6 @@ namespace Harmony.DAL
             modelBuilder.Entity<Show>()
                 .HasMany(e => e.User_Show)
                 .WithRequired(e => e.Show)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.BandMembers)
-                .WithRequired(e => e.User)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()
@@ -70,6 +59,12 @@ namespace Harmony.DAL
             modelBuilder.Entity<User>()
                 .HasMany(e => e.Videos)
                 .WithRequired(e => e.User)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
+                .HasMany(e => e.Ratings)
+                .WithRequired(e => e.User)
+                .HasForeignKey(e => e.UserID)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<VenueType>()

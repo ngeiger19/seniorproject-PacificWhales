@@ -27,7 +27,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
-    <TypeScriptToolsVersion>3.7</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>3.6</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -210,39 +210,37 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\BandMembersController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PhotosController.cs" />
     <Compile Include="Controllers\ShowsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\User_ShowController.cs" />
     <Compile Include="Controllers\VenuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\BandMember.cs" />
     <Compile Include="Models\CalendarEventGroup.cs" />
     <Compile Include="Models\CalendarViewModels.cs" />
     <Compile Include="Models\DetailViewModel.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="DAL\HarmonyContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Instrument.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Photo.cs" />
+    <Compile Include="Models\Rating.cs" />
     <Compile Include="Models\Show.cs" />
+    <Compile Include="Models\ShowsViewModel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\User_Show.cs" />
     <Compile Include="Models\Venue.cs" />
-    <Compile Include="Models\VenueSearchModel.cs" />
     <Compile Include="Models\VenueType.cs" />
     <Compile Include="Models\Video.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
-  <ItemGroup>
     <Content Include="1.jpg" />
     <Content Include="2.jpg" />
     <Content Include="3.jpg" />
@@ -436,25 +434,18 @@
     <Content Include="Views\Users\MusicianDetails.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\MusicianIndex.cshtml" />
-    <Content Include="Views\BandMembers\Create.cshtml" />
-    <Content Include="Views\BandMembers\Delete.cshtml" />
-    <Content Include="Views\BandMembers\Details.cshtml" />
-    <Content Include="Views\BandMembers\Edit.cshtml" />
-    <Content Include="Views\BandMembers\Index.cshtml" />
     <Content Include="Views\Calendar\Schedule.cshtml" />
     <Content Include="client_secret.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Views\Home\MusicianSearchResults.cshtml" />
+    <Content Include="Views\Users\MyShows.cshtml" />
+    <Content Include="Views\Venues\MyShows.cshtml" />
+    <Content Include="Views\Venues\ShowDetails.cshtml" />
     <Content Include="Views\Shows\Create.cshtml" />
     <Content Include="Views\Shows\Delete.cshtml" />
     <Content Include="Views\Shows\Details.cshtml" />
     <Content Include="Views\Shows\Edit.cshtml" />
-    <Content Include="Views\Shows\Index.cshtml" />
-    <Content Include="Views\Home\MusicianSearchResults.cshtml" />
-    <Content Include="Views\Photos\Details.cshtml" />
-    <Content Include="Views\Photos\Create.cshtml" />
-  </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />

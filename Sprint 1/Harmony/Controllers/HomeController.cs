@@ -17,7 +17,102 @@ namespace Harmony.Controllers
     {
 
         private HarmonyContext db = new HarmonyContext();
-        
+
+        // Queries for Venue FIlters
+        /* public IQueryable<Venue> VenueCityQuery(IQueryable<Venue> venues, string city)
+        {
+            if (city != null && city != "")
+            {
+                var cityQuery =
+                    from venue in venues
+                    where venue.City.Contains(city)
+                    select venue;
+
+                ViewBag.City = city;
+                return cityQuery;
+            }
+
+            ViewBag.City = null;
+            return venues;
+        }
+
+        public IQueryable<Venue> StateQuery(IQueryable<Venue> venues, string state)
+        {
+            if (state != null && state != "")
+            {
+                var stateQuery =
+                    from venue in venues
+                    where venue.State.Contains(state)
+                    select venue;
+
+                ViewBag.State = state;
+                return stateQuery;
+            }
+
+            ViewBag.State = null;
+            return venues;
+        } */
+
+        // Queries for Musician Filters
+        public IEnumerable<User> CityQuery(IEnumerable<User> users, string city)
+        {
+            if (city != null && city != "")
+            {
+                IEnumerable<User> cityQuery =
+                    from user in users
+                    where user.City.Contains(city)
+                    select user;
+
+                ViewBag.City = city;
+                return cityQuery;
+            }
+
+            ViewBag.City = null;
+            return users;
+        }
+
+        public IEnumerable<User> StateQuery(IEnumerable<User> users, string state)
+        {
+            if (state != null && state != "")
+            {
+                IEnumerable<User> stateQuery =
+                    from user in users
+                    where user.State.Contains(state)
+                    select user;
+
+                ViewBag.State = state;
+                return stateQuery;
+            }
+
+            ViewBag.State = null;
+            return users;
+        } 
+
+        public IEnumerable<User> GenreQuery(IEnumerable<User> users, string genre)
+        {
+            if (genre != null && genre != "")
+            {
+                Genre g = new Genre();
+
+                foreach(Genre x in db.Genres)
+                {
+                    g = x;
+                }
+
+                var genreQuery =
+                    from musician in users
+                    where musician.Genres.Contains(g)
+                    select musician;
+
+                ViewBag.Genre = genre;
+                return genreQuery;
+            }
+
+            ViewBag.Genre = null;
+            return users;
+        }
+
+
         public ActionResult Index()
         {
             return View();
@@ -57,11 +152,12 @@ namespace Harmony.Controllers
 
             string cityFilter = Request.QueryString["cityFilter"];
             string stateFilter = Request.QueryString["stateFilter"];
+            string genreFilter = Request.QueryString["genreFilter"];
 
             // search for musicians
             if (searchOption == "option1")
             {
-                return RedirectToAction("MusicianSearchResults", new { musicianSearch = search });
+                return RedirectToAction("MusicianSearchResults", new { musicianSearch = search, city = cityFilter, state = stateFilter, genre = genreFilter });
             }
             else if (searchOption == "option2")
             {
@@ -121,14 +217,18 @@ namespace Harmony.Controllers
         }
 
         // MUSICIAN SEARCH RESULTS
-        public ActionResult MusicianSearchResults(string musicianSearch)
+        public ActionResult MusicianSearchResults(string musicianSearch, string city, string state, string genre)
         {
-            var musicianQuery =
+            IEnumerable<User> musicians =
                 from musician in db.Users
                 where musician.FirstName.Contains(musicianSearch)
                 select musician;
 
-            return View(musicianQuery);
+            musicians = CityQuery(musicians, city);
+            musicians = StateQuery(musicians, state);
+            musicians = GenreQuery(musicians, genre);
+
+            return View(musicians);
         }
     }
 }
