@@ -8,13 +8,12 @@ namespace Harmony.DAL
     public partial class HarmonyContext : DbContext
     {
         public HarmonyContext()
-        // : base("name=HarmonyContext")
-         : base("name=HarmonyContext_Azure")
+         : base("name=HarmonyContext")
+        // : base("name=HarmonyContext_Azure")
         {
         }
 
         public virtual DbSet<Genre> Genres { get; set; }
-        public virtual DbSet<Photo> Photos { get; set; }
         public virtual DbSet<Show> Shows { get; set; }
         public virtual DbSet<User_Show> User_Show { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -32,11 +31,6 @@ namespace Harmony.DAL
             modelBuilder.Entity<Show>()
                 .HasMany(e => e.User_Show)
                 .WithRequired(e => e.Show)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.Photos)
-                .WithRequired(e => e.User)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()
