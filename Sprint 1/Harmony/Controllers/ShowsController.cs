@@ -111,6 +111,7 @@ namespace Harmony.Controllers
             if (ModelState.IsValid)
             {
                 show.Status = "Accepted";
+                db.SaveChanges();
                 return RedirectToAction("MyShows");
 
             }
