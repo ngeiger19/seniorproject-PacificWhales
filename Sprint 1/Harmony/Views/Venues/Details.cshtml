@@ -100,7 +100,7 @@
                 <dd>
                     @Html.DisplayFor(model => model.ZipCode)
                 </dd>
-             
+
 
                 <dt>
                     @Html.DisplayNameFor(model => model.UpcomingShows)
@@ -138,8 +138,9 @@
             <div>
                 <img src="~/venue.jpg" id="venuepic" />
             </div>
+
         </div>
-        <div class="row">
+        @*<div class="row">
             <div id="map">
                 <script>
                     var map;
@@ -154,7 +155,7 @@
                         async defer></script>
             </div>
 
-        </div>
+        </div>*@
         <div>
             <p>
                 @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
