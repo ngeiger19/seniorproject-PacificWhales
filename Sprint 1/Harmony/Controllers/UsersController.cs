@@ -33,6 +33,31 @@ namespace Harmony
 
         private readonly IDataStore dataStore = new FileDataStore(GoogleWebAuthorizationBroker.Folder);
 
+        // Converts rating string into int
+        public int getRating(string ratingStr)
+        {
+            if (ratingStr == "star1")
+            {
+                return 1;
+            }
+            else if (ratingStr == "star2")
+            {
+                return 2;
+            }
+            else if (ratingStr == "star3")
+            {
+                return 3;
+            }
+            else if (ratingStr == "star4")
+            {
+                return 4;
+            }
+            else
+            {
+                return 5;
+            }
+        }
+
         // Get user's Google Calendar info
         private async Task<UserCredential> GetCredentialForApiAsync()
         {
@@ -308,6 +333,36 @@ namespace Harmony
         {
             // Find show and create viewmodel
             User_Show show = db.User_Show.Find(id);
+
+            ShowsViewModel viewModel = new ShowsViewModel(show);
+
+            return View(viewModel);
+        }
+
+        /*********************************
+         *          RATE SHOWS
+         * ******************************/
+         public ActionResult RateUser(User_Show show)
+        {
+            ShowsViewModel viewModel = new ShowsViewModel(show);
+            return View(viewModel);
+        }
+
+        public ActionResult RateUser(User_Show show, string rating)
+        {
+            // Converting string into int
+            int numStars = getRating(rating);
+
+            Models.Rating userRating = new Models.Rating
+            {
+                UserID = show.VenueOwnerID,
+                Value = numStars
+            };
+
+            show.VenueRated = 1;
+            
+            db.Ratings.Add(userRating);
+            db.SaveChanges();
 
             ShowsViewModel viewModel = new ShowsViewModel(show);
 

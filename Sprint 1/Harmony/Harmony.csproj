@@ -229,6 +229,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Photo.cs" />
+    <Compile Include="Models\Rating.cs" />
     <Compile Include="Models\Show.cs" />
     <Compile Include="Models\ShowsViewModel.cs" />
     <Compile Include="Models\User.cs" />
@@ -447,6 +448,8 @@
     <Content Include="Views\Shows\Details.cshtml" />
     <Content Include="Views\Shows\Edit.cshtml" />
     <Content Include="Views\Shows\MyShows.cshtml" />
+    <Content Include="Views\Users\RateUser.cshtml" />
+    <Content Include="Views\Venues\RateUser.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

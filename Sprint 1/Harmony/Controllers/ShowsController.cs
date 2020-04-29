@@ -51,6 +51,59 @@ namespace Harmony.Controllers
             return View(viewModel);
         }
 
+        /*********************************
+         *          RATE SHOWS
+         * ******************************/
+        public int getRating(string ratingStr)
+        {
+            if (ratingStr == "star1")
+            {
+                return 1;
+            }
+            else if (ratingStr == "star2")
+            {
+                return 2;
+            }
+            else if (ratingStr == "star3")
+            {
+                return 3;
+            }
+            else if (ratingStr == "star4")
+            {
+                return 4;
+            }
+            else
+            {
+                return 5;
+            }
+        }
+        public ActionResult RateUser(User_Show show)
+        {
+            ShowsViewModel viewModel = new ShowsViewModel(show);
+            return View(viewModel);
+        }
+
+        public ActionResult RateUser(User_Show show, string rating)
+        {
+            // Converting string into int
+            int numStars = getRating(rating);
+
+            Models.Rating userRating = new Models.Rating
+            {
+                UserID = show.MusicianID,
+                Value = numStars
+            };
+
+            show.MusicianRated = 1;
+
+            db.Ratings.Add(userRating);
+            db.SaveChanges();
+
+            ShowsViewModel viewModel = new ShowsViewModel(show);
+
+            return View(viewModel);
+        }
+
         // GET: Shows/Create
         public ActionResult Create()
         {

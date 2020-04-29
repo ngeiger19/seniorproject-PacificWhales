@@ -30,6 +30,8 @@ namespace Harmony.Models
             MusicianName = (from u in db.Users
                             where u.ID == show.MusicianID
                             select u).First().FirstName;
+            MusicianRated = show.MusicianRated;
+            VenueRated = show.VenueRated;
         }
 
         public int ID { get; set; }
@@ -49,6 +51,12 @@ namespace Harmony.Models
         [Required]
         [Display(Name = "Show ID")]
         public int ShowID { get; set; }
+
+        [Required]
+        public int MusicianRated { get; set; }
+
+        [Required]
+        public int VenueRated { get; set; }
 
         [Required]
         [Display(Name = "Start Date")]

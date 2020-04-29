@@ -53,6 +53,7 @@ namespace Harmony
             var token = await dataStore.GetAsync<TokenResponse>(userId);
             return new UserCredential(flow, userId, token);
         }
+        
         // GET: Venues
         public ActionResult Index()
         {
