@@ -12,19 +12,25 @@
                     <th>>@Html.DisplayNameFor(model => model.Show.StartDateTime)</th>
                     <th>>@Html.DisplayNameFor(model => model.Show.EndDateTime)</th>
                     <th></th>
+                    <th></th>
                 </tr>
 
                 @foreach (var show in Model)
                 {
                     if (show.Show.EndDateTime < DateTime.Now)
                     {
-                        <tr>
-                            <td>@Html.DisplayFor(x => show.Show.Title)</td>
-                            <td>@Html.DisplayFor(x => show.Show.DateBooked)</td>
-                            <td>@Html.DisplayFor(x => show.Show.StartDateTime)</td>
-                            <td>@Html.DisplayFor(x => show.Show.EndDateTime)</td>
-                            <td>@Html.ActionLink("Details", "ShowDetails", new { id = show.Show.ID })</td>
-                        </tr>
+                    <tr>
+                        <td>@Html.DisplayFor(x => show.Show.Title)</td>
+                        <td>@Html.DisplayFor(x => show.Show.DateBooked)</td>
+                        <td>@Html.DisplayFor(x => show.Show.StartDateTime)</td>
+                        <td>@Html.DisplayFor(x => show.Show.EndDateTime)</td>
+                        <td>@Html.ActionLink("Details", "ShowDetails", new { id = show.Show.ID })</td>
+                        @if (show.MusicianRated == 0)
+                        {
+                            <td>@Html.ActionLink("Rate", "RateUser", new { show = show })</td>
+                        }
+
+                    </tr>
                     }
                 }
             </table>

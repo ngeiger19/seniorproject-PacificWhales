@@ -23,6 +23,10 @@ namespace Harmony.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ShowID { get; set; }
 
+        public int MusicianRated { get; set; }
+
+        public int VenueRated { get; set; }
+
         public virtual Show Show { get; set; }
 
         public virtual User User { get; set; }
