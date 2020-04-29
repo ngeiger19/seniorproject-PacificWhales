@@ -33,5 +33,7 @@ namespace Harmony.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Harmony.Models.Photo> Photos { get; set; }
     }
 }

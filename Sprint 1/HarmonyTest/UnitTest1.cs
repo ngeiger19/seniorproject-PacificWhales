@@ -22,14 +22,14 @@ namespace HarmonyTest
             AccountController Controller = new AccountController();
             List<SelectListItem> stateList = Controller.ParseJsonStringOfStatesToSelectList(statesJSON);
             int expectedResult = 4;
-            Assert.AreEqual(expectedResult,  stateList.Count());
+            Assert.AreEqual(expectedResult, stateList.Count());
         }
 
         [TestMethod]
         public bool GenerateVenueList_IsEmpty_ReturnsTrue()
         {
             UsersController Controller = new UsersController();
-            
+
             return true;
         }
 
@@ -38,7 +38,7 @@ namespace HarmonyTest
         {
             HomeController controller = new HomeController();
             IEnumerable<User> users = Enumerable.Empty<User>();
-            
+
             IEnumerable<User> result = controller.CityQuery(users, "Salem");
             Assert.AreEqual(users.Count(), result.Count());
         }

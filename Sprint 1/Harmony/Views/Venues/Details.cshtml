@@ -2,7 +2,21 @@
 @{
     ViewBag.Title = "Details";
 }
-@*<style>
+@*
+     <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <style>
         #video4 {
             margin: 30px 300px 0px 200px;
         }
@@ -21,108 +35,125 @@
                     <button class="btn btn-outline-light my-2 my-sm-0" data-toggle="modal" data-target="#event-modal">Request To Perform at This Venue!</button>
                 }
             }
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Type)
-            </dt>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Type)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Type)
-
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Owner)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Owner)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.OwnerEmail)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.OwnerEmail)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.AddressLine1)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.AddressLine1)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.AddressLine2)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.AddressLine2)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.City)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.City)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.State)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.State)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.ZipCode)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ZipCode)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.UpcomingShows)
-            </dt>
-            @if(Model.UpcomingShows.Count() != 0)
-            {
                 <dd>
-                    <table class="table">
-                        <tr>
-                            <th>
-                                Title
-                            </th>
-                            <th>
-                                DateTime
-                            </th>
-                        </tr>
-                        @foreach (var item in Model.UpcomingShows)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Title)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.StartDateTime)
-                                </td>
-                            </tr>
+                    @Html.DisplayFor(model => model.Type)
 
-                        }
-                    </table>
                 </dd>
-            }
-        </dl>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Owner)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Owner)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.OwnerEmail)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.OwnerEmail)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.AddressLine1)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AddressLine1)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.AddressLine2)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AddressLine2)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.City)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.City)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.State)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.State)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ZipCode)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ZipCode)
+                </dd>
+             
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.UpcomingShows)
+                </dt>
+                @if (Model.UpcomingShows.Count() != 0)
+                {
+                    <dd>
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    Title
+                                </th>
+                                <th>
+                                    DateTime
+                                </th>
+                            </tr>
+                            @foreach (var item in Model.UpcomingShows)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Title)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.StartDateTime)
+                                    </td>
+                                </tr>
+
+                            }
+                        </table>
+                    </dd>
+                }
+            </dl>
         </div>
         <div class="col-md-8">
             <div>
                 <img src="~/venue.jpg" id="venuepic" />
             </div>
+        </div>
+        <div class="row">
+            <div id="map">
+                <script>
+                    var map;
+                    function initMap() {
+                        map = new google.maps.Map(document.getElementById('map'), {
+                            center: { lat: 44.939018, lng: -123.039307 },
+                            zoom: 15
+                        });
+                    }
+                </script>
+                <script src="https://maps.googleapis.com/maps/api/js?key=pNKTuI946E9jhHXtQhexusvL&callback=initMap"
+                        async defer></script>
+            </div>
+
         </div>
         <div>
             <p>
