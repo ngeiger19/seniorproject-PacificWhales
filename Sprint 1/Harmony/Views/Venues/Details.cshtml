@@ -2,7 +2,21 @@
 @{
     ViewBag.Title = "Details";
 }
-@*<style>
+@*
+     <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <style>
         #video4 {
             margin: 30px 300px 0px 200px;
         }
@@ -86,11 +100,18 @@
             <dd>
                 @Html.DisplayFor(model => model.ZipCode)
             </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Distance)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Distance)
+            </dd>
 
             <dt>
                 @Html.DisplayNameFor(model => model.UpcomingShows)
             </dt>
-            @if(Model.UpcomingShows.Count() != 0)
+            @if (Model.UpcomingShows.Count() != 0)
             {
                 <dd>
                     <table class="table">
@@ -123,6 +144,22 @@
             <div>
                 <img src="~/venue.jpg" id="venuepic" />
             </div>
+        </div>
+        <div class="row">
+            <div id="map">
+                <script>
+                    var map;
+                    function initMap() {
+                        map = new google.maps.Map(document.getElementById('map'), {
+                            center: { lat: 44.939018, lng: -123.039307 },
+                            zoom: 15
+                        });
+                    }
+                </script>
+                <script src="https://maps.googleapis.com/maps/api/js?key=pNKTuI946E9jhHXtQhexusvL&callback=initMap"
+                        async defer></script>
+            </div>
+
         </div>
         <div>
             <p>
