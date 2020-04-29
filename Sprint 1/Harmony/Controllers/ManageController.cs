@@ -186,7 +186,6 @@ namespace Harmony.Controllers
                 }
             }
             model.UpcomingEvents = eventGroups;
-            model.UpcomingShows = db.User_Show.Where(u => u.MusicianID == model.ID || u.VenueOwnerID == model.ID).Select(s => s.Show).ToList();
             return View(model);
         }
 

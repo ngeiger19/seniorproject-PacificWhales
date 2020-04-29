@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Harmony.DAL;
 using Harmony.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Harmony.Controllers
 {
@@ -16,10 +17,20 @@ namespace Harmony.Controllers
         private HarmonyContext db = new HarmonyContext();
 
         // GET: Shows
-        public ActionResult Index()
+        public ActionResult MyShows()
         {
-            var shows = db.Shows.Include(s => s.Venue);
-            return View(shows.ToList());
+            var identityID = User.Identity.GetUserId();
+            if (User.IsInRole("Musician"))
+            {
+                User musician = db.Users.Where(u => u.ASPNetIdentityID == identityID).FirstOrDefault();
+                return View(db.User_Show.Where(u => u.MusicianID == musician.ID).Select(s => s.Show).OrderByDescending(s => s.EndDateTime).ToList());
+            }
+            if (User.IsInRole("VenueOwner"))
+            {
+                User venueOwner = db.Users.Where(u => u.ASPNetIdentityID == identityID).FirstOrDefault();
+                return View(db.User_Show.Where(u => u.VenueOwnerID == venueOwner.ID).Select(s => s.Show).OrderByDescending(s => s.EndDateTime).ToList());
+            }
+            return View(db.Shows.ToList());
         }
 
         // GET: Shows/Details/5
@@ -34,7 +45,10 @@ namespace Harmony.Controllers
             {
                 return HttpNotFound();
             }
-            return View(show);
+            User_Show user_Show = db.User_Show.Where(u => u.ShowID == id).First();
+            ShowsViewModel viewModel = new ShowsViewModel(user_Show);
+            
+            return View(viewModel);
         }
 
         // GET: Shows/Create

@@ -30,41 +30,25 @@ namespace Harmony.Models
 
         public int ID { get; set; }
 
-        [Required]
-        [Display(Name = "First Name")]
         [StringLength(50)]
-<<<<<<< HEAD
         public string Owner { get; set; }
-=======
-        public string FirstName { get; set; }
 
-        [Required]
-        [Display(Name = "Last Name")]
-        [StringLength(50)]
-        public string LastName { get; set; }
->>>>>>> dev0.3
-
-        [Required]
         [StringLength(50)]
         public string City { get; set; }
 
-        [Required]
         [StringLength(24)]
         public string State { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string OwnerEmail { get; set; }
 
         [StringLength(300)]
         public string Description { get; set; }
 
-        [Required]
         [StringLength(50)]
         [Display(Name = "Venue Name")]
         public string VenueName { get; set; }
 
-        [Required]
         [StringLength(50)]
         [Display(Name = "Address Line 1")]
         public string AddressLine1 { get; set; }
@@ -73,17 +57,6 @@ namespace Harmony.Models
         [Display(Name = "Address Line 2")]
         public string AddressLine2 { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        [Display(Name = "Venue City")]
-        public string VenueCity { get; set; }
-
-        [Required]
-        [StringLength(24)]
-        [Display(Name = "Venue State")]
-        public string VenueState { get; set; }
-
-        [Required]
         [StringLength(10)]
         [Display(Name = "Zip Code")]
         public string ZipCode { get; set; }
@@ -91,23 +64,25 @@ namespace Harmony.Models
 
         public int UserID { get; set; }
 
+        public List<Show> UpcomingShows { get; set; }
+
         // This section is for the calendar event form
-        [Display(Name = "ShowTitle")]
+        [Display(Name = "Show Title")]
         public string Title { get; set; }
 
         [DataType(DataType.DateTime)]
-        [Display(Name = "StartDateTime")]
+        [Display(Name = "Start DateTime")]
         public DateTime StartDateTime { get; set; }
 
         [DataType(DataType.DateTime)]
-        [Display(Name = "EndDateTime")]
+        [Display(Name = "End DateTime")]
         public DateTime EndDateTime { get; set; }
 
+        [Display(Name = "Show Description")]
         public string ShowDescription { get; set; }
 
         public DateTime DateBooked { get; set; }
-        public List<SelectListItem> VenueList { get; set; }
-        public IEnumerable<CalendarEventGroup> UpcomingEvents { get; set; }
+        // public List<SelectListItem> VenueList { get; set; }
     }
 
     public class MusicianDetailViewModel
@@ -143,6 +118,7 @@ namespace Harmony.Models
 
         public List<string> Genres { get; set; }
 
+        public List<Show> UpcomingShows { get; set; }
         // This section is for the calendar event form
         [Display(Name = "Show Title")]
         public string Title { get; set; }
@@ -162,6 +138,5 @@ namespace Harmony.Models
 
         public DateTime DateBooked { get; set; }
         public List<SelectListItem> VenueList { get; set; }
-        public IEnumerable<CalendarEventGroup> UpcomingEvents { get; set; }
     }
 }

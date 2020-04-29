@@ -78,7 +78,10 @@ namespace Harmony
                 return HttpNotFound();
             }
 
+            var identityID = User.Identity.GetUserId();
+
             VenueOwnerDetailViewModel viewModel = new VenueOwnerDetailViewModel(venue);
+            viewModel.UpcomingShows = db.User_Show.Where(u => u.VenueOwnerID == venue.UserID).Select(s => s.Show).Where(s => s.StartDateTime > DateTime.Now).OrderByDescending(s => s.EndDateTime).ToList();
 
             return View(viewModel);
         }
@@ -93,7 +96,6 @@ namespace Harmony
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            // Viewmodel for VenueOwner
             Venue venue = db.Venues.Find(id);
 
             // If users doesn't exisit
@@ -102,6 +104,7 @@ namespace Harmony
                 return HttpNotFound();
             }
 
+            // Viewmodel for VenueOwner
             VenueOwnerDetailViewModel model = new VenueOwnerDetailViewModel(venue);
 
             var IdentityID = User.Identity.GetUserId();
@@ -168,17 +171,9 @@ namespace Harmony
                     db.SaveChanges();
                 }
 
-                return RedirectToAction("Welcome", "Home");
+                return RedirectToAction("Details", new { id = model.ID});
             }
-            //List<Venue> venues = db.Venues/*.Where(m => m.User.ASPNetIdentityID == IdentityID)*/.ToList();
-            // List<SelectListItem> venueList = new List<SelectListItem>();
-            /*foreach (var v in venues)
-            {
-                model.VenueList.Add(new SelectListItem { Text = v.VenueName, Value = v.ID.ToString() });
-            }*/
-            // model.VenueList = new SelectList(db.Venues.Where(m => m.User.ASPNetIdentityID == IdentityID).Select(s => new { VenueID = s.ID, s.VenueName }), "VenueID", "VenueName", model.VenueID);
-            // ViewData["VenueList"] = new SelectList(db.Venues.Where(m => m.User.ASPNetIdentityID == IdentityID).Select(s => new { VenueID = s.ID, s.VenueName }), "VenueID", "VenueName", model.VenueID);
-            // ViewData["VenueList"] = new SelectList(venueList, "Value", "Text");
+
             return View(model);
         }
 
@@ -268,35 +263,6 @@ namespace Harmony
             db.Venues.Remove(venue);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        /*********************************
-         *          VIEW SHOWS
-         * ******************************/
-
-        public ActionResult MyShows(int? id)
-        {
-            // Getting venue owner's ID
-            int venueID = db.Users.Where(u => u.ID == id).First().ID;
-
-            // Query shows that match user's id
-            IEnumerable<User_Show> shows =
-                from show in db.User_Show
-                where show.VenueOwnerID == venueID
-                orderby show.Show.EndDateTime descending
-                select show;
-
-            return View(shows);
-        }
-
-        public ActionResult ShowDetails(int? id)
-        {
-            // Find show and create viewmodel
-            User_Show show = db.User_Show.Find(id);
-
-            ShowsViewModel viewModel = new ShowsViewModel(show);
-
-            return View(viewModel);
         }
 
         protected override void Dispose(bool disposing)

@@ -38,7 +38,7 @@ namespace Harmony.Controllers
         }
 
         // GET: User_Show/Create
-        public ActionResult CreateUserShow()
+        public ActionResult Create()
         {
             ViewBag.ShowID = new SelectList(db.Shows, "ID", "Title");
             ViewBag.MusicianID = new SelectList(db.Users, "ID", "FirstName");
@@ -51,7 +51,7 @@ namespace Harmony.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateUserShow([Bind(Include = "MusicianID,VenueOwnerID,ShowID")] User_Show user_Show)
+        public ActionResult Create([Bind(Include = "MusicianID,VenueOwnerID,ShowID")] User_Show user_Show)
         {
             if (ModelState.IsValid)
             {

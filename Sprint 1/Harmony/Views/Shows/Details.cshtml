@@ -1,0 +1,75 @@
+﻿@model Harmony.Models.ShowsViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div class="container black-font">
+    <div class="row" id="myprofile">
+        <div class="col-md-12">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.MusicianName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.MusicianName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.VenueName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.VenueName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.StartTime)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.StartTime)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.EndTime)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EndTime)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DateBooked)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DateBooked)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Back to List", "MyShows")
+        </p>
+    </div>
+</div>

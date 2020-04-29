@@ -21,6 +21,7 @@ namespace Harmony.Models
             StartTime = show.Show.StartDateTime;
             EndTime = show.Show.EndDateTime;
             DateBooked = show.Show.DateBooked;
+            Description = show.Show.Description;
 
             VenueName = (from v in db.Venues
                          where v.UserID == show.VenueOwnerID
@@ -66,5 +67,7 @@ namespace Harmony.Models
 
         [Display(Name = "Musician")]
         public string MusicianName { get; set; }
+
+        public string Description { get; set; }
     }
 }
