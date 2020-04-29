@@ -441,14 +441,13 @@
     <Content Include="Views\Home\MusicianSearchResults.cshtml" />
     <Content Include="Views\Users\MyShows.cshtml" />
     <Content Include="Views\Venues\MyShows.cshtml" />
-    <Content Include="Views\Users\ShowDetails.cshtml" />
     <Content Include="Views\Venues\ShowDetails.cshtml" />
     <Content Include="Views\Shows\Create.cshtml" />
     <Content Include="Views\Shows\Delete.cshtml" />
     <Content Include="Views\Shows\Details.cshtml" />
     <Content Include="Views\Shows\Edit.cshtml" />
     <Content Include="Views\Shows\MyShows.cshtml" />
-    <Content Include="Views\Users\RateUser.cshtml" />
+    <Content Include="Views\Shows\RateUser.cshtml" />
     <Content Include="Views\Venues\RateUser.cshtml" />
   </ItemGroup>
   <ItemGroup />

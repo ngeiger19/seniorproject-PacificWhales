@@ -1,0 +1,91 @@
+﻿@model Harmony.Models.ShowsViewModel
+
+<div class="row">
+    <div class="col-8 offset-2 shadow p-3 mb-5 bg-white rounded" style="margin-top: 40px;">
+        @if ((User.IsInRole("Musician") && Model.VenueRated == false) || (User.IsInRole("VenueOwner") && Model.MusicianRated == false))
+        {
+            if (User.IsInRole("Musician"))
+            {
+                <h3 id="form-title">Rate this experience with @Model.VenueName</h3>
+            }
+            else if (User.IsInRole("VenueOwner"))
+            {
+                <h3 id="form-title">Rate this experience with @Model.MusicianName</h3>
+            }
+            <hr />
+            <div class="row">
+                <div class="col">
+                    @using (Html.BeginForm("RateUser", "Shows", new { id = Model.ShowID }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.RadioButtonFor(m => m.RatingValue, "star1")
+                                @Html.Label("Terrible")
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.RadioButtonFor(m => m.RatingValue, "star2")
+                                @Html.Label("Poor")
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.RadioButtonFor(m => m.RatingValue, "star3")
+                                @Html.Label("Okay")
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.RadioButtonFor(m => m.RatingValue, "star4")
+                                @Html.Label("Great")
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                @Html.RadioButtonFor(m => m.RatingValue, "star5")
+                                @Html.Label("Awesome")
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Rate!</button>
+                        </div>
+                        @*<div class="form-group">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="rating" id="star1-radio" runat="server" value="star1" />
+                                        <label class="form-check-label" for="star1">Terrible</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="rating" id="star2-radio" runat="server" value="star2" />
+                                        <label class="form-check-label" for="star2">Poor</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="rating" id="star3-radio" runat="server" value="star3" />
+                                        <label class="form-check-label" for="star3">Okay</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="rating" id="star4-radio" runat="server" value="star4" />
+                                        <label class="form-check-label" for="star4">Great</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="rating" id="star5-radio" runat="server" value="star5" />
+                                        <label class="form-check-label" for="star5">Awesome</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Rate!</button>
+                                </div>
+                            </div>
+                        </div>*@
+                    }
+                </div>
+            </div>
+            
+        }
+        @if (Model.VenueRated == true)
+        {
+            <h3>You've rated this experience</h3>
+        }
+        @Html.ActionLink("Return to shows", "MyShows")
+    </div>
+</div>

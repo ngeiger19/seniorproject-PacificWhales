@@ -77,31 +77,39 @@ namespace Harmony.Controllers
                 return 5;
             }
         }
-        public ActionResult RateUser(User_Show show)
+        public ActionResult RateUser(int? id)
         {
+            User_Show show = db.User_Show.Where(s => s.ShowID == id).FirstOrDefault();
             ShowsViewModel viewModel = new ShowsViewModel(show);
             return View(viewModel);
         }
 
-        public ActionResult RateUser(User_Show show, string rating)
+        [HttpPost]
+        public ActionResult RateUser(int? id, ShowsViewModel model)
         {
+            User_Show show = db.User_Show.Where(s => s.ShowID == id).FirstOrDefault();
+            ShowsViewModel viewModel = new ShowsViewModel(show);
             // Converting string into int
-            int numStars = getRating(rating);
+            int numStars = getRating(model.RatingValue);
 
-            Models.Rating userRating = new Models.Rating
+            Rating userRating = new Rating();
+
+            if (User.IsInRole("VenueOwner"))
             {
-                UserID = show.MusicianID,
-                Value = numStars
-            };
-
-            show.MusicianRated = 1;
-
+                userRating.UserID = viewModel.MusicianID;
+                userRating.Value = numStars;
+                show.VenueRated = true;
+            }
+            else if (User.IsInRole("Musician"))
+            {
+                userRating.UserID = viewModel.VenueID;
+                userRating.Value = numStars;
+                show.MusicianRated = true;
+            }
             db.Ratings.Add(userRating);
             db.SaveChanges();
 
-            ShowsViewModel viewModel = new ShowsViewModel(show);
-
-            return View(viewModel);
+            return RedirectToAction("MyShows");
         }
 
         // GET: Shows/Create

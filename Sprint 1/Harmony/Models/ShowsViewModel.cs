@@ -12,6 +12,8 @@ namespace Harmony.Models
     {
         HarmonyContext db = new HarmonyContext();
 
+        public ShowsViewModel() { }
+
         public ShowsViewModel(User_Show show)
         {
             Title = show.Show.Title;
@@ -34,39 +36,28 @@ namespace Harmony.Models
             VenueRated = show.VenueRated;
         }
 
-        public int ID { get; set; }
-
-        [Required]
         [Display(Name = "Title")]
         public string Title { get; set; }
 
-        [Required]
         [Display(Name = "Musician ID")]
         public int MusicianID { get; set; }
 
-        [Required]
         [Display(Name = "Venue ID")]
         public int VenueID { get; set; }
 
-        [Required]
         [Display(Name = "Show ID")]
         public int ShowID { get; set; }
 
-        [Required]
-        public int MusicianRated { get; set; }
+        public bool? MusicianRated { get; set; }
 
-        [Required]
-        public int VenueRated { get; set; }
+        public bool? VenueRated { get; set; }
 
-        [Required]
         [Display(Name = "Start Date")]
         public DateTime StartTime { get; set; }
 
-        [Required]
         [Display(Name = "End Date")]
         public DateTime EndTime { get; set; }
 
-        [Required]
         [Display(Name = "Date Booked")]
         public DateTime DateBooked { get; set; }
 
@@ -77,5 +68,7 @@ namespace Harmony.Models
         public string MusicianName { get; set; }
 
         public string Description { get; set; }
+
+        public string RatingValue { get; set; }
     }
 }

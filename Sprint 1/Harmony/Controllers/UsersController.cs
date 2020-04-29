@@ -339,36 +339,6 @@ namespace Harmony
             return View(viewModel);
         }
 
-        /*********************************
-         *          RATE SHOWS
-         * ******************************/
-         public ActionResult RateUser(User_Show show)
-        {
-            ShowsViewModel viewModel = new ShowsViewModel(show);
-            return View(viewModel);
-        }
-
-        public ActionResult RateUser(User_Show show, string rating)
-        {
-            // Converting string into int
-            int numStars = getRating(rating);
-
-            Models.Rating userRating = new Models.Rating
-            {
-                UserID = show.VenueOwnerID,
-                Value = numStars
-            };
-
-            show.VenueRated = 1;
-            
-            db.Ratings.Add(userRating);
-            db.SaveChanges();
-
-            ShowsViewModel viewModel = new ShowsViewModel(show);
-
-            return View(viewModel);
-        }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

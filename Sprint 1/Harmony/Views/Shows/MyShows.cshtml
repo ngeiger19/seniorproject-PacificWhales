@@ -87,9 +87,17 @@
                             <td>
                                 @Html.ActionLink("Details", "Details", new { id = item.ID })
                             </td>
+
+                            @if (User.IsInRole("Musician") && item.User_Show.Select(us => us.MusicianRated).First() == false)
+                            {
+                                <td>@Html.ActionLink("Rate", "RateUser", new { id = item.ID })</td>
+                            }
+                            @if (User.IsInRole("VenueOwner") && item.User_Show.Select(us => us.VenueRated).First() == false)
+                            {
+                                <td>@Html.ActionLink("Rate", "RateUser", new { id = item.ID })</td>
+                            }
                         </tr>
                     }
-
                 }
             </table>
         </div>
