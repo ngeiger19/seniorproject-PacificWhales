@@ -214,6 +214,7 @@
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PhotosController.cs" />
     <Compile Include="Controllers\ShowsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\VenuesController.cs" />
@@ -450,6 +451,8 @@
     <Content Include="Views\Shows\Edit.cshtml" />
     <Content Include="Views\Shows\Index.cshtml" />
     <Content Include="Views\Home\MusicianSearchResults.cshtml" />
+    <Content Include="Views\Photos\Details.cshtml" />
+    <Content Include="Views\Photos\Create.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

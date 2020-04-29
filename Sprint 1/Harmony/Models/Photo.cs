@@ -8,6 +8,8 @@ namespace Harmony.Models
 
     public partial class Photo
     {
+        internal User User;
+
         public int ID { get; set; }
 
         [Required]
@@ -19,7 +21,5 @@ namespace Harmony.Models
         public string Path { get; set; }
 
         public int UserID { get; set; }
-
-        public virtual User User { get; set; }
     }
 }

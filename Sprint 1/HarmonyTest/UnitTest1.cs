@@ -16,5 +16,14 @@ namespace HarmonyTest
 
             return true;
         }
+        [TestMethod]
+        public void Total_Add10to10ShouldEqual20()
+        {
+            int x = 10;
+            int y = x + 10;
+            Assert.AreEqual(x + 10, y);
+        }
+
+
     }
 }
