@@ -84,6 +84,7 @@ namespace Harmony.Models
 
         public DateTime DateBooked { get; set; }
         // public List<SelectListItem> VenueList { get; set; }
+        [Display(Name = "Rating")]
         public float AveRating { get; set; }
     }
 
@@ -141,6 +142,8 @@ namespace Harmony.Models
 
         public DateTime DateBooked { get; set; }
         public List<SelectListItem> VenueList { get; set; }
+
+        [Display(Name = "Rating")]
         public float AveRating { get; set; }
     }
 }
