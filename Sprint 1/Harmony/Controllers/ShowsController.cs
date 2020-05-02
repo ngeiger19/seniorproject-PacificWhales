@@ -199,6 +199,11 @@ namespace Harmony.Controllers
             return View(viewModel);
         }
 
+        public void CalcAveRating(int userId)
+        {
+            User user = db.Users.Where(u => u.ID == userId).FirstOrDefault();
+        }
+
         [HttpPost]
         public ActionResult RateUser(int? id, ShowsViewModel model)
         {
@@ -214,6 +219,7 @@ namespace Harmony.Controllers
                 userRating.UserID = viewModel.MusicianID;
                 userRating.Value = numStars;
                 show.VenueRated = true;
+                
             }
             else if (User.IsInRole("Musician"))
             {
@@ -221,6 +227,7 @@ namespace Harmony.Controllers
                 userRating.Value = numStars;
                 show.MusicianRated = true;
             }
+
             db.Ratings.Add(userRating);
             db.SaveChanges();
 

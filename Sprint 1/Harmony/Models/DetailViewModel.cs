@@ -26,6 +26,7 @@ namespace Harmony.Models
             ZipCode = venue.ZipCode;
             Type = venue.VenueType.TypeName;
             UserID = venue.UserID;
+            AveRating = venue.User.AveRating;
         }
 
         public int ID { get; set; }
@@ -83,6 +84,7 @@ namespace Harmony.Models
 
         public DateTime DateBooked { get; set; }
         // public List<SelectListItem> VenueList { get; set; }
+        public float AveRating { get; set; }
     }
 
     public class MusicianDetailViewModel
@@ -98,6 +100,7 @@ namespace Harmony.Models
             Email = user.Email;
             Description = user.Description;
             Genres = user.Genres.Select(g => g.GenreName).ToList();
+            AveRating = user.AveRating;
         }
 
         public int ID { get; set; }
@@ -138,5 +141,6 @@ namespace Harmony.Models
 
         public DateTime DateBooked { get; set; }
         public List<SelectListItem> VenueList { get; set; }
+        public float AveRating { get; set; }
     }
 }
