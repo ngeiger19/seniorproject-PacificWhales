@@ -112,9 +112,40 @@ namespace Harmony.Controllers
             return users;
         }
 
+        public IEnumerable<User> GetMusicianReccs()
+        {
+            // Getting users in order of average rating
+            IEnumerable<User> topRated =
+                from u in db.Users
+                orderby u.AveRating descending
+                select u;
+
+            // Assigning point value to each user
+            // based on their rating and shows played
+            List<Tuple<User, float?>> usersPoints = new List<Tuple<User, float?>>();
+            foreach (var u in topRated)
+            {
+                int numShows =
+                    (from s in db.User_Show
+                     where s.MusicianID == u.ID
+                     select s).Count();
+
+                float? numPoints = u.AveRating * numShows;
+                usersPoints.Add(Tuple.Create(u, numPoints));
+            }
+        }
+
 
         public ActionResult Index()
         {
+            if (User.IsInRole("VenueOwner"))
+            {
+
+            }
+            else if (User.IsInRole("Musician")) 
+            {
+
+            }
             return View();
         }
 
