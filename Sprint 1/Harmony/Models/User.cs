@@ -46,6 +46,9 @@ namespace Harmony.Models
         public string Description { get; set; }
 
         [Required]
+        public double AveRating { get; set; }
+
+        [Required]
         [StringLength(128)]
         public string ASPNetIdentityID { get; set; }
 

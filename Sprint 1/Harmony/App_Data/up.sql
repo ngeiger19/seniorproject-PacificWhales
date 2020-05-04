@@ -111,7 +111,7 @@ CREATE TABLE [dbo].[Users]
 	[Email]		NVARCHAR (100)		NOT NULL,
 	-- [ShowsBooked]		INT		 NULL,
 	[Description]		NVARCHAR (300)		NULL,
-	-- [AveRating]		INT		NULL,
+	[AveRating]		FLOAT(35)	NOT NULL	DEFAULT 0.0,
 	-- [RoleID]		INT		NOT NULL,
 	[ASPNetIdentityID] NVARCHAR (128) NOT NULL,			-- Id into Identity User table, but NOT a FK on purpose
 	CONSTRAINT [PK_dbo.Users] PRIMARY KEY CLUSTERED ([ID] ASC)
