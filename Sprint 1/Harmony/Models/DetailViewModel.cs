@@ -6,6 +6,7 @@ using System.Web;
 using Harmony.Models;
 using Calendar.ASP.NET.MVC5.Models;
 using System.Web.Mvc;
+using System.Web.WebPages.Html;
 
 namespace Harmony.Models
 {
@@ -141,7 +142,7 @@ namespace Harmony.Models
         public string ShowDescription { get; set; }
 
         public DateTime DateBooked { get; set; }
-        public List<SelectListItem> VenueList { get; set; }
+        public SelectList VenueList { get; set; }
 
         [Display(Name = "Rating")]
         public double AveRating { get; set; }
