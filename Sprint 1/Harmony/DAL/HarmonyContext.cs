@@ -14,13 +14,11 @@ namespace Harmony.DAL
         }
 
         public virtual DbSet<Genre> Genres { get; set; }
-        public virtual DbSet<Photo> Photos { get; set; }
         public virtual DbSet<Show> Shows { get; set; }
         public virtual DbSet<User_Show> User_Show { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Venue> Venues { get; set; }
         public virtual DbSet<VenueType> VenueTypes { get; set; }
-        public virtual DbSet<Video> Videos { get; set; }
         public virtual DbSet<Rating> Ratings { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
