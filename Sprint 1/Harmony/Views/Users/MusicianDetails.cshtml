@@ -24,41 +24,42 @@
     </style>
     <hr />*@
 
-<div class="container black-font">
-    <h4 style="color:seashell;font-family: Broadway; font-size: 30px">Musician Profile Page</h4>
-    <div class="row" id="musicianprofile">
-        <div class="col-md-4">
-            @{
-                if (User.IsInRole("VenueOwner"))
-                {
-                    <button class="btn btn-outline-light my-2 my-sm-0" data-toggle="modal" data-target="#event-modal">Book This Musician!</button>
+    <div class="container black-font">
+        <h4 style="color:seashell;font-family: Broadway; font-size: 30px">Musician Profile Page</h4>
+        <div class="row" id="musicianprofile">
+            <div class="col-md-4">
+                @{
+                    if (User.IsInRole("VenueOwner"))
+                    {
+                        <button class="btn btn-outline-light my-2 my-sm-0" data-toggle="modal" data-target="#event-modal">Book This Musician!</button>
+                    }
                 }
-            }
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </dt>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.FirstName)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.LastName)
-            </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.FirstName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.LastName)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.City)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.City)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.State)
-            </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.LastName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.City)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.City)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.State)
+                </dt>
 
+<<<<<<< HEAD
             <dd>
                 @Html.DisplayFor(model => model.State)
             </dd>
@@ -74,45 +75,73 @@
             <dd>
                 @Html.DisplayFor(model => model.Description)
             </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.UpcomingShows)
-            </dt>
-            @if (Model.UpcomingShows.Count() != 0)
-            {
+=======
                 <dd>
-                    <table class="table">
-                        <tr>
-                            <th>
-                                Title
-                            </th>
-                            <th>
-                                DateTime
-                            </th>
-                        </tr>
-                        @foreach (var item in Model.UpcomingShows)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Title)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.StartDateTime)
-                                </td>
-                            </tr>
-
-                        }
-                    </table>
+                    @Html.DisplayFor(model => model.State)
                 </dd>
-            }
-        </dl>
-        </div>
-        <div class="col-md-8">
-            <div>
-                <img src="~/singer.jpg" id="musicianprofilepic" />
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+
+                @if (Model.AveRating != 0.0)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AveRating)
+                    </dt>
+>>>>>>> 2aa4762b2ccbdaea318e2e5fcdfd1d93460073c4
+
+                    <dd>
+                        @Html.DisplayFor(model => model.AveRating) Stars
+                    </dd> 
+                }
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.UpcomingShows)
+                </dt>
+                @if (Model.UpcomingShows.Count() != 0)
+                {
+                    <dd>
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    Title
+                                </th>
+                                <th>
+                                    DateTime
+                                </th>
+                            </tr>
+                            @foreach (var item in Model.UpcomingShows)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Title)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.StartDateTime)
+                                    </td>
+                                </tr>
+
+                            }
+                        </table>
+                    </dd>
+                }
+            </dl>
             </div>
-        </div>
-        @*<p></p>
+            <div class="col-md-8">
+                <div>
+                    <img src="~/singer.jpg" id="musicianprofilepic" />
+                </div>
+            </div>
+            @*<p></p>
                  <div class="row">
                      <div class="col-lg-2"></div>
                      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -177,89 +206,88 @@
                 </div>
             </div>
             <br />*@
-    </div>
-    <div class="row">
-        <div id="map">
-            <script>
-                var map;
-                function initMap() {
-                    map = new google.maps.Map(document.getElementById('map'), {
-                        center: { lat: 44.848549, lng: -123.237381 },
-                        zoom: 15
-                    });
-                }
-            </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=pNKTuI946E9jhHXtQhexusvL&callback=initMap"
-                    async defer></script>
         </div>
+        @*<div class="row">
+            <div id="map">
+                <script>
+                    var map;
+                    function initMap() {
+                        map = new google.maps.Map(document.getElementById('map'), {
+                            center: { lat: 44.848549, lng: -123.237381 },
+                            zoom: 15
+                        });
+                    }
+                </script>
+                <script src="https://maps.googleapis.com/maps/api/js?key=pNKTuI946E9jhHXtQhexusvL&callback=initMap"
+                        async defer></script>
+            </div>
 
-    </div>
-    <div class="modal fade" id="event-modal" tabindex="-1" role="dialog" aria-labelledby="event-modal-label" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="event-modal-label">Create an event</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                @using (Html.BeginForm("CreateShow", "Users", new { id = Model.ID }, FormMethod.Post, new { @class = "form-horizontal", role = "form"}))
-                {
-                    <div class="modal-body">
-                        @Html.AntiForgeryToken()
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
-                            <div class="col-md-12">
-                                @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.StartDateTime, new { @class = "col-md-2 control-label" })
-                            <div class="col-md-12">
-                                @Html.TextBoxFor(m => m.StartDateTime, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.StartDateTime, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.EndDateTime, new { @class = "col-md-2 control-label" })
-                            <div class="col-md-12">
-                                @Html.TextBoxFor(m => m.EndDateTime, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.EndDateTime, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.VenueID, new { @class = "col-md-2 control-label" })
-                            <div class="col-md-12">
-                                @Html.TextBoxFor(m => m.VenueID, htmlAttributes: new { @class = "form-control" })
-                                @*Html.DropDownList("VenueID", Model.VenueList, "---Select Venues---", htmlAttributes: new { @class = "form-control" })*@
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.ShowDescription, new { @class = "col-md-2 control-label" })
-                            <div class="col-md-12">
-                                @Html.TextAreaFor(m => m.ShowDescription, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.ShowDescription, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Create</button>
-                            </div>
-                        </div>
+        </div>*@
+        <div class="modal fade" id="event-modal" tabindex="-1" role="dialog" aria-labelledby="event-modal-label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="event-modal-label">Create an event</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                }
+                    @using (Html.BeginForm("CreateShow", "Users", new { id = Model.ID }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        <div class="modal-body">
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.StartDateTime, new { @class = "col-md-2 control-label" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(m => m.StartDateTime, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.StartDateTime, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.EndDateTime, new { @class = "col-md-2 control-label" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(m => m.EndDateTime, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.EndDateTime, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.VenueID, new { @class = "col-md-2 control-label" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(m => m.VenueID, htmlAttributes: new { @class = "form-control" })
+                                    @*Html.DropDownList("VenueID", Model.VenueList, "---Select Venues---", htmlAttributes: new { @class = "form-control" })*@
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.ShowDescription, new { @class = "col-md-2 control-label" })
+                                <div class="col-md-12">
+                                    @Html.TextAreaFor(m => m.ShowDescription, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.ShowDescription, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Create</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
-    </div>
 
-    <script>
-        $('#event-modal').appendTo("body")
-    </script>
-</div>
+        <script>
+            $('#event-modal').appendTo("body")
+        </script>
+    </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-

@@ -111,7 +111,7 @@ CREATE TABLE [dbo].[Users]
 	[Email]		NVARCHAR (100)		NOT NULL,
 	-- [ShowsBooked]		INT		 NULL,
 	[Description]		NVARCHAR (300)		NULL,
-	-- [AveRating]		INT		NULL,
+	[AveRating]		FLOAT(35)	NOT NULL	DEFAULT 0.0,
 	-- [RoleID]		INT		NOT NULL,
 	[ASPNetIdentityID] NVARCHAR (128) NOT NULL,			-- Id into Identity User table, but NOT a FK on purpose
 	CONSTRAINT [PK_dbo.Users] PRIMARY KEY CLUSTERED ([ID] ASC)
@@ -258,6 +258,8 @@ CREATE TABLE [dbo].[Shows]
 	[VenueID]		INT		NULL,
 	[Description]		NVARCHAR(500)		NULL,
 	[DateBooked]	DateTime		NOT NULL,
+	[Status]	NVARCHAR(16)		NOT NULL,
+	[GoogleEventID] NVARCHAR(500)	NOT NULL,
 	CONSTRAINT [PK_dbo.Shows] PRIMARY KEY CLUSTERED ([ID] ASC),
 	CONSTRAINT [FK_dbo.Shows_dbo.Venues_ID] FOREIGN KEY ([VenueID]) REFERENCES [dbo].[Venues] ([ID])
 );

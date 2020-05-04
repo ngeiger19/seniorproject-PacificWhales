@@ -12,7 +12,6 @@ namespace Harmony.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            Photos = new HashSet<Photo>();
             User_Show = new HashSet<User_Show>();
             User_Show1 = new HashSet<User_Show>();
             Venues = new HashSet<Venue>();
@@ -47,11 +46,11 @@ namespace Harmony.Models
         public string Description { get; set; }
 
         [Required]
+        public double AveRating { get; set; }
+
+        [Required]
         [StringLength(128)]
         public string ASPNetIdentityID { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Photo> Photos { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User_Show> User_Show { get; set; }

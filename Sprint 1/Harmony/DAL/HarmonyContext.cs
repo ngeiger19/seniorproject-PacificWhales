@@ -8,8 +8,8 @@ namespace Harmony.DAL
     public partial class HarmonyContext : DbContext
     {
         public HarmonyContext()
-         : base("name=HarmonyContext")
-        // : base("name=HarmonyContext_Azure")
+        // : base("name=HarmonyContext")
+         : base("name=HarmonyContext_Azure")
         {
         }
 
@@ -30,11 +30,6 @@ namespace Harmony.DAL
             modelBuilder.Entity<Show>()
                 .HasMany(e => e.User_Show)
                 .WithRequired(e => e.Show)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.Photos)
-                .WithRequired(e => e.User)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()

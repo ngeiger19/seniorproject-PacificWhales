@@ -70,5 +70,7 @@ namespace Harmony.Models
         public string Description { get; set; }
 
         public string RatingValue { get; set; }
+
+        public string Status { get; set; }
     }
 }

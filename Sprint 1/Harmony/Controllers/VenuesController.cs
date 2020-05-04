@@ -82,7 +82,7 @@ namespace Harmony
             var identityID = User.Identity.GetUserId();
 
             VenueOwnerDetailViewModel viewModel = new VenueOwnerDetailViewModel(venue);
-            viewModel.UpcomingShows = db.User_Show.Where(u => u.VenueOwnerID == venue.UserID).Select(s => s.Show).Where(s => s.StartDateTime > DateTime.Now).OrderByDescending(s => s.EndDateTime).ToList();
+            viewModel.UpcomingShows = db.User_Show.Where(u => u.VenueOwnerID == venue.UserID).Select(s => s.Show).Where(s => s.StartDateTime > DateTime.Now && s.Status == "Accepted").OrderByDescending(s => s.EndDateTime).ToList();
 
             return View(viewModel);
         }
@@ -128,6 +128,7 @@ namespace Harmony
                 {
                     Event newEvent = new Event()
                     {
+                        Id = Guid.NewGuid().ToString().Replace('-', '0'),
                         Summary = viewModel.Title,
                         Description = viewModel.ShowDescription,
                         Location = model.VenueName,
@@ -149,7 +150,7 @@ namespace Harmony
                     var newEventRequest = service.Events.Insert(newEvent, "primary");
                     // This allows attendees to get email notification
                     newEventRequest.SendNotifications = true;
-                    var eventResult = newEventRequest.ExecuteAsync();
+                    var eventResult = newEventRequest.Execute();
 
                     // add the new show to db
                     Show newShow = new Show
@@ -159,17 +160,22 @@ namespace Harmony
                         EndDateTime = viewModel.EndDateTime,
                         Description = viewModel.ShowDescription,
                         DateBooked = newEvent.Created ?? DateTime.Now,
-                        VenueID = model.ID
+                        VenueID = model.ID,
+                        Status = "Pending",
+                        GoogleEventID = newEvent.Id
                     };
                     db.Shows.Add(newShow);
                     User_Show user_Show = new User_Show
                     {
                         MusicianID = db.Users.Where(u => u.ASPNetIdentityID == IdentityID).First().ID,
                         VenueOwnerID = model.UserID,
-                        ShowID = newShow.ID
+                        ShowID = newShow.ID,
+                        MusicianRated = false,
+                        VenueRated = false
                     };
                     db.User_Show.Add(user_Show);
                     db.SaveChanges();
+
                 }
 
                 return RedirectToAction("Details", new { id = model.ID});
