@@ -146,5 +146,7 @@ namespace Harmony.Models
 
         [Display(Name = "Rating")]
         public double AveRating { get; set; }
+
+        public List<string> stateList { get; set; }
     }
 }

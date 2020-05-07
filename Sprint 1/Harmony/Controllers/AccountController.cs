@@ -70,17 +70,18 @@ namespace Harmony.Controllers
             }
             return stateList;
         }
-        public List<SelectListItem> ReadAllStatesFromJSON()
+        public SelectList ReadAllStatesFromJSON()
         {
             StreamReader sr = new StreamReader(Server.MapPath("~/Content/states_hash.json"));
             string data = sr.ReadToEnd();
             JArray arr = JArray.Parse(data);
-            List<SelectListItem> stateList = new List<SelectListItem>();
-            foreach (var item in arr)
+            List<string> states = new List<string>();
+            foreach (var state in arr)
             {
-                stateList.Add(new SelectListItem { Text = (string)item["name"], Value = (string)item["name"] });
+                states.Add((string)state["name"]);
             }
-            return stateList;
+            SelectList selectList = new SelectList(states);
+            return selectList;
         }
 
         //
@@ -172,7 +173,7 @@ namespace Harmony.Controllers
         {
             RegisterViewModel model = new RegisterViewModel
             {
-                stateList = ReadAllStatesFromJSON()
+                // stateList = ReadAllStatesFromJSON()
             };
             // ViewData.Clear();
             // ViewBag.State = stateList;
@@ -264,7 +265,6 @@ namespace Harmony.Controllers
                 }
                 AddErrors(result);
             }
-            model.stateList = ReadAllStatesFromJSON();
             // ViewBag.State = stateList;
             // ViewData["State"] = stateList;
             // If we got this far, something failed, redisplay form
@@ -442,30 +442,9 @@ namespace Harmony.Controllers
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email , stateList = ReadAllStatesFromJSON()});
             }
         }
-        /*public ActionResult ExternalLoginConfirmation()
-        {
-            StreamReader sr = new StreamReader(Server.MapPath("~/Content/states_hash.json"));
-            string data = sr.ReadToEnd();
-            JArray arr = JArray.Parse(data);
-            List<SelectListItem> stateList = new List<SelectListItem>();
-            foreach (var item in arr)
-            {
-                stateList.Add(new SelectListItem { Text = (string)item["name"], Value = (string)item["name"] });
-            }
-            ExternalLoginConfirmationViewModel model = new ExternalLoginConfirmationViewModel
-            {
-                stateList = stateList
-            };
-
-            // ViewData.Clear();
-            // ViewBag.State = stateList;
-            // ViewData["State"] = stateList;
-            sr.Dispose();
-            return View(model);
-        }*/
 
         //
         // POST: /Account/ExternalLoginConfirmation
@@ -496,13 +475,6 @@ namespace Harmony.Controllers
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         await this.UserManager.AddToRoleAsync(user.Id, model.Role);
-                        /*StreamReader sr = new StreamReader(Server.MapPath("~/Content/states_hash.json"));
-                        string data = sr.ReadToEnd();
-                        JArray arr = JArray.Parse(data);
-                        for (int i = 0; i < arr.Count(); i++)
-                        {
-                            model.stateList.Add(new SelectListItem { Text = (string)arr[i]["name"], Value = (string)arr[i]["name"] });
-                        }*/
                         User HarmonyUser = new User
                         {
                             FirstName = model.FirstName,
@@ -559,10 +531,6 @@ namespace Harmony.Controllers
                 }
                 AddErrors(result);
             }
-            model.stateList = ReadAllStatesFromJSON();
-            // ViewBag.State = stateList;
-            // ViewData["State"] = stateList;
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
