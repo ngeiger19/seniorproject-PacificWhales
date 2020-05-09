@@ -112,27 +112,68 @@ namespace Harmony.Controllers
             return users;
         }
 
-        public IEnumerable<User> GetMusicianReccs()
+        // Gets popular musicians or venues based on the
+        // number of shows they've play and their
+        // average rating
+        public IEnumerable<User> GetReccs(string role)
         {
-            // Getting users in order of average rating
-            IEnumerable<User> topRated =
+            // Getting users
+            IEnumerable<User> users =
                 from u in db.Users
-                orderby u.AveRating descending
                 select u;
 
             // Assigning point value to each user
             // based on their rating and shows played
             List<Tuple<User, float?>> usersPoints = new List<Tuple<User, float?>>();
-            foreach (var u in topRated)
+            int numShows = 0;
+            foreach (var u in users)
             {
-                int numShows =
-                    (from s in db.User_Show
-                     where s.MusicianID == u.ID
-                     select s).Count();
-
-                float? numPoints = u.AveRating * numShows;
+                
+                if (role == "VenueOwner")
+                {
+                    numShows =
+                        (from s in db.User_Show
+                        where s.MusicianID == u.ID
+                        select s).Count();
+                }
+                else if (role == "Musician")
+                {
+                    numShows =
+                        (from s in db.User_Show
+                         where s.VenueOwnerID == u.ID
+                         select s).Count();
+                }
+                
+                float? numPoints = u.AveRating * numShows + numShows;
                 usersPoints.Add(Tuple.Create(u, numPoints));
             }
+
+            // Sorting users by number of points
+            IEnumerable<User> result = Enumerable.Empty<User>();
+            User selected = new User();
+            if (usersPoints.Count() > 0)
+            {
+                for (int i = 0; i < usersPoints.Count() - 1; i++)
+                {
+                    selected = usersPoints[i].Item1;
+                    for (int j = i + 1; j < usersPoints.Count(); i++)
+                    {
+                        if (usersPoints[j].Item2 > usersPoints[i].Item2)
+                        {
+                            selected = usersPoints[j].Item1;
+                        }
+                    }
+                    if (result.Count() < 10)
+                    {
+                        result.Append(selected);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            return result;
         }
 
 
@@ -140,11 +181,13 @@ namespace Harmony.Controllers
         {
             if (User.IsInRole("VenueOwner"))
             {
-
+                IEnumerable<User> reccs = GetReccs("VenueOwner");
+                return View(reccs);
             }
             else if (User.IsInRole("Musician")) 
             {
-
+                IEnumerable<User> reccs = GetReccs("Musician");
+                return View(reccs);
             }
             return View();
         }
