@@ -199,7 +199,7 @@ namespace Harmony.Controllers
             return View(viewModel);
         }
 
-        public float CalcAveRating(int userId)
+        public double CalcAveRating(int userId, int numStars)
         {
             User user = db.Users.Where(u => u.ID == userId).FirstOrDefault();
 
@@ -207,9 +207,9 @@ namespace Harmony.Controllers
                           where r.UserID == user.ID
                           select r;
 
-            float aveRating = 0;
-            int numRatings = 0;
-            int totalRating = 0;
+            double aveRating = 0;
+            double numRatings = 1;
+            double totalRating = numStars;
 
             foreach (var r in ratings)
             {
@@ -218,6 +218,8 @@ namespace Harmony.Controllers
             }
 
             aveRating = totalRating / numRatings;
+
+            aveRating = Math.Round(aveRating, 2);
 
             return aveRating;
         }
@@ -238,9 +240,7 @@ namespace Harmony.Controllers
                 userRating.UserID = viewModel.MusicianID;
                 userRating.Value = numStars;
                 show.VenueRated = true;
-
-                db.Ratings.Add(userRating);
-                user.AveRating = CalcAveRating(user.ID);
+                user.AveRating = CalcAveRating(user.ID, numStars);
             }
             else if (User.IsInRole("Musician"))
             {
@@ -248,11 +248,10 @@ namespace Harmony.Controllers
                 userRating.UserID = viewModel.VenueID;
                 userRating.Value = numStars;
                 show.MusicianRated = true;
-
-                db.Ratings.Add(userRating);
-                user.AveRating = CalcAveRating(user.ID);
+                user.AveRating = CalcAveRating(user.ID, numStars);
             }
 
+            db.Ratings.Add(userRating);
             db.SaveChanges();
 
             return RedirectToAction("MyShows");

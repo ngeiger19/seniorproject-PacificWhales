@@ -173,23 +173,26 @@ namespace Harmony.Controllers
                     }
                 }
             }
+            if (result.Count() > 10)
+            {
+                result.Take(10);
+            }
             return result;
         }
 
 
         public ActionResult Index()
         {
+            IEnumerable<User> reccs = Enumerable.Empty<User>();
             if (User.IsInRole("VenueOwner"))
             {
-                IEnumerable<User> reccs = GetReccs("VenueOwner");
-                return View(reccs);
+                reccs = GetReccs("VenueOwner");
             }
             else if (User.IsInRole("Musician")) 
             {
-                IEnumerable<User> reccs = GetReccs("Musician");
-                return View(reccs);
+                reccs = GetReccs("Musician");
             }
-            return View();
+            return View(reccs);
         }
 
         public ActionResult About()

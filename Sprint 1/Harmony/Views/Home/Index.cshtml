@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Harmony.Models.User>
+@{
     ViewBag.Title = "Home Page";
 }
 <style>
@@ -77,6 +78,52 @@
             <p></p>
             <br />
         </div>
+    </div>
+    <div class="row shadow p-3 mb-5 bg-white rounded">
+        @if (Model.Count() > 0)
+        {
+            <h4>Popular Users</h4>
+            <table>
+                @if (User.IsInRole("VenueOwner"))
+                {
+                    <tr>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Email</th>
+                        <th>Profile</th>
+                    </tr>
+                    foreach (var u in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(x => u.FirstName) @Html.DisplayFor(x => u.LastName)</td>
+                            <td>@Html.DisplayFor(x => u.City), @Html.DisplayFor(x => u.State)</td>
+                            <td>@Html.DisplayFor(x => u.Email)</td>
+                            <td>&emsp; @Html.ActionLink("Profile", "Details", "Users", new { id = u.ID }, null)</td>
+                        </tr>
+                    }
+
+                }
+                @if (User.IsInRole("Musician"))
+                {
+                    <tr>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Email</th>
+                        <th>Profile</th>
+                    </tr>
+                    foreach (var u in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(x => u.Venues.ElementAt(0).VenueName)</td>
+                            <td>@Html.DisplayFor(x => u.Venues.ElementAt(0).City), @Html.DisplayFor(x => u.Venues.ElementAt(0).State)</td>
+                            <td>@Html.DisplayFor(x => u.Email)</td>
+                            <td>&emsp; @Html.ActionLink("Profile", "Details", "Venues", new { id = u.ID }, null)</td>
+                        </tr>
+                    }
+
+                }
+            </table>
+        }
     </div>
     <p></p>
     <p></p>

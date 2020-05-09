@@ -46,7 +46,7 @@ namespace Harmony.Models
         public string Description { get; set; }
 
         [Required]
-        public float? AveRating { get; set; }
+        public double AveRating { get; set; }
 
         [Required]
         [StringLength(128)]
