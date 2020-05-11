@@ -75,15 +75,20 @@
                     @Html.DisplayFor(model => model.Description)
                 </dd>
 
+                <dt>
+                    @Html.DisplayNameFor(model => model.AveRating)
+                </dt>
                 @if (Model.AveRating != 0.0)
                 {
-                    <dt>
-                        @Html.DisplayNameFor(model => model.AveRating)
-                    </dt>
-
                     <dd>
                         @Html.DisplayFor(model => model.AveRating) Stars
-                    </dd> 
+                    </dd>
+                }
+                else
+                {
+                    <dd>
+                        Not rated
+                    </dd>
                 }
 
                 <dt>

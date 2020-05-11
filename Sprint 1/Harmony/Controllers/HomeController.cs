@@ -129,6 +129,8 @@ namespace Harmony.Controllers
             return false;
         }
 
+        // Assigns points to users based on
+        // how many shows played and average rating
         public double GetPoints(User user, string role)
         {
             int numShows = 0;
@@ -138,6 +140,7 @@ namespace Harmony.Controllers
                     (from s in db.User_Show
                      where s.MusicianID == user.ID
                      select s).Count();
+                // Leave out if user has same role as current user
                 if (IsVenueOwner(user))
                 {
                     return -1.0;
@@ -149,6 +152,7 @@ namespace Harmony.Controllers
                     (from s in db.User_Show
                     where s.VenueOwnerID == user.ID
                     select s).Count();
+                // Leave out if user has same role as current user
                 if (!IsVenueOwner(user))
                 {
                     return -1.0;
@@ -165,44 +169,22 @@ namespace Harmony.Controllers
         // average rating
         public IEnumerable<User> GetReccs(string role, User currentUser)
         {
+            // Number of recommendations
             int numReccs = 10;
 
             // Getting users in current user's area
             IEnumerable<User> users =
                 from u in db.Users
-                where u.State == currentUser.State && u.ID != currentUser.ID
+                where u.State == currentUser.State && u.ID != currentUser.ID && u.AveRating >= 3
                 select u;
 
-            // Sorting users by number of points
-            IEnumerable<User> result = Enumerable.Empty<User>();
-            User selected = new User();
-            int i = 0;
+            // Filter out users in same role as current user
+            // and sort by number of points
+            IEnumerable<User> userPoints = users.Where(u => GetPoints(u, role) > -1.0).
+                OrderBy(u => GetPoints(u, role));
 
-            if (users.Count() > 0) { 
-                foreach (var user1 in users)
-                {
-                    selected = user1;
-                    if (i < users.Count() - 1 && GetPoints(user1, role) > -1.0)
-                    {
-                        for (int j = i + 1; j < users.Count(); j++)
-                        {
-                            User user2 = users.ElementAt(j);
-
-                            if (GetPoints(user2, role) > GetPoints(user1, role))
-                            {
-                                selected = user2;
-                            }
-                        }
-                        if (result.Count() < numReccs)
-                        {
-                            result.Append(selected);
-                        }
-                    }
-                    i += 1;
-                }
-            }
-            users.OrderBy(u => u.AveRating);
-            return users;
+            // Return top users
+            return userPoints.Take(numReccs);
         }
 
 
@@ -210,11 +192,14 @@ namespace Harmony.Controllers
         {
             string userid = User.Identity.GetUserId();
             IEnumerable<User> emptyReccs = Enumerable.Empty<User>();
+
+            // Get top users for venue owners
             if (User.IsInRole("VenueOwner"))
             {
                 IEnumerable<User> reccs = GetReccs("VenueOwner", db.Users.Where(u => u.ASPNetIdentityID == userid).First());
                 return View(reccs);
             }
+            // Get top users for musicians
             else if (User.IsInRole("Musician"))
             {
                 IEnumerable<User> reccs = GetReccs("Musician", db.Users.Where(u => u.ASPNetIdentityID == userid).First());

@@ -100,14 +100,20 @@
             <dd>
                 @Html.DisplayFor(model => model.ZipCode)
             </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AveRating)
+            </dt>
             @if (Model.AveRating != 0)
             {
-                <dt>
-                    @Html.DisplayNameFor(model => model.AveRating)
-                </dt>
-
                 <dd>
                     @Html.DisplayFor(model => model.AveRating) Stars
+                </dd>
+            }
+            else
+            {
+                <dd>
+                    Not rated
                 </dd>
             }
 
