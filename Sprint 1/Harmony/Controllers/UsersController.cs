@@ -121,7 +121,6 @@ namespace Harmony
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            // Viewmodel for Musician
             User user = db.Users.Find(id);
 
             // If users doesn't exisit
@@ -130,6 +129,7 @@ namespace Harmony
                 return HttpNotFound();
             }
 
+            // Viewmodel for Musician
             MusicianDetailViewModel model = new MusicianDetailViewModel(user);
 
             var IdentityID = User.Identity.GetUserId();
@@ -187,7 +187,8 @@ namespace Harmony
                         DateBooked = newEvent.Created ?? DateTime.Now,
                         VenueID = viewModel.VenueID,
                         Status = "Pending",
-                        GoogleEventID = newEvent.Id
+                        GoogleEventID = newEvent.Id,
+                        ShowOwnerID = db.Users.Where(u => u.ASPNetIdentityID == IdentityID).First().ID 
                     };
                     db.Shows.Add(newShow);
                     User_Show user_Show = new User_Show
