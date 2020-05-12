@@ -262,8 +262,7 @@ CREATE TABLE [dbo].[Shows]
 	[ShowOwnerID]	INT			NOT NULL,
 	[VenueID]		INT		NULL,
 	CONSTRAINT [PK_dbo.Shows] PRIMARY KEY CLUSTERED ([ID] ASC),
-	CONSTRAINT [FK_dbo.Shows_dbo.Venues_ID] FOREIGN KEY ([VenueID]) REFERENCES [dbo].[Venues] ([ID]),
-	CONSTRAINT [FK_dbo.Shows_dbo.ShowOwner_ID] FOREIGN KEY ([ShowOwnerID]) REFERENCES [dbo].[Users] ([ID])
+	CONSTRAINT [FK_dbo.Shows_dbo.Venues_ID] FOREIGN KEY ([VenueID]) REFERENCES [dbo].[Venues] ([ID])
 );
 
 -- #######################################
