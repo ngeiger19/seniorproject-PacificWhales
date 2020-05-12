@@ -255,13 +255,15 @@ CREATE TABLE [dbo].[Shows]
 	[Title]		NVARCHAR(64)	NOT NULL,
 	[StartDateTime]		DateTime		NOT NULL,
 	[EndDateTime]		DateTime		NOT NULL,
-	[VenueID]		INT		NULL,
 	[Description]		NVARCHAR(500)		NULL,
 	[DateBooked]	DateTime		NOT NULL,
 	[Status]	NVARCHAR(16)		NOT NULL,
 	[GoogleEventID] NVARCHAR(500)	NOT NULL,
+	[ShowOwnerID]	INT			NOT NULL,
+	[VenueID]		INT		NULL,
 	CONSTRAINT [PK_dbo.Shows] PRIMARY KEY CLUSTERED ([ID] ASC),
-	CONSTRAINT [FK_dbo.Shows_dbo.Venues_ID] FOREIGN KEY ([VenueID]) REFERENCES [dbo].[Venues] ([ID])
+	CONSTRAINT [FK_dbo.Shows_dbo.Venues_ID] FOREIGN KEY ([VenueID]) REFERENCES [dbo].[Venues] ([ID]),
+	CONSTRAINT [FK_dbo.Shows_dbo.ShowOwner_ID] FOREIGN KEY ([ShowOwnerID]) REFERENCES [dbo].[Users] ([ID])
 );
 
 -- #######################################
