@@ -4,6 +4,15 @@
     ViewBag.Title = "MyShows";
 }
 
+@using Harmony.Models;
+@using Harmony.DAL;
+@using Microsoft.AspNet.Identity;
+@{
+    HarmonyContext db = new HarmonyContext();
+    string identityID = User.Identity.GetUserId();
+    User self = db.Users.Where(u => u.ASPNetIdentityID == identityID).FirstOrDefault();
+}
+
 <div class="container black-font">
     <div class="row" id="myprofile">
         <div class="col-md-12">
@@ -53,7 +62,7 @@
                             <td>
                                 @using (Html.BeginForm("Accept", "Shows", new { id = item.ID }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                                 {
-                                    if (item.Status == "Pending")
+                                    if (item.Status == "Pending" && item.ShowOwnerID != self.ID)
                                     {
                                         <button type="submit" class="btn btn-sm btn-dark">Accept</button>
                                     }
@@ -62,7 +71,7 @@
                             <td>
                                 @using (Html.BeginForm("Decline", "Shows", new { id = item.ID }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                                 {
-                                    if (item.Status == "Pending")
+                                    if (item.Status == "Pending" && item.ShowOwnerID != self.ID)
                                     {
                                         <button type="submit" class="btn btn-sm btn-danger">Decline</button>
                                     }
@@ -177,6 +186,6 @@
                     }
                 }
                 </table>
+            </div>
         </div>
     </div>
-</div>
