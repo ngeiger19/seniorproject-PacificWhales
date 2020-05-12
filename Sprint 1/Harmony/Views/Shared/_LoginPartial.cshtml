@@ -1,4 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
+@using Harmony.DAL
+@using Harmony.Models
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -6,17 +8,17 @@
     @Html.AntiForgeryToken()
 
     <ul class="nav navbar-nav navbar-right">
+        <li>@Html.Display("Hello " + User.Identity.Name + "!")</li>
         <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" , @class = "btn btn-outline-light napa-navbar-join"})
+            @Html.ActionLink("My Profile", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" , @class = "btn btn-orange napa-navbar-join"})
         </li>
-        <li><a id="navbar-login-desktop" class="btn btn-outline-light napa-navbar-join" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <li><a id="navbar-login-desktop" class="btn btn-orange napa-navbar-join" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     </ul>
     }
 }
 else
 {
 <ul class="nav navbar-nav navbar-right">
-    <li><a id="navbar-login-desktop" class="btn btn-outline-light my-2 my-sm-0" href="~/Account/Login" title="Login">Log in</a></li>
-    <li><a id="navbar-login-desktop" class="btn btn-outline-light my-2 my-sm-0" href="~/Account/Register" title="Register">Register</a></li>
+    <li><a id="navbar-login-desktop" class="btn btn-orange my-2 my-sm-0" href="~/Account/Login" title="Login">Log in</a></li>
 </ul>
 }

@@ -6,117 +6,116 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Harmony.DAL;
 using Harmony.Models;
 
 namespace Harmony.Controllers
 {
-    public class BandMembersController : Controller
+    public class PhotosController : Controller
     {
-        private HarmonyContext db = new HarmonyContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: BandMembers
+        // GET: Photos
         public ActionResult Index()
         {
-            var bandMembers = db.BandMembers.Include(b => b.User);
-            return View(bandMembers.ToList());
+            var photos = db.Photos.Include(p => p.User);
+            return View(photos.ToList());
         }
 
-        // GET: BandMembers/Details/5
+        // GET: Photos/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BandMember bandMember = db.BandMembers.Find(id);
-            if (bandMember == null)
+            Photo photo = db.Photos.Find(id);
+            if (photo == null)
             {
                 return HttpNotFound();
             }
-            return View(bandMember);
+            return View(photo);
         }
 
-        // GET: BandMembers/Create
+        // GET: Photos/Create
         public ActionResult Create()
         {
             ViewBag.UserID = new SelectList(db.Users, "ID", "FirstName");
             return View();
         }
 
-        // POST: BandMembers/Create
+        // POST: Photos/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,BandMemberName,UserID")] BandMember bandMember)
+        public ActionResult Create([Bind(Include = "ID,FileName,Path,UserID")] Photo photo)
         {
             if (ModelState.IsValid)
             {
-                db.BandMembers.Add(bandMember);
+                db.Photos.Add(photo);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserID = new SelectList(db.Users, "ID", "FirstName", bandMember.UserID);
-            return View(bandMember);
+            ViewBag.UserID = new SelectList(db.Users, "ID", "FirstName", photo.UserID);
+            return View(photo);
         }
 
-        // GET: BandMembers/Edit/5
+        // GET: Photos/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BandMember bandMember = db.BandMembers.Find(id);
-            if (bandMember == null)
+            Photo photo = db.Photos.Find(id);
+            if (photo == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.UserID = new SelectList(db.Users, "ID", "FirstName", bandMember.UserID);
-            return View(bandMember);
+            ViewBag.UserID = new SelectList(db.Users, "ID", "FirstName", photo.UserID);
+            return View(photo);
         }
 
-        // POST: BandMembers/Edit/5
+        // POST: Photos/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,BandMemberName,UserID")] BandMember bandMember)
+        public ActionResult Edit([Bind(Include = "ID,FileName,Path,UserID")] Photo photo)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(bandMember).State = EntityState.Modified;
+                db.Entry(photo).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserID = new SelectList(db.Users, "ID", "FirstName", bandMember.UserID);
-            return View(bandMember);
+            ViewBag.UserID = new SelectList(db.Users, "ID", "FirstName", photo.UserID);
+            return View(photo);
         }
 
-        // GET: BandMembers/Delete/5
+        // GET: Photos/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BandMember bandMember = db.BandMembers.Find(id);
-            if (bandMember == null)
+            Photo photo = db.Photos.Find(id);
+            if (photo == null)
             {
                 return HttpNotFound();
             }
-            return View(bandMember);
+            return View(photo);
         }
 
-        // POST: BandMembers/Delete/5
+        // POST: Photos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            BandMember bandMember = db.BandMembers.Find(id);
-            db.BandMembers.Remove(bandMember);
+            Photo photo = db.Photos.Find(id);
+            db.Photos.Remove(photo);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

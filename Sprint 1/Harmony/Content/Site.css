@@ -1,31 +1,9 @@
-﻿body, html {
+﻿body {
     /*padding-top: 50px;
     padding-bottom: 20px;*/
-    /*background-image: url(../newbackground.jpg);*/
-    /*opacity: 0.85;*/
-    background-color: rgba(0, 177, 255, 0.57);
-    height: 100%;
-}
-
-#backgroundopic {
-    width: 100%;
-    height: 100%;
-    display: block;
-    background: url(../newbackground.jpg);
-    background-repeat: no-repeat;
+    background: linear-gradient(to bottom right, navy, deepskyblue, aqua) no-repeat center fixed;
+    opacity: 0.85;
     background-size: cover;
-    background-attachment: fixed;
-    opacity: 0.5;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1;
-}
-
-#navdesign {
-    background-color: rgb(255, 176, 21);
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -57,10 +35,11 @@ textarea {
     color: white;
 }
 
+
 .h1.title {
     font-size: 20px;
     font-family:'Informal Roman';
-    color:white;
+    color:black;
 
 }
 
@@ -69,7 +48,7 @@ textarea {
     font-size: 10px;
     font-weight: bold;
     font-family: 'Informal Roman';
-    color: white;
+    color: black;
 }
 
 .box1 {
@@ -77,7 +56,7 @@ textarea {
     width: 400px;
     height: 300px;
     padding: -30px;
-    border: 2px solid white;
+    border: 2px solid black;
 }
 
 #bkimage {
@@ -92,19 +71,11 @@ textarea {
     padding: 0;
 }
 
+=======
+>>>>>>> a6bcc6b18347a58dc90e4737c89fa0ba19c3d4a7
 .black-font{
     color: black;
 }
-
-#bi {
-    background-image: url(../musicbk.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    opacity: 0.85;
-    height: 100%;
-}
-
 
 nav {
     background-color: transparent;
@@ -122,13 +93,13 @@ nav {
     color: deepskyblue;
 }
 
-.btn-outline-light{
-    border-color: deepskyblue;
-    color: deepskyblue;
+.btn-orange{
+    background-color: darkorange;
+    color: white;
 }
 
-.btn-outline-light:hover {
-    background-color: deepskyblue;
+.btn-orange:hover {
+    background-color: coral;
     color: white;
 }
 
@@ -156,6 +127,14 @@ nav {
     background-color: lightgoldenrodyellow;
     background-clip: content-box;
 }
+
 #video2 {
     margin: 30px 300px 0px 300px;
+}
+
+#myprofile {
+    border: 1px dotted black;
+    padding: 10px;
+    background-color: whitesmoke;
+    background-clip: content-box;
 }

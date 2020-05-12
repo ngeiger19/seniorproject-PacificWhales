@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Harmony.Models.Venue>
+﻿@model IEnumerable<Harmony.Models.User>
 
 @if (Model.Count() > 0)
 {
@@ -13,19 +13,25 @@
             {
                 <p>State Filter: @ViewBag.State</p>
             }
+            @if (ViewBag.Genre != null)
+            {
+                <p>Genre Filter: @ViewBag.Genre</p>
+            }
             <hr />
             <table>
                 <tr>
-                    <th>Name &emsp;</th>
-                    <th>Location</th>
+                    <th>Name</th>
+                    <th>&emsp; Location</th>
+                    <th>&emsp; Email</th>
                     <th></th>
                 </tr>
-                @foreach (var venue in Model)
+                @foreach (var user in Model)
                 {
                     <tr>
-                        <td>@Html.DisplayFor(x => venue.VenueName)</td>
-                        <td>@Html.DisplayFor(x => venue.AddressLine1) @Html.DisplayFor(x => venue.City), @Html.DisplayFor(x => venue.State)</td>
-                        <td>&emsp; @Html.ActionLink("Profile", "Details", "Venues", new { id = venue.ID }, null)</td>
+                        <td>@Html.DisplayFor(x => user.FirstName) @Html.DisplayFor(x => user.LastName)</td>
+                        <td>&emsp; @Html.DisplayFor(x => user.City), @Html.DisplayFor(x => user.State)</td>
+                        <td>&emsp; @Html.DisplayFor(x => user.Email)</td>
+                        <td>&emsp; @Html.ActionLink("Profile", "MusicianDetails", "Users", new { id = user.ID }, null)</td>
                     </tr>
                 }
             </table>
@@ -41,7 +47,5 @@
             <h2 style="text-align:center;">No Matches</h2>
         </div>
     </div>
-}
-
-
+ }
 

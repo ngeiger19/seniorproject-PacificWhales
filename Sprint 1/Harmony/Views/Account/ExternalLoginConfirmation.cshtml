@@ -2,8 +2,6 @@
 @{
     ViewBag.Title = "Register";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>Associate your @ViewBag.LoginProvider account.</h3>
 <div class="row" style="justify-content: center;">
     <div class="col-md-5 shadow p-3 mb-5 bg-white rounded">
         @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -24,7 +22,7 @@
                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
-            @*<div class="form-group">
+            <div class="form-group">
                 @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
                 <div class="col-md-12">
                     @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
@@ -45,9 +43,9 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.State, new { @class = "col-md-2 control-label" })
                 <div class="col-md-12">
-                    @Html.TextBoxFor(m => m.State, new { @class = "form-control" })
-                    @*Html.DropDownListFor(m => m.State, (SelectList)ViewBag.State, new { @class = "form-control" })
-        </div>
+                    @*Html.TextBoxFor(m => m.State, new { @class = "form-control" })*@
+                    @Html.DropDownListFor(m => m.State, Model.stateList, new { @class = "form-control" })
+                </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
@@ -104,7 +102,8 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.VenueState, new { @class = "col-md-2 control-label" })
                     <div class="col-md-12">
-                        @Html.TextBoxFor(m => m.State, new { @class = "form-control" })
+                        @*Html.TextBoxFor(m => m.VenueState, new { @class = "form-control" })*@
+                        @Html.DropDownListFor(m => m.VenueState, Model.stateList, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="form-group">
@@ -122,18 +121,6 @@
                     @Html.LabelFor(m => m.GenreName, new { @class = "col-md-2 control-label" })
                     <div class="col-md-12">
                         @Html.TextAreaFor(m => m.GenreName, new { @class = "form-control" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.BandMemberName, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-12" id="BandMember">
-                        @Html.TextAreaFor(m => m.BandMemberName, new { @class = "form-control" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.InstrumentName, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-12">
-                        @Html.TextAreaFor(m => m.InstrumentName, new { @class = "form-control" })
                     </div>
                 </div>
             </div>
@@ -161,7 +148,7 @@
                     $('#VenueInfo').hide();
                     $('#VenueInfo').find('.form-control').removeClass('required');
                 })
-            </script>*@
+            </script>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" class="btn btn-primary my-2 my-sm-0" value="Register" />

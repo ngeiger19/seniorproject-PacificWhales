@@ -6,78 +6,85 @@ using System.Web;
 using Harmony.Models;
 using Calendar.ASP.NET.MVC5.Models;
 using System.Web.Mvc;
+using System.Web.WebPages.Html;
 
 namespace Harmony.Models
 {
     public class VenueOwnerDetailViewModel
     {
+        public VenueOwnerDetailViewModel() { }
         public VenueOwnerDetailViewModel(Venue venue)
         {
             ID = venue.ID;
-            FirstName = venue.User.FirstName;
-            LastName = venue.User.LastName;
+            Owner = venue.User.FirstName + " " + venue.User.LastName;
             City = venue.City;
             State = venue.State;
-            Email = venue.User.Email;
+            OwnerEmail = venue.User.Email;
             Description = venue.User.Description;
             VenueName = venue.VenueName;
             AddressLine1 = venue.AddressLine1;
             AddressLine2 = venue.AddressLine2;
             ZipCode = venue.ZipCode;
-            TypeName = venue.VenueType.TypeName;
+            Type = venue.VenueType.TypeName;
+            UserID = venue.UserID;
+            AveRating = venue.User.AveRating;
         }
 
         public int ID { get; set; }
 
-        [Required]
         [StringLength(50)]
-        public string FirstName { get; set; }
+        public string Owner { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string LastName { get; set; }
-
-        [Required]
         [StringLength(50)]
         public string City { get; set; }
 
-        [Required]
         [StringLength(24)]
         public string State { get; set; }
 
-        [Required]
         [StringLength(100)]
-        public string Email { get; set; }
+        public string OwnerEmail { get; set; }
 
         [StringLength(300)]
         public string Description { get; set; }
 
-        [Required]
         [StringLength(50)]
+        [Display(Name = "Venue Name")]
         public string VenueName { get; set; }
 
-        [Required]
         [StringLength(50)]
+        [Display(Name = "Address Line 1")]
         public string AddressLine1 { get; set; }
 
         [StringLength(50)]
+        [Display(Name = "Address Line 2")]
         public string AddressLine2 { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string VenueCity { get; set; }
-
-        [Required]
-        [StringLength(24)]
-        public string VenueState { get; set; }
-
-        [Required]
         [StringLength(10)]
+        [Display(Name = "Zip Code")]
         public string ZipCode { get; set; }
+        public string Type { get; set; }
 
-        public string TypeName { get; set; }
+        public int UserID { get; set; }
 
-        public IEnumerable<CalendarEventGroup> UpcomingEvents { get; set; }
+        public List<Show> UpcomingShows { get; set; }
+
+        // This section is for the calendar event form
+        [Display(Name = "Show Title")]
+        public string Title { get; set; }
+
+        [Display(Name = "Start DateTime")]
+        public DateTime StartDateTime { get; set; }
+
+        [Display(Name = "End DateTime")]
+        public DateTime EndDateTime { get; set; }
+
+        [Display(Name = "Show Description")]
+        public string ShowDescription { get; set; }
+
+        public DateTime DateBooked { get; set; }
+        // public List<SelectListItem> VenueList { get; set; }
+        [Display(Name = "Rating")]
+        public double AveRating { get; set; }
     }
 
     public class MusicianDetailViewModel
@@ -92,14 +99,16 @@ namespace Harmony.Models
             State = user.State;
             Email = user.Email;
             Description = user.Description;
-            Genres = user.Genres.Select(g => g.GenreName).ToList();
-            BandMembers = user.BandMembers.Select(b => b.BandMemberName).ToList();
+            Genres = user.Genres.ToList();
+            AveRating = user.AveRating;
         }
 
         public int ID { get; set; }
 
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         public string City { get; set; }
@@ -110,27 +119,30 @@ namespace Harmony.Models
 
         public string Description { get; set; }
 
-        public List<string> Genres { get; set; }
-        
-        public List<string> BandMembers { get; set; }
+        public List<Genre> Genres { get; set; }
 
-        public List<string> Instruments { get; set; }
-
+        public List<Show> UpcomingShows { get; set; }
         // This section is for the calendar event form
+        [Display(Name = "Show Title")]
+        public string Title { get; set; }
 
-        public int ShowID { get; set; }
+        [Display(Name = "Start Time")]
+        public DateTime StartDateTime { get; set; }
 
-        [DataType(DataType.DateTime)]
-        [Display(Name = "DateTime")]
-        public DateTime DateTime { get; set; }
+        [Display(Name = "End Time")]
+        public DateTime EndDateTime { get; set; }
 
-        [Display(Name = "VenueName")]
+        [Display(Name = "Venue Name")]
         public int VenueID { get; set; }
 
         public string ShowDescription { get; set; }
 
         public DateTime DateBooked { get; set; }
-        public List<SelectListItem> VenueList { get; set; }
-        public IEnumerable<CalendarEventGroup> UpcomingEvents { get; set; }
+        public SelectList VenueList { get; set; }
+
+        [Display(Name = "Rating")]
+        public double AveRating { get; set; }
+
+        public List<string> stateList { get; set; }
     }
 }

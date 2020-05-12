@@ -11,7 +11,7 @@ namespace Harmony.Models
         public string Email { get; set; }
 
         // User general info
-        /*[Required]
+        [Required]
         [StringLength(50)]
         [Display(Name = "FirstName")]
         public string FirstName { get; set; }
@@ -39,16 +39,16 @@ namespace Harmony.Models
         public string Role { get; set; }
 
         // For Venue Owners
-        [Display(Name = "VenueType")]
+        [Display(Name = "Venue Type")]
         public string VenueType { get; set; }
 
-        [Display(Name = "VenueName")]
+        [Display(Name = "Venue Name")]
         public string VenueName { get; set; }
 
-        [Display(Name = "AddressLine1")]
+        [Display(Name = "AddressLine 1")]
         public string AddressLine1 { get; set; }
 
-        [Display(Name = "AddressLine2")]
+        [Display(Name = "AddressLine 2")]
         public string AddressLine2 { get; set; }
 
         [Display(Name = "City")]
@@ -58,7 +58,7 @@ namespace Harmony.Models
         public string VenueState { get; set; }
 
         [StringLength(10)]
-        [Display(Name = "ZipCode")]
+        [Display(Name = "Zipcode")]
         public string ZipCode { get; set; }
 
         // For Musicians
@@ -66,15 +66,7 @@ namespace Harmony.Models
         [Display(Name = "Genre")]
         public string GenreName { get; set; }
 
-        [StringLength(50)]
-        [Display(Name = "BandMemberName")]
-        public string BandMemberName { get; set; }
-
-        [StringLength(50)]
-        [Display(Name = "Instruments")]
-        public string InstrumentName { get; set; }
-
-        public List<SelectListItem> stateList { get; set; }*/
+        public SelectList stateList { get; set; }
     }
 
     public class ExternalLoginListViewModel
@@ -176,16 +168,16 @@ namespace Harmony.Models
         public string Role { get; set; }
 
         // For Venue Owners
-        [Display(Name = "VenueType")]
+        [Display(Name = "Venue Type")]
         public string VenueType { get; set; }
 
-        [Display(Name = "VenueName")]
+        [Display(Name = "Venue Name")]
         public string VenueName { get; set; }
         
-        [Display(Name = "AddressLine1")]
+        [Display(Name = "Address Line 1")]
         public string AddressLine1 { get; set; }
 
-        [Display(Name = "AddressLine2")]
+        [Display(Name = "Address Line 2")]
         public string AddressLine2 { get; set; }
         
         [Display(Name = "City")]
@@ -195,7 +187,7 @@ namespace Harmony.Models
         public string VenueState { get; set; }
 
         [StringLength(10)]
-        [Display(Name = "ZipCode")]
+        [Display(Name = "Zip Code")]
         public string ZipCode { get; set; }
 
         // For Musicians
@@ -203,15 +195,7 @@ namespace Harmony.Models
         [Display(Name = "Genre")]
         public string GenreName { get; set; }
 
-        [StringLength(50)]
-        [Display(Name = "BandMemberName")]
-        public string BandMemberName { get; set; }
-
-        [StringLength(50)]
-        [Display(Name = "Instruments")]
-        public string InstrumentName { get; set; }
-
-        public List<SelectListItem> stateList { get; set; }
+        public SelectList stateList { get; set; }
 
     }
 

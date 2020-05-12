@@ -22,6 +22,7 @@ using Calendar.ASP.NET.MVC5;
 using System.IO;
 using Google.GData.Extensions;
 using Calendar.ASP.NET.MVC5.Models;
+using Newtonsoft.Json.Linq;
 
 namespace Harmony
 {
@@ -32,7 +33,6 @@ namespace Harmony
         private HarmonyContext db = new HarmonyContext();
 
         private readonly IDataStore dataStore = new FileDataStore(GoogleWebAuthorizationBroker.Folder);
-
         // Get user's Google Calendar info
         private async Task<UserCredential> GetCredentialForApiAsync()
         {
@@ -66,8 +66,8 @@ namespace Harmony
         /*******************************************
          *          MUSICIAN PROFILE
          *  *************************************/
-        // GET: Users/Details/5
-        public async Task<ActionResult> MusicianDetails(int? id)
+        // GET: Users/MusicianDetails/5
+        public ActionResult MusicianDetails(int? id)
         {
             // No user id passed through
             if (id == null)
@@ -84,150 +84,127 @@ namespace Harmony
                 return HttpNotFound();
             }
 
+            var IdentityID = User.Identity.GetUserId();
             MusicianDetailViewModel viewModel = new MusicianDetailViewModel(user);
 
-            // Get user's calendar credentials
-            const int MaxEventsPerCalendar = 20;
-            const int MaxEventsOverall = 40;
-
-            var credential = await GetCredentialForApiAsync();
-
-            var initializer = new BaseClientService.Initializer()
-            {
-                HttpClientInitializer = credential,
-                ApplicationName = "ASP.NET MVC5 Calendar Sample",
-            };
-            var service = new CalendarService(initializer);
-
-            // Fetch the list of calendars.
-            var calendars = await service.CalendarList.List().ExecuteAsync();
-
-            // Fetch some events from each calendar.
-            var fetchTasks = new List<Task<Google.Apis.Calendar.v3.Data.Events>>(calendars.Items.Count);
-            foreach (var calendar in calendars.Items)
-            {
-                var request = service.Events.List(calendar.Id);
-                request.MaxResults = MaxEventsPerCalendar;
-                request.SingleEvents = true;
-                request.TimeMin = DateTime.Now;
-                fetchTasks.Add(request.ExecuteAsync());
-            }
-            var fetchResults = await Task.WhenAll(fetchTasks);
-
-            // Sort the events and put them in the model.
-            var upcomingEvents = from result in fetchResults
-                                 from evt in result.Items
-                                 where evt.Start != null
-                                 let date = evt.Start.DateTime.HasValue ?
-                                     evt.Start.DateTime.Value.Date :
-                                     DateTime.ParseExact(evt.Start.Date, "yyyy-MM-dd", null)
-                                 let sortKey = evt.Start.DateTimeRaw ?? evt.Start.Date
-                                 orderby sortKey
-                                 select new { evt, date };
-            var eventsByDate = from result in upcomingEvents.Take(MaxEventsOverall)
-                               group result.evt by result.date into g
-                               orderby g.Key
-                               select g;
-
-            // Days in the next week
-            int thisWeek = DateTime.Now.DayOfYear + 7;
-            var eventGroups = new List<CalendarEventGroup>();
-            foreach (var grouping in eventsByDate)
-            {
-                // Adding event to model if they are scheduled for the next week
-                if (grouping.Key.DayOfYear <= thisWeek)
-                {
-                    eventGroups.Add(new CalendarEventGroup
-                    {
-                        GroupTitle = grouping.Key.ToLongDateString(),
-                        Events = grouping,
-                    });
-                }
-            }
-            viewModel.UpcomingEvents = eventGroups;
+            viewModel.UpcomingShows = db.User_Show.Where(u => u.MusicianID == user.ID).Select(s => s.Show).Where(s => s.StartDateTime > DateTime.Now && s.Status == "Accepted").OrderByDescending(s => s.EndDateTime).ToList();
+            viewModel.VenueList = new SelectList(db.Venues.Where(v => v.User.ASPNetIdentityID == IdentityID), "ID", "VenueName");
 
             return View(viewModel);
         }
 
-        public ActionResult CreateShow()
+        /*public ActionResult CreateShow()
         {
             var IdentityID = User.Identity.GetUserId();
-            List<Venue> venues = db.Venues.ToList();
+            List<Venue> venues = db.Venues*//*.Where(m => m.User.ASPNetIdentityID == IdentityID)*//*.ToList();
             List<SelectListItem> venueList = new List<SelectListItem>();
-            for (int i = 0; i < venues.Count(); i++)
+            foreach(var v in venues)
             {
-                venueList.Add(new SelectListItem { Text = venues[i].VenueName, Value = venues[i].ID.ToString() });
+                venueList.Add(new SelectListItem { Text = v.VenueName, Value = v.ID.ToString() });
             }
-            ViewBag.VenueID = new SelectList(db.Venues, "ID", "VenueName");
-
-            return View();
-        }
+            MusicianDetailViewModel model = new MusicianDetailViewModel
+            {
+                VenueList = venueList
+            };
+            // ViewBag.VenueList = new SelectList(db.Venues/*.Where(m => m.User.ASPNetIdentityID == IdentityID).Select(s => new { VenueID = s.ID, s.VenueName }), "ID", "ID");
+            // ViewData["VenueList"] = new SelectList(venueList, "Value", "Text");
+            return View(model);
+        }*/
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateShow(MusicianDetailViewModel model)
+        public async Task<ActionResult> CreateShow(int? id, MusicianDetailViewModel viewModel)
         {
-            
+            // No user id passed through
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            User user = db.Users.Find(id);
+
+            // If users doesn't exisit
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Viewmodel for Musician
+            MusicianDetailViewModel model = new MusicianDetailViewModel(user);
+
+            var IdentityID = User.Identity.GetUserId();
+            model.VenueList = new SelectList(db.Venues.Where(v => v.User.ASPNetIdentityID == IdentityID), "ID", "VenueName");
+
             if (ModelState.IsValid)
             {
-                var credential = await GetCredentialForApiAsync();
-
-                var initializer = new BaseClientService.Initializer()
+                // Get user's calendar credentials
+                UserCredential credential = await GetCredentialForApiAsync();
+                // Create Google Calendar API service.
+                var service = new CalendarService(new BaseClientService.Initializer()
                 {
                     HttpClientInitializer = credential,
-                    ApplicationName = "ASP.NET MVC5 Calendar Sample",
-                };
-                var service = new CalendarService(initializer);
+                    ApplicationName = "Harmony",
+                });
 
+                // Fetch the list of calendars.
                 var calendars = await service.CalendarList.List().ExecuteAsync();
-
-                // add the new show to db
-                Show newShow = new Show
-                {
-                    ID = model.ShowID,
-                    Date = model.DateTime,
-                    Description = model.ShowDescription,
-                    DateBooked = DateTime.Now,
-                    VenueID = model.VenueID
-                };
-                db.Shows.Add(newShow);
-
                 // create a new event to google calendar
                 if (calendars != null)
                 {
                     Event newEvent = new Event()
                     {
-                        Summary = newShow.Description,
-                        Location = "VenueName: " + newShow.Venue.VenueName + " Address: " + newShow.Venue.AddressLine1 + " " + newShow.Venue.AddressLine2 + " " + newShow.Venue.City + ", " + newShow.Venue.State + " " + newShow.Venue.ZipCode,
+                        Id = Guid.NewGuid().ToString().Replace('-', '0'),
+                        Summary = viewModel.Title,
+                        Description = viewModel.ShowDescription,
+                        Location = db.Venues.Find(viewModel.VenueID).VenueName,
                         Start = new EventDateTime()
                         {
-                            DateTime = newShow.Date
+                            DateTime = viewModel.StartDateTime.AddHours(7.0),
+                            TimeZone = "America/Los_Angeles"
                         },
                         End = new EventDateTime()
                         {
-                            DateTime = newShow.Date.Value.AddHours(1.0)
+                            DateTime = viewModel.EndDateTime.AddHours(7.0),
+                            TimeZone = "America/Los_Angeles"
                         },
                         Attendees = new List<EventAttendee>()
                         {
                             new EventAttendee(){Email = model.Email}
                         }
-
                     };
-                    var newEventRequest = service.Events.Insert(newEvent, calendars.Items.First().Id);
-                    // This allow attendees to get email notification
+                    var newEventRequest = service.Events.Insert(newEvent, "primary");
+                    // This allows attendees to get email notification
                     newEventRequest.SendNotifications = true;
-                    var eventResult = newEventRequest.ExecuteAsync();
+                    var eventResult = newEventRequest.Execute();
+
+                    // add the new show to db
+                    Show newShow = new Show
+                    {
+                        Title = viewModel.Title,
+                        StartDateTime = viewModel.StartDateTime,
+                        EndDateTime = viewModel.EndDateTime,
+                        Description = viewModel.ShowDescription,
+                        DateBooked = newEvent.Created ?? DateTime.Now,
+                        VenueID = viewModel.VenueID,
+                        Status = "Pending",
+                        GoogleEventID = newEvent.Id,
+                        ShowOwnerID = db.Users.Where(u => u.ASPNetIdentityID == IdentityID).First().ID 
+                    };
+                    db.Shows.Add(newShow);
+                    User_Show user_Show = new User_Show
+                    {
+                        MusicianID = model.ID,
+                        VenueOwnerID = db.Users.Where(u => u.ASPNetIdentityID == IdentityID).First().ID,
+                        ShowID = newShow.ID,
+                        MusicianRated = false,
+                        VenueRated = false
+                    };
+                    db.User_Show.Add(user_Show);
+                    db.SaveChanges();
                 }
-                await db.SaveChangesAsync();
-                return RedirectToAction("Welcome", "Home");
+                
+                return RedirectToAction("MusicianDetails", new { id = model.ID});
             }
-            var IdentityID = User.Identity.GetUserId();
-            List<Venue> venues = db.Venues.ToList();
-            for(int i = 0; i < venues.Count(); i++)
-            {
-                model.VenueList.Add(new SelectListItem { Text = venues[i].VenueName, Value = venues[i].ID.ToString() });
-            }
-            ViewBag.VenueID = new SelectList(db.Venues, "ID", "VenueName");
             return View(model);
         }
 
@@ -310,7 +287,6 @@ namespace Harmony
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

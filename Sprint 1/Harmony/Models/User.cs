@@ -5,19 +5,18 @@ namespace Harmony.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using Harmony.DAL;
 
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            BandMembers = new HashSet<BandMember>();
-            Photos = new HashSet<Photo>();
             User_Show = new HashSet<User_Show>();
             User_Show1 = new HashSet<User_Show>();
             Venues = new HashSet<Venue>();
-            Videos = new HashSet<Video>();
             Genres = new HashSet<Genre>();
+            Ratings = new HashSet<Rating>();
         }
 
         public int ID { get; set; }
@@ -46,14 +45,11 @@ namespace Harmony.Models
         public string Description { get; set; }
 
         [Required]
+        public double AveRating { get; set; }
+
+        [Required]
         [StringLength(128)]
         public string ASPNetIdentityID { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BandMember> BandMembers { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Photo> Photos { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User_Show> User_Show { get; set; }
@@ -65,9 +61,11 @@ namespace Harmony.Models
         public virtual ICollection<Venue> Venues { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Video> Videos { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Genre> Genres { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Rating> Ratings { get; set; }
     }
 }
