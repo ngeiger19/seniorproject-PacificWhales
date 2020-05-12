@@ -1,12 +1,9 @@
-﻿body, html {
+﻿body {
     /*padding-top: 50px;
     padding-bottom: 20px;*/
-    background-image: url(../musicbk.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+    background: linear-gradient(to bottom right, navy, deepskyblue, aqua) no-repeat center fixed;
     opacity: 0.85;
-    height: 100%;
+    background-size: cover;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -38,13 +35,6 @@ textarea {
     color: white;
 }
 
-.h1.title {
-    font-size: 20px;
-    font-family:'Informal Roman';
-    color:white;
-
-}
-
 .h2 {
     display: block;
     font-size: 10px;
@@ -53,39 +43,9 @@ textarea {
     color: white;
 }
 
-.box1 {
-    box-sizing: content-box;
-    width: 400px;
-    height: 300px;
-    padding: -30px;
-    border: 2px solid white;
-}
-
-#bkimage {
-    /*
-    background-image: url(../musicbk.jpg);
-        */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    margin: 0;
-    padding: 0;
-}
-
 .black-font{
     color: black;
 }
-
-#bi {
-    background-image: url(../musicbk.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    opacity: 0.85;
-    height: 100%;
-}
-
 
 nav {
     background-color: transparent;
@@ -103,13 +63,13 @@ nav {
     color: deepskyblue;
 }
 
-.btn-outline-light{
-    border-color: deepskyblue;
-    color: deepskyblue;
+.btn-orange{
+    background-color: darkorange;
+    color: white;
 }
 
-.btn-outline-light:hover {
-    background-color: deepskyblue;
+.btn-orange:hover {
+    background-color: coral;
     color: white;
 }
 

@@ -111,7 +111,7 @@ namespace Harmony.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Welcome", "Home");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -432,7 +432,7 @@ namespace Harmony.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Welcome", "Home");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification: 
@@ -526,7 +526,7 @@ namespace Harmony.Controllers
 
                         }
                         await db.SaveChangesAsync();
-                        return RedirectToLocal(returnUrl);
+                        return RedirectToAction("Welcome", "Home");
                     }
                 }
                 AddErrors(result);
