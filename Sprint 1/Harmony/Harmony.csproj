@@ -292,6 +292,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -425,9 +429,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Home\MusicianSearchResults.cshtml" />
-    <Content Include="Views\Users\MyShows.cshtml" />
-    <Content Include="Views\Venues\MyShows.cshtml" />
-    <Content Include="Views\Venues\ShowDetails.cshtml" />
     <Content Include="Views\Shows\Create.cshtml" />
     <Content Include="Views\Shows\Delete.cshtml" />
     <Content Include="Views\Shows\Details.cshtml" />
@@ -438,6 +439,7 @@
     <Content Include="Views\Home\ErrorPage.cshtml" />
     <Content Include="Views\Home\Error404.cshtml" />
     <Content Include="Views\Account\AccountError404.cshtml" />
+
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

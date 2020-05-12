@@ -8,8 +8,13 @@ namespace Harmony.DAL
     public partial class HarmonyContext : DbContext
     {
         public HarmonyContext()
+<<<<<<< HEAD
          : base("name=HarmonyContext")
         //: base("name=HarmonyContext_Azure")
+=======
+        : base("name=HarmonyContext")
+        // : base("name=HarmonyContext_Azure")
+>>>>>>> a6bcc6b18347a58dc90e4737c89fa0ba19c3d4a7
         {
         }
 

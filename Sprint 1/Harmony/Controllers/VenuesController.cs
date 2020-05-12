@@ -162,7 +162,8 @@ namespace Harmony
                         DateBooked = newEvent.Created ?? DateTime.Now,
                         VenueID = model.ID,
                         Status = "Pending",
-                        GoogleEventID = newEvent.Id
+                        GoogleEventID = newEvent.Id,
+                        ShowOwnerID = db.Users.Where(u => u.ASPNetIdentityID == IdentityID).First().ID
                     };
                     db.Shows.Add(newShow);
                     User_Show user_Show = new User_Show
