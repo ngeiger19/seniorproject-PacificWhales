@@ -41,7 +41,7 @@ textarea {
 .h1.title {
     font-size: 20px;
     font-family:'Informal Roman';
-    color:white;
+    color:black;
 
 }
 
@@ -50,7 +50,7 @@ textarea {
     font-size: 10px;
     font-weight: bold;
     font-family: 'Informal Roman';
-    color: white;
+    color: black;
 }
 
 .box1 {
@@ -58,7 +58,7 @@ textarea {
     width: 400px;
     height: 300px;
     padding: -30px;
-    border: 2px solid white;
+    border: 2px solid black;
 }
 
 #bkimage {
