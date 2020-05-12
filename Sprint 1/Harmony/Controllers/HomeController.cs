@@ -28,15 +28,12 @@ namespace Harmony.Controllers
                     from venue in venues
                     where venue.City.Contains(city)
                     select venue;
-
                 ViewBag.City = city;
                 return cityQuery;
             }
-
             ViewBag.City = null;
             return venues;
         }
-
         public IQueryable<Venue> StateQuery(IQueryable<Venue> venues, string state)
         {
             if (state != null && state != "")
@@ -45,11 +42,9 @@ namespace Harmony.Controllers
                     from venue in venues
                     where venue.State.Contains(state)
                     select venue;
-
                 ViewBag.State = state;
                 return stateQuery;
             }
-
             ViewBag.State = null;
             return venues;
         } */
@@ -87,7 +82,7 @@ namespace Harmony.Controllers
 
             ViewBag.State = null;
             return users;
-        } 
+        }
 
         public IEnumerable<User> GenreQuery(IEnumerable<User> users, string genre)
         {
@@ -95,7 +90,7 @@ namespace Harmony.Controllers
             {
                 Genre g = new Genre();
 
-                foreach(Genre x in db.Genres)
+                foreach (Genre x in db.Genres)
                 {
                     g = x;
                 }
@@ -150,8 +145,8 @@ namespace Harmony.Controllers
             {
                 numShows =
                     (from s in db.User_Show
-                    where s.VenueOwnerID == user.ID
-                    select s).Count();
+                     where s.VenueOwnerID == user.ID
+                     select s).Count();
                 // Leave out if user has same role as current user
                 if (!IsVenueOwner(user))
                 {
@@ -232,7 +227,7 @@ namespace Harmony.Controllers
         public ActionResult Search(string searchOption)
         {
             string search = Request.QueryString["search"];
-            
+
 
             // If nothing was typed into search bar
             if (search == null || search == "")
@@ -251,10 +246,10 @@ namespace Harmony.Controllers
             }
             else if (searchOption == "option2")
             {
-                return RedirectToAction("VenueSearchResults", new { venueSearch = search, city = cityFilter, state = stateFilter});
+                return RedirectToAction("VenueSearchResults", new { venueSearch = search, city = cityFilter, state = stateFilter });
             }
 
-            
+
             return View();
 
         }
