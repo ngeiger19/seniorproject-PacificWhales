@@ -10,6 +10,7 @@ using Harmony.DAL;
 using System.Net;
 using Newtonsoft.Json.Linq;
 using System.IO;
+using Microsoft.AspNet.Identity;
 
 namespace Harmony.Controllers
 {
@@ -112,10 +113,99 @@ namespace Harmony.Controllers
             return users;
         }
 
+        // Determines a user's role
+        public bool IsVenueOwner(User user)
+        {
+            Venue venue =
+                (from v in db.Venues
+                 where v.UserID == user.ID
+                 select v).FirstOrDefault();
+
+            if (venue != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        // Assigns points to users based on
+        // how many shows played and average rating
+        public double GetPoints(User user, string role)
+        {
+            int numShows = 0;
+            if (role == "VenueOwner")
+            {
+                numShows =
+                    (from s in db.User_Show
+                     where s.MusicianID == user.ID
+                     select s).Count();
+                // Leave out if user has same role as current user
+                if (IsVenueOwner(user))
+                {
+                    return -1.0;
+                }
+            }
+            else if (role == "Musician")
+            {
+                numShows =
+                    (from s in db.User_Show
+                    where s.VenueOwnerID == user.ID
+                    select s).Count();
+                // Leave out if user has same role as current user
+                if (!IsVenueOwner(user))
+                {
+                    return -1.0;
+                }
+            }
+
+            double numPoints = user.AveRating * numShows + numShows;
+
+            return (numPoints);
+        }
+
+        // Gets popular musicians or venues based on the
+        // number of shows they've play and their
+        // average rating
+        public IEnumerable<User> GetReccs(string role, User currentUser)
+        {
+            // Number of recommendations
+            int numReccs = 10;
+
+            // Getting users in current user's area
+            IEnumerable<User> users =
+                from u in db.Users
+                where u.State == currentUser.State && u.ID != currentUser.ID && u.AveRating >= 3
+                select u;
+
+            // Filter out users in same role as current user
+            // and sort by number of points
+            IEnumerable<User> userPoints = users.Where(u => GetPoints(u, role) > -1.0).
+                OrderBy(u => GetPoints(u, role));
+
+            // Return top users
+            return userPoints.Take(numReccs);
+        }
+
 
         public ActionResult Index()
         {
-            return View();
+            string userid = User.Identity.GetUserId();
+            IEnumerable<User> emptyReccs = Enumerable.Empty<User>();
+
+            // Get top users for venue owners
+            if (User.IsInRole("VenueOwner"))
+            {
+                IEnumerable<User> reccs = GetReccs("VenueOwner", db.Users.Where(u => u.ASPNetIdentityID == userid).First());
+                return View(reccs);
+            }
+            // Get top users for musicians
+            else if (User.IsInRole("Musician"))
+            {
+                IEnumerable<User> reccs = GetReccs("Musician", db.Users.Where(u => u.ASPNetIdentityID == userid).First());
+                return View(reccs);
+            }
+            return View(emptyReccs);
         }
 
         public ActionResult About()

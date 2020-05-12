@@ -92,16 +92,28 @@
                     @Html.DisplayFor(model => model.Description)
                 </dd>
 
+                <dt>
+                    @Html.DisplayNameFor(model => model.AveRating)
+                </dt>
                 @if (Model.AveRating != 0.0)
                 {
+<<<<<<< HEAD
                     <dt>
                         @Html.DisplayNameFor(model => model.AveRating)
                     </dt>
 >>>>>>> 2aa4762b2ccbdaea318e2e5fcdfd1d93460073c4
 
+=======
+>>>>>>> e87bb7c27b2e4e091ffc756146e957ce55428c35
                     <dd>
                         @Html.DisplayFor(model => model.AveRating) Stars
-                    </dd> 
+                    </dd>
+                }
+                else
+                {
+                    <dd>
+                        Not rated
+                    </dd>
                 }
 
                 <dt>
