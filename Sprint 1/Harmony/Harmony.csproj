@@ -435,6 +435,9 @@
     <Content Include="Views\Shows\MyShows.cshtml" />
     <Content Include="Views\Shows\RateUser.cshtml" />
     <Content Include="Views\Venues\RateUser.cshtml" />
+    <Content Include="Views\Home\ErrorPage.cshtml" />
+    <Content Include="Views\Home\Error404.cshtml" />
+    <Content Include="Views\Account\AccountError404.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

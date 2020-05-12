@@ -202,6 +202,7 @@ namespace Harmony.Controllers
             // Get top users for musicians
             else if (User.IsInRole("Musician"))
             {
+                //reccs ends up being empty
                 IEnumerable<User> reccs = GetReccs("Musician", db.Users.Where(u => u.ASPNetIdentityID == userid).First());
                 return View(reccs);
             }
@@ -319,6 +320,31 @@ namespace Harmony.Controllers
             musicians = GenreQuery(musicians, genre);
 
             return View(musicians);
+        }
+
+        public ActionResult ErrorPage()
+        {
+            
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Error404()
+        {
+
+           
+            return View();
+
+        }
+        [HttpPost]
+        public ActionResult Error404(int num)
+        {
+            ViewBag.success = true;
+            // if (num != null) { return View(); } 
+
+            return View();
+            // else { return RedirectToAction("ErrorPage", "Home"); }
+
         }
     }
 }
