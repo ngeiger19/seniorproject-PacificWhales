@@ -129,28 +129,34 @@ namespace Harmony.Controllers
         public double GetPoints(User user, string role)
         {
             int numShows = 0;
+
             if (role == "VenueOwner")
             {
-                numShows =
-                    (from s in db.User_Show
-                     where s.MusicianID == user.ID
-                     select s).Count();
-                // Leave out if user has same role as current user
-                if (IsVenueOwner(user))
+                foreach (User_Show s in db.User_Show)
                 {
-                    return -1.0;
+                    if (s.MusicianID == user.ID)
+                    {
+                        numShows++;
+                    }
                 }
             }
             else if (role == "Musician")
             {
+<<<<<<< HEAD
                 numShows =
                     (from s in db.User_Show
                      where s.VenueOwnerID == user.ID
                      select s).Count();
                 // Leave out if user has same role as current user
                 if (!IsVenueOwner(user))
+=======
+                foreach (User_Show s in db.User_Show)
+>>>>>>> dev0.3
                 {
-                    return -1.0;
+                    if (s.VenueOwnerID == user.ID)
+                    {
+                        numShows++;
+                    }
                 }
             }
 
@@ -175,7 +181,7 @@ namespace Harmony.Controllers
 
             // Filter out users in same role as current user
             // and sort by number of points
-            IEnumerable<User> userPoints = users.Where(u => GetPoints(u, role) > -1.0).
+            IEnumerable<User> userPoints = users.Where(u => GetPoints(u, role) > 0).
                 OrderBy(u => GetPoints(u, role));
 
             // Return top users
@@ -197,6 +203,7 @@ namespace Harmony.Controllers
             // Get top users for musicians
             else if (User.IsInRole("Musician"))
             {
+                //reccs ends up being empty
                 IEnumerable<User> reccs = GetReccs("Musician", db.Users.Where(u => u.ASPNetIdentityID == userid).First());
                 return View(reccs);
             }
@@ -314,6 +321,31 @@ namespace Harmony.Controllers
             musicians = GenreQuery(musicians, genre);
 
             return View(musicians);
+        }
+
+        public ActionResult ErrorPage()
+        {
+            
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Error404()
+        {
+
+           
+            return View();
+
+        }
+        [HttpPost]
+        public ActionResult Error404(int num)
+        {
+            ViewBag.success = true;
+            // if (num != null) { return View(); } 
+
+            return View();
+            // else { return RedirectToAction("ErrorPage", "Home"); }
+
         }
     }
 }

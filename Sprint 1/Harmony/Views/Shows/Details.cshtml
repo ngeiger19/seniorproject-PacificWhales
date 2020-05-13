@@ -4,18 +4,14 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+
 
 <div class="container black-font">
     <div class="row" id="myprofile">
         <div class="col-md-12">
             <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.Title)
-                </dt>
-
                 <dd>
-                    @Html.DisplayFor(model => model.Title)
+                    <h3>@Html.DisplayFor(model => model.Title)</h3>
                 </dd>
 
                 <dt>
@@ -32,6 +28,14 @@
 
                 <dd>
                     @Html.DisplayFor(model => model.VenueName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Address)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Address)
                 </dd>
 
                 <dt>
@@ -58,18 +62,44 @@
                     @Html.DisplayFor(model => model.Description)
                 </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.DateBooked)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.DateBooked)
-                </dd>
-
+                @if (Model.Status == "Accepted")
+                {
+                    <dd>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#cancelModal">
+                            Cancel This Show!
+                        </button>
+                    </dd>
+                }
             </dl>
         </div>
         <p>
             @Html.ActionLink("Back to List", "MyShows")
         </p>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cancelModalLabel">Cancel This Show</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to cancel this show?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    @using (Html.BeginForm("Cancel", "Shows", new { id = Model.ShowID }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        <button type="submit" class="btn btn-warning">
+                            Yes
+                        </button>
+                    }
+                </div>
+            </div>
+        </div>
     </div>
 </div>

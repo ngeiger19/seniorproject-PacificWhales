@@ -22,6 +22,7 @@ using Calendar.ASP.NET.MVC5;
 using System.IO;
 using Google.GData.Extensions;
 using Calendar.ASP.NET.MVC5.Models;
+using Newtonsoft.Json.Linq;
 
 namespace Harmony
 {
@@ -83,10 +84,11 @@ namespace Harmony
                 return HttpNotFound();
             }
 
-            var identityID = User.Identity.GetUserId();
+            var IdentityID = User.Identity.GetUserId();
             MusicianDetailViewModel viewModel = new MusicianDetailViewModel(user);
 
             viewModel.UpcomingShows = db.User_Show.Where(u => u.MusicianID == user.ID).Select(s => s.Show).Where(s => s.StartDateTime > DateTime.Now && s.Status == "Accepted").OrderByDescending(s => s.EndDateTime).ToList();
+            viewModel.VenueList = new SelectList(db.Venues.Where(v => v.User.ASPNetIdentityID == IdentityID), "ID", "VenueName");
 
             return View(viewModel);
         }
@@ -119,7 +121,6 @@ namespace Harmony
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            // Viewmodel for Musician
             User user = db.Users.Find(id);
 
             // If users doesn't exisit
@@ -128,9 +129,11 @@ namespace Harmony
                 return HttpNotFound();
             }
 
+            // Viewmodel for Musician
             MusicianDetailViewModel model = new MusicianDetailViewModel(user);
 
             var IdentityID = User.Identity.GetUserId();
+            model.VenueList = new SelectList(db.Venues.Where(v => v.User.ASPNetIdentityID == IdentityID), "ID", "VenueName");
 
             if (ModelState.IsValid)
             {
@@ -184,7 +187,8 @@ namespace Harmony
                         DateBooked = newEvent.Created ?? DateTime.Now,
                         VenueID = viewModel.VenueID,
                         Status = "Pending",
-                        GoogleEventID = newEvent.Id
+                        GoogleEventID = newEvent.Id,
+                        ShowOwnerID = db.Users.Where(u => u.ASPNetIdentityID == IdentityID).First().ID 
                     };
                     db.Shows.Add(newShow);
                     User_Show user_Show = new User_Show
@@ -201,15 +205,6 @@ namespace Harmony
                 
                 return RedirectToAction("MusicianDetails", new { id = model.ID});
             }
-            List<Venue> venues = db.Venues/*.Where(m => m.User.ASPNetIdentityID == IdentityID)*/.ToList();
-            // List<SelectListItem> venueList = new List<SelectListItem>();
-            foreach(var v in venues)
-            {
-                model.VenueList.Add(new SelectListItem { Text = v.VenueName, Value = v.ID.ToString() });
-            }
-            // model.VenueList = new SelectList(db.Venues.Where(m => m.User.ASPNetIdentityID == IdentityID).Select(s => new { VenueID = s.ID, s.VenueName }), "VenueID", "VenueName", model.VenueID);
-            // ViewData["VenueList"] = new SelectList(db.Venues.Where(m => m.User.ASPNetIdentityID == IdentityID).Select(s => new { VenueID = s.ID, s.VenueName }), "VenueID", "VenueName", model.VenueID);
-            // ViewData["VenueList"] = new SelectList(venueList, "Value", "Text");
             return View(model);
         }
 

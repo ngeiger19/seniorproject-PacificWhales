@@ -6,6 +6,7 @@ using System.Web;
 using Harmony.Models;
 using Calendar.ASP.NET.MVC5.Models;
 using System.Web.Mvc;
+using System.Web.WebPages.Html;
 
 namespace Harmony.Models
 {
@@ -71,11 +72,9 @@ namespace Harmony.Models
         [Display(Name = "Show Title")]
         public string Title { get; set; }
 
-        [DataType(DataType.DateTime)]
         [Display(Name = "Start DateTime")]
         public DateTime StartDateTime { get; set; }
 
-        [DataType(DataType.DateTime)]
         [Display(Name = "End DateTime")]
         public DateTime EndDateTime { get; set; }
 
@@ -100,7 +99,7 @@ namespace Harmony.Models
             State = user.State;
             Email = user.Email;
             Description = user.Description;
-            Genres = user.Genres.Select(g => g.GenreName).ToList();
+            Genres = user.Genres.ToList();
             AveRating = user.AveRating;
         }
 
@@ -120,18 +119,16 @@ namespace Harmony.Models
 
         public string Description { get; set; }
 
-        public List<string> Genres { get; set; }
+        public List<Genre> Genres { get; set; }
 
         public List<Show> UpcomingShows { get; set; }
         // This section is for the calendar event form
         [Display(Name = "Show Title")]
         public string Title { get; set; }
 
-        [DataType(DataType.DateTime)]
         [Display(Name = "Start Time")]
         public DateTime StartDateTime { get; set; }
 
-        [DataType(DataType.DateTime)]
         [Display(Name = "End Time")]
         public DateTime EndDateTime { get; set; }
 
@@ -141,9 +138,11 @@ namespace Harmony.Models
         public string ShowDescription { get; set; }
 
         public DateTime DateBooked { get; set; }
-        public List<SelectListItem> VenueList { get; set; }
+        public SelectList VenueList { get; set; }
 
         [Display(Name = "Rating")]
         public double AveRating { get; set; }
+
+        public List<string> stateList { get; set; }
     }
 }

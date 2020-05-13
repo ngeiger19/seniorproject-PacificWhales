@@ -10,6 +10,7 @@ namespace Harmony.DAL
         public HarmonyContext()
          : base("name=HarmonyContext")
         //: base("name=HarmonyContext_Azure")
+
         {
         }
 
