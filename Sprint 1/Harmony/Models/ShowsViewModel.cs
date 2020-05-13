@@ -77,5 +77,13 @@ namespace Harmony.Models
 
         [Display(Name = "VenueAddress")]
         public string Address { get; set; }
+
+        public List<Show> FinishedShows { get; set; } //FinishedShows = db.Shows.Where(s => (s.EndDateTime < DateTime.Now) && (s.Status == "Accepted" || s.Status == "Pending")).ToList();
+
+        public List<Show> UpcomingShows { get; set; }
+
+        public List<Show> CanceledShows { get; set; }
+
+        public List<Show> DeclinedShows { get; set; }
     }
 }

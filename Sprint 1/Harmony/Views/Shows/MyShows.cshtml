@@ -38,7 +38,7 @@
                 </tr>
                 @foreach (var item in Model)
                 {
-                    if (item.StartDateTime > DateTime.Now && item.Status != "Canceled")
+                    if (item.StartDateTime > DateTime.Now && item.Status != "Canceled" && item.Status != "Declined")
                     {
                         <tr>
                             <td>
@@ -83,6 +83,7 @@
                 }
             </table>
             <hr />
+            <br />
             <h3>Show History</h3>
             <table class="table">
                 <tr>
@@ -105,7 +106,7 @@
                 </tr>
                 @foreach (var item in Model)
                 {
-                    if (item.StartDateTime <= DateTime.Now && item.Status == "Finished")
+                    if (item.EndDateTime < DateTime.Now && item.Status == "Finished")
                     {
                         <tr>
                             <td>
@@ -140,6 +141,7 @@
                 }
             </table>
             <hr />
+            <br />
             <h3>Canceled and Declined Show</h3>
             <table class="table">
                 <tr>
@@ -186,6 +188,7 @@
                     }
                 }
                 </table>
+            <hr />
             </div>
         </div>
     </div>

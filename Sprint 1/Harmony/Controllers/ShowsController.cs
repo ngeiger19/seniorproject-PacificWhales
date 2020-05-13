@@ -57,6 +57,7 @@ namespace Harmony.Controllers
         public ActionResult MyShows()
         {
             var identityID = User.Identity.GetUserId();
+            User user = db.Users.Where(u => u.ASPNetIdentityID == identityID).FirstOrDefault();
             List<Show> FinishedShows = db.Shows.Where(s => (s.EndDateTime < DateTime.Now) && (s.Status == "Accepted" || s.Status == "Pending")).ToList();
             foreach(var finishedshow in FinishedShows)
             {

@@ -169,8 +169,9 @@ namespace Harmony
                         },
                         Attendees = new List<EventAttendee>()
                         {
-                            new EventAttendee(){Email = model.Email}
-                        }
+                            new EventAttendee() { Email = model.Email }
+                        },
+                        GuestsCanModify = true
                     };
                     var newEventRequest = service.Events.Insert(newEvent, "primary");
                     // This allows attendees to get email notification
