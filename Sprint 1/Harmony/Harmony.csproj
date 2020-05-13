@@ -254,6 +254,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="login.jpg" />
     <Content Include="newbackground.jpg" />
+    <Content Include="pacificwhaleslogo.png" />
     <Content Include="SavageGarden.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -441,6 +442,7 @@
     <Content Include="Views\Home\ErrorPage.cshtml" />
     <Content Include="Views\Home\Error404.cshtml" />
     <Content Include="Views\Account\AccountError404.cshtml" />
+    <Content Include="Views\Home\Credits.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

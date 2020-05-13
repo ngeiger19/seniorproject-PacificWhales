@@ -17,17 +17,22 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="collapse navbar-collapse" id="navbarColor02">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="~/Home/Search" style="font-size:larger">Start Searching for Musicians/Venues</a>
+                            <a class="nav-link" href="~/Home/Search" style="font-size:larger">Search Musicians/Venues</a>
                         </li>
                     </ul>
-                    @Html.Partial("_LoginPartial") @*<---  DO NOT DELETE THIS LINE PLEASE!*@
+                    <div class="collapse navbar-collapse" id="navbarColor02">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="~/Home/Credits" style="font-size:larger">Credits</a>
+                            </li>
+                        </ul>
+                        @Html.Partial("_LoginPartial") @*<---  DO NOT DELETE THIS LINE PLEASE!*@
+                    </div>
                 </div>
             </nav>
-
             @RenderBody()
             <hr />
             <footer>
