@@ -28,15 +28,12 @@ namespace Harmony.Controllers
                     from venue in venues
                     where venue.City.Contains(city)
                     select venue;
-
                 ViewBag.City = city;
                 return cityQuery;
             }
-
             ViewBag.City = null;
             return venues;
         }
-
         public IQueryable<Venue> StateQuery(IQueryable<Venue> venues, string state)
         {
             if (state != null && state != "")
@@ -45,11 +42,9 @@ namespace Harmony.Controllers
                     from venue in venues
                     where venue.State.Contains(state)
                     select venue;
-
                 ViewBag.State = state;
                 return stateQuery;
             }
-
             ViewBag.State = null;
             return venues;
         } */
@@ -87,7 +82,7 @@ namespace Harmony.Controllers
 
             ViewBag.State = null;
             return users;
-        } 
+        }
 
         public IEnumerable<User> GenreQuery(IEnumerable<User> users, string genre)
         {
@@ -95,7 +90,7 @@ namespace Harmony.Controllers
             {
                 Genre g = new Genre();
 
-                foreach(Genre x in db.Genres)
+                foreach (Genre x in db.Genres)
                 {
                     g = x;
                 }
@@ -238,7 +233,7 @@ namespace Harmony.Controllers
         public ActionResult Search(string searchOption)
         {
             string search = Request.QueryString["search"];
-            
+
 
             // If nothing was typed into search bar
             if (search == null || search == "")
@@ -257,10 +252,10 @@ namespace Harmony.Controllers
             }
             else if (searchOption == "option2")
             {
-                return RedirectToAction("VenueSearchResults", new { venueSearch = search, city = cityFilter, state = stateFilter});
+                return RedirectToAction("VenueSearchResults", new { venueSearch = search, city = cityFilter, state = stateFilter });
             }
 
-            
+
             return View();
 
         }
@@ -329,7 +324,40 @@ namespace Harmony.Controllers
 
         public ActionResult ErrorPage()
         {
-            
+
+            return View();
+        }
+
+        [HttpGet]
+
+        public ActionResult Harmony()
+        {
+
+            return View();
+        }
+
+        [HttpGet]
+
+        public ActionResult Account()
+        {
+
+            return View();
+        }
+
+        [HttpGet]
+
+        public ActionResult Show()
+        {
+
+            return View();
+        }
+
+        [HttpGet]
+
+
+        public ActionResult Calendar()
+        {
+
             return View();
         }
 
@@ -337,7 +365,7 @@ namespace Harmony.Controllers
         public ActionResult Error404()
         {
 
-           
+
             return View();
 
         }
@@ -351,5 +379,6 @@ namespace Harmony.Controllers
             // else { return RedirectToAction("ErrorPage", "Home"); }
 
         }
+        
+        }
     }
-}
