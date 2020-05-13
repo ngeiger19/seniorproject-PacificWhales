@@ -196,14 +196,16 @@ namespace Harmony.Controllers
             // Get top users for venue owners
             if (User.IsInRole("VenueOwner"))
             {
-                IEnumerable<User> reccs = GetReccs("VenueOwner", db.Users.Where(u => u.ASPNetIdentityID == userid).First());
+                User user = db.Users.Where(u => u.ASPNetIdentityID == userid).First();
+                IEnumerable<User> reccs = GetReccs("VenueOwner", user);
                 return View(reccs);
             }
             // Get top users for musicians
             else if (User.IsInRole("Musician"))
             {
                 //reccs ends up being empty
-                IEnumerable<User> reccs = GetReccs("Musician", db.Users.Where(u => u.ASPNetIdentityID == userid).First());
+                User user = db.Users.Where(u => u.ASPNetIdentityID == userid).First();
+                IEnumerable<User> reccs = GetReccs("Musician", user);
                 return View(reccs);
             }
             return View(emptyReccs);

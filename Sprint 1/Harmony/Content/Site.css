@@ -6,13 +6,6 @@
     background-size: cover;
 }
 
-#navdesign{
-    background-color: darkorange
-}
-
-#homebutton{
-    color:azure
-}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -40,30 +33,6 @@ textarea {
 
 #register-link {
     color: white;
-}
-
-
-.h1.title {
-    font-size: 20px;
-    font-family:'Informal Roman';
-    color:black;
-
-}
-
-.h2 {
-    display: block;
-    font-size: 10px;
-    font-weight: bold;
-    font-family: 'Informal Roman';
-    color: black;
-}
-
-.box1 {
-    box-sizing: content-box;
-    width: 400px;
-    height: 300px;
-    padding: -30px;
-    border: 2px solid black;
 }
 
 #bkimage {
@@ -104,7 +73,7 @@ nav {
 }
 
 .btn-orange:hover {
-    background-color: rgb(200, 122, 0);
+    background-color: coral;
     color: white;
 }
 
@@ -139,13 +108,9 @@ nav {
    height:300px
 
 }
-#video2 {
-    margin: 30px 300px 0px 300px;
-}
-
 #myprofile {
     border: 1px dotted black;
-    padding: 10px;
+    padding-left: 20px;
     background-color: whitesmoke;
     background-clip: content-box;
 }
