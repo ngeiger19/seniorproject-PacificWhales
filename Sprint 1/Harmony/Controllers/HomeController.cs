@@ -224,6 +224,10 @@ namespace Harmony.Controllers
         {
             return View();
         }
+        public ActionResult Credits()
+        {
+            return View();
+        }
 
         // GET INFO FROM SEARCH PAGE
         [HttpGet]
