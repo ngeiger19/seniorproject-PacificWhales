@@ -113,30 +113,49 @@ namespace Harmony.Controllers
             return users;
         }
 
+        // Determines a user's role
+        public bool IsVenueOwner(User user)
+        {
+            Venue venue =
+                (from v in db.Venues
+                 where v.UserID == user.ID
+                 select v).FirstOrDefault();
+
+            if (venue != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         // Assigns points to users based on
         // how many shows played and average rating
         public double GetPoints(User user, string role)
         {
             int numShows = 0;
-
             if (role == "VenueOwner")
             {
-                foreach (User_Show s in db.User_Show)
+                numShows =
+                    (from s in db.User_Show
+                     where s.MusicianID == user.ID
+                     select s).Count();
+                // Leave out if user has same role as current user
+                if (IsVenueOwner(user))
                 {
-                    if (s.MusicianID == user.ID)
-                    {
-                        numShows++;
-                    }
+                    return -1.0;
                 }
             }
             else if (role == "Musician")
             {
-                foreach (User_Show s in db.User_Show)
+                numShows =
+                    (from s in db.User_Show
+                     where s.VenueOwnerID == user.ID
+                     select s).Count();
+                // Leave out if user has same role as current user
+                if (!IsVenueOwner(user))
                 {
-                    if (s.VenueOwnerID == user.ID)
-                    {
-                        numShows++;
-                    }
+                    return -1.0;
                 }
             }
 
@@ -161,35 +180,16 @@ namespace Harmony.Controllers
 
             // Filter out users in same role as current user
             // and sort by number of points
-            List<double> points = new List<double>();
-            IEnumerable<User> topUsers = Enumerable.Empty<User>();
+            IEnumerable<User> userPoints = users.Where(u => GetPoints(u, role) > -1.0).
+                OrderBy(u => GetPoints(u, role));
 
-            foreach (User u in users)
-            {
-                points.Append(GetPoints(u, role));
-            }
-
-            for (int i = 0; i < users.Count() - 1; i++)
-            {
-                int selected = i;
-                for (int j = i + 1; j < users.Count(); j++)
-                {
-                    if (points.ElementAt(j) > points.ElementAt(i))
-                    {
-                        selected = j;
-                    }
-                }
-                if (selected > 0)
-                {
-                    topUsers.Append(users.ElementAt(selected));
-                }
-            }
             // Return top users
-            return topUsers.Take(numReccs);
+            return userPoints.Take(numReccs);
         }
 
 
-        public ActionResult Index()
+
+        public ActionResult Index() 
         {
             string userid = User.Identity.GetUserId();
             IEnumerable<User> emptyReccs = Enumerable.Empty<User>();
@@ -197,16 +197,13 @@ namespace Harmony.Controllers
             // Get top users for venue owners
             if (User.IsInRole("VenueOwner"))
             {
-                User user = db.Users.Where(u => u.ASPNetIdentityID == userid).First();
-                IEnumerable<User> reccs = GetReccs("VenueOwner", user);
+                IEnumerable<User> reccs = GetReccs("VenueOwner", db.Users.Where(u => u.ASPNetIdentityID == userid).First());
                 return View(reccs);
             }
             // Get top users for musicians
             else if (User.IsInRole("Musician"))
             {
-                //reccs ends up being empty
-                User user = db.Users.Where(u => u.ASPNetIdentityID == userid).First();
-                IEnumerable<User> reccs = GetReccs("Musician", user);
+                IEnumerable<User> reccs = GetReccs("Musician", db.Users.Where(u => u.ASPNetIdentityID == userid).First());
                 return View(reccs);
             }
             return View(emptyReccs);
