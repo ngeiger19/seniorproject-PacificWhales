@@ -255,6 +255,7 @@
     <Content Include="happy.jpg" />
     <Content Include="login.jpg" />
     <Content Include="newbackground.jpg" />
+    <Content Include="pacificwhaleslogo.png" />
     <Content Include="SavageGarden.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -447,6 +448,7 @@
     <Content Include="Views\Home\Account.cshtml" />
     <Content Include="Views\Home\Show.cshtml" />
     <Content Include="Views\Home\Calendar.cshtml" />
+    <Content Include="Views\Home\Credits.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
