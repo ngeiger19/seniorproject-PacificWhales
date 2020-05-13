@@ -3,26 +3,6 @@
 @{
     ViewBag.Title = "Details";
 }
-@*
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
-    <style>
-        #video3 {
-            margin: 30px 200px 0px 200px;
-        }
-    </style>
-    <hr />*@
 
 <div class="container black-font">
     <div class="row" id="musicianprofile">
@@ -228,14 +208,14 @@
                         <div class="form-group">
                             @Html.LabelFor(m => m.StartDateTime, new { @class = "col-md-2 control-label" })
                             <div class="col-md-12">
-                                @Html.TextBoxFor(m => m.StartDateTime, new { @class = "form-control", type = "datetime-local"})
+                                @Html.EditorFor(m => m.StartDateTime, new { htmlAttributes = new { @class = "form-control", type = "datetime-local" } })
                                 @Html.ValidationMessageFor(m => m.StartDateTime, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(m => m.EndDateTime, new { @class = "col-md-2 control-label" })
                             <div class="col-md-12">
-                                @Html.TextBoxFor(m => m.StartDateTime, new { @class = "form-control", @type = "datetime-local"})
+                                @Html.EditorFor(m => m.EndDateTime, new { htmlAttributes = new { @class = "form-control", type = "datetime-local" } })
                                 @Html.ValidationMessageFor(m => m.EndDateTime, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -267,11 +247,9 @@
 
     <script type="text/javascript">
         $('#event-modal').appendTo("body");
-        $(function () {
-            $('#datetimepicker1').datetimepicker();
-        });
     </script>
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    </script>
 }
