@@ -630,5 +630,26 @@ namespace Harmony.Controllers
             }
         }
         #endregion
+
+        [HttpGet]
+        public ActionResult AccountError404()
+        {
+
+
+            return View();
+
+        }
+        [HttpPost]
+        public ActionResult AccountError404(int num)
+        {
+            ViewBag.success = true;
+            // if (num != null) { return View(); } 
+
+            return View();
+            // else { return RedirectToAction("ErrorPage", "Home"); }
+
+        }
     }
+
+
 }

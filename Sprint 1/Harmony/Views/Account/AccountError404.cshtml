@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Error404";
+}
+
+<h2>Error404</h2>
+
+@if (ViewBag.success == true)
+{
+    using (Html.BeginForm("Error404", "Home", "FormMethod.Post"))
+    {
+        @Html.TextBox("num", null, new { @class = "form-control", type = "number", min = 0, placeholder = "enter a number" })
+        <button class="btn btn-primary" type="submit">Submit</button>
+    }
+}
+
+
+else
+{
+    <p>Sorry, there was an error on the page you wanted to access.</p>
+    @Html.ActionLink("click here to return to home", "index", "Home")
+
+}
+
+
