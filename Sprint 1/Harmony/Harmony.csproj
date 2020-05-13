@@ -252,6 +252,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="login.jpg" />
     <Content Include="newbackground.jpg" />
     <Content Include="SavageGarden.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -441,7 +442,6 @@
     <Content Include="Views\Home\ErrorPage.cshtml" />
     <Content Include="Views\Home\Error404.cshtml" />
     <Content Include="Views\Account\AccountError404.cshtml" />
-
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

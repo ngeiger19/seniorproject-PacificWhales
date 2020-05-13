@@ -6,6 +6,13 @@
     background-size: cover;
 }
 
+#navdesign{
+    background-color: darkorange
+}
+
+#homebutton{
+    color:azure
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -71,8 +78,6 @@ textarea {
     padding: 0;
 }
 
-=======
->>>>>>> a6bcc6b18347a58dc90e4737c89fa0ba19c3d4a7
 .black-font{
     color: black;
 }
@@ -99,7 +104,7 @@ nav {
 }
 
 .btn-orange:hover {
-    background-color: coral;
+    background-color: rgb(200, 122, 0);
     color: white;
 }
 
@@ -127,7 +132,13 @@ nav {
     background-color: lightgoldenrodyellow;
     background-clip: content-box;
 }
+#loginpic {
+    border: 1px dotted black;
+    padding: 1px;
+   width:300px;
+   height:300px
 
+}
 #video2 {
     margin: 30px 300px 0px 300px;
 }
