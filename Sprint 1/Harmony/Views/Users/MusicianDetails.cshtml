@@ -25,21 +25,6 @@
     <hr />*@
 
 <div class="container black-font">
-<<<<<<< HEAD
-    <h4 style="color:seashell;font-family: Broadway; font-size: 30px">Musician Profile Page</h4>
-    <div class="row" id="musicianprofile">
-        <div class="col-md-4">
-            @{
-                if (User.IsInRole("VenueOwner"))
-                {
-                    <button class="btn btn-outline-light my-2 my-sm-0" data-toggle="modal" data-target="#event-modal">Book This Musician!</button>
-                }
-            }
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.FirstName)
-                </dt>
-=======
     <div class="row" id="musicianprofile">
         <div class="col-md-4">
             <h3>@Model.FirstName @Model.LastName</h3>
@@ -49,7 +34,6 @@
                     <button class="btn btn-orange my-2 my-sm-0" data-toggle="modal" data-target="#event-modal">Book This Musician!</button>
                 }
             }
->>>>>>> dev0.3
 
             <dl class="dl-horizontal">
                 <dt>
@@ -62,24 +46,6 @@
                     @Html.DisplayNameFor(model => model.State)
                 </dt>
 
-<<<<<<< HEAD
-                <dd>
-                    @Html.DisplayFor(model => model.State)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.Email)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.Email)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.Description)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.Description)
-                </dd>
-=======
->>>>>>> dev0.3
                 <dd>
                     @Html.DisplayFor(model => model.State)
                 </dd>
@@ -112,12 +78,6 @@
                 </dt>
                 @if (Model.AveRating != 0.0)
                 {
-<<<<<<< HEAD
-                    <dt>
-                        @Html.DisplayNameFor(model => model.AveRating)
-                    </dt>
-=======
->>>>>>> dev0.3
                     <dd>
                         @Html.DisplayFor(model => model.AveRating) Stars
                     </dd>
@@ -167,16 +127,6 @@
             </div>
         </div>
         @*<p></p>
-<<<<<<< HEAD
-                 <div class="row">
-                     <div class="col-lg-2"></div>
-                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                         <ol class="carousel-indicators">
-                             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                             <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-=======
                     <div class="row">
                         <div class="col-lg-2"></div>
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -185,7 +135,6 @@
                                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                                 <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
->>>>>>> dev0.3
 
                             </ol>
                             <div class="carousel-inner">
@@ -283,35 +232,22 @@
                         <div class="form-group">
                             @Html.LabelFor(m => m.StartDateTime, new { @class = "col-md-2 control-label" })
                             <div class="col-md-12">
-<<<<<<< HEAD
-                                @Html.TextBoxFor(m => m.StartDateTime, new { @class = "form-control" })
-=======
                                 @Html.TextBoxFor(m => m.StartDateTime, new { @class = "form-control", type = "datetime-local" })
->>>>>>> dev0.3
                                 @Html.ValidationMessageFor(m => m.StartDateTime, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(m => m.EndDateTime, new { @class = "col-md-2 control-label" })
                             <div class="col-md-12">
-<<<<<<< HEAD
-                                @Html.TextBoxFor(m => m.EndDateTime, new { @class = "form-control" })
-=======
                                 @Html.TextBoxFor(m => m.StartDateTime, new { @class = "form-control", @type = "datetime-local" })
->>>>>>> dev0.3
                                 @Html.ValidationMessageFor(m => m.EndDateTime, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(m => m.VenueID, new { @class = "col-md-2 control-label" })
                             <div class="col-md-12">
-<<<<<<< HEAD
-                                @Html.TextBoxFor(m => m.VenueID, htmlAttributes: new { @class = "form-control" })
-                                @*Html.DropDownList("VenueID", Model.VenueList, "---Select Venues---", htmlAttributes: new { @class = "form-control" })*@
-=======
                                 @*Html.TextBoxFor(m => m.VenueID, htmlAttributes: new { @class = "form-control" })*@
                                 @Html.DropDownList("VenueID", Model.VenueList, "-Select Venues-", htmlAttributes: new { @class = "form-control" })
->>>>>>> dev0.3
                             </div>
                         </div>
                         <div class="form-group">
@@ -333,16 +269,11 @@
         </div>
     </div>
 
-<<<<<<< HEAD
-    <script>
-        $('#event-modal').appendTo("body")
-=======
     <script type="text/javascript">
         $('#event-modal').appendTo("body");
         $(function () {
             $('#datetimepicker1').datetimepicker();
         });
->>>>>>> dev0.3
     </script>
 </div>
 @section Scripts {
