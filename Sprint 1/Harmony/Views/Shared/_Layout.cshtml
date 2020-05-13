@@ -21,12 +21,18 @@
             <div class="collapse navbar-collapse" id="navbarColor02">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="~/Home/Search" style="font-size:larger">Start Searching for Musicians/Venues</a>
+                        <a class="nav-link" href="~/Home/Search" style="font-size:larger">Search Musicians/Venues</a>
                     </li>
                 </ul>
-                @Html.Partial("_LoginPartial") @*<---  DO NOT DELETE THIS LINE PLEASE!*@
-            </div>
-        </nav>
+                <div class="collapse navbar-collapse" id="navbarColor02">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="~/Home/Search" style="font-size:larger">Credits</a>
+                        </li>
+                    </ul>
+                    @Html.Partial("_LoginPartial") @*<---  DO NOT DELETE THIS LINE PLEASE!*@
+                </div>
+</nav>
 
         @RenderBody()
         <hr />
