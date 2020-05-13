@@ -50,7 +50,9 @@ textarea {
 .black-font{
     color: black;
 }
-
+#navdesign{
+    background-color:darkorange;
+}
 nav {
     background-color: transparent;
 }
@@ -73,7 +75,7 @@ nav {
 }
 
 .btn-orange:hover {
-    background-color: coral;
+    background-color: rgb(200, 122, 0);
     color: white;
 }
 
