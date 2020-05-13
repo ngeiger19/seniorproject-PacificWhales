@@ -113,22 +113,6 @@ namespace Harmony.Controllers
             return users;
         }
 
-        // Determines a user's role
-        public bool IsVenueOwner(User user)
-        {
-            Venue venue =
-                (from v in db.Venues
-                 where v.UserID == user.ID
-                 select v).FirstOrDefault();
-
-            if (venue != null)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
         // Assigns points to users based on
         // how many shows played and average rating
         public double GetPoints(User user, string role)
@@ -177,11 +161,31 @@ namespace Harmony.Controllers
 
             // Filter out users in same role as current user
             // and sort by number of points
-            IEnumerable<User> userPoints = users.Where(u => GetPoints(u, role) > 0).
-                OrderBy(u => GetPoints(u, role));
+            List<double> points = new List<double>();
+            IEnumerable<User> topUsers = Enumerable.Empty<User>();
 
+            foreach (User u in users)
+            {
+                points.Append(GetPoints(u, role));
+            }
+
+            for (int i = 0; i < users.Count() - 1; i++)
+            {
+                int selected = i;
+                for (int j = i + 1; j < users.Count(); j++)
+                {
+                    if (points.ElementAt(j) > points.ElementAt(i))
+                    {
+                        selected = j;
+                    }
+                }
+                if (selected > 0)
+                {
+                    topUsers.Append(users.ElementAt(selected));
+                }
+            }
             // Return top users
-            return userPoints.Take(numReccs);
+            return topUsers.Take(numReccs);
         }
 
 
