@@ -24,6 +24,7 @@ namespace Harmony.Models
             EndTime = show.Show.EndDateTime;
             DateBooked = show.Show.DateBooked;
             Description = show.Show.Description;
+            Status = show.Show.Status;
 
             VenueName = (from v in db.Venues
                          where v.UserID == show.VenueOwnerID
@@ -34,6 +35,7 @@ namespace Harmony.Models
                             select u).First().FirstName;
             MusicianRated = show.MusicianRated;
             VenueRated = show.VenueRated;
+            Address = show.Show.Venue.AddressLine1 + " " + show.Show.Venue.AddressLine2 + show.Show.Venue.City + "," + show.Show.Venue.State + " " + show.Show.Venue.ZipCode;
         }
 
         [Display(Name = "Title")]
@@ -72,5 +74,16 @@ namespace Harmony.Models
         public string RatingValue { get; set; }
 
         public string Status { get; set; }
+
+        [Display(Name = "VenueAddress")]
+        public string Address { get; set; }
+
+        public List<Show> FinishedShows { get; set; } //FinishedShows = db.Shows.Where(s => (s.EndDateTime < DateTime.Now) && (s.Status == "Accepted" || s.Status == "Pending")).ToList();
+
+        public List<Show> UpcomingShows { get; set; }
+
+        public List<Show> CanceledShows { get; set; }
+
+        public List<Show> DeclinedShows { get; set; }
     }
 }

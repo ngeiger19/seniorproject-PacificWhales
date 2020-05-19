@@ -4,6 +4,15 @@
     ViewBag.Title = "MyShows";
 }
 
+@using Harmony.Models;
+@using Harmony.DAL;
+@using Microsoft.AspNet.Identity;
+@{
+    HarmonyContext db = new HarmonyContext();
+    string identityID = User.Identity.GetUserId();
+    User self = db.Users.Where(u => u.ASPNetIdentityID == identityID).FirstOrDefault();
+}
+
 <div class="container black-font">
     <div class="row" id="myprofile">
         <div class="col-md-12">
@@ -29,7 +38,7 @@
                 </tr>
                 @foreach (var item in Model)
                 {
-                    if (item.StartDateTime > DateTime.Now)
+                    if (item.StartDateTime > DateTime.Now && item.Status != "Canceled" && item.Status != "Declined")
                     {
                         <tr>
                             <td>
@@ -53,7 +62,7 @@
                             <td>
                                 @using (Html.BeginForm("Accept", "Shows", new { id = item.ID }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                                 {
-                                    if (item.Status == "Pending")
+                                    if (item.Status == "Pending" && item.ShowOwnerID != self.ID)
                                     {
                                         <button type="submit" class="btn btn-sm btn-dark">Accept</button>
                                     }
@@ -62,7 +71,7 @@
                             <td>
                                 @using (Html.BeginForm("Decline", "Shows", new { id = item.ID }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                                 {
-                                    if (item.Status == "Pending")
+                                    if (item.Status == "Pending" && item.ShowOwnerID != self.ID)
                                     {
                                         <button type="submit" class="btn btn-sm btn-danger">Decline</button>
                                     }
@@ -73,7 +82,8 @@
 
                 }
             </table>
-            <hr/>
+            <hr />
+            <br />
             <h3>Show History</h3>
             <table class="table">
                 <tr>
@@ -96,7 +106,7 @@
                 </tr>
                 @foreach (var item in Model)
                 {
-                    if (item.StartDateTime <= DateTime.Now)
+                    if (item.EndDateTime < DateTime.Now && item.Status == "Finished")
                     {
                         <tr>
                             <td>
@@ -130,6 +140,55 @@
                     }
                 }
             </table>
+            <hr />
+            <br />
+            <h3>Canceled and Declined Show</h3>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Venue.VenueName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StartDateTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EndDateTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th></th>
+                    @foreach (var item in Model)
+                    {
+                        if (item.Status == "Canceled" || item.Status == "Declined")
+                        {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Venue.VenueName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StartDateTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EndDateTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Details", "Details", new { id = item.ID })
+                            </td>
+                        </tr>
+                    }
+                }
+                </table>
+            <hr />
+            </div>
         </div>
     </div>
-</div>

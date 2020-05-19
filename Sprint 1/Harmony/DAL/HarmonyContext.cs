@@ -19,7 +19,6 @@ namespace Harmony.DAL
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Venue> Venues { get; set; }
         public virtual DbSet<VenueType> VenueTypes { get; set; }
-        public virtual DbSet<Video> Videos { get; set; }
         public virtual DbSet<Rating> Ratings { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -47,11 +46,6 @@ namespace Harmony.DAL
 
             modelBuilder.Entity<User>()
                 .HasMany(e => e.Venues)
-                .WithRequired(e => e.User)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.Videos)
                 .WithRequired(e => e.User)
                 .WillCascadeOnDelete(false);
 

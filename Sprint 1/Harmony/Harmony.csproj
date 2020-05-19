@@ -235,7 +235,6 @@
     <Compile Include="Models\User_Show.cs" />
     <Compile Include="Models\Venue.cs" />
     <Compile Include="Models\VenueType.cs" />
-    <Compile Include="Models\Video.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -253,6 +252,11 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="happy.jpg" />
+    <Content Include="login.jpg" />
+    <Content Include="newbackground.jpg" />
+    <Content Include="pacificwhaleslogo.png" />
+    <Content Include="SavageGarden.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -293,6 +297,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -426,16 +434,20 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Home\MusicianSearchResults.cshtml" />
-    <Content Include="Views\Users\MyShows.cshtml" />
-    <Content Include="Views\Venues\MyShows.cshtml" />
-    <Content Include="Views\Venues\ShowDetails.cshtml" />
     <Content Include="Views\Shows\Create.cshtml" />
     <Content Include="Views\Shows\Delete.cshtml" />
     <Content Include="Views\Shows\Details.cshtml" />
     <Content Include="Views\Shows\Edit.cshtml" />
     <Content Include="Views\Shows\MyShows.cshtml" />
     <Content Include="Views\Shows\RateUser.cshtml" />
-    <Content Include="Views\Venues\RateUser.cshtml" />
+    <Content Include="Views\Home\ErrorPage.cshtml" />
+    <Content Include="Views\Home\Error404.cshtml" />
+    <Content Include="Views\Account\AccountError404.cshtml" />
+    <Content Include="Views\Home\Harmony.cshtml" />
+    <Content Include="Views\Home\Account.cshtml" />
+    <Content Include="Views\Home\Show.cshtml" />
+    <Content Include="Views\Home\Calendar.cshtml" />
+    <Content Include="Views\Home\Credits.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

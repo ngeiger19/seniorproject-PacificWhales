@@ -1,12 +1,9 @@
-﻿body, html {
+﻿body {
     /*padding-top: 50px;
     padding-bottom: 20px;*/
-    background-image: url(../musicbk.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+    background: linear-gradient(to bottom right, navy, deepskyblue, aqua) no-repeat center fixed;
     opacity: 0.85;
-    height: 100%;
+    background-size: cover;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -38,57 +35,16 @@ textarea {
     color: white;
 }
 
-.h1.title {
-    font-size: 20px;
-    font-family:'Informal Roman';
-    color:white;
-
-}
-
-.h2 {
-    display: block;
-    font-size: 10px;
-    font-weight: bold;
-    font-family: 'Informal Roman';
-    color: white;
-}
-
-.box1 {
-    box-sizing: content-box;
-    width: 400px;
-    height: 300px;
-    padding: -30px;
-    border: 2px solid white;
-}
-
-#bkimage {
-    /*
-    background-image: url(../musicbk.jpg);
-        */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    margin: 0;
-    padding: 0;
-}
-
 .black-font{
     color: black;
 }
-
-#bi {
-    background-image: url(../musicbk.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    opacity: 0.85;
-    height: 100%;
+#navdesign{
+    
 }
-
-
 nav {
-    background-color: transparent;
+    background-color: lightsalmon;
+    opacity: 0.9;
+    border-bottom: ridge;
 }
 
 .nav-link {
@@ -96,20 +52,32 @@ nav {
 }
 
 .navbar-brand {
-    color: deepskyblue;
+    font-size: x-large;
+    font-family: Impact;
+    color: aqua;
 }
 
 .nav-link:hover {
-    color: deepskyblue;
+    color: lightskyblue;
 }
 
-.btn-outline-light{
-    border-color: deepskyblue;
-    color: deepskyblue;
-}
-
-.btn-outline-light:hover {
+.btn-skyblue{
     background-color: deepskyblue;
+    color: white;
+}
+
+.btn-skyblue:hover {
+    background-color: lightskyblue;
+    color: white;
+}
+
+.btn-orange {
+    background-color: darkorange;
+    color: white;
+}
+
+.btn-orange:hover {
+    background-color: coral;
     color: white;
 }
 
@@ -126,25 +94,25 @@ nav {
 
 #venueprofile {
     border: 1px dotted black;
-    padding: 10px;
+    padding: 20px;
     background-color: lavender;
-    background-clip: content-box;
 }
 
 #musicianprofile {
     border: 1px dotted black;
-    padding: 10px;
+    padding: 20px;
     background-color: lightgoldenrodyellow;
-    background-clip: content-box;
 }
+#loginpic {
+    border: 1px dotted black;
+    padding: 1px;
+    width:300px;
+    height:300px
 
-#video2 {
-    margin: 30px 300px 0px 300px;
 }
-
 #myprofile {
     border: 1px dotted black;
-    padding: 10px;
+    padding: 20px;
     background-color: whitesmoke;
-    background-clip: content-box;
 }
+

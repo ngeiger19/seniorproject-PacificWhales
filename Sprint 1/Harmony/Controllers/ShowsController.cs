@@ -57,6 +57,7 @@ namespace Harmony.Controllers
         public ActionResult MyShows()
         {
             var identityID = User.Identity.GetUserId();
+            User user = db.Users.Where(u => u.ASPNetIdentityID == identityID).FirstOrDefault();
             List<Show> FinishedShows = db.Shows.Where(s => (s.EndDateTime < DateTime.Now) && (s.Status == "Accepted" || s.Status == "Pending")).ToList();
             foreach(var finishedshow in FinishedShows)
             {
@@ -146,7 +147,7 @@ namespace Harmony.Controllers
 
                 // Fetch the list of calendars.
                 var calendars = await service.CalendarList.List().ExecuteAsync();
-                // create a new event to google calendar
+                // update an event to google calendar
                 if (calendars != null)
                 {
                     show.Status = "Declined";
@@ -162,6 +163,52 @@ namespace Harmony.Controllers
                 }
                 return RedirectToAction("MyShows");
                 
+            }
+            return RedirectToAction("MyShows");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Cancel(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Show show = db.Shows.Find(id);
+            if (show == null)
+            {
+                return HttpNotFound();
+            }
+
+            var IdentityID = User.Identity.GetUserId();
+
+            if (ModelState.IsValid)
+            {
+                // Get user's calendar credentials
+                UserCredential credential = await GetCredentialForApiAsync();
+                // Create Google Calendar API service.
+                var service = new CalendarService(new BaseClientService.Initializer()
+                {
+                    HttpClientInitializer = credential,
+                    ApplicationName = "Harmony",
+                });
+
+                // Fetch the list of calendars.
+                var calendars = await service.CalendarList.List().ExecuteAsync();
+                // update an event on google calendar
+                if (calendars != null)
+                {
+                    show.Status = "Canceled";
+                    db.SaveChanges();
+
+                    var DeleteRequest = service.Events.Delete("primary", show.GoogleEventID);
+                    // This allows attendees to get email notification
+                    DeleteRequest.SendNotifications = true;
+                    DeleteRequest.SendUpdates = 0;
+                    var eventResult = DeleteRequest.ExecuteAsync();
+                }
+                return RedirectToAction("MyShows");
+
             }
             return RedirectToAction("MyShows");
         }

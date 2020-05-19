@@ -28,15 +28,12 @@ namespace Harmony.Controllers
                     from venue in venues
                     where venue.City.Contains(city)
                     select venue;
-
                 ViewBag.City = city;
                 return cityQuery;
             }
-
             ViewBag.City = null;
             return venues;
         }
-
         public IQueryable<Venue> StateQuery(IQueryable<Venue> venues, string state)
         {
             if (state != null && state != "")
@@ -45,11 +42,9 @@ namespace Harmony.Controllers
                     from venue in venues
                     where venue.State.Contains(state)
                     select venue;
-
                 ViewBag.State = state;
                 return stateQuery;
             }
-
             ViewBag.State = null;
             return venues;
         } */
@@ -87,7 +82,7 @@ namespace Harmony.Controllers
 
             ViewBag.State = null;
             return users;
-        } 
+        }
 
         public IEnumerable<User> GenreQuery(IEnumerable<User> users, string genre)
         {
@@ -95,7 +90,7 @@ namespace Harmony.Controllers
             {
                 Genre g = new Genre();
 
-                foreach(Genre x in db.Genres)
+                foreach (Genre x in db.Genres)
                 {
                     g = x;
                 }
@@ -134,25 +129,28 @@ namespace Harmony.Controllers
         public double GetPoints(User user, string role)
         {
             int numShows = 0;
-
             if (role == "VenueOwner")
             {
-                foreach (User_Show s in db.User_Show)
+                numShows =
+                    (from s in db.User_Show
+                     where s.MusicianID == user.ID
+                     select s).Count();
+                // Leave out if user has same role as current user
+                if (IsVenueOwner(user))
                 {
-                    if (s.MusicianID == user.ID)
-                    {
-                        numShows++;
-                    }
+                    return -1.0;
                 }
             }
             else if (role == "Musician")
             {
-                foreach (User_Show s in db.User_Show)
+                numShows =
+                    (from s in db.User_Show
+                     where s.VenueOwnerID == user.ID
+                     select s).Count();
+                // Leave out if user has same role as current user
+                if (!IsVenueOwner(user))
                 {
-                    if (s.VenueOwnerID == user.ID)
-                    {
-                        numShows++;
-                    }
+                    return -1.0;
                 }
             }
 
@@ -177,7 +175,7 @@ namespace Harmony.Controllers
 
             // Filter out users in same role as current user
             // and sort by number of points
-            IEnumerable<User> userPoints = users.Where(u => GetPoints(u, role) > 0).
+            IEnumerable<User> userPoints = users.Where(u => GetPoints(u, role) > -1.0).
                 OrderBy(u => GetPoints(u, role));
 
             // Return top users
@@ -185,7 +183,8 @@ namespace Harmony.Controllers
         }
 
 
-        public ActionResult Index()
+
+        public ActionResult Index() 
         {
             string userid = User.Identity.GetUserId();
             IEnumerable<User> emptyReccs = Enumerable.Empty<User>();
@@ -223,13 +222,17 @@ namespace Harmony.Controllers
         {
             return View();
         }
+        public ActionResult Credits()
+        {
+            return View();
+        }
 
         // GET INFO FROM SEARCH PAGE
         [HttpGet]
         public ActionResult Search(string searchOption)
         {
             string search = Request.QueryString["search"];
-            
+
 
             // If nothing was typed into search bar
             if (search == null || search == "")
@@ -248,10 +251,10 @@ namespace Harmony.Controllers
             }
             else if (searchOption == "option2")
             {
-                return RedirectToAction("VenueSearchResults", new { venueSearch = search, city = cityFilter, state = stateFilter});
+                return RedirectToAction("VenueSearchResults", new { venueSearch = search, city = cityFilter, state = stateFilter });
             }
 
-            
+
             return View();
 
         }
@@ -317,5 +320,64 @@ namespace Harmony.Controllers
 
             return View(musicians);
         }
+
+        public ActionResult ErrorPage()
+        {
+
+            return View();
+        }
+
+        [HttpGet]
+
+        public ActionResult Harmony()
+        {
+
+            return View();
+        }
+
+        [HttpGet]
+
+        public ActionResult Account()
+        {
+
+            return View();
+        }
+
+        [HttpGet]
+
+        public ActionResult Show()
+        {
+
+            return View();
+        }
+
+        [HttpGet]
+
+
+        public ActionResult Calendar()
+        {
+
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Error404()
+        {
+
+
+            return View();
+
+        }
+        [HttpPost]
+        public ActionResult Error404(int num)
+        {
+            ViewBag.success = true;
+            // if (num != null) { return View(); } 
+
+            return View();
+            // else { return RedirectToAction("ErrorPage", "Home"); }
+
+        }
+        
+        }
     }
-}

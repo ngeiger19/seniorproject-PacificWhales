@@ -38,6 +38,9 @@ namespace Harmony.Models
         [Required]
         [StringLength(500)]
         public string GoogleEventID { get; set; }
+
+        [Required]
+        public int ShowOwnerID { get; set; }
         public virtual Venue Venue { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User_Show> User_Show { get; set; }

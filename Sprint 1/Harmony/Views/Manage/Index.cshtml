@@ -7,166 +7,170 @@
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div class="container black-font">
     <h4 style="color:seashell;font-family: Broadway; font-size: 30px">My Profile</h4>
-    <div class="row" id="myprofile">
-        <div class="col-md-4">
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.FirstName)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.FirstName)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.LastName)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.LastName)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.City)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.City)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.State)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.State)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.Email)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.Email)
-                </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.Description)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.Description)
-                </dd>
-                @if (User.IsInRole("Musician"))
-                {
+    <div class="container" id="myprofile">
+        <div class="row">
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
                     <dt>
-                        @Html.DisplayNameFor(model => model.MyGenres)
+                        @Html.DisplayNameFor(model => model.FirstName)
                     </dt>
+
                     <dd>
-                        <dl>
-                            @foreach (var item in Model.MyGenres)
-                            {
-                                <dd>@Html.DisplayFor(model => item.GenreName)</dd>
-                            }
-                        </dl>
+                        @Html.DisplayFor(model => model.FirstName)
                     </dd>
-                }
-                @if (User.IsInRole("VenueOwner"))
-                {
                     <dt>
-                        @Html.DisplayNameFor(model => model.MyVenues)
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.LastName)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.City)
                     </dt>
                     <dd>
-                        @foreach (var item in Model.MyVenues)
-                        {
-                            <dl class="dl-horizontal">
-                                <dt>
-                                    @Html.ActionLink(item.VenueName, "Details", "Venues", new { id = item.ID }, null)
-                                </dt>
+                        @Html.DisplayFor(model => model.City)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.State)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.State)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Email)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Description)
+                    </dd>
+                    @if (User.IsInRole("Musician"))
+                    {
+                        <dt>
+                            @Html.DisplayNameFor(model => model.MyGenres)
+                        </dt>
+                        <dd>
+                            <dl>
+                                @foreach (var item in Model.MyGenres)
+                                {
+                                    <dd>@Html.DisplayFor(model => item.GenreName)</dd>
+                                }
                             </dl>
-                        }
-                    </dd>
-                }
-                <dd>@Html.ActionLink("View Shows", "MyShows", "Shows")</dd>
-            </dl>
-        </div>
-        <div class="col-md-8">
-            <h4><strong>Profile Picture</strong></h4>
-            <div>
-                <img src="~/singer.jpg" id="musicianprofilepic" />
+                        </dd>
+                    }
+                    @if (User.IsInRole("VenueOwner"))
+                    {
+                        <dt>
+                            @Html.DisplayNameFor(model => model.MyVenues)
+                        </dt>
+                        <dd>
+                            @foreach (var item in Model.MyVenues)
+                            {
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        @Html.ActionLink(item.VenueName, "Details", "Venues", new { id = item.ID }, null)
+                                    </dt>
+                                </dl>
+                            }
+                        </dd>
+                    }
+                    <dd>@Html.ActionLink("View Shows", "MyShows", "Shows")</dd>
+                </dl>
+            </div>
+            <div class="col-md-8">
+                <div>
+                    <img src="~/singer.jpg" id="musicianprofilepic" />
+                </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
-                <h4>Change your account settings</h4>
-                <hr />
-                <dl class="dl-horizontal">
-                    <dt>Password:</dt>
-                    <dd>
-                        [
-                        @if (Model.HasPassword)
-                        {
-                            @Html.ActionLink("Change your password", "ChangePassword")
-                        }
-                        else
-                        {
-                            @Html.ActionLink("Create", "SetPassword")
-                        }
-                        ]
-                    </dd>
-                    <dt>External Logins:</dt>
-                    <dd>
-                        @Model.Logins.Count [
-                        @Html.ActionLink("Manage", "ManageLogins") ]
-                    </dd>
-                    @*
-                        Phone Numbers can used as a second factor of verification in a two-factor authentication system.
-
-                            See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                            for details on setting up this ASP.NET application to support two-factor authentication using SMS.
-
-                            Uncomment the following block after you have set up two-factor authentication
-                    *@
-                    @*
-                        <dt>Phone Number:</dt>
+            <div class="text-md-left">
+                <div class="col-md-12">
+                    <h4>Change your account settings</h4>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>Password:</dt>
                         <dd>
-                            @(Model.PhoneNumber ?? "None")
-                            @if (Model.PhoneNumber != null)
+                            [
+                            @if (Model.HasPassword)
                             {
-                                <br />
-                                <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
-                                using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                                {
-                                    @Html.AntiForgeryToken()
-                                    <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
-                                }
+                                @Html.ActionLink("Change your password", "ChangePassword")
                             }
                             else
                             {
-                                <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
+                                @Html.ActionLink("Create", "SetPassword")
                             }
+                            ]
                         </dd>
-                    *@
-                    <dt>Two-Factor Authentication:</dt>
-                    <dd>
-                        <p>
-                            There are no two-factor authentication providers configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                            for details on setting up this ASP.NET application to support two-factor authentication.
-                        </p>
-                        @*@if (Model.TwoFactor)
-                            {
-                                using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                                {
-                                    @Html.AntiForgeryToken()
-                                    <text>Enabled
-                                    <input type="submit" value="Disable" class="btn btn-link" />
-                                    </text>
-                                }
-                            }
-                            else
-                            {
-                                using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                                {
-                                    @Html.AntiForgeryToken()
-                                    <text>Disabled
-                                    <input type="submit" value="Enable" class="btn btn-link" />
-                                    </text>
-                                }
-                            }*@
-                    </dd>
-                </dl>
+                        <dt>External Logins:</dt>
+                        <dd>
+                            @Model.Logins.Count [
+                            @Html.ActionLink("Manage", "ManageLogins") ]
+                        </dd>
+                        @*
+            Phone Numbers can used as a second factor of verification in a two-factor authentication system.
+
+                See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                for details on setting up this ASP.NET application to support two-factor authentication using SMS.
+
+                Uncomment the following block after you have set up two-factor authentication
+                        *@
+                        @*
+            <dt>Phone Number:</dt>
+            <dd>
+                @(Model.PhoneNumber ?? "None")
+                @if (Model.PhoneNumber != null)
+                {
+                    <br />
+                    <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
+                    using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
+                    }
+                }
+                else
+                {
+                    <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
+                }
+            </dd>
+                        *@
+                        <dt>Two-Factor Authentication:</dt>
+                        <dd>
+                            <p>
+                                There are no two-factor authentication providers configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                                for details on setting up this ASP.NET application to support two-factor authentication.
+                            </p>
+                            @*@if (Model.TwoFactor)
+                {
+                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <text>Enabled
+                        <input type="submit" value="Disable" class="btn btn-link" />
+                        </text>
+                    }
+                }
+                else
+                {
+                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <text>Disabled
+                        <input type="submit" value="Enable" class="btn btn-link" />
+                        </text>
+                    }
+                }*@
+                        </dd>
+                    </dl>
+                </div>
             </div>
+        </div>
             <!------------------------------- HELPERS FOR FORMATTING EVENTS -------------------------------->
             @helper FormatEventTime(CalendarData.EventDateTime when)
             {
@@ -198,8 +202,8 @@
                     duration.Value.Minutes >= 2 ? "s" : "")
                 }
             }
-
-            <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-12">
                 <h5>Availability</h5>
                 <table>
                     <tr>

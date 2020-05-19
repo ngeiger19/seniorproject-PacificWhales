@@ -22,17 +22,15 @@
         }
     </style>*@
 
-<div class="container black-font">
-    <h4 style="color:seashell;font-family: Broadway; font-size: 30px">Venue Owner Profile</h4>
-
+<div class="container black-font" id="venueprofile">
     <hr />
-    <div class="row" id="venueprofile">
+    <div class="row" >
         <div class="col-md-4">
             <h3><b>@Html.DisplayFor(model => model.VenueName)</b></h3>
             @{
                 if (User.IsInRole("Musician"))
                 {
-                    <button class="btn btn-outline-light my-2 my-sm-0" data-toggle="modal" data-target="#event-modal">Request To Perform at This Venue!</button>
+                    <button class="btn btn-orange my-2 my-sm-0" data-toggle="modal" data-target="#event-modal">Request To Perform at This Venue!</button>
                 }
             }
         <dl class="dl-horizontal">
@@ -204,14 +202,14 @@
                         <div class="form-group">
                             @Html.LabelFor(m => m.StartDateTime, new { @class = "col-md-2 control-label" })
                             <div class="col-md-12">
-                                @Html.TextBoxFor(m => m.StartDateTime, new { @class = "form-control" })
+                                @Html.EditorFor(m => m.StartDateTime, new { @class = "form-control", type = "datetime-local" })
                                 @Html.ValidationMessageFor(m => m.StartDateTime, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(m => m.EndDateTime, new { @class = "col-md-2 control-label" })
                             <div class="col-md-12">
-                                @Html.TextBoxFor(m => m.EndDateTime, new { @class = "form-control" })
+                                @Html.EditorFor(m => m.StartDateTime, new { @class = "form-control", type = "datetime-local" })
                                 @Html.ValidationMessageFor(m => m.EndDateTime, "", new { @class = "text-danger" })
                             </div>
                         </div>

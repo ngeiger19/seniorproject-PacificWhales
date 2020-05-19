@@ -15,7 +15,6 @@ namespace Harmony.Models
             User_Show = new HashSet<User_Show>();
             User_Show1 = new HashSet<User_Show>();
             Venues = new HashSet<Venue>();
-            Videos = new HashSet<Video>();
             Genres = new HashSet<Genre>();
             Ratings = new HashSet<Rating>();
         }
@@ -62,7 +61,6 @@ namespace Harmony.Models
         public virtual ICollection<Venue> Venues { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Video> Videos { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Genre> Genres { get; set; }
