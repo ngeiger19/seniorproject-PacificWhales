@@ -223,6 +223,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CalendarEventGroup.cs" />
     <Compile Include="Models\CalendarViewModels.cs" />
+    <Compile Include="Models\DataPoint.cs" />
     <Compile Include="Models\DetailViewModel.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="DAL\HarmonyContext.cs" />
@@ -239,6 +240,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\db_harmony.mdf" />
+    <Content Include="App_Data\db_harmony_log.ldf">
+      <DependentUpon>db_harmony.mdf</DependentUpon>
+    </Content>
     <Content Include="App_Data\down.sql" />
     <Content Include="App_Data\seed.sql" />
     <Content Include="App_Data\test.sql" />

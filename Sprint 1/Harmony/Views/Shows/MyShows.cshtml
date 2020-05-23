@@ -12,6 +12,44 @@
     string identityID = User.Identity.GetUserId();
     User self = db.Users.Where(u => u.ASPNetIdentityID == identityID).FirstOrDefault();
 }
+<head>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+	        animationEnabled: true,
+	        title: {
+		        text: "Your Progress"
+	        },
+	        axisY: {
+		        includeZero: true
+	        },
+	        toolTip: {
+		        shared: true
+	        },
+	        data: [{
+		        type: "line",
+		        name: "Shows Played",
+		        showInLegend: true,
+		        dataPoints: @Html.Raw(ViewBag.DataPoints1)
+	        }, {
+		        type: "line",
+		        name: "Shows Booked",
+		        showInLegend: true,
+		        dataPoints: @Html.Raw(ViewBag.DataPoints2)
+	        }]
+        });
+        chart.render();
+
+        }
+    </script>
+</head>
+
+
+<div class="col-10 offset-1">
+    <div id="chartContainer" style="height: 370px; width: 100%; margin: 60px 0px 60px 0px;"></div>
+</div>
 
 <div class="container black-font">
     <div class="row" id="myprofile">
@@ -188,7 +226,7 @@
                     }
                 }
                 </table>
-            <hr />
+                <hr />
             </div>
         </div>
     </div>

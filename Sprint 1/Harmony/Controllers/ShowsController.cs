@@ -22,6 +22,7 @@ using System.IO;
 using Google.GData.Extensions;
 using Calendar.ASP.NET.MVC5.Models;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Harmony.Controllers
 {
@@ -53,12 +54,144 @@ namespace Harmony.Controllers
             return new UserCredential(flow, userId, token);
         }
 
+        public string GetMonth(int month)
+        {
+            if (month == 1)
+            {
+                return "Jan";
+            }
+            else if (month == 2)
+            {
+                return "Feb";
+            }
+            else if (month == 3)
+            {
+                return "Mar";
+            }
+            else if (month == 4)
+            {
+                return "Apr";
+            }
+            else if (month == 5)
+            {
+                return "May";
+            }
+            else if (month == 6)
+            {
+                return "Jun";
+            }
+            else if (month == 7)
+            {
+                return "Jul";
+            }
+            else if (month == 8)
+            {
+                return "Aug";
+            }
+            else if (month == 9)
+            {
+                return "Sep";
+            }
+            else if (month == 10)
+            {
+                return "Oct";
+            }
+            else if (month == 11)
+            {
+                return "Nov";
+            }
+            else
+            {
+                return "Dec";
+            }
+        }
+
+        public int GetNumShows(IEnumerable<User_Show> shows, int month, int year, string playedOrBooked)
+        {
+            int numShows = 0;
+            if (playedOrBooked == "played")
+            {
+                numShows =
+                (from s in shows
+                 where s.Show.EndDateTime.Month == month && s.Show.EndDateTime.Year == year
+                 select s).Count();
+            }
+            else
+            {
+                numShows =
+                    (from s in shows
+                     where s.Show.DateBooked.Month == month && s.Show.DateBooked.Year == year
+                     select s).Count();
+            }
+
+            return numShows;
+        }
+
+        public List<DataPoint> GetShowsPlayed(User user)
+        {
+            List<DataPoint> dataPoints = new List<DataPoint>();
+
+            var shows =
+                from s in db.User_Show
+                where s.MusicianID == user.ID || s.VenueOwnerID == user.ID 
+                orderby s.Show.EndDateTime
+                select s;
+
+            for (int i = 1; i < 13; i++)
+            {
+                int month = (DateTime.Now.Month + i) % 12;
+                int year = DateTime.Now.Year;
+                if (month > DateTime.Now.Month)
+                {
+                    year = DateTime.Now.Year - 1;
+                }
+
+                string label = GetMonth(month);
+                int numShows = GetNumShows(shows, month, year, "played");
+
+                dataPoints.Add(new DataPoint(label, numShows));
+            }
+
+            return dataPoints;
+        }
+
+        public List<DataPoint> GetShowsBooked(User user)
+        {
+            List<DataPoint> dataPoints = new List<DataPoint>();
+            var shows =
+                from s in db.User_Show
+                where s.MusicianID == user.ID || s.VenueOwnerID == user.ID
+                orderby s.Show.DateBooked
+                select s;
+
+            for (int i = 1; i < 13; i++)
+            {
+                int month = (DateTime.Now.Month + i) % 12;
+                int year = DateTime.Now.Year;
+                if (month > DateTime.Now.Month)
+                {
+                    year = DateTime.Now.Year - 1;
+                }
+
+                string label = GetMonth(month);
+                int numShows = GetNumShows(shows, month, year, "booked");
+
+                dataPoints.Add(new DataPoint(label, numShows));
+            }
+
+            return dataPoints;
+        }
+
         // GET: Shows
         public ActionResult MyShows()
         {
             var identityID = User.Identity.GetUserId();
             User user = db.Users.Where(u => u.ASPNetIdentityID == identityID).FirstOrDefault();
             List<Show> FinishedShows = db.Shows.Where(s => (s.EndDateTime < DateTime.Now) && (s.Status == "Accepted" || s.Status == "Pending")).ToList();
+
+            ViewBag.DataPoints1 = JsonConvert.SerializeObject(GetShowsPlayed(user));
+            ViewBag.DataPoints2 = JsonConvert.SerializeObject(GetShowsBooked(user));
+
             foreach(var finishedshow in FinishedShows)
             {
                 finishedshow.Status = "Finished";
