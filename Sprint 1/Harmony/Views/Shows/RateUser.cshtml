@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="col-8 offset-2 shadow p-3 mb-5 bg-white rounded" style="margin-top: 40px;">
-        @if ((User.IsInRole("Musician") && Model.VenueRated == false) || (User.IsInRole("VenueOwner") && Model.MusicianRated == false))
+        @if ((User.IsInRole("Musician") && Model.MusicianRated == false) || (User.IsInRole("VenueOwner") && Model.VenueRated == false))
         {
             if (User.IsInRole("Musician"))
             {
@@ -49,7 +49,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-12">
-                                @Html.Label("Comment")
+                                <p>Leave a comment</p>
                                 @Html.TextAreaFor(m => m.Comment)
                             </div>
                         </div>
@@ -61,7 +61,7 @@
             </div>
             
         }
-        @if (Model.VenueRated == true)
+        else
         {
             <h3>You've rated this experience</h3>
         }

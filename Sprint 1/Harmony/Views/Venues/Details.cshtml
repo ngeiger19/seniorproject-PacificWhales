@@ -105,9 +105,8 @@
             @if (Model.AveRating != 0)
             {
                 <dd>
-                    @Html.DisplayFor(model => model.AveRating) Stars
+                    @Html.DisplayFor(model => model.AveRating) Stars - @Html.ActionLink("View Ratings", "ViewRatings", new { id = Model.ID })
                 </dd>
-                <dt>@Html.ActionLink("View Ratings", "ViewRatings", new { id = Model.ID })</dt>
             }
             else
             {
