@@ -107,6 +107,7 @@
                 <dd>
                     @Html.DisplayFor(model => model.AveRating) Stars
                 </dd>
+                <dt>@Html.ActionLink("View Ratings", "ViewRatings", new { id = Model.ID })</dt>
             }
             else
             {
