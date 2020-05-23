@@ -137,7 +137,7 @@ namespace Harmony.Controllers
                 orderby s.Show.EndDateTime
                 select s;
 
-            for (int i = 0; i < 12; i++)
+            for (int i = 1; i < 13; i++)
             {
                 int month = (DateTime.Now.Month + i) % 12;
                 int year = DateTime.Now.Year;
@@ -164,7 +164,7 @@ namespace Harmony.Controllers
                 orderby s.Show.DateBooked
                 select s;
 
-            for (int i = 0; i < 12; i++)
+            for (int i = 1; i < 13; i++)
             {
                 int month = (DateTime.Now.Month + i) % 12;
                 int year = DateTime.Now.Year;
