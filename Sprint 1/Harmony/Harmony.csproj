@@ -223,6 +223,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CalendarEventGroup.cs" />
     <Compile Include="Models\CalendarViewModels.cs" />
+    <Compile Include="Models\DataPoint.cs" />
     <Compile Include="Models\DetailViewModel.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="DAL\HarmonyContext.cs" />

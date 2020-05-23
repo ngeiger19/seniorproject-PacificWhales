@@ -12,14 +12,15 @@
     string identityID = User.Identity.GetUserId();
     User self = db.Users.Where(u => u.ASPNetIdentityID == identityID).FirstOrDefault();
 }
-
-    <script>
+<head>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script type="text/javascript">
         window.onload = function () {
 
         var chart = new CanvasJS.Chart("chartContainer", {
 	        animationEnabled: true,
 	        title: {
-		        text: "Your Shows"
+		        text: "Your Progress"
 	        },
 	        axisY: {
 		        includeZero: true
@@ -37,25 +38,20 @@
 		        name: "Shows Booked",
 		        showInLegend: true,
 		        dataPoints: @Html.Raw(ViewBag.DataPoints2)
-	        }, {
-		        type: "line",
-		        name: "Mobiles",
-		        showInLegend: true,
-		        dataPoints: @Html.Raw(ViewBag.DataPoints3)
 	        }]
         });
         chart.render();
 
         }
     </script>
+</head>
+
+
+<div class="col-10 offset-1">
+    <div id="chartContainer" style="height: 370px; width: 100%; margin: 60px 0px 60px 0px;"></div>
+</div>
 
 <div class="container black-font">
-    <div class="row" id="graph">
-        <div class="col-6 offset-3">
-            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-        </div>
-    </div>
     <div class="row" id="myprofile">
         <div class="col-md-12">
             <h3>Upcoming Shows</h3>
@@ -230,7 +226,7 @@
                     }
                 }
                 </table>
-            <hr />
+                <hr />
             </div>
         </div>
     </div>
