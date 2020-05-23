@@ -424,6 +424,7 @@ namespace Harmony.Controllers
             ShowsViewModel viewModel = new ShowsViewModel(show);
             // Converting string into int
             int numStars = getRating(model.RatingValue);
+            string comment = model.Comment;
 
             Models.Rating userRating = new Models.Rating();
 
@@ -432,6 +433,7 @@ namespace Harmony.Controllers
                 User user = db.Users.Where(u => u.ID == viewModel.MusicianID).FirstOrDefault();
                 userRating.UserID = viewModel.MusicianID;
                 userRating.Value = numStars;
+                userRating.Comment = comment;
                 show.VenueRated = true;
                 user.AveRating = CalcAveRating(user.ID, numStars);
             }
@@ -440,6 +442,7 @@ namespace Harmony.Controllers
                 User user = db.Users.Where(u => u.ID == viewModel.VenueID).FirstOrDefault();
                 userRating.UserID = viewModel.VenueID;
                 userRating.Value = numStars;
+                userRating.Comment = comment;
                 show.MusicianRated = true;
                 user.AveRating = CalcAveRating(user.ID, numStars);
             }
