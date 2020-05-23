@@ -73,6 +73,8 @@ namespace Harmony.Models
 
         public string RatingValue { get; set; }
 
+        public string Comment { get; set; }
+
         public string Status { get; set; }
 
         [Display(Name = "VenueAddress")]
