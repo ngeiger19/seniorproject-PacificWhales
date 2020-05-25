@@ -54,6 +54,7 @@ namespace Harmony.Controllers
             return new UserCredential(flow, userId, token);
         }
 
+        /* Gets a month string from corresponding integer */
         public string GetMonth(int month)
         {
             if (month == 1)
@@ -106,6 +107,7 @@ namespace Harmony.Controllers
             }
         }
 
+        /* Gets the number of shows for a current user in a specified month and year */
         public int GetNumShows(IEnumerable<User_Show> shows, int month, int year, string playedOrBooked)
         {
             int numShows = 0;
@@ -127,16 +129,21 @@ namespace Harmony.Controllers
             return numShows;
         }
 
+        /* Gets the number of shows current user has played in
+            for every month in the last year */
         public List<DataPoint> GetShowsPlayed(User user)
         {
+            // DataPoint: x = month, y = number of shows
             List<DataPoint> dataPoints = new List<DataPoint>();
 
+            // Getting shows users has participated in
             var shows =
                 from s in db.User_Show
                 where s.MusicianID == user.ID || s.VenueOwnerID == user.ID 
                 orderby s.Show.EndDateTime
                 select s;
 
+            // Adding datapoints for each month in the past year
             for (int i = 1; i < 13; i++)
             {
                 int month = (DateTime.Now.Month + i) % 12;
@@ -155,15 +162,21 @@ namespace Harmony.Controllers
             return dataPoints;
         }
 
+        /* Getting the number of shows current user has
+             booked each month for the last year */
         public List<DataPoint> GetShowsBooked(User user)
         {
+            // datapoint: x = month, y = number of shows
             List<DataPoint> dataPoints = new List<DataPoint>();
+
+            // Getting shows user has participated in
             var shows =
                 from s in db.User_Show
                 where s.MusicianID == user.ID || s.VenueOwnerID == user.ID
                 orderby s.Show.DateBooked
                 select s;
 
+            // Adding data points for each month in past year
             for (int i = 1; i < 13; i++)
             {
                 int month = (DateTime.Now.Month + i) % 12;
@@ -411,6 +424,7 @@ namespace Harmony.Controllers
             ShowsViewModel viewModel = new ShowsViewModel(show);
             // Converting string into int
             int numStars = getRating(model.RatingValue);
+            string comment = model.Comment;
 
             Models.Rating userRating = new Models.Rating();
 
@@ -419,6 +433,7 @@ namespace Harmony.Controllers
                 User user = db.Users.Where(u => u.ID == viewModel.MusicianID).FirstOrDefault();
                 userRating.UserID = viewModel.MusicianID;
                 userRating.Value = numStars;
+                userRating.Comment = comment;
                 show.VenueRated = true;
                 user.AveRating = CalcAveRating(user.ID, numStars);
             }
@@ -427,6 +442,7 @@ namespace Harmony.Controllers
                 User user = db.Users.Where(u => u.ID == viewModel.VenueID).FirstOrDefault();
                 userRating.UserID = viewModel.VenueID;
                 userRating.Value = numStars;
+                userRating.Comment = comment;
                 show.MusicianRated = true;
                 user.AveRating = CalcAveRating(user.ID, numStars);
             }

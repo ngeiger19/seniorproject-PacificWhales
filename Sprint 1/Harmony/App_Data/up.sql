@@ -290,6 +290,7 @@ CREATE TABLE [dbo].[Ratings]
 (
 	[ID]		INT IDENTITY (1,1)	NOT NULL,
 	[Value]		INT		NOT NULL,
+	[Comment]	NVARCHAR(200) NULL,
 	[UserID]		INT		NOT NULL,
 	CONSTRAINT [PK_dbo.Ratings] PRIMARY KEY CLUSTERED ([ID] ASC),
 	CONSTRAINT [FK_dbo.Ratings_dbo.Users_ID] FOREIGN KEY ([UserID]) REFERENCES [dbo].[Users] ([ID])

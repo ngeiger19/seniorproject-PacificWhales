@@ -263,6 +263,18 @@ namespace Harmony
             return View(user);
         }
 
+        public ActionResult ViewRatings(int? id)
+        {
+            User user = db.Users.Find(id);
+
+            IEnumerable<Models.Rating> ratings =
+                from r in db.Ratings
+                where r.UserID == user.ID
+                select r;
+
+            return View(ratings);
+        }
+
         // GET: Users/Delete/5
         public ActionResult Delete(int? id)
         {
