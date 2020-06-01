@@ -9,7 +9,7 @@
     <h4 style="color:seashell;font-family: Broadway; font-size: 30px">My Profile</h4>
     <div class="container" id="myprofile">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <dl class="dl-horizontal">
                     <dt>
                         @Html.DisplayNameFor(model => model.FirstName)
@@ -79,13 +79,30 @@
                             }
                         </dd>
                     }
+
+
                     <dd>@Html.ActionLink("View Shows", "MyShows", "Shows")</dd>
                 </dl>
+                
             </div>
-            <div class="col-md-8">
+
+            <div class="col-md-5">
                 <div>
                     <img src="~/singer.jpg" id="musicianprofilepic" />
                 </div>
+            </div>
+            <div class="col-md-2 offset-1">
+                <h5>Social Media</h5>
+                <p>@Html.DisplayNameFor(model => model.Facebook) - @Html.DisplayFor(model => model.Facebook)</p>
+                <p>@Html.DisplayNameFor(model => model.Instagram) - @Html.DisplayFor(model => model.Instagram)</p>
+                <p>@Html.DisplayNameFor(model => model.Twitter) - @Html.DisplayFor(model => model.Twitter)</p>
+                @if (User.IsInRole("Musician"))
+                {
+                    <p>@Html.DisplayNameFor(model => model.Spotify) - @Html.DisplayFor(model => model.Spotify)</p>
+                    <p>@Html.DisplayNameFor(model => model.AppleMusic) - @Html.DisplayFor(model => model.AppleMusic)</p>
+                    <p>@Html.DisplayNameFor(model => model.Youtube) - @Html.DisplayFor(model => model.Youtube)</p>
+                }
+                @Html.ActionLink("Edit/Add Social Media ", "EditSocialMedia")
             </div>
         </div>
         <div class="row">

@@ -21,6 +21,14 @@ namespace Harmony.Models
 
         public string Email { get; set; }
 
+        public string Facebook { get; set; }
+        public string Instagram { get; set; }
+        public string Twitter { get; set; }
+        public string Spotify { get; set; }
+        [Display(Name="Apple Music")]
+        public string AppleMusic { get; set; }
+        public string Youtube { get; set; }
+
         public string Description { get; set; }
         public bool HasPassword { get; set; }
         public IList<UserLoginInfo> Logins { get; set; }
