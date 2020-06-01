@@ -113,6 +113,12 @@ namespace Harmony.Controllers
                 City = user.City,
                 State = user.State,
                 Description = user.Description,
+                Facebook = user.Facebook,
+                Instagram = user.Instagram,
+                Twitter = user.Twitter,
+                Spotify = user.Spotify,
+                AppleMusic = user.AppleMusic,
+                Youtube = user.Youtube,
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
@@ -189,6 +195,18 @@ namespace Harmony.Controllers
             return View(model);
         }
 
+        public ActionResult EditSocialMedia()
+        {
+            var userId = User.Identity.GetUserId();
+            User user = db.Users.Where(u => u.ASPNetIdentityID == userId).First();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult EditSocialMedia()
+        {
+
+        }
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]
