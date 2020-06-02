@@ -1,0 +1,82 @@
+﻿@model Harmony.Models.User
+
+<style>
+    label {
+        float: left
+    }
+
+    span {
+        display: block;
+        overflow: hidden;
+        padding: 0 4px 0 6px
+    }
+
+    input {
+        width: 100%
+    }
+</style>
+
+<div class="row">
+    <div class="col-4 offset-4 shadow p-3 mb-5 bg-white rounded" style="margin-top: 40px;">
+        <h3 id="form-title">Update your social media</h3>
+        <hr />
+
+        @using (Html.BeginForm("EditSocialMedia", "Manage", FormMethod.Get))
+        {
+            <div class="row">
+                <div class="col-9">
+                    <form>
+                        <div class="form-group">
+                            <label for="facebook">Facebook.com/</label>
+                            <span>
+                                <input class="form-control" type="text" placeholder="@Model.Facebook"
+                                       aria-label="Facebook.com/" id="facebook" name="facebook">
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="instagram">Instagram.com/</label>
+                            <span>
+                                <input class="form-control" type="text" placeholder="@Model.Instagram"
+                                       aria-label="Instagran.com/" id="instagram" name="instagram">
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="twitter">Twitter.com/</label>
+                            <span>
+                                <input class="form-control" type="text" placeholder="@Model.Twitter"
+                                       aria-label="Twitter.com/" id="twitter" name="twitter">
+                            </span>
+                        </div>
+                        @if (User.IsInRole("Musician"))
+                        {
+                            <div class="form-group">
+                                <label for="spotify">Spotify.com/</label>
+                                <span>
+                                    <input class="form-control" type="text" placeholder="@Model.Spotify"
+                                           aria-label="Spotify.com/" id="spotify" name="spotify">
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <label for="applemusic">Apple.com/applemusic/</label>
+                                <span>
+                                    <input class="form-control" type="text" placeholder="@Model.AppleMusic"
+                                           aria-label="Apple.com/applemusic/" id="applemusic" name="applemusic">
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <label for="youtube">Youtube.com/</label>
+                                <span>
+                                    <input class="form-control" type="text" placeholder="@Model.Youtube"
+                                           aria-label="Youtube.com/" id="youtube" name="youtube">
+                                </span>
+                            </div>
+                        }
+                    </form>
+                    <button type="submit" class="btn btn-orange">Update</button>
+                    @Html.ActionLink("Back to Profile", "Index")
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

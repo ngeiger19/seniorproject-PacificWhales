@@ -149,11 +149,25 @@
             }
         </dl>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-5">
             <div>
                 <img src="~/venue.jpg" id="venuepic" />
             </div>
+        </div>
+        <div class="col-md-2 offset-1">
+            @if (Model.Facebook != null)
+            {
+                <a href="https://www.facebook.com/@Model.Facebook" style="color: black"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+            }
+            @if (Model.Instagram != null)
+            {
+                <a href="https://www.instagram.com/@Model.Instagram" style="color: black"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+            }
 
+            @if (Model.Twitter != null)
+            {
+                <a href="https://www.twitter.com/@Model.Twitter" style="color: black"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            }
         </div>
         @*<div class="row">
             <div id="map">

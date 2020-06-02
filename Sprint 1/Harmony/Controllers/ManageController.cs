@@ -195,17 +195,63 @@ namespace Harmony.Controllers
             return View(model);
         }
 
+        // Makes sure that link to social media site is valid
+        public bool IsValidString(string str)
+        {
+            if (str == null || str == "" || str.Contains(" "))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        [HttpGet]
         public ActionResult EditSocialMedia()
         {
             var userId = User.Identity.GetUserId();
             User user = db.Users.Where(u => u.ASPNetIdentityID == userId).First();
-            return View();
-        }
 
-        [HttpPost]
-        public ActionResult EditSocialMedia()
-        {
+            string facebook = Request.QueryString["facebook"];
+            string instagram = Request.QueryString["instagram"];
+            string twitter = Request.QueryString["twitter"];
 
+            if (IsValidString(facebook))
+            {
+                user.Facebook = facebook;
+            }
+            if (IsValidString(instagram))
+            {
+                user.Instagram = instagram;
+            }
+            if (IsValidString(twitter))
+            {
+                user.Twitter = twitter;
+            }
+
+            if (User.IsInRole("Musician"))
+            {
+                string spotify = Request.QueryString["spotify"];
+                string applemusic = Request.QueryString["applemusic"];
+                string youtube = Request.QueryString["youtube"];
+
+                if (IsValidString(spotify))
+                {
+                    user.Spotify = spotify;
+                }
+                if (IsValidString(applemusic))
+                {
+                    user.AppleMusic = applemusic;
+                }
+                if (IsValidString(youtube))
+                {
+                    user.Youtube = youtube;
+                }
+            }
+
+            db.SaveChanges();
+
+            return View(user);
         }
         //
         // POST: /Manage/RemoveLogin

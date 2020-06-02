@@ -4,6 +4,9 @@
     ViewBag.Title = "Manage";
 }
 
+<!-- Social media icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div class="container black-font">
     <h4 style="color:seashell;font-family: Broadway; font-size: 30px">My Profile</h4>
@@ -93,16 +96,17 @@
             </div>
             <div class="col-md-2 offset-1">
                 <h5>Social Media</h5>
-                <p>@Html.DisplayNameFor(model => model.Facebook) - @Html.DisplayFor(model => model.Facebook)</p>
-                <p>@Html.DisplayNameFor(model => model.Instagram) - @Html.DisplayFor(model => model.Instagram)</p>
-                <p>@Html.DisplayNameFor(model => model.Twitter) - @Html.DisplayFor(model => model.Twitter)</p>
+                <a href="https://www.facebook.com/@Model.Facebook" style="color: black"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <a href="https://www.instagram.com/@Model.Instagram" style="color: black"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                <a href="https://www.twitter.com/@Model.Twitter" style="color: black"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                 @if (User.IsInRole("Musician"))
                 {
-                    <p>@Html.DisplayNameFor(model => model.Spotify) - @Html.DisplayFor(model => model.Spotify)</p>
-                    <p>@Html.DisplayNameFor(model => model.AppleMusic) - @Html.DisplayFor(model => model.AppleMusic)</p>
-                    <p>@Html.DisplayNameFor(model => model.Youtube) - @Html.DisplayFor(model => model.Youtube)</p>
+                    <a href="https://www.spotify.com/@Model.Spotify" style="color: black"><i class="fa fa-spotify" aria-hidden="true"></i></a>
+                    <a href="https://www.apple.com/applemusic/" style="color: black"><i class="fa fa-apple" aria-hidden="true"></i></a>
+                    <a href="https://www.youtube.com/" style="color: black"><i class="fa fa-youtube" aria-hidden="true"></i></a>
                 }
-                @Html.ActionLink("Edit/Add Social Media ", "EditSocialMedia")
+                <br />
+                @Html.ActionLink("Update Social Media", "EditSocialMedia")
             </div>
         </div>
         <div class="row">
