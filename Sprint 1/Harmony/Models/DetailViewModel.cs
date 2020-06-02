@@ -89,8 +89,11 @@ namespace Harmony.Models
         [Display(Name = "Rating")]
         public double AveRating { get; set; }
 
+        [StringLength(100)]
         public string Facebook { get; set; }
+        [StringLength(100)]
         public string Instagram { get; set; }
+        [StringLength(100)]
         public string Twitter { get; set; }
     }
 
@@ -156,13 +159,23 @@ namespace Harmony.Models
         [Display(Name = "Rating")]
         public double AveRating { get; set; }
 
+        [StringLength(100)]
         public string Facebook { get; set; }
+
+        [StringLength(100)]
         public string Instagram { get; set; }
+
+        [StringLength(100)]
         public string Twitter { get; set; }
+
+        [StringLength(100)]
         public string Spotify { get; set; }
 
+        [StringLength(100)]
         [Display(Name = "Apple Music")]
         public string AppleMusic { get; set; }
+
+        [StringLength(100)]
         public string Youtube { get; set; }
 
         public List<string> stateList { get; set; }
